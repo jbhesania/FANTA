@@ -96,6 +96,10 @@ public class FriendsFragment extends Fragment {
         super.onStart();
     }
 
+    /**
+     * read the list of users from the database and sets it to users
+     * asynchronous need null checks on the users field even after call
+     */
     private void readUserMap(){
         DatabaseReference usersRef = FirebaseDatabase.getInstance().getReference().child("users");
         usersRef.addListenerForSingleValueEvent(new ValueEventListener() {
@@ -112,6 +116,11 @@ public class FriendsFragment extends Fragment {
         });
     }
 
+    /**
+     * loads the foods and intakes of a given userid
+     * asynchronous need null checks on the theirFoods and theirIntakes even after call
+     * @param uid the uid of the user to load their intakes and foods
+     */
     public void readUserInfo(final String uid){
         DatabaseReference usersRef = FirebaseDatabase.getInstance().getReference().child(uid);
         usersRef.addListenerForSingleValueEvent(new ValueEventListener() {
