@@ -1,10 +1,12 @@
 package com.example.android.projectfanta;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.design.widget.BottomNavigationView;
 import android.support.v7.app.AppCompatActivity;
 import android.view.MenuItem;
+import android.view.View;
 import android.widget.TextView;
 
 public class HomeActivity extends AppCompatActivity {
@@ -39,6 +41,43 @@ public class HomeActivity extends AppCompatActivity {
         mTextMessage = (TextView) findViewById(R.id.message);
         BottomNavigationView navigation = (BottomNavigationView) findViewById(R.id.navigation);
         navigation.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener);
+    }
+
+    // Start Friends Activity
+    public void friends(View view) {
+
+        Intent friends_intent = new Intent(this, Friends.class);
+        startActivity(friends_intent);
+
+    }
+
+    // Start AddNutrition Activity
+    public void addNutritionInfo(View view) {
+
+        //Intent addIntent = new Intent(this, );
+        //startActivity(addIntent);
+    }
+
+    // Start Settings Activity
+    public void settings(View view) {
+
+        Intent intentSettings = new Intent(this, Settings.class);
+        startActivity(intentSettings);
+    }
+
+    // Start Home Activity (remains here)
+    public void goHome(View view) {
+
+        Intent intentHome = new Intent(this, HomeActivity.class);
+        startActivity(intentHome);
+    }
+
+    // Start History Activity
+    public void history(View view) {
+
+        //Intent intentHistory = new Intent(this, );
+        //startActivity(intentHistory);
+
     }
 
 }
