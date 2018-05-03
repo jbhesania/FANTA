@@ -33,7 +33,7 @@
     <Button
         android:id="@+id/Friends"
         style="@android:style/ButtonBar"
-        android:layout_width="65dp"
+        android:layout_width="90dp"
         android:layout_height="56dp"
         android:background="?android:attr/colorActivatedHighlight"
         android:onClick="friends"
@@ -44,7 +44,7 @@
     <Button
         android:id="@+id/Settings"
         style="@android:style/ButtonBar"
-        android:layout_width="wrap_content"
+        android:layout_width="90dp"
         android:layout_height="56dp"
         android:background="?android:attr/colorActivatedHighlight"
         android:onClick="settings"
@@ -55,13 +55,11 @@
     <Button
         android:id="@+id/History"
         style="@android:style/ButtonBar"
-        android:layout_width="match_parent"
+        android:layout_width="90dp"
         android:layout_height="56dp"
         android:background="?android:attr/colorActivatedHighlight"
         android:onClick="history"
         android:text="@string/title_history"
         tools:layout_editor_absoluteX="299dp"
-        tools:layout_editor_absoluteY="447dp"
-
-        />
+        tools:layout_editor_absoluteY="447dp" />
 </LinearLayout>
