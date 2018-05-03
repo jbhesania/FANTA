@@ -17,8 +17,9 @@
     <!-- Strings related to Home and Navigation -->
     <string name="title_activity_home">Home</string>
     <string name="title_home">Home</string>
-    <string name="title_dashboard">Dashboard</string>
-    <string name="title_notifications">Notifications</string>
+    <string name="title_add">Add</string>
+    <string name="title_friends">Friends</string>
+    <string name="title_settings">Settings</string>
 
     <!-- Strings related to Friends -->
     <string name="title_activity_friends">Friends</string>

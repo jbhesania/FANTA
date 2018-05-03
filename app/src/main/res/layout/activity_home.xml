@@ -13,7 +13,7 @@
         android:layout_height="wrap_content"
         android:background="?android:attr/colorActivatedHighlight"
         android:onClick="goHome"
-        android:text="Home"
+        android:text="@string/title_home"
         tools:layout_editor_absoluteX="0dp"
         tools:layout_editor_absoluteY="447dp" />
 
@@ -23,7 +23,7 @@
         android:layout_height="wrap_content"
         android:background="?android:attr/colorActivatedHighlight"
         android:onClick="addNutritionInfo"
-        android:text="Add"
+        android:text="@string/title_add"
         tools:layout_editor_absoluteX="104dp"
         tools:layout_editor_absoluteY="447dp" />
 
@@ -33,7 +33,7 @@
         android:layout_height="wrap_content"
         android:background="?android:attr/colorActivatedHighlight"
         android:onClick="friends"
-        android:text="Friends"
+        android:text="@string/title_friends"
         tools:layout_editor_absoluteX="202dp"
         tools:layout_editor_absoluteY="447dp" />
 
@@ -43,7 +43,7 @@
         android:layout_height="wrap_content"
         android:background="?android:attr/colorActivatedHighlight"
         android:onClick="settings"
-        android:text="Settings"
+        android:text="@string/title_settings"
         tools:layout_editor_absoluteX="299dp"
         tools:layout_editor_absoluteY="447dp" />
 </android.support.constraint.ConstraintLayout>
