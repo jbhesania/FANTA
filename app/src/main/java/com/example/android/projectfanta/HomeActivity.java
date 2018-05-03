@@ -8,15 +8,21 @@ import android.widget.Button;
 
 public class HomeActivity extends AppCompatActivity {
 
+    // UI components for navbar
+    private Button homeButton;
+    private Button friendsButton;
+    private Button addButton;
+    private Button settingsButton;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home);
 
-        Button homeButton = (Button) findViewById(R.id.Home);
-        Button friendsButton = (Button) findViewById(R.id.Friends);
-        Button addButton = (Button) findViewById(R.id.Add);
-        Button settingsButton = (Button) findViewById(R.id.Settings);
+        homeButton = (Button) findViewById(R.id.Home);
+        friendsButton = (Button) findViewById(R.id.Friends);
+        addButton = (Button) findViewById(R.id.Add);
+        settingsButton = (Button) findViewById(R.id.Settings);
 
     }
 
