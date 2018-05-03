@@ -51,11 +51,11 @@ public class HomeActivity extends AppCompatActivity {
 
     }
 
-    // Start AddNutrition Activity
+    // Start NutritionInfo Activity
     public void addNutritionInfo(View view) {
 
-        //Intent addIntent = new Intent(this, );
-        //startActivity(addIntent);
+        Intent addIntent = new Intent(this, NutritionInfo.class);
+        startActivity(addIntent);
     }
 
     // Start Settings Activity
@@ -75,8 +75,8 @@ public class HomeActivity extends AppCompatActivity {
     // Start History Activity
     public void history(View view) {
 
-        //Intent intentHistory = new Intent(this, );
-        //startActivity(intentHistory);
+        Intent intentHistory = new Intent(this, History.class);
+        startActivity(intentHistory);
 
     }
 
