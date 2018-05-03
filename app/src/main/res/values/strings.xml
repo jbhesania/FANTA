@@ -29,4 +29,7 @@
 
     <!-- Strings related to NutritionInfo -->
     <string name="title_activity_nutrition_info">NutritionInfo</string>
+
+    <!-- Strings related to History -->
+    <string name="title_history">History</string>
 </resources>

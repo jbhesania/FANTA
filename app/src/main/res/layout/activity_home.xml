@@ -10,8 +10,9 @@
 
     <Button
         android:id="@+id/Home"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        style="@android:style/ButtonBar"
+        android:layout_width="60dp"
+        android:layout_height="56dp"
         android:background="?android:attr/colorActivatedHighlight"
         android:onClick="goHome"
         android:text="@string/title_home"
@@ -20,8 +21,9 @@
 
     <Button
         android:id="@+id/Add"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        style="@android:style/ButtonBar"
+        android:layout_width="60dp"
+        android:layout_height="56dp"
         android:background="?android:attr/colorActivatedHighlight"
         android:onClick="addNutritionInfo"
         android:text="@string/title_add"
@@ -30,8 +32,9 @@
 
     <Button
         android:id="@+id/Friends"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        style="@android:style/ButtonBar"
+        android:layout_width="65dp"
+        android:layout_height="56dp"
         android:background="?android:attr/colorActivatedHighlight"
         android:onClick="friends"
         android:text="@string/title_friends"
@@ -40,11 +43,25 @@
 
     <Button
         android:id="@+id/Settings"
+        style="@android:style/ButtonBar"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_height="56dp"
         android:background="?android:attr/colorActivatedHighlight"
         android:onClick="settings"
         android:text="@string/title_settings"
         tools:layout_editor_absoluteX="299dp"
         tools:layout_editor_absoluteY="447dp" />
+
+    <Button
+        android:id="@+id/History"
+        style="@android:style/ButtonBar"
+        android:layout_width="match_parent"
+        android:layout_height="56dp"
+        android:background="?android:attr/colorActivatedHighlight"
+        android:onClick="history"
+        android:text="@string/title_history"
+        tools:layout_editor_absoluteX="299dp"
+        tools:layout_editor_absoluteY="447dp"
+
+        />
 </LinearLayout>
