@@ -1,0 +1,55 @@
+{
+  "project_info": {
+    "project_number": "210025604900",
+    "firebase_url": "https://fanta-4d243.firebaseio.com",
+    "project_id": "fanta-4d243",
+    "storage_bucket": "fanta-4d243.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:210025604900:android:30795465a22f31e7",
+        "android_client_info": {
+          "package_name": "com.example.android.projectfanta"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "210025604900-c8v9k8a0ob4dsukqm76228pu5gtgbpp9.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.android.projectfanta",
+            "certificate_hash": "89bc59b4f8c9407febd2ff1295af28ee6900a941"
+          }
+        },
+        {
+          "client_id": "210025604900-6u2k1or61vfdejlcimepeifimil0d2us.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBJ1BjXmy--elJ-U1W7fU-rG6kYxKbiYdg"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 2,
+          "other_platform_oauth_client": [
+            {
+              "client_id": "210025604900-6u2k1or61vfdejlcimepeifimil0d2us.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
