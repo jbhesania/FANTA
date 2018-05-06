@@ -24,7 +24,6 @@ public class Settings extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_settings);
-
         SignOut = (ImageView) findViewById(R.id.log_out);
     }
 
