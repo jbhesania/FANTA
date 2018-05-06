@@ -185,10 +185,7 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
             GoogleSignInAccount account = completedTask.getResult(ApiException.class);
 
             // Signed in successfully, show authenticated UI.
-            Intent HomeIntent = new Intent(this, HomeActivity.class);
             firebaseAuthWithGoogle(account);
-            startActivityForResult(HomeIntent, RC_SIGN_IN);
-
         } catch (ApiException e) {
             // The ApiException status code indicates the detailed failure reason.
             // Please refer to the GoogleSignInStatusCodes class reference for more information.
@@ -211,7 +208,7 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
                         if (task.isSuccessful()) {
                             // Sign in success, update UI with the signed-in user's information
                             FirebaseUser user = mAuth.getCurrentUser();
-
+                            handleUsers(user);
                             Intent calcIntent = new Intent(LoginActivity.this, HomeActivity.class);
                             startActivityForResult(calcIntent, RC_SIGN_IN);
                         } else {
