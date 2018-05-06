@@ -155,9 +155,9 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
     }
 
     public void handleUsers(FirebaseUser user) {
-        final DatabaseReference userRef = FirebaseDatabase.getInstance().getReference().child("users").child(user.getUid());
+        final DatabaseReference singleUserRef = FirebaseDatabase.getInstance().getReference().child("users").child(user.getUid());
         final String userid = user.getUid();
-        userRef.addListenerForSingleValueEvent(new ValueEventListener() {
+        singleUserRef.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot snapshot) {
                 if (!snapshot.exists()) {
@@ -165,7 +165,7 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
                     // TODO REQUEST USER INFO
                     // a set user properly
                     User u = new User(userid, 210, 78, 25);
-                    userRef.setValue(u);
+                    FirebaseDatabase.getInstance().getReference().child("users").child(userid).setValue(u);
                 }
             }
             @Override
@@ -227,7 +227,6 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
             public void onClick(View v) {
                 Intent signInIntent = mGoogleSignInClient.getSignInIntent();
                 startActivityForResult(signInIntent, RC_SIGN_IN);
-
             }
         };
     }
