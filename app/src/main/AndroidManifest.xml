@@ -35,7 +35,11 @@
             android:name=".NutritionInfo"
             android:label="@string/title_activity_nutrition_info"
             android:theme="@style/AppTheme.NoActionBar" />
-        <activity android:name=".History"></activity>
+        <activity android:name=".History" />
+        <activity
+            android:name=".MyAccountActivity"
+            android:label="@string/title_activity_my_account"
+            android:theme="@style/AppTheme.NoActionBar"></activity>
     </application>
 
 </manifest>

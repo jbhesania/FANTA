@@ -32,4 +32,5 @@
 
     <!-- Strings related to History -->
     <string name="title_history">History</string>
+    <string name="title_activity_my_account">MyAccountActivity</string>
 </resources>
