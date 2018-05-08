@@ -1,65 +1,68 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<android.support.design.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/container"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:gravity="bottom|center_horizontal"
-    android:orientation="horizontal"
-    tools:context=".HomeActivity">
+    tools:context=".HomeActivity"
+    android:paddingBottom="1dp"
+    android:paddingLeft="64dp"
+    android:paddingRight="64dp"
+    android:paddingTop="16dp">
 
-    <Button
-        android:id="@+id/Home"
-        style="@android:style/ButtonBar"
-        android:layout_width="60dp"
-        android:layout_height="56dp"
-        android:background="?android:attr/colorActivatedHighlight"
-        android:onClick="goHome"
-        android:text="@string/title_home"
-        tools:layout_editor_absoluteX="0dp"
-        tools:layout_editor_absoluteY="447dp" />
+    <android.support.design.widget.FloatingActionButton
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:backgroundTint="@color/cameraButton"
+        android:elevation="10dp"
+        app:fabSize="mini"
+        android:layout_marginBottom="90dp"
+        app:pressedTranslationZ="12dp"
+        android:src="@drawable/picture"
+        android:layout_gravity="bottom|center"/>
 
-    <Button
-        android:id="@+id/Add"
-        style="@android:style/ButtonBar"
-        android:layout_width="60dp"
-        android:layout_height="56dp"
-        android:background="?android:attr/colorActivatedHighlight"
-        android:onClick="addNutritionInfo"
-        android:text="@string/title_add"
-        tools:layout_editor_absoluteX="104dp"
-        tools:layout_editor_absoluteY="447dp" />
+    <android.support.design.widget.FloatingActionButton
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:backgroundTint="@color/manualButton"
+        android:elevation="10dp"
+        app:fabSize="mini"
+        android:layout_marginBottom="150dp"
+        app:pressedTranslationZ="12dp"
+        android:src="@drawable/manual"
+        android:layout_gravity="bottom|center"/>
 
-    <Button
-        android:id="@+id/Friends"
-        style="@android:style/ButtonBar"
-        android:layout_width="90dp"
-        android:layout_height="56dp"
-        android:background="?android:attr/colorActivatedHighlight"
-        android:onClick="friends"
-        android:text="@string/title_friends"
-        tools:layout_editor_absoluteX="202dp"
-        tools:layout_editor_absoluteY="447dp" />
+    <android.support.design.widget.FloatingActionButton
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:backgroundTint="@color/searchButton"
+        android:elevation="10dp"
+        app:fabSize="mini"
+        android:layout_marginBottom="210dp"
+        app:pressedTranslationZ="12dp"
+        android:src="@drawable/search"
+        android:layout_gravity="bottom|center"/>
 
-    <Button
-        android:id="@+id/Settings"
-        style="@android:style/ButtonBar"
-        android:layout_width="90dp"
-        android:layout_height="56dp"
-        android:background="?android:attr/colorActivatedHighlight"
-        android:onClick="settings"
-        android:text="@string/title_settings"
-        tools:layout_editor_absoluteX="299dp"
-        tools:layout_editor_absoluteY="447dp" />
+    <android.support.design.widget.FloatingActionButton
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:backgroundTint="@color/freshButton"
+        android:elevation="10dp"
+        app:fabSize="mini"
+        android:layout_marginBottom="270dp"
+        app:pressedTranslationZ="12dp"
+        android:src="@drawable/fresh"
+        android:layout_gravity="bottom|center"/>
 
-    <Button
-        android:id="@+id/History"
-        style="@android:style/ButtonBar"
-        android:layout_width="90dp"
-        android:layout_height="56dp"
-        android:background="?android:attr/colorActivatedHighlight"
-        android:onClick="history"
-        android:text="@string/title_history"
-        tools:layout_editor_absoluteX="299dp"
-        tools:layout_editor_absoluteY="447dp" />
-</LinearLayout>
+    <android.support.design.widget.FloatingActionButton
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:backgroundTint="@color/addButton"
+        android:layout_margin="20dp"
+        android:elevation="10dp"
+        app:fabSize="normal"
+        android:src="@drawable/ic_add"
+        android:layout_gravity="bottom|center"/>
+
+
+</android.support.design.widget.CoordinatorLayout>

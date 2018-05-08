@@ -1,28 +1,28 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".MyAccountActivity"
-    android:orientation="vertical"
-    android:layout_margin="35dp">
+    tools:context=".ChangeNutritionIntake"
+    android:layout_margin="35dp"
+    android:orientation="vertical">
 
     <LinearLayout
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginLeft="25dp">
+        android:layout_height="wrap_content">
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="My Account"
-            android:textStyle="bold|italic"
+            android:text="Change Nutrition Intake"
+            android:textSize="24sp"
             android:textColor="#000"
-            android:textSize="30sp"/>
+            android:textStyle="bold|italic"/>
     </LinearLayout>
 
     <LinearLayout
-        android:layout_width="200dp"
+        android:layout_width="220dp"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
         android:layout_marginTop="25dp"
@@ -31,18 +31,18 @@
         <ImageView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:src="@drawable/name"
+            android:src="@drawable/calories"
             android:layout_marginRight="5dp"/>
 
         <EditText
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:hint="Enter your name"
+            android:hint="Enter calories intake"
             android:textSize="15sp"/>
     </LinearLayout>
 
     <LinearLayout
-        android:layout_width="200dp"
+        android:layout_width="220dp"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
         android:layout_marginTop="20dp"
@@ -51,19 +51,19 @@
         <ImageView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:src="@drawable/gender"
+            android:src="@drawable/carbohydrate"
             android:layout_marginRight="5dp"/>
 
         <EditText
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:hint="Enter your gender"
+            android:hint="Enter carbohydrate intake"
             android:textSize="15sp"/>
 
     </LinearLayout>
 
     <LinearLayout
-        android:layout_width="200dp"
+        android:layout_width="220dp"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
         android:layout_marginTop="20dp"
@@ -72,18 +72,18 @@
         <ImageView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:src="@drawable/email"
+            android:src="@drawable/fat"
             android:layout_marginRight="5dp"/>
 
         <EditText
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:hint="Enter your email"
+            android:hint="Enter fat intake"
             android:textSize="15sp"/>
     </LinearLayout>
 
     <LinearLayout
-        android:layout_width="200dp"
+        android:layout_width="220dp"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
         android:layout_marginTop="20dp"
@@ -92,18 +92,18 @@
         <ImageView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:src="@drawable/birthday"
+            android:src="@drawable/proteins"
             android:layout_marginRight="5dp"/>
 
         <EditText
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:hint="Enter your age"
+            android:hint="Enter protein intake"
             android:textSize="15sp"/>
     </LinearLayout>
 
     <LinearLayout
-        android:layout_width="200dp"
+        android:layout_width="220dp"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
         android:layout_marginTop="20dp"
@@ -112,18 +112,18 @@
         <ImageView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:src="@drawable/weight"
+            android:src="@drawable/sodium"
             android:layout_marginRight="5dp"/>
 
         <EditText
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:hint="Enter your weight"
+            android:hint="Enter sodium intake"
             android:textSize="15sp"/>
     </LinearLayout>
 
     <LinearLayout
-        android:layout_width="200dp"
+        android:layout_width="220dp"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
         android:layout_marginTop="20dp"
@@ -132,13 +132,13 @@
         <ImageView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:src="@drawable/height"
+            android:src="@drawable/sugar"
             android:layout_marginRight="5dp"/>
 
         <EditText
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:hint="Enter your height"
+            android:hint="Enter sugar intake"
             android:textSize="15sp"/>
     </LinearLayout>
 
@@ -162,4 +162,7 @@
             android:src="@drawable/exit"
             android:background="#fff"/>
     </LinearLayout>
+
+
+
 </LinearLayout>

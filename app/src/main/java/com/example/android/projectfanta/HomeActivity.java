@@ -2,9 +2,11 @@ package com.example.android.projectfanta;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ImageView;
 
 public class HomeActivity extends AppCompatActivity {
 
@@ -19,10 +21,13 @@ public class HomeActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home);
 
-        homeButton = (Button) findViewById(R.id.Home);
-        friendsButton = (Button) findViewById(R.id.Friends);
-        addButton = (Button) findViewById(R.id.Add);
-        settingsButton = (Button) findViewById(R.id.Settings);
+//        homeButton = (Button) findViewById(R.id.Home);
+//        friendsButton = (Button) findViewById(R.id.Friends);
+//        addButton = (Button) findViewById(R.id.Add);
+//        settingsButton = (Button) findViewById(R.id.Settings);
+
+        final ImageView homeMenu = new ImageView(this);
+        homeMenu.setImageDrawable(ContextCompat.getDrawable(getApplicationContext(),R.drawable.plus));
 
     }
 
