@@ -3,51 +3,30 @@ package com.example.android.projectfanta;
 public class User {
 
     private String id;
-    private int weight;
-    private int height;
-    private int age;
-    //private int
+    private String userName;
 
-    public User(){
+    public User() {
 
     }
 
-    public User(String id, int w, int h, int a) {
+    public User(String id, String uname) {
         this.id = id;
-        weight = w;
-        height = h;
-        age = a;
-    }
-
-    public int getAge() {
-        return age;
-    }
-
-    public int getWeight() {
-        return weight;
-    }
-
-    public String getId() {
-        return id;
-    }
-
-    public int getHeight() {
-        return height;
-    }
-
-    public void setAge(int age) {
-        this.age = age;
+        userName = uname;
     }
 
     public void setId(String id) {
         this.id = id;
     }
 
-    public void setHeight(int height) {
-        this.height = height;
+    public String getId() {
+        return id;
     }
 
-    public void setWeight(int weight) {
-        this.weight = weight;
+    public void setUserName(String userName) {
+        this.userName = userName;
+    }
+
+    public String getUserName() {
+        return userName;
     }
 }

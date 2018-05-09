@@ -15,4 +15,18 @@ public class MyAccountActivity extends AppCompatActivity {
         setContentView(R.layout.activity_my_account);
     }
 
+    @Override
+    public void onStart(){
+        super.onStart();
+
+    }
+
+    public void saveClick(View v){
+        // SAVE THE USER INFO
+    }
+
+    public void exitClick(View v){
+        // EXIT THIS SCREEN
+    }
+
 }

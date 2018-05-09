@@ -68,6 +68,7 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
     private GoogleSignInClient mGoogleSignInClient;
     private FirebaseAuth mAuth;
     public static final int RC_SIGN_IN = 1;
+    public static final int ACCOUNT_INFO_FILLED = 2;
 
     /**
      * A dummy authentication store containing known user names and passwords.
@@ -161,11 +162,13 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
             @Override
             public void onDataChange(DataSnapshot snapshot) {
                 if (!snapshot.exists()) {
-                    // run some code
-                    // TODO REQUEST USER INFO
-                    // a set user properly
-                    User u = new User(userid, 210, 78, 25);
-                    FirebaseDatabase.getInstance().getReference().child("users").child(userid).setValue(u);
+                    // TODO REQUEST USER INFO TO SET USER VALUES CORRECTLY
+                    String username = "Baby john doe";
+                    UserInfo ui = new UserInfo(userid, username, 10, 8, 0);
+                    User u = new User(userid, username);
+                    DatabaseReference mData = FirebaseDatabase.getInstance().getReference();
+                    mData.child(userid).child("info").setValue(ui);
+                    mData.child("users").child(userid).setValue(u);
                 }
             }
             @Override
