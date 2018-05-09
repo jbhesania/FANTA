@@ -3,10 +3,12 @@ package com.example.android.projectfanta;
 import android.content.Intent;
 import android.os.Bundle;
 import android.provider.MediaStore;
+import android.support.annotation.NonNull;
 import android.support.design.widget.BottomNavigationView;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
@@ -15,7 +17,7 @@ import java.lang.reflect.Field;
 
 public class HomeActivity extends AppCompatActivity {
 
-    // UI components for navbar
+    // UI components for navigation bar
     FloatingActionButton fab_plus, fab_search, fab_camera, fab_fresh, fab_manual;
     Animation fabOpen, fabClose, fabForward, fabBackward;
     boolean isOpen = false;
@@ -68,6 +70,30 @@ public class HomeActivity extends AppCompatActivity {
 
         BottomNavigationView bottomNavigationView = (BottomNavigationView)findViewById(R.id.bottom_navigation);
         BottomNavigationBarHelper.removeShiftMode(bottomNavigationView);
+        bottomNavigationView.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
+            @Override
+            public boolean onNavigationItemSelected(@NonNull MenuItem item) {
+                switch(item.getItemId()){
+                    case R.id.home:
+                        Intent home_intent = new Intent(HomeActivity.this, HomeActivity.class);
+                        startActivity(home_intent);
+                        break;
+                    case R.id.friends:
+                        Intent friend_intent = new Intent(HomeActivity.this, Friends.class);
+                        startActivity(friend_intent);
+                        break;
+                    case R.id.setting:
+                        Intent setting_intent = new Intent(HomeActivity.this, Settings.class);
+                        startActivity(setting_intent);
+                        break;
+                    case R.id.history:
+                        Intent history_intent = new Intent(HomeActivity.this, History.class);
+                        startActivity(history_intent);
+                        break;
+                }
+                return false;
+            }
+        });
 
         fab_camera.setOnClickListener(new View.OnClickListener(){
             @Override
