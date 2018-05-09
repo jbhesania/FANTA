@@ -47,6 +47,10 @@
         <activity
             android:name=".MainActivitya"
             android:label="@string/title_activity_main_activitya"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".FreshFoodActivity"
+            android:label="@string/title_activity_fresh_food"
             android:theme="@style/AppTheme.NoActionBar"></activity>
     </application>
 
