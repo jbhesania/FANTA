@@ -33,4 +33,6 @@
     <!-- Strings related to History -->
     <string name="title_history">History</string>
     <string name="title_activity_my_account">MyAccountActivity</string>
+    <string name="title_activity_change_nutrition_intake">ChangeNutritionIntake</string>
+    <string name="title_activity_main_activitya">MainActivitya</string>
 </resources>
