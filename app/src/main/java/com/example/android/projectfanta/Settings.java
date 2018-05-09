@@ -30,14 +30,10 @@ public class Settings extends AppCompatActivity {
     }
 
     public void logOut(View v) {
-        switch (v.getId()) {
-            case R.id.log_out:
-                googleSignOut();
-                FirebaseAuth.getInstance().signOut();
-                Intent toLogin = new Intent(Settings.this, LoginActivity.class);
-                startActivity(toLogin);
-                break;
-        }
+        googleSignOut();
+        FirebaseAuth.getInstance().signOut();
+        Intent toLogin = new Intent(Settings.this, LoginActivity.class);
+        startActivity(toLogin);
     }
 
     private void googleSignOut() {
