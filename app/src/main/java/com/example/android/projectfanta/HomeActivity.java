@@ -2,6 +2,7 @@ package com.example.android.projectfanta;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.provider.MediaStore;
 import android.support.design.widget.BottomNavigationView;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v4.content.ContextCompat;
@@ -67,6 +68,14 @@ public class HomeActivity extends AppCompatActivity {
 
         BottomNavigationView bottomNavigationView = (BottomNavigationView)findViewById(R.id.bottom_navigation);
         BottomNavigationBarHelper.removeShiftMode(bottomNavigationView);
+
+        fab_camera.setOnClickListener(new View.OnClickListener(){
+            @Override
+            public void onClick(View view){
+                Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
+                startActivityForResult(intent, 0);
+            }
+        });
 
 //        homeButton = (Button) findViewById(R.id.Home);
 //        friendsButton = (Button) findViewById(R.id.Friends);
