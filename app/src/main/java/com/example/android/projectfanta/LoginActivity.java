@@ -162,7 +162,6 @@ public class LoginActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 NetworkConnectionChecker check = new NetworkConnectionChecker();
-
                 if(check.isOnline()) {
                     Intent signInIntent = mGoogleSignInClient.getSignInIntent();
                     startActivityForResult(signInIntent, RC_SIGN_IN);
