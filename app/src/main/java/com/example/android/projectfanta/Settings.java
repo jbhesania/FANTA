@@ -7,6 +7,7 @@ import android.os.Bundle;
 import android.support.v7.widget.CardView;
 import android.view.View;
 import android.widget.Button;
+import android.widget.GridLayout;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
@@ -20,20 +21,47 @@ import com.google.firebase.auth.FirebaseAuth;
 
 public class Settings extends AppCompatActivity {
 
-    private CardView SignOut;
+    GridLayout mainGrid;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_settings);
-        SignOut = (CardView) findViewById(R.id.log_out);
+
+        mainGrid = (GridLayout)findViewById(R.id.mainGrid);
+
+        //Set Event
+        setSingleEvent(mainGrid);
     }
 
-    public void logOut(View v) {
-        googleSignOut();
-        FirebaseAuth.getInstance().signOut();
-        Intent toLogin = new Intent(Settings.this, LoginActivity.class);
-        startActivity(toLogin);
+    private void setSingleEvent(GridLayout mainGrid){
+        for(int i =0; i < mainGrid.getChildCount();i++){
+            CardView cardView = (CardView)mainGrid.getChildAt(i);
+            final int index = i;
+            cardView.setOnClickListener(new View.OnClickListener(){
+                @Override
+                public void onClick(View view){
+                    if(index == 0){
+                        Intent about_intent = new Intent(Settings.this, AboutUs.class);
+                        startActivity(about_intent);
+                    }
+                    else if(index == 1){
+                        Intent myAcc_intent = new Intent(Settings.this, MyAccountActivity.class);
+                        startActivity(myAcc_intent);
+                    }
+                    else if(index == 2){
+                        Intent nutrition_intent = new Intent(Settings.this, ChangeNutritionIntake.class);
+                        startActivity(nutrition_intent);
+                    }
+                    else{
+                        googleSignOut();
+                        FirebaseAuth.getInstance().signOut();
+                        Intent toLogin = new Intent(Settings.this, LoginActivity.class);
+                        startActivity(toLogin);
+                    }
+                }
+            });
+        }
     }
 
     private void googleSignOut() {

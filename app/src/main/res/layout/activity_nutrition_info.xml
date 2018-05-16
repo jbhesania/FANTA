@@ -30,7 +30,7 @@
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:gravity="center_horizontal"
-        android:layout_margin="10dp">
+        android:layout_margin="15dp">
 
         <ImageView
             android:layout_width="wrap_content"
@@ -74,7 +74,7 @@
                     android:textStyle="bold"
                     android:textAlignment="center"/>
 
-                <TextView
+                <EditText
                     android:layout_gravity="center"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -111,7 +111,7 @@
                     android:textStyle="bold"
                     android:textAlignment="center"/>
 
-                <TextView
+                <EditText
                     android:layout_gravity="center"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -142,13 +142,13 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Fat"
+                    android:text="  Fat"
                     android:textColor="#000"
                     android:textSize="15sp"
                     android:textStyle="bold"
                     android:textAlignment="center"/>
 
-                <TextView
+                <EditText
                     android:layout_gravity="center"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -186,7 +186,7 @@
                     android:textStyle="bold"
                     android:textAlignment="center"/>
 
-                <TextView
+                <EditText
                     android:layout_gravity="center"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -223,7 +223,7 @@
                     android:textStyle="bold"
                     android:textAlignment="center"/>
 
-                <TextView
+                <EditText
                     android:layout_gravity="center"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -260,7 +260,7 @@
                     android:textStyle="bold"
                     android:textAlignment="center"/>
 
-                <TextView
+                <EditText
                     android:layout_gravity="center"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -273,25 +273,39 @@
     </GridLayout>
 
     <RelativeLayout
-        android:layout_weight="1"
         android:layout_width="match_parent"
-        android:layout_height="0dp">
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:layout_marginBottom="10dp">
 
         <TextView
             android:id="@+id/addServings"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_alignParentLeft="true"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="30dp"
             android:text="Add servings"
-            android:textSize="15sp"
             android:textColor="#000"
-            android:layout_margin="5dp"
-            android:layout_centerInParent="true"/>
+            android:textSize="15sp" />
 
         <EditText
-            android:layout_width="wrap_content"
+            android:id="@+id/editServings"
+            android:layout_width="30dp"
             android:layout_height="wrap_content"
-            android:layout_toEndOf="@id/addServings"/>
+            android:layout_toEndOf="@id/addServings" />
 
+        <Button
+            android:id="@+id/saveBtn"
+            android:layout_width="100dp"
+            android:layout_height="30dp"
+            android:background="@drawable/capsule"
+            android:textAlignment="center"
+            android:layout_alignParentBottom="true"
+            android:layout_marginBottom="10dp"
+            android:layout_alignParentRight="true"
+            android:layout_marginRight="20dp"
+            android:text="SAVE"/>
 
     </RelativeLayout>
 </LinearLayout>

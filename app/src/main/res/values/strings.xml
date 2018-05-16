@@ -36,4 +36,6 @@
     <string name="title_activity_change_nutrition_intake">ChangeNutritionIntake</string>
     <string name="title_activity_main_activitya">MainActivitya</string>
     <string name="title_activity_fresh_food">FreshFoodActivity</string>
+    <string name="title_activity_manual_entry_form">ManualEntryForm</string>
+    <string name="title_activity_about_us">AboutUs</string>
 </resources>

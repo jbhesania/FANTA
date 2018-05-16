@@ -1,0 +1,182 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".ManualEntryForm"
+    android:layout_margin="20dp"
+    android:orientation="vertical">
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Manual Entry Form"
+            android:textSize="24sp"
+            android:textColor="#000"
+            android:textStyle="bold|italic"/>
+
+        <TextView
+            android:layout_marginTop="10dp"
+            android:id="@+id/food"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Potato"
+            android:textColor="#000"
+            android:textSize="17sp"
+            android:layout_gravity="center_horizontal"/>
+
+        <ImageView
+            android:id="@+id/foodPic"
+            android:layout_width="wrap_content"
+            android:layout_height="160dp"
+            android:src="@drawable/potato"
+            android:layout_marginTop="20dp"/>
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_marginTop="15dp"
+        android:layout_marginLeft="35dp">
+
+        <!--Row 1 Column 1-->
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Protein"
+                android:textColor="#000"
+                android:textStyle="bold"/>
+
+            <EditText
+                android:id="@+id/protein"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="3g"
+                android:textSize="13sp"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Carbohydrate"
+                android:layout_marginTop="20dp"
+                android:textColor="#000"
+                android:textStyle="bold"/>
+
+            <EditText
+                android:id="@+id/carb"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="26g"
+                android:textSize="13sp"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Fat"
+                android:layout_marginTop="20dp"
+                android:textColor="#000"
+                android:textStyle="bold"/>
+
+            <EditText
+                android:id="@+id/fat"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="0g"
+                android:textSize="13sp"/>
+        </LinearLayout>
+
+        <!--Row 1 Column 2-->
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:layout_marginLeft="100dp">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Fiber"
+                android:textColor="#000"
+                android:textStyle="bold"/>
+
+            <EditText
+                android:id="@+id/fiber"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="2g"
+                android:textSize="13sp"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Calories"
+                android:layout_marginTop="20dp"
+                android:textColor="#000"
+                android:textStyle="bold"/>
+
+            <EditText
+                android:id="@+id/calories"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="110"
+                android:textSize="13sp"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Sugar"
+                android:layout_marginTop="20dp"
+                android:textColor="#000"
+                android:textStyle="bold"/>
+
+
+            <EditText
+                android:id="@+id/sugar"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="1g"
+                android:textSize="13sp"/>
+        </LinearLayout>
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginTop="20dp">
+
+        <Button
+            android:id="@+id/saveBtn"
+            android:layout_width="100dp"
+            android:layout_height="30dp"
+            android:background="@drawable/capsule"
+            android:textAlignment="center"
+            android:text="SAVE"
+            android:layout_marginRight="20dp"/>
+
+        <Button
+            android:id="@+id/exitBtn"
+            android:layout_width="100dp"
+            android:layout_height="30dp"
+            android:background="@drawable/capsule"
+            android:textAlignment="center"
+            android:text="EXIT"/>
+    </LinearLayout>
+
+</LinearLayout>
+
+
+

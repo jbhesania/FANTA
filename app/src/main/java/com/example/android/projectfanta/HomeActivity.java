@@ -103,51 +103,6 @@ public class HomeActivity extends AppCompatActivity {
             }
         });
 
-//        homeButton = (Button) findViewById(R.id.Home);
-//        friendsButton = (Button) findViewById(R.id.Friends);
-//        addButton = (Button) findViewById(R.id.Add);
-//        settingsButton = (Button) findViewById(R.id.Settings);
-
-//        final ImageView homeMenu = new ImageView(this);
-//        homeMenu.setImageDrawable(ContextCompat.getDrawable(getApplicationContext(),R.drawable.plus));
-
-    }
-
-    // Start Friends Activity
-    public void friends(View view) {
-
-        Intent friends_intent = new Intent(this, Friends.class);
-        startActivity(friends_intent);
-
-    }
-
-    // Start NutritionInfo Activity
-    public void addNutritionInfo(View view) {
-
-        Intent addIntent = new Intent(this, NutritionInfo.class);
-        startActivity(addIntent);
-    }
-
-    // Start Settings Activity
-    public void settings(View view) {
-
-        Intent intentSettings = new Intent(this, Settings.class);
-        startActivity(intentSettings);
-    }
-
-    // Start Home Activity (remains here)
-    public void goHome(View view) {
-
-        Intent intentHome = new Intent(this, HomeActivity.class);
-        startActivity(intentHome);
-    }
-
-    // Start History Activity
-    public void history(View view) {
-
-        Intent intentHistory = new Intent(this, History.class);
-        startActivity(intentHistory);
-
     }
 
 }
