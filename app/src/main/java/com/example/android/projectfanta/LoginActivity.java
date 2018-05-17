@@ -160,9 +160,22 @@ public class LoginActivity extends AppCompatActivity {
     public View.OnClickListener getGoogleSignIn(){
         return new View.OnClickListener(){
             @Override
+             public void onClick(View v) {
+                 if(NetworkStatus.getInstance(getApplicationContext()).isOnline()){
+                     Intent signInIntent = mGoogleSignInClient.getSignInIntent();
+                     startActivityForResult(signInIntent, RC_SIGN_IN);
+             }else {
+                 Toast toast = Toast.makeText(getApplicationContext(),
+                         "No Internet Connection!", Toast.LENGTH_SHORT);
+                 toast.show();
+             }
+         }
+     };
+ }
+
             public void onClick(View v) {
-                NetworkConnectionChecker check = new NetworkConnectionChecker();
-                if(check.isOnline()) {
+
+                if(NetworkStatus.getInstance(getApplicationContext()).isOnline()) {
                     Intent signInIntent = mGoogleSignInClient.getSignInIntent();
                     startActivityForResult(signInIntent, RC_SIGN_IN);
                 }else {
@@ -173,7 +186,7 @@ public class LoginActivity extends AppCompatActivity {
 
             }
         };
-    }
 
-}
+
+
 

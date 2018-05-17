@@ -27,8 +27,9 @@ public class Settings extends AppCompatActivity {
     public void logOut(View v) {
         googleSignOut();
         FirebaseAuth.getInstance().signOut();
-        Intent toLogin = new Intent(Settings.this, LoginActivity.class);
-        startActivity(toLogin);
+        Intent intent = new Intent(this, LoginActivity.class);
+        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
+        startActivity(intent);
     }
 
     private void googleSignOut() {
