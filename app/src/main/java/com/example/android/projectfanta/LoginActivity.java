@@ -170,6 +170,7 @@ public class LoginActivity extends AppCompatActivity {
                             "No Internet Connection!", Toast.LENGTH_SHORT);
                     toast.show();
                 }
+
             }
         };
     }
