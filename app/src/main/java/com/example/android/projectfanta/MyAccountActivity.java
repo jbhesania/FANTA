@@ -18,7 +18,6 @@ public class MyAccountActivity extends AppCompatActivity {
     @Override
     public void onStart(){
         super.onStart();
-
     }
 
     public void saveClick(View v){

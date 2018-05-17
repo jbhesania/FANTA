@@ -144,10 +144,13 @@ public class HomeActivity extends AppCompatActivity {
 
     // Start History Activity
     public void history(View view) {
-
         Intent intentHistory = new Intent(this, History.class);
         startActivity(intentHistory);
+    }
 
+    public void manual(View v) {
+        Intent intentManual = new Intent(this, ChangeNutritionIntake.class);
+        startActivity(intentManual);
     }
 
 }
