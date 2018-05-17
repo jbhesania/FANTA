@@ -32,6 +32,7 @@
         android:id="@+id/manual"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:onClick="manual"
         app:backgroundTint="@color/manualButton"
         android:elevation="10dp"
         app:fabSize="mini"

@@ -87,6 +87,8 @@
         <!--Row 1 Column 2 -->
 
         <android.support.v7.widget.CardView
+            android:id="@+id/my_account"
+            android:onClick="myAccount"
             android:layout_width="0dp"
             android:layout_height="0dp"
             android:layout_columnWeight="1"
