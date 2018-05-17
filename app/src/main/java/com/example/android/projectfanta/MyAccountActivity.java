@@ -11,28 +11,16 @@ import android.widget.Button;
 
 public class MyAccountActivity extends AppCompatActivity {
 
-    Button exitBtnAcc;
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_my_account);
 
-        exitBtnAcc = (Button) findViewById(R.id.exit);
-
-        exitBtnAcc.setOnClickListener(new View.OnClickListener(){
-            @Override
-            public void onClick(View view){
-                Intent exit_intent_acc = new Intent(MyAccountActivity.this,Settings.class);
-                startActivity(exit_intent_acc);
-            }
-        });
     }
 
     @Override
     public void onStart(){
         super.onStart();
-
     }
 
     public void saveClick(View v){

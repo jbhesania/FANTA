@@ -125,34 +125,23 @@
     </RelativeLayout>
 
 
-    <RelativeLayout
+    <LinearLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
-        android:layout_marginTop="35dp"
-        android:layout_gravity="center_horizontal">
-
-        <Button
-            android:layout_alignParentBottom="true"
-            android:id="@+id/saveBtn"
-            android:layout_width="100dp"
-            android:layout_height="30dp"
-            android:background="@drawable/capsule"
-            android:textAlignment="center"
-            android:text="SAVE"
-            android:layout_marginRight="15dp"/>
+        android:layout_gravity="center_horizontal"
+        android:layout_marginTop="40dp">
 
 
-        <Button
-            android:layout_toEndOf="@+id/saveBtn"
-            android:layout_alignParentBottom="true"
-            android:id="@+id/exit"
-            android:layout_width="100dp"
-            android:layout_height="30dp"
-            android:background="@drawable/capsule"
-            android:textAlignment="center"
-            android:text="EXIT"/>
+            <Button
+                android:id="@+id/saveBtn"
+                android:layout_width="100dp"
+                android:layout_height="30dp"
+                android:layout_marginRight="15dp"
+                android:background="@drawable/capsule"
+                android:text="SAVE"
+                android:textAlignment="center" />
 
-    </RelativeLayout>
+    </LinearLayout>
 
 </LinearLayout>

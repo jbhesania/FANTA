@@ -154,15 +154,5 @@
             android:layout_marginRight="15dp"
             android:layout_alignParentBottom="true"/>
 
-        <Button
-            android:id="@+id/exit"
-            android:layout_width="100dp"
-            android:layout_height="30dp"
-            android:background="@drawable/capsule"
-            android:textAlignment="center"
-            android:text="EXIT"
-            android:layout_toEndOf="@+id/save"
-            android:layout_alignParentBottom="true"/>
-
     </RelativeLayout>
 </LinearLayout>
