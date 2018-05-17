@@ -45,7 +45,7 @@ public class Settings extends AppCompatActivity {
                 });
     }
 
-    private void myAccount(View v) {
+    public void myAccount(View v) {
         Intent toMyAccount = new Intent(Settings.this, MyAccountActivity.class);
         startActivity(toMyAccount);
     }
