@@ -2,18 +2,14 @@ package com.example.android.projectfanta;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.provider.MediaStore;
 import android.support.annotation.NonNull;
 import android.support.design.widget.BottomNavigationView;
 import android.support.design.widget.FloatingActionButton;
-import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
-
-import java.lang.reflect.Field;
 
 public class HomeActivity extends AppCompatActivity {
 
@@ -98,7 +94,7 @@ public class HomeActivity extends AppCompatActivity {
         fab_camera.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View view){
-                Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
+                Intent intent = new Intent(HomeActivity.this, CameraActivity.class);
                 startActivityForResult(intent, 0);
             }
         });
