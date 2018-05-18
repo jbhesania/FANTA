@@ -118,11 +118,29 @@ public class HomeFragment extends Fragment {
             }
         });
 
+        //TODO: fab_search for searching recent food
+
+        fab_manual.setOnClickListener(new View.OnClickListener(){
+            @Override
+            public void onClick(View view){
+                Intent manual_intent = new Intent(getContext(), ManualEntryForm.class);
+                startActivity(manual_intent);
+            }
+        });
+
         fab_camera.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View view){
                 Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
                 startActivityForResult(intent, 0);
+            }
+        });
+
+        fab_fresh.setOnClickListener(new View.OnClickListener(){
+            @Override
+            public void onClick(View view){
+                Intent fresh_intent = new Intent(getContext(), FreshFoodActivity.class);
+                startActivity(fresh_intent);
             }
         });
 

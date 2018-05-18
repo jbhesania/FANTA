@@ -16,9 +16,10 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Manual Entry Form"
-            android:textSize="24sp"
+            android:textSize="20sp"
             android:textColor="#000"
-            android:textStyle="bold|italic"/>
+            android:textStyle="bold|italic"
+            android:layout_marginBottom="30dp"/>
 
         <TextView
             android:layout_marginTop="10dp"
