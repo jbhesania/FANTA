@@ -25,7 +25,7 @@
         android:layout_width="220dp"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
-        android:layout_marginTop="50dp"
+        android:layout_marginTop="30dp"
         android:layout_gravity="center_horizontal">
 
         <ImageView
@@ -128,7 +128,6 @@
     <LinearLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:orientation="horizontal"
         android:layout_gravity="center_horizontal"
         android:layout_marginTop="40dp">
 
@@ -137,7 +136,6 @@
                 android:id="@+id/saveBtn"
                 android:layout_width="100dp"
                 android:layout_height="30dp"
-                android:layout_marginRight="15dp"
                 android:background="@drawable/capsule"
                 android:text="SAVE"
                 android:textAlignment="center" />

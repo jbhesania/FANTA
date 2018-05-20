@@ -19,10 +19,9 @@
             android:textSize="20sp"
             android:textColor="#000"
             android:textStyle="bold|italic"
-            android:layout_marginBottom="30dp"/>
+            android:layout_marginBottom="25dp"/>
 
         <TextView
-            android:layout_marginTop="10dp"
             android:id="@+id/food"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -51,7 +50,8 @@
         <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:orientation="vertical">
+            android:orientation="vertical"
+            android:layout_marginLeft="20dp">
 
             <TextView
                 android:layout_width="wrap_content"
@@ -104,7 +104,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:orientation="vertical"
-            android:layout_marginLeft="100dp">
+            android:layout_marginLeft="120dp">
 
             <TextView
                 android:layout_width="wrap_content"
@@ -165,16 +165,8 @@
             android:layout_height="30dp"
             android:background="@drawable/capsule"
             android:textAlignment="center"
-            android:text="SAVE"
-            android:layout_marginRight="20dp"/>
+            android:text="SAVE"/>
 
-        <Button
-            android:id="@+id/exitBtn"
-            android:layout_width="100dp"
-            android:layout_height="30dp"
-            android:background="@drawable/capsule"
-            android:textAlignment="center"
-            android:text="EXIT"/>
     </LinearLayout>
 
 </LinearLayout>

@@ -1,22 +1,12 @@
 package com.example.android.projectfanta;
 
-import android.content.Intent;
 import android.os.Bundle;
-import android.provider.MediaStore;
 import android.support.annotation.NonNull;
 import android.support.design.widget.BottomNavigationView;
-import android.support.design.widget.FloatingActionButton;
-import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
-import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.view.MenuItem;
-import android.view.View;
-import android.view.animation.Animation;
-import android.view.animation.AnimationUtils;
-
-import java.lang.reflect.Field;
 
 public class HomeActivity extends AppCompatActivity {
 
