@@ -173,32 +173,8 @@ public class LoginActivity extends AppCompatActivity {
      };
  }
 
-            public void onClick(View v) {
-<<<<<<< HEAD
 
-                if(NetworkStatus.getInstance(getApplicationContext()).isOnline()) {
-=======
-                if(NetworkStatus.getInstance(getApplicationContext()).isOnline()){
->>>>>>> stephanie
-                    Intent signInIntent = mGoogleSignInClient.getSignInIntent();
-                    startActivityForResult(signInIntent, RC_SIGN_IN);
-                }else {
-                    Toast toast = Toast.makeText(getApplicationContext(),
-                            "No Internet Connection!", Toast.LENGTH_SHORT);
-                    toast.show();
-                }
-<<<<<<< HEAD
-
-=======
->>>>>>> stephanie
-            }
-        };
-
-<<<<<<< HEAD
-
-=======
     public void onClick(View v) {
-
         if(NetworkStatus.getInstance(getApplicationContext()).isOnline()) {
             Intent signInIntent = mGoogleSignInClient.getSignInIntent();
             startActivityForResult(signInIntent, RC_SIGN_IN);
@@ -210,6 +186,3 @@ public class LoginActivity extends AppCompatActivity {
 
     }
 };
->>>>>>> stephanie
-
-

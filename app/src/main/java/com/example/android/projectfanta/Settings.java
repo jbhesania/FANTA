@@ -20,7 +20,7 @@ public class Settings extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_settings);
+        setContentView(R.layout.fragment_settings);
         SignOut = (CardView) findViewById(R.id.log_out);
     }
 

@@ -25,41 +25,6 @@ public class HomeActivity extends AppCompatActivity {
 
     }
 
-<<<<<<< HEAD
-    // Start NutritionInfo Activity
-    public void addNutritionInfo(View view) {
-
-        Intent addIntent = new Intent(this, NutritionInfo.class);
-        startActivity(addIntent);
-    }
-
-    // Start Settings Activity
-    public void settings(View view) {
-
-        Intent intentSettings = new Intent(this, Settings.class);
-        startActivity(intentSettings);
-    }
-
-    // Start Home Activity (remains here)
-    public void goHome(View view) {
-
-        Intent intentHome = new Intent(this, HomeActivity.class);
-        startActivity(intentHome);
-    }
-
-    // Start History Activity
-    public void history(View view) {
-        Intent intentHistory = new Intent(this, History.class);
-        startActivity(intentHistory);
-    }
-
-    public void manual(View v) {
-        Intent intentManual = new Intent(this, ChangeNutritionIntake.class);
-        startActivity(intentManual);
-    }
-=======
->>>>>>> stephanie
-
     private BottomNavigationView.OnNavigationItemSelectedListener mOnNavigationItemSelectedListener
             = new BottomNavigationView.OnNavigationItemSelectedListener() {
         @Override
