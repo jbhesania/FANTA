@@ -4,20 +4,21 @@
     <item
         android:id="@+id/home"
         android:icon="@drawable/home"
-        android:title="Home" />
+        android:title="@string/title_home" />
 
     <item
         android:id="@+id/history"
         android:icon="@drawable/history"
-        android:title="History"/>
+        android:title="History" />
 
     <item
         android:id="@+id/friends"
         android:icon="@drawable/friend"
-        android:title="Friends"/>
+        android:title="Friends" />
 
     <item
         android:id="@+id/setting"
         android:icon="@drawable/setting"
-        android:title="Settings"/>
+        android:title="Settings" />
+
 </menu>

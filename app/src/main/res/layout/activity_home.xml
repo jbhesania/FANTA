@@ -1,9 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+<<<<<<< HEAD
     tools:context=".HomeActivity">
 
     <ImageView
@@ -42,52 +44,26 @@
         android:layout_centerInParent="true"
         android:layout_marginBottom="225dp"
         android:visibility="invisible"/>
+=======
+    tools:context=".HomeActivity"
+    android:windowSoftInputMode="adjustNothing"
+    android:layout_gravity="bottom">
+>>>>>>> stephanie
 
-    <android.support.design.widget.FloatingActionButton
-        android:id="@+id/search"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        app:backgroundTint="@color/searchButton"
-        android:elevation="10dp"
-        app:fabSize="mini"
-        app:pressedTranslationZ="12dp"
-        android:src="@drawable/search"
-        android:layout_alignParentBottom="true"
-        android:layout_centerInParent="true"
-        android:layout_marginBottom="175dp"
-        android:visibility="invisible"/>
-
-    <android.support.design.widget.FloatingActionButton
-        android:id="@+id/fresh"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        app:backgroundTint="@color/freshButton"
-        android:elevation="10dp"
-        app:fabSize="mini"
-        app:pressedTranslationZ="12dp"
-        android:src="@drawable/fresh"
-        android:layout_alignParentBottom="true"
-        android:layout_centerInParent="true"
-        android:layout_marginBottom="125dp"
-        android:visibility="invisible"/>
-
-    <android.support.design.widget.FloatingActionButton
-        android:id="@+id/plus"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        app:backgroundTint="@color/addButton"
-        android:layout_marginBottom="60dp"
-        android:elevation="10dp"
-        app:fabSize="normal"
-        android:src="@drawable/ic_add"
-        android:layout_alignParentBottom="true"
-        android:layout_centerInParent="true"/>
+    <FrameLayout
+        android:id="@+id/fragment_container"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginBottom="56dp"
+        tools:layout_editor_absoluteY="8dp"
+        tools:layout_editor_absoluteX="8dp" />
 
     <android.support.design.widget.BottomNavigationView
         android:id="@+id/bottom_navigation"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
-        app:menu="@menu/nav_items" />
+        android:layout_alignBottom="@id/fragment_container"
+        app:menu="@menu/navigation"/>
 
 </RelativeLayout>

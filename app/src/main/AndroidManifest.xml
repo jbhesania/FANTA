@@ -33,12 +33,17 @@
             android:name=".Friends"
             android:label="@string/title_activity_friends"
             android:theme="@style/AppTheme.NoActionBar" />
-        <activity android:name=".Settings" />
+        <activity
+            android:name=".Settings"
+            android:label="@string/title_activity_settings" />
         <activity
             android:name=".NutritionInfo"
             android:label="@string/title_activity_nutrition_info"
             android:theme="@style/AppTheme.NoActionBar" />
-        <activity android:name=".History" />
+        <activity
+            android:name=".History"
+            android:label="@string/title_activity_history"
+            android:theme="@style/AppTheme.NoActionBar" />
         <activity
             android:name=".MyAccountActivity"
             android:label="@string/title_activity_my_account"
@@ -54,7 +59,19 @@
         <activity
             android:name=".FreshFoodActivity"
             android:label="@string/title_activity_fresh_food"
-            android:theme="@style/AppTheme.NoActionBar"></activity>
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".ManualEntryForm"
+            android:label="@string/title_activity_manual_entry_form"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".AboutUs"
+            android:label="@string/title_activity_about_us"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".HIstory"
+            android:label="@string/title_activity_history"
+            android:theme="@style/AppTheme.NoActionBar" />
     </application>
 
 </manifest>
