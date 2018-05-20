@@ -1,9 +1,12 @@
 package com.example.android.projectfanta;
 
+import java.util.HashMap;
+
 public class User {
 
     private String id;
     private String userName;
+    private HashMap<String, Food> myFoods;
 
     public User() {
 
