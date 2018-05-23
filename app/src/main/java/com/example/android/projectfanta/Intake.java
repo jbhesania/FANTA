@@ -1,7 +1,49 @@
 package com.example.android.projectfanta;
 
-public class Intake {
+import java.io.Serializable;
+import java.sql.Time;
 
-    public Food food;
+public class Intake implements Serializable {
+    private long creationTime;
+    private double servings;
+    private Food food;
 
+    /**
+     * Creates an intake with appropraite nutrient values
+     * @param food the food that was eaten
+     */
+    public Intake(Food food) {
+        this.creationTime = System.currentTimeMillis();
+        this.food = food;
+        this.servings = 1.0;
+    }
+
+    /**
+     * Creates an intake with appropraite nutrient values
+     * @param food the food that was eaten
+     * @param servingSize how many servings of the food were eaten
+     */
+    public Intake(Food food, double servingSize) {
+        this.creationTime = System.currentTimeMillis();
+        this.food = food;
+        this.servings = servingSize;
+    }
+
+    /**
+     * Gets the nutrient value for this intake (different than value for food)
+     * @param key the nutrient string name
+     * @return the value of that nutrient for this intake
+     */
+    public Double getNutrient(String key) {
+        Double value = food.getNutrient(key);
+        if(value != null) return value * servings;
+        else return null;
+    }
+
+
+    public long getCreationTime() { return creationTime;  }
+
+    public Time getTimeObject() { return new Time(creationTime); }
+
+    public Food getFood() { return food; }
 }
