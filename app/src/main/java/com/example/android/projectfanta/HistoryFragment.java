@@ -3,8 +3,15 @@ package com.example.android.projectfanta;
 import android.content.Context;
 import android.net.Uri;
 import android.os.Bundle;
+import android.support.design.widget.AppBarLayout;
+import android.support.design.widget.TabLayout;
 import android.support.v4.app.Fragment;
+import android.support.v4.view.ViewPager;
+import android.support.v4.widget.DrawerLayout;
+import android.support.v7.app.ActionBarDrawerToggle;
+import android.support.v7.app.AppCompatActivity;
 import android.view.LayoutInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 
@@ -29,8 +36,22 @@ public class HistoryFragment extends Fragment {
 
     private OnFragmentInteractionListener mListener;
 
+    private DrawerLayout drawerLayout;
+    private ActionBarDrawerToggle toggle;
+
+    private SectionsPageAdapter myAdapters;
+    private ViewPager myPagers;;
+
     public HistoryFragment() {
         // Required empty public constructor
+    }
+
+    private void setUpViewPager(ViewPager viewPager){
+        SectionsPageAdapter adapter = new SectionsPageAdapter(getFragmentManager());
+        adapter.addFragment(new WeekFragment(), "Week");
+        adapter.addFragment(new MonthFragment(), "Month");
+        adapter.addFragment(new YearFragment(), "Year");
+        viewPager.setAdapter(adapter);
     }
 
     /**
@@ -61,10 +82,38 @@ public class HistoryFragment extends Fragment {
     }
 
     @Override
+    public void onAttach(Context context) {
+        super.onAttach(context);
+    }
+
+    @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_history, container, false);
+        View view = inflater.inflate(R.layout.fragment_history, container, false);
+        drawerLayout = (DrawerLayout) view.findViewById(R.id.drawer);
+        toggle = new ActionBarDrawerToggle(getActivity(),drawerLayout, R.string.open, R.string.close);
+        drawerLayout.addDrawerListener(toggle);
+        toggle.syncState();
+        //((AppCompatActivity)getActivity()).getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+
+        myAdapters = new SectionsPageAdapter(getFragmentManager());
+
+        myPagers = (ViewPager) view.findViewById(R.id.historyContainer);
+        setUpViewPager(myPagers);
+
+        TabLayout tab = (TabLayout)view.findViewById(R.id.historyTabs);
+        tab.setupWithViewPager(myPagers);
+        return view;
+    }
+
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        if(toggle.onOptionsItemSelected(item)){
+            return true;
+        }
+        return super.onOptionsItemSelected(item);
     }
 
     // TODO: Rename method, update argument and hook method into UI event
@@ -74,14 +123,6 @@ public class HistoryFragment extends Fragment {
         }
     }
 
-    @Override
-    public void onAttach(Context context) {
-        super.onAttach(context);
-        if (context instanceof OnFragmentInteractionListener) {
-            mListener = (OnFragmentInteractionListener) context;
-        } else {
-        }
-    }
 
     @Override
     public void onDetach() {

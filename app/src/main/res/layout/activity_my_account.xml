@@ -29,7 +29,7 @@
             android:layout_height="70dp"
             android:background="@drawable/circle"
             android:layout_marginLeft="40dp"
-            android:src="@drawable/profile"
+            android:src="@drawable/liam"
             android:layout_toEndOf="@+id/myAcc"/>
     </RelativeLayout>
 
