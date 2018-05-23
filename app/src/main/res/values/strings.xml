@@ -61,4 +61,5 @@
     <string name="diet_fiber">Dietary Fiber (g)</string>
     <string name="sugar">Sugars (g)</string>
     <string name="protein">Protein (g)</string>
+    <string name="servings">Servings </string>
 </resources>

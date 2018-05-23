@@ -3,12 +3,14 @@ package com.example.android.projectfanta;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.text.TextUtils;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.TextView;
 
 import java.util.HashMap;
-import java.util.Map;
 
 public class NutritionLabelConfirmActivity extends AppCompatActivity {
 
@@ -39,20 +41,60 @@ public class NutritionLabelConfirmActivity extends AppCompatActivity {
         dataProt.setText(parsedData.get(5));
         dataFib.setText(parsedData.get(9));
 
-
-/*
-        for(int i = 0; i < detections.length; ++i) {
-            System.out.println("DETECTIONS " + i);
-            System.out.println(detections[i]);
-
-            data = (TextView)findViewById(R.id.calories_field);
-            data.setText(detections[i]);
-
-            System.out.println("DETECTIONS " + i);
-        }*/
-        //parseData(detections);
     }
 
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        // Inflate the menu; this adds items to the action bar if it is present.
+        getMenuInflater().inflate(R.menu.nutlabel_nav_items, menu);
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        // Handle action bar item clicks here. The action bar will
+        // automatically handle clicks on the Home/Up button, so long
+        // as you specify a parent activity in AndroidManifest.xml.
+        int id = item.getItemId();
+
+        TextView name = (TextView) findViewById(R.id.name);
+        TextView serve = (TextView) findViewById(R.id.servings);
+        TextView dataCals = (TextView)findViewById(R.id.calories_field);
+        TextView dataFat = (TextView)findViewById(R.id.totalFat_field);
+        TextView dataChol = (TextView)findViewById(R.id.chol_input);
+        TextView dataSod = (TextView)findViewById(R.id.sodium_input);
+        TextView dataPot = (TextView)findViewById(R.id.potass_input);
+        TextView dataCarb = (TextView)findViewById(R.id.totCarb_input);
+        TextView dataFib = (TextView)findViewById(R.id.fiber_input);
+        TextView dataSug = (TextView)findViewById(R.id.sugar_input);
+        TextView dataProt = (TextView)findViewById(R.id.prote_input);
+
+
+        if (!TextUtils.isEmpty(serve.getText().toString())) {
+
+
+            NutritionLabel new_label = new NutritionLabel(name.getText().toString());
+
+            if (!TextUtils.isEmpty(dataCals.getText().toString())) new_label.setCalories(Integer.parseInt(dataCals.getText().toString()));
+            if (!TextUtils.isEmpty(dataFat.getText().toString())) new_label.setTotalFat(Integer.parseInt(dataFat.getText().toString()));
+            if (!TextUtils.isEmpty(dataChol.getText().toString())) new_label.setChol(Integer.parseInt(dataChol.getText().toString()));
+            if (!TextUtils.isEmpty(dataSod.getText().toString())) new_label.setSodium(Integer.parseInt(dataSod.getText().toString()));
+            if (!TextUtils.isEmpty(dataPot.getText().toString())) new_label.setPotassium(Integer.parseInt(dataPot.getText().toString()));
+            if (!TextUtils.isEmpty(dataCarb.getText().toString())) new_label.setTotalCarb(Integer.parseInt(dataCarb.getText().toString()));
+            if (!TextUtils.isEmpty(dataFib.getText().toString())) new_label.setFiber(Integer.parseInt(dataFib.getText().toString()));
+            if (!TextUtils.isEmpty(dataSug.getText().toString())) new_label.setSugar(Integer.parseInt(dataSug.getText().toString()));
+            if (!TextUtils.isEmpty(dataProt.getText().toString())) new_label.setProtein(Integer.parseInt(dataProt.getText().toString()));
+
+
+            new_label.printDis();
+
+            // Arun, push new_label to the database por favor
+
+        }
+
+
+        return super.onOptionsItemSelected(item);
+    }
 
     public HashMap<Integer, String> parseData(String[] detects) {
 
@@ -79,13 +121,8 @@ public class NutritionLabelConfirmActivity extends AppCompatActivity {
         string = string.replaceAll("' '+", " ");
         string = string.replace('\n', ' ');
 
-        System.out.println("STRING");
-
-        System.out.println(string);
-
         HashMap<Integer, String> map = new HashMap<Integer, String>();
 
-        System.out.println("ENTER");
         String[] stringArray = string.split(" ");
         System.out.println(stringArray.length);
         for(int i = 0; i < stringArray.length-1; ++i) {
@@ -131,12 +168,6 @@ public class NutritionLabelConfirmActivity extends AppCompatActivity {
                     }
                 }
             }
-        }
-        System.out.println("EXIT");
-        System.out.println(map.size());
-        for(Map.Entry<Integer, String> item : map.entrySet()) {
-            System.out.print(keys[item.getKey()] + " | ");
-            System.out.println(item.getValue());
         }
 
         return map;
