@@ -1,22 +1,28 @@
 package com.example.android.projectfanta;
 
+import android.app.NotificationManager;
+import android.app.PendingIntent;
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
+import android.support.v4.app.NotificationCompat;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
-import android.widget.ArrayAdapter;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.ListView;
+import android.widget.RemoteViews;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Locale;
+
+import static android.content.Context.NOTIFICATION_SERVICE;
 
 /**
  * Created by User on 5/18/2018.
@@ -31,7 +37,6 @@ public class ContactsFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.contact_fragment,container,false);
-
         EditText search = (EditText)view.findViewById(R.id.searchBar);
 
         dataFriends = new ArrayList<>();
@@ -65,6 +70,10 @@ public class ContactsFragment extends Fragment {
             }
         });
 
+
+
+
+
         //TODO: get the search function to work
 
         search.addTextChangedListener(new TextWatcher() {
@@ -82,5 +91,7 @@ public class ContactsFragment extends Fragment {
             }
         });
         return view;
+
     }
+
 }

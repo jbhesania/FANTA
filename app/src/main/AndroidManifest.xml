@@ -25,13 +25,10 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+
         <activity
             android:name=".HomeActivity"
             android:label="@string/title_activity_home" />
-        <activity
-            android:name=".Friends"
-            android:label="@string/title_activity_friends"
-            android:theme="@style/AppTheme.NoActionBar" />
         <activity
             android:name=".Settings"
             android:label="@string/title_activity_settings" />
@@ -40,9 +37,10 @@
             android:label="@string/title_activity_nutrition_info"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
-            android:name=".History"
+            android:name=".HistoryFragment"
             android:label="@string/title_activity_history"
-            android:theme="@style/AppTheme.NoActionBar" />
+            android:theme="@style/AppTheme.NoActionBar"
+            android:parentActivityName=".HomeActivity"/>
         <activity
             android:name=".MyAccountActivity"
             android:label="@string/title_activity_my_account"
@@ -50,10 +48,6 @@
         <activity
             android:name=".ChangeNutritionIntake"
             android:label="@string/title_activity_change_nutrition_intake"
-            android:theme="@style/AppTheme.NoActionBar" />
-        <activity
-            android:name=".MainActivitya"
-            android:label="@string/title_activity_main_activitya"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
             android:name=".FreshFoodActivity"
@@ -68,12 +62,12 @@
             android:label="@string/title_activity_about_us"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
-            android:name=".HIstory"
-            android:label="@string/title_activity_history"
-            android:theme="@style/AppTheme.NoActionBar" />
-        <activity
             android:name=".UserProfile"
             android:label="@string/title_activity_user_profile"
+            android:theme="@style/AppTheme" />
+        <activity
+            android:name=".AcceptRejectFollow"
+            android:label="@string/title_activity_accept_reject_follow"
             android:theme="@style/AppTheme"></activity>
     </application>
 

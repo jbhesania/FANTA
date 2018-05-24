@@ -21,12 +21,13 @@
         android:layout_toEndOf="@id/profImage"/>
 
     <ImageView
+        android:id="@+id/followButton"
         android:layout_width="25dp"
         android:layout_height="25dp"
         android:layout_marginTop="32dp"
         android:layout_marginRight="30dp"
         android:src="@drawable/add"
-        android:clickable="true"
-        android:layout_alignParentRight="true"/>
+        android:layout_alignParentRight="true"
+        android:focusable="false"/>
 
 </RelativeLayout>
