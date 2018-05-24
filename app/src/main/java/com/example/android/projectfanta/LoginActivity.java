@@ -1,6 +1,7 @@
 package com.example.android.projectfanta;
 
 import android.content.Intent;
+import android.icu.text.IDNA;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 
@@ -51,6 +52,8 @@ public class LoginActivity extends AppCompatActivity {
     private View mProgressView;
     private View mLoginFormView;
 
+    private Information uid;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -71,9 +74,14 @@ public class LoginActivity extends AppCompatActivity {
         super.onStart();
         // Check if user is signed in (non-null) and update UI accordingly.
         FirebaseUser currentUser = mAuth.getCurrentUser();
+
         if (currentUser != null){
             handleUsers(currentUser);
-            Intent calcIntent = new Intent(this, HomeActivity.class);
+            Information.read(currentUser.getUid(), uid);
+            Bundle toPass = new Bundle();
+            toPass.putSerializable("uid", uid);
+            //popuplate uid
+            Intent calcIntent = new Intent(LoginActivity.this, HomeActivity.class).putExtra("uid", toPass);
             startActivityForResult(calcIntent, RC_SIGN_IN);
         }
     }
@@ -86,6 +94,7 @@ public class LoginActivity extends AppCompatActivity {
         if (requestCode == RC_SIGN_IN) {
             // The Task returned from this call is always completed, no need to attach
             // a listener.
+            // read
             Task<GoogleSignInAccount> task = GoogleSignIn.getSignedInAccountFromIntent(data);
             handleSignInResult(task);
         }
@@ -105,6 +114,10 @@ public class LoginActivity extends AppCompatActivity {
                     DatabaseReference mData = FirebaseDatabase.getInstance().getReference();
                     mData.child(userid).child("info").setValue(ui);
                     mData.child("users").child(userid).setValue(u);
+                } else {
+                    FirebaseUser user = mAuth.getCurrentUser();
+                    Information.read(user.getUid(), uid);
+                    handleUsers(user);
                 }
             }
             @Override
@@ -146,9 +159,9 @@ public class LoginActivity extends AppCompatActivity {
                     public void onComplete(@NonNull Task<AuthResult> task) {
                         if (task.isSuccessful()) {
                             // Sign in success, update UI with the signed-in user's information
-                            FirebaseUser user = mAuth.getCurrentUser();
-                            handleUsers(user);
-                            Intent calcIntent = new Intent(LoginActivity.this, HomeActivity.class);
+                            Bundle toPass = new Bundle();
+                            toPass.putSerializable("uid", uid);
+                            Intent calcIntent = new Intent(LoginActivity.this, HomeActivity.class).putExtra("uid", toPass);
                             startActivityForResult(calcIntent, RC_SIGN_IN);
                         } else {
                             // TODO If sign in fails, display a message to the user.

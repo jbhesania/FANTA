@@ -1,6 +1,12 @@
 package com.example.android.projectfanta;
 
+import android.util.Log;
+
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 
 import java.io.Serializable;
 import java.util.ArrayList;
@@ -9,7 +15,7 @@ import java.util.HashMap;
 public class Information implements Serializable {
     private HashMap<String, Food> myFoods;
     private ArrayList<Intake> myIntakes;
-    private User myUser;
+    private UserInfo myUser;
     // String here is the username
     private HashMap<String, User> myFollowers;
     private HashMap<String, User> imFollowing;
@@ -42,7 +48,6 @@ public class Information implements Serializable {
         return this.imFollowing.containsKey(user.getUserName());
     }
 
-
     public void addFood(Food food) {
         this.myFoods.put(food.getName(), food);
     }
@@ -53,6 +58,29 @@ public class Information implements Serializable {
 
     public boolean hasFood(String name) {
         return myFoods.containsKey(name);
+    }
+
+    static void read(String uid, final Information toSet){
+        ValueEventListener postListener = new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                // Get Post object and use the values to update the UI
+                Information info = dataSnapshot.getValue(Information.class);
+                toSet.myFollowers = info.myFollowers;
+                toSet.myFoods = info.myFoods;
+                toSet.myIntakes = info.myIntakes;
+                toSet.myUser = info.myUser;
+            }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+                // Getting Post failed, log a message
+                Log.w("sucks", "loadUid:onCancelled", databaseError.toException());
+                // ...
+            }
+        };
+
+        FirebaseDatabase.getInstance().getReference().child(uid).addValueEventListener(postListener);
     }
 }
 
