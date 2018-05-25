@@ -77,7 +77,6 @@ public class LoginActivity extends AppCompatActivity {
 
         if (currentUser != null){
             handleUsers(currentUser);
-            Information.read(currentUser.getUid(), uid);
             Bundle toPass = new Bundle();
             toPass.putSerializable("uid", uid);
             //popuplate uid
@@ -112,12 +111,14 @@ public class LoginActivity extends AppCompatActivity {
                     UserInfo ui = new UserInfo(userid, username, 10, 8, 0);
                     User u = new User(userid, username);
                     DatabaseReference mData = FirebaseDatabase.getInstance().getReference();
-                    mData.child(userid).child("info").setValue(ui);
+                    uid = new Information(ui, u);
                     mData.child("users").child(userid).setValue(u);
+                    mData.child(userid).setValue(Information.convertToDB(uid));
                 } else {
                     FirebaseUser user = mAuth.getCurrentUser();
-                    Information.read(user.getUid(), uid);
-                    handleUsers(user);
+                    InformationDB db = new InformationDB();
+                    InformationDB.read(user.getUid(), db);
+                    uid = InformationDB.convertToNormal(db);
                 }
             }
             @Override
