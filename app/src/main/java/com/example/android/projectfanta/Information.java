@@ -13,58 +13,58 @@ import java.util.ArrayList;
 import java.util.HashMap;
 
 public class Information implements Serializable {
-    private HashMap<String, Food> foods;
-    private ArrayList<Intake> intakes;
-    private UserInfo info;
+    private HashMap<String, Food> myFoods;
+    private ArrayList<Intake> myIntakes;
+    private UserInfo myInfo;
     // String here is the username
-    private HashMap<String, User> followers;
-    private HashMap<String, User> following;
+    private HashMap<String, User> myFollowers;
+    private HashMap<String, User> imFollowing;
 
     /**
      * Create information object and populates it
      * @param user how the information object will be populated
      */
-    public Information(UserInfo info, User user) {
-        this.info = info;
+    public Information(UserInfo myInfo, User user) {
+        this.myInfo = myInfo;
         Food food = new Food(" ");
         food.add("calories", 0);
-        this.foods = new HashMap<String, Food>();
-        this.foods.put(" ", food);
-        this.intakes = new ArrayList<Intake>();
-        this.intakes.add(new Intake("", 0, 0));
-        this.followers = new HashMap<String, User>();
-        this.followers.put(user.getUserName(),user);
-        this.following = new HashMap<String, User>();
-        this.following.put(user.getUserName(),user);
+        this.myFoods = new HashMap<String, Food>();
+        this.myFoods.put(" ", food);
+        this.myIntakes = new ArrayList<Intake>();
+        this.myIntakes.add(new Intake("", 0, 0));
+        this.myFollowers = new HashMap<String, User>();
+        this.myFollowers.put(user.getUserName(),user);
+        this.imFollowing = new HashMap<String, User>();
+        this.imFollowing.put(user.getUserName(),user);
     }
 
     public Information() {};
 
-    public UserInfo getInfo() { return info; }
-    public Food getFood(String name) { return foods.get(name); }
-    public ArrayList<Intake> getMyIntakes() { return intakes; }
-    public HashMap<String, Food> getMyFoods() { return foods; }
-    public HashMap<String, User> getImFollowing() { return following; }
-    public HashMap<String, User> getMyFollowers() { return followers; }
+    public UserInfo getInfo() { return myInfo; }
+    public Food getFood(String name) { return myFoods.get(name); }
+    public ArrayList<Intake> getMyIntakes() { return myIntakes; }
+    public HashMap<String, Food> getMyFoods() { return myFoods; }
+    public HashMap<String, User> getImFollowing() { return imFollowing; }
+    public HashMap<String, User> getMyFollowers() { return myFollowers; }
 
-    public void setFollowers(HashMap<String, User> followers) {
-        this.followers = followers;
+    public void setFollowers(HashMap<String, User> myFollowers) {
+        this.myFollowers = myFollowers;
     }
 
-    public void setFollowing(HashMap<String, User> following) {
-        this.following = following;
+    public void setFollowing(HashMap<String, User> imFollowing) {
+        this.imFollowing = imFollowing;
     }
 
-    public void setInfo(UserInfo info) {
-        this.info = info;
+    public void setInfo(UserInfo myInfo) {
+        this.myInfo = myInfo;
     }
 
-    public void setFoods(HashMap<String, Food> foods) {
-        this.foods = foods;
+    public void setFoods(HashMap<String, Food> myFoods) {
+        this.myFoods = myFoods;
     }
 
-    public void setIntakes(ArrayList<Intake> intakes) {
-        this.intakes = intakes;
+    public void setIntakes(ArrayList<Intake> myIntakes) {
+        this.myIntakes = myIntakes;
     }
 
     /**
@@ -73,34 +73,51 @@ public class Information implements Serializable {
      * @return true if i follow user, false if not
      */
     public boolean follows(User user) {
-        return this.following.containsKey(user.getUserName());
+        return this.imFollowing.containsKey(user.getUserName());
     }
 
     public void addFood(Food food) {
-        this.foods.put(food.getName(), food);
+        this.myFoods.put(food.getName(), food);
     }
 
     public void addIntake(int index,Intake in) {
-        this.intakes.add(in);
+        this.myIntakes.add(in);
     }
 
     public boolean hasFood(String name) {
-        return foods.containsKey(name);
+        return myFoods.containsKey(name);
     }
 
-    public static InformationDB convertToDB(Information info) {
-        InformationDB db = new InformationDB(info.getInfo(), info.following.get(info.getInfo().getUserName()));
+    static void read(String uid, final Callback call){
+        ValueEventListener postListener = new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                Information myInfo = dataSnapshot.getValue(Information.class);
+                call.onComplete(myInfo);
+            }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+                // Getting Post failed, log a message
+                Log.w("sucks", "loadUid:onCancelled", databaseError.toException());
+            }
+        };
+        FirebaseDatabase.getInstance().getReference().child(uid).addListenerForSingleValueEvent(postListener);
+    }
+
+    public static InformationDB convertToDB(Information myInfo) {
+        InformationDB db = new InformationDB(myInfo.getInfo(), myInfo.imFollowing.get(myInfo.getInfo().getUserName()));
         int index = 0;
-        HashMap<String, Intake> intakes = db.getMyIntakes();
-        for(Intake i : info.intakes) {
-            intakes.put(index+"", i);
+        HashMap<String, Intake> myIntakes = db.getMyIntakes();
+        for(Intake i : myInfo.myIntakes) {
+            myIntakes.put(index+"", i);
             index++;
         }
-        db.setFollowers(info.followers);
-        db.setFollowing(info.following);
-        db.setInfo(info.getInfo());
-        for(String f : info.foods.keySet()) {
-            db.addFood(Food.convertToDB(info.foods.get(f)));
+        db.setFollowers(myInfo.myFollowers);
+        db.setFollowing(myInfo.imFollowing);
+        db.setInfo(myInfo.getInfo());
+        for(String f : myInfo.myFoods.keySet()) {
+            db.addFood(Food.convertToDB(myInfo.myFoods.get(f)));
         }
         return db;
     }
@@ -137,11 +154,11 @@ public class Information implements Serializable {
             i.printStackTrace();
         }
 
-        Information info;
+        Information myInfo;
         try {
             FileInputStream fileIn = openFileInput("JoyaanTestFile");
             ObjectInputStream in = new ObjectInputStream(fileIn);
-            info = (Information) in.readObject();
+            myInfo = (Information) in.readObject();
             in.close();
             fileIn.close();
         } catch (IOException i) {

@@ -6,6 +6,7 @@ import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.AutoCompleteTextView;
 import android.widget.EditText;
@@ -100,8 +101,23 @@ public class LoginActivity extends AppCompatActivity {
     }
 
     public void handleUsers(FirebaseUser user) {
+
         final DatabaseReference singleUserRef = FirebaseDatabase.getInstance().getReference().child("users").child(user.getUid());
         final String userid = user.getUid();
+        final Callback readCallBack = new Callback() {
+            @Override
+            public void onComplete(Object o) {
+                //uid = InformationDB.convertToNormal((InformationDB) o);
+                uid = (Information)o;
+                Bundle toPass = new Bundle();
+                toPass.putSerializable("uid", uid);
+                //Log.v("sucks", uid.getInfo().getUserName());
+                //Log.v("sucks", "fooooood:  "+ uid.getMyIntakes().get(0).getFood());
+                Intent calcIntent = new Intent(LoginActivity.this, HomeActivity.class).putExtra("uid", toPass);
+                startActivityForResult(calcIntent, RC_SIGN_IN);
+            }
+        };
+
         singleUserRef.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot snapshot) {
@@ -113,12 +129,15 @@ public class LoginActivity extends AppCompatActivity {
                     DatabaseReference mData = FirebaseDatabase.getInstance().getReference();
                     uid = new Information(ui, u);
                     mData.child("users").child(userid).setValue(u);
-                    mData.child(userid).setValue(Information.convertToDB(uid));
+                    mData.child(userid).setValue(uid);
+                    Bundle toPass = new Bundle();
+                    toPass.putSerializable("uid", uid);
+                    Intent calcIntent = new Intent(LoginActivity.this, HomeActivity.class).putExtra("uid", toPass);
+                    startActivityForResult(calcIntent, RC_SIGN_IN);
                 } else {
                     FirebaseUser user = mAuth.getCurrentUser();
-                    InformationDB db = new InformationDB();
-                    InformationDB.read(user.getUid(), db);
-                    uid = InformationDB.convertToNormal(db);
+                    final InformationDB db = new InformationDB();
+                    Information.read(user.getUid(), readCallBack);
                 }
             }
             @Override
@@ -126,6 +145,8 @@ public class LoginActivity extends AppCompatActivity {
 
             }
         });
+
+
     }
 
 
@@ -160,6 +181,8 @@ public class LoginActivity extends AppCompatActivity {
                     public void onComplete(@NonNull Task<AuthResult> task) {
                         if (task.isSuccessful()) {
                             // Sign in success, update UI with the signed-in user's information
+                            FirebaseUser user = mAuth.getCurrentUser();
+                            handleUsers(user);
                             Bundle toPass = new Bundle();
                             toPass.putSerializable("uid", uid);
                             Intent calcIntent = new Intent(LoginActivity.this, HomeActivity.class).putExtra("uid", toPass);
@@ -184,8 +207,8 @@ public class LoginActivity extends AppCompatActivity {
                  toast.show();
              }
          }
-     };
- }
+        };
+    }
 
 
     public void onClick(View v) {

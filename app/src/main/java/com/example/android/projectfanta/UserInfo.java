@@ -24,6 +24,10 @@ public class UserInfo extends User {
         age = a;
     }
 
+    public UserInfo( UserInfo copy) {
+        this(copy.getId(), copy.getUserName(), copy.getWeight(), copy.getHeight(), copy.getAge());
+    }
+
     public int getAge() {
         return age;
     }
