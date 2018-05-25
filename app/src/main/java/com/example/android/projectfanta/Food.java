@@ -109,11 +109,11 @@ public class Food implements Serializable{
 
     public String getName() { return name; }
 
-    public static FoodDB convertToDB(Food food){
-        FoodDB db = new FoodDB(food.name);
-        for (String key : food.getNutrients().keySet()) {
-            db.add(key, food.getNutrient(key));
-        }
-        return db;
-    }
+//    public static FoodDB convertToDB(Food food){
+//        FoodDB db = new FoodDB(food.name);
+//        for (String key : food.getNutrients().keySet()) {
+//            db.add(key, food.getNutrient(key));
+//        }
+//        return db;
+//    }
 }

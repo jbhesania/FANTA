@@ -105,22 +105,22 @@ public class Information implements Serializable {
         FirebaseDatabase.getInstance().getReference().child(uid).addListenerForSingleValueEvent(postListener);
     }
 
-    public static InformationDB convertToDB(Information myInfo) {
-        InformationDB db = new InformationDB(myInfo.getInfo(), myInfo.imFollowing.get(myInfo.getInfo().getUserName()));
-        int index = 0;
-        HashMap<String, Intake> myIntakes = db.getMyIntakes();
-        for(Intake i : myInfo.myIntakes) {
-            myIntakes.put(index+"", i);
-            index++;
-        }
-        db.setFollowers(myInfo.myFollowers);
-        db.setFollowing(myInfo.imFollowing);
-        db.setInfo(myInfo.getInfo());
-        for(String f : myInfo.myFoods.keySet()) {
-            db.addFood(Food.convertToDB(myInfo.myFoods.get(f)));
-        }
-        return db;
-    }
+//    public static InformationDB convertToDB(Information myInfo) {
+//        InformationDB db = new InformationDB(myInfo.getInfo(), myInfo.imFollowing.get(myInfo.getInfo().getUserName()));
+//        int index = 0;
+//        HashMap<String, Intake> myIntakes = db.getMyIntakes();
+//        for(Intake i : myInfo.myIntakes) {
+//            myIntakes.put(index+"", i);
+//            index++;
+//        }
+//        db.setFollowers(myInfo.myFollowers);
+//        db.setFollowing(myInfo.imFollowing);
+//        db.setInfo(myInfo.getInfo());
+//        for(String f : myInfo.myFoods.keySet()) {
+//            db.addFood(Food.convertToDB(myInfo.myFoods.get(f)));
+//        }
+//        return db;
+//    }
 }
 
 /*

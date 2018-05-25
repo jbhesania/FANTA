@@ -136,7 +136,6 @@ public class LoginActivity extends AppCompatActivity {
                     startActivityForResult(calcIntent, RC_SIGN_IN);
                 } else {
                     FirebaseUser user = mAuth.getCurrentUser();
-                    final InformationDB db = new InformationDB();
                     Information.read(user.getUid(), readCallBack);
                 }
             }
@@ -220,6 +219,5 @@ public class LoginActivity extends AppCompatActivity {
                     "No Internet Connection!", Toast.LENGTH_SHORT);
             toast.show();
         }
-
     }
-};
+}
