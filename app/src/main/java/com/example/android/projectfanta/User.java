@@ -1,12 +1,12 @@
 package com.example.android.projectfanta;
 
+import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.HashMap;
 
-public class User {
-
+public class User implements Serializable {
     private String id;
     private String userName;
-    private HashMap<String, Food> myFoods;
 
     public User() {
 
@@ -14,7 +14,7 @@ public class User {
 
     public User(String id, String uname) {
         this.id = id;
-        userName = uname;
+        this.userName = uname;
     }
 
     public void setId(String id) {

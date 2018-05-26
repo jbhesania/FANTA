@@ -1,10 +1,12 @@
 package com.example.android.projectfanta;
 
 import android.content.Intent;
+import android.icu.text.IDNA;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.AutoCompleteTextView;
 import android.widget.EditText;
@@ -51,6 +53,8 @@ public class LoginActivity extends AppCompatActivity {
     private View mProgressView;
     private View mLoginFormView;
 
+    private Information uid;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -71,9 +75,13 @@ public class LoginActivity extends AppCompatActivity {
         super.onStart();
         // Check if user is signed in (non-null) and update UI accordingly.
         FirebaseUser currentUser = mAuth.getCurrentUser();
+
         if (currentUser != null){
             handleUsers(currentUser);
-            Intent calcIntent = new Intent(this, HomeActivity.class);
+            Bundle toPass = new Bundle();
+            toPass.putSerializable("uid", uid);
+            //popuplate uid
+            Intent calcIntent = new Intent(LoginActivity.this, HomeActivity.class).putExtra("uid", toPass);
             startActivityForResult(calcIntent, RC_SIGN_IN);
         }
     }
@@ -86,14 +94,30 @@ public class LoginActivity extends AppCompatActivity {
         if (requestCode == RC_SIGN_IN) {
             // The Task returned from this call is always completed, no need to attach
             // a listener.
+            // read
             Task<GoogleSignInAccount> task = GoogleSignIn.getSignedInAccountFromIntent(data);
             handleSignInResult(task);
         }
     }
 
     public void handleUsers(FirebaseUser user) {
+
         final DatabaseReference singleUserRef = FirebaseDatabase.getInstance().getReference().child("users").child(user.getUid());
         final String userid = user.getUid();
+        final Callback readCallBack = new Callback() {
+            @Override
+            public void onComplete(Object o) {
+                //uid = InformationDB.convertToNormal((InformationDB) o);
+                uid = (Information)o;
+                Bundle toPass = new Bundle();
+                toPass.putSerializable("uid", uid);
+                //Log.v("sucks", uid.getInfo().getUserName());
+                //Log.v("sucks", "fooooood:  "+ uid.getMyIntakes().get(0).getFood());
+                Intent calcIntent = new Intent(LoginActivity.this, HomeActivity.class).putExtra("uid", toPass);
+                startActivityForResult(calcIntent, RC_SIGN_IN);
+            }
+        };
+
         singleUserRef.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot snapshot) {
@@ -103,8 +127,16 @@ public class LoginActivity extends AppCompatActivity {
                     UserInfo ui = new UserInfo(userid, username, 10, 8, 0);
                     User u = new User(userid, username);
                     DatabaseReference mData = FirebaseDatabase.getInstance().getReference();
-                    mData.child(userid).child("info").setValue(ui);
+                    uid = new Information(ui, u);
                     mData.child("users").child(userid).setValue(u);
+                    mData.child(userid).setValue(uid);
+                    Bundle toPass = new Bundle();
+                    toPass.putSerializable("uid", uid);
+                    Intent calcIntent = new Intent(LoginActivity.this, HomeActivity.class).putExtra("uid", toPass);
+                    startActivityForResult(calcIntent, RC_SIGN_IN);
+                } else {
+                    FirebaseUser user = mAuth.getCurrentUser();
+                    Information.read(user.getUid(), readCallBack);
                 }
             }
             @Override
@@ -112,6 +144,8 @@ public class LoginActivity extends AppCompatActivity {
 
             }
         });
+
+
     }
 
 
@@ -148,7 +182,9 @@ public class LoginActivity extends AppCompatActivity {
                             // Sign in success, update UI with the signed-in user's information
                             FirebaseUser user = mAuth.getCurrentUser();
                             handleUsers(user);
-                            Intent calcIntent = new Intent(LoginActivity.this, HomeActivity.class);
+                            Bundle toPass = new Bundle();
+                            toPass.putSerializable("uid", uid);
+                            Intent calcIntent = new Intent(LoginActivity.this, HomeActivity.class).putExtra("uid", toPass);
                             startActivityForResult(calcIntent, RC_SIGN_IN);
                         } else {
                             // TODO If sign in fails, display a message to the user.
@@ -170,8 +206,8 @@ public class LoginActivity extends AppCompatActivity {
                  toast.show();
              }
          }
-     };
- }
+        };
+    }
 
 
     public void onClick(View v) {
@@ -183,6 +219,5 @@ public class LoginActivity extends AppCompatActivity {
                     "No Internet Connection!", Toast.LENGTH_SHORT);
             toast.show();
         }
-
     }
-};
+}
