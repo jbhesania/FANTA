@@ -1,5 +1,12 @@
 package com.example.android.projectfanta;
 
+import android.util.Log;
+
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
+
 public class UserInfo extends User {
 
     private int weight;
@@ -15,6 +22,10 @@ public class UserInfo extends User {
         weight = w;
         height = h;
         age = a;
+    }
+
+    public UserInfo( UserInfo copy) {
+        this(copy.getId(), copy.getUserName(), copy.getWeight(), copy.getHeight(), copy.getAge());
     }
 
     public int getAge() {
@@ -40,4 +51,6 @@ public class UserInfo extends User {
     public void setWeight(int weight) {
         this.weight = weight;
     }
+
+
 }
