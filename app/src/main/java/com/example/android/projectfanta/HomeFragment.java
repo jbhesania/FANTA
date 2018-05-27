@@ -4,7 +4,6 @@ import android.content.Context;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
-import android.provider.MediaStore;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
@@ -129,11 +128,11 @@ public class HomeFragment extends Fragment {
         });
 
         fab_camera.setOnClickListener(new View.OnClickListener(){
-            @Override
-            public void onClick(View view){
-                Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
-                startActivityForResult(intent, 0);
-            }
+                  @Override
+                  public void onClick(View view){
+                      Intent intent = new Intent(getContext(), CameraActivity.class);
+                      startActivityForResult(intent, 0);
+                  }
         });
 
         fab_fresh.setOnClickListener(new View.OnClickListener(){
