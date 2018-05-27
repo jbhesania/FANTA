@@ -36,4 +36,30 @@
     <string name="title_activity_change_nutrition_intake">ChangeNutritionIntake</string>
     <string name="title_activity_main_activitya">MainActivitya</string>
     <string name="title_activity_fresh_food">FreshFoodActivity</string>
+
+    <!-- OCR -->
+    <string name="ok">OK</string>
+    <string name="done">DONE</string>
+    <string name="permission_camera_rationale">Access to the camera is needed for detection</string>
+    <string name="no_camera_permission">This application cannot run because it does not have the camera permission.  The application will now exit.</string>
+    <string name="low_storage_error">Ocr dependencies cannot be downloaded due to low device storage</string>
+    <string name="title_activity_main">Ocr Detector Sample</string>
+    <string name="ocr_header">Click &quot;Detect Text&quot; to detect text</string>
+    <string name="read_text">Detect Text</string>
+    <string name="auto_focus">Auto Focus</string>
+    <string name="use_flash">Use Flash</string>
+    <string name="ocr_success">Text read successfully</string>
+    <string name="ocr_failure">No text captured</string>
+    <string name="ocr_error">"Error reading text: %1$s"</string>
+    <string name="name">Name</string>
+    <string name="calories">Calories</string>
+    <string name="totalFat">Total Fat (g)</string>
+    <string name="cholest">Cholesterol (mg)</string>
+    <string name="sodium">Sodium (mg)</string>
+    <string name="potassium">Potassium (mg)</string>
+    <string name="total_carb">Total Carbs (g)</string>
+    <string name="diet_fiber">Dietary Fiber (g)</string>
+    <string name="sugar">Sugars (g)</string>
+    <string name="protein">Protein (g)</string>
+    <string name="servings">Servings </string>
 </resources>
