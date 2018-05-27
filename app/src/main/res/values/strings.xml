@@ -62,4 +62,23 @@
     <string name="sugar">Sugars (g)</string>
     <string name="protein">Protein (g)</string>
     <string name="servings">Servings </string>
+    
+    <string name="title_activity_manual_entry_form">ManualEntryForm</string>
+    <string name="title_activity_about_us">AboutUs</string>
+    <string name="title_activity_history">History</string>
+    <string name="title_dashboard">Dashboard</string>
+    <string name="title_notifications">Notifications</string>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="tab_text_1">Tab 1</string>
+    <string name="tab_text_2">Tab 2</string>
+    <string name="tab_text_3">Tab 3</string>
+    <string name="action_settings">Settings</string>
+    <string name="section_format">Hello World from section: %1$d</string>
+    <string name="title_activity_user_profile">UserProfile</string>
+    <string name="title_activity_accept_reject_follow">AcceptRejectFollow</string>
+
+    <string name="open">Open</string>
+    <string name="close">Close</string>
 </resources>

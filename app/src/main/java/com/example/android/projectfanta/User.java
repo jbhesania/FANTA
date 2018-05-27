@@ -1,7 +1,10 @@
 package com.example.android.projectfanta;
 
-public class User {
+import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.HashMap;
 
+public class User implements Serializable {
     private String id;
     private String userName;
 
@@ -11,7 +14,7 @@ public class User {
 
     public User(String id, String uname) {
         this.id = id;
-        userName = uname;
+        this.userName = uname;
     }
 
     public void setId(String id) {

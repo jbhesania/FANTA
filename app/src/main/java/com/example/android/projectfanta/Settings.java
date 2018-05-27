@@ -6,11 +6,6 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.CardView;
 import android.view.View;
-import android.widget.Button;
-import android.widget.ImageButton;
-import android.widget.ImageView;
-import android.widget.LinearLayout;
-import android.widget.TextView;
 
 import com.google.android.gms.auth.api.signin.GoogleSignIn;
 import com.google.android.gms.auth.api.signin.GoogleSignInOptions;
@@ -25,15 +20,16 @@ public class Settings extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_settings);
+        setContentView(R.layout.fragment_settings);
         SignOut = (CardView) findViewById(R.id.log_out);
     }
 
     public void logOut(View v) {
         googleSignOut();
         FirebaseAuth.getInstance().signOut();
-        Intent toLogin = new Intent(Settings.this, LoginActivity.class);
-        startActivity(toLogin);
+        Intent intent = new Intent(this, LoginActivity.class);
+        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
+        startActivity(intent);
     }
 
     private void googleSignOut() {
@@ -48,5 +44,10 @@ public class Settings extends AppCompatActivity {
                         // ...
                     }
                 });
+    }
+
+    public void myAccount(View v) {
+        Intent toMyAccount = new Intent(Settings.this, MyAccountActivity.class);
+        startActivity(toMyAccount);
     }
 }

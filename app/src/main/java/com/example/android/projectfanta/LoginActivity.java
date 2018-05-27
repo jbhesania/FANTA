@@ -1,35 +1,16 @@
 package com.example.android.projectfanta;
 
-import android.animation.Animator;
-import android.animation.AnimatorListenerAdapter;
-import android.annotation.TargetApi;
 import android.content.Intent;
-import android.content.pm.PackageManager;
+import android.icu.text.IDNA;
 import android.support.annotation.NonNull;
-import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
-import android.app.LoaderManager.LoaderCallbacks;
 
-import android.content.CursorLoader;
-import android.content.Loader;
-import android.database.Cursor;
-import android.net.Uri;
-import android.os.AsyncTask;
-
-import android.os.Build;
 import android.os.Bundle;
-import android.provider.ContactsContract;
-import android.text.TextUtils;
 import android.util.Log;
-import android.view.KeyEvent;
 import android.view.View;
-import android.view.View.OnClickListener;
-import android.view.inputmethod.EditorInfo;
-import android.widget.ArrayAdapter;
 import android.widget.AutoCompleteTextView;
-import android.widget.Button;
 import android.widget.EditText;
-import android.widget.TextView;
+import android.widget.Toast;
 
 import com.google.android.gms.auth.api.signin.GoogleSignIn;
 import com.google.android.gms.auth.api.signin.GoogleSignInAccount;
@@ -50,10 +31,6 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
-import java.util.ArrayList;
-import java.util.List;
-
-import static android.Manifest.permission.READ_CONTACTS;
 
 /**
  * A login screen that offers login via email/password.
@@ -76,6 +53,8 @@ public class LoginActivity extends AppCompatActivity {
     private View mProgressView;
     private View mLoginFormView;
 
+    private Information uid;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -96,9 +75,13 @@ public class LoginActivity extends AppCompatActivity {
         super.onStart();
         // Check if user is signed in (non-null) and update UI accordingly.
         FirebaseUser currentUser = mAuth.getCurrentUser();
+
         if (currentUser != null){
             handleUsers(currentUser);
-            Intent calcIntent = new Intent(this, HomeActivity.class);
+            Bundle toPass = new Bundle();
+            toPass.putSerializable("uid", uid);
+            //popuplate uid
+            Intent calcIntent = new Intent(LoginActivity.this, HomeActivity.class).putExtra("uid", toPass);
             startActivityForResult(calcIntent, RC_SIGN_IN);
         }
     }
@@ -111,14 +94,30 @@ public class LoginActivity extends AppCompatActivity {
         if (requestCode == RC_SIGN_IN) {
             // The Task returned from this call is always completed, no need to attach
             // a listener.
+            // read
             Task<GoogleSignInAccount> task = GoogleSignIn.getSignedInAccountFromIntent(data);
             handleSignInResult(task);
         }
     }
 
     public void handleUsers(FirebaseUser user) {
+
         final DatabaseReference singleUserRef = FirebaseDatabase.getInstance().getReference().child("users").child(user.getUid());
         final String userid = user.getUid();
+        final Callback readCallBack = new Callback() {
+            @Override
+            public void onComplete(Object o) {
+                //uid = InformationDB.convertToNormal((InformationDB) o);
+                uid = (Information)o;
+                Bundle toPass = new Bundle();
+                toPass.putSerializable("uid", uid);
+                //Log.v("sucks", uid.getInfo().getUserName());
+                //Log.v("sucks", "fooooood:  "+ uid.getMyIntakes().get(0).getFood());
+                Intent calcIntent = new Intent(LoginActivity.this, HomeActivity.class).putExtra("uid", toPass);
+                startActivityForResult(calcIntent, RC_SIGN_IN);
+            }
+        };
+
         singleUserRef.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot snapshot) {
@@ -128,8 +127,16 @@ public class LoginActivity extends AppCompatActivity {
                     UserInfo ui = new UserInfo(userid, username, 10, 8, 0);
                     User u = new User(userid, username);
                     DatabaseReference mData = FirebaseDatabase.getInstance().getReference();
-                    mData.child(userid).child("info").setValue(ui);
+                    uid = new Information(ui, u);
                     mData.child("users").child(userid).setValue(u);
+                    mData.child(userid).setValue(uid);
+                    Bundle toPass = new Bundle();
+                    toPass.putSerializable("uid", uid);
+                    Intent calcIntent = new Intent(LoginActivity.this, HomeActivity.class).putExtra("uid", toPass);
+                    startActivityForResult(calcIntent, RC_SIGN_IN);
+                } else {
+                    FirebaseUser user = mAuth.getCurrentUser();
+                    Information.read(user.getUid(), readCallBack);
                 }
             }
             @Override
@@ -137,6 +144,8 @@ public class LoginActivity extends AppCompatActivity {
 
             }
         });
+
+
     }
 
 
@@ -173,7 +182,9 @@ public class LoginActivity extends AppCompatActivity {
                             // Sign in success, update UI with the signed-in user's information
                             FirebaseUser user = mAuth.getCurrentUser();
                             handleUsers(user);
-                            Intent calcIntent = new Intent(LoginActivity.this, HomeActivity.class);
+                            Bundle toPass = new Bundle();
+                            toPass.putSerializable("uid", uid);
+                            Intent calcIntent = new Intent(LoginActivity.this, HomeActivity.class).putExtra("uid", toPass);
                             startActivityForResult(calcIntent, RC_SIGN_IN);
                         } else {
                             // TODO If sign in fails, display a message to the user.
@@ -185,12 +196,28 @@ public class LoginActivity extends AppCompatActivity {
     public View.OnClickListener getGoogleSignIn(){
         return new View.OnClickListener(){
             @Override
-            public void onClick(View v) {
-                Intent signInIntent = mGoogleSignInClient.getSignInIntent();
-                startActivityForResult(signInIntent, RC_SIGN_IN);
-            }
+             public void onClick(View v) {
+                 if(NetworkStatus.getInstance(getApplicationContext()).isOnline()){
+                     Intent signInIntent = mGoogleSignInClient.getSignInIntent();
+                     startActivityForResult(signInIntent, RC_SIGN_IN);
+             }else {
+                 Toast toast = Toast.makeText(getApplicationContext(),
+                         "No Internet Connection!", Toast.LENGTH_SHORT);
+                 toast.show();
+             }
+         }
         };
     }
 
-}
 
+    public void onClick(View v) {
+        if(NetworkStatus.getInstance(getApplicationContext()).isOnline()) {
+            Intent signInIntent = mGoogleSignInClient.getSignInIntent();
+            startActivityForResult(signInIntent, RC_SIGN_IN);
+        }else {
+            Toast toast = Toast.makeText(getApplicationContext(),
+                    "No Internet Connection!", Toast.LENGTH_SHORT);
+            toast.show();
+        }
+    }
+}
