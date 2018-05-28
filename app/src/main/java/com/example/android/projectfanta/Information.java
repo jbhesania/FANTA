@@ -5,6 +5,7 @@ import android.util.Log;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
@@ -13,12 +14,17 @@ import java.util.ArrayList;
 import java.util.HashMap;
 
 public class Information implements Serializable {
+
+    public static Information uid;
+
     private HashMap<String, Food> myFoods;
     private ArrayList<Intake> myIntakes;
     private UserInfo myInfo;
     // String here is the username
     private HashMap<String, User> myFollowers;
     private HashMap<String, User> imFollowing;
+    DatabaseReference mData;
+
 
     /**
      * Create information object and populates it
@@ -76,14 +82,6 @@ public class Information implements Serializable {
         return this.imFollowing.containsKey(user.getUserName());
     }
 
-    public void addFood(Food food) {
-        this.myFoods.put(food.getName(), food);
-    }
-
-    public void addIntake(int index,Intake in) {
-        this.myIntakes.add(in);
-    }
-
     public boolean hasFood(String name) {
         return myFoods.containsKey(name);
     }
@@ -103,6 +101,18 @@ public class Information implements Serializable {
             }
         };
         FirebaseDatabase.getInstance().getReference().child(uid).addListenerForSingleValueEvent(postListener);
+    }
+
+    public void addIntake(Intake intake){
+        if (mData == null) mData = FirebaseDatabase.getInstance().getReference();
+        mData.child(myInfo.getId()).child("myIntakes").child(myIntakes.size()+"").setValue(intake);
+        myIntakes.add(intake);
+    }
+
+    public void addFood(Food food) {
+        if (mData == null) mData = FirebaseDatabase.getInstance().getReference();
+        mData.child(myInfo.getId()).child("myFoods").child(food.getName()).setValue(food);
+        myFoods.put(food.getName(),food);
     }
 
 //    public static InformationDB convertToDB(Information myInfo) {
