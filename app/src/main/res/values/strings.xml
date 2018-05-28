@@ -81,4 +81,6 @@
 
     <string name="open">Open</string>
     <string name="close">Close</string>
+    <string name="confirm">confirm</string>
+    <string name="exit">exit</string>
 </resources>
