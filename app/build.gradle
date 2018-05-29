@@ -1,11 +1,7 @@
 apply plugin: 'com.android.application'
 
 android {
-<<<<<<< HEAD
     compileSdkVersion 27
-=======
-    compileSdkVersion 26
->>>>>>> 1a3db540c1f1d8c59e4674c4d5aaa3a548756659
     defaultConfig {
         applicationId "com.example.android.projectfanta"
         minSdkVersion 21
