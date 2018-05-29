@@ -25,7 +25,6 @@ class CustomViewHolder extends RecyclerView.ViewHolder{
 
     public CustomViewHolder(View itemView){
         super(itemView);
-
         ribbonLayout = (RibbonLayout)itemView.findViewById(R.id.ribbonAbout);
         imageView = (ImageView)itemView.findViewById(R.id.imageView);
     }

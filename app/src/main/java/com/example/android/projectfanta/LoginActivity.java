@@ -53,8 +53,6 @@ public class LoginActivity extends AppCompatActivity {
     private View mProgressView;
     private View mLoginFormView;
 
-    private Information uid;
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -78,10 +76,8 @@ public class LoginActivity extends AppCompatActivity {
 
         if (currentUser != null){
             handleUsers(currentUser);
-            Bundle toPass = new Bundle();
-            toPass.putSerializable("uid", uid);
             //popuplate uid
-            Intent calcIntent = new Intent(LoginActivity.this, HomeActivity.class).putExtra("uid", toPass);
+            Intent calcIntent = new Intent(LoginActivity.this, HomeActivity.class);
             startActivityForResult(calcIntent, RC_SIGN_IN);
         }
     }
@@ -108,12 +104,10 @@ public class LoginActivity extends AppCompatActivity {
             @Override
             public void onComplete(Object o) {
                 //uid = InformationDB.convertToNormal((InformationDB) o);
-                uid = (Information)o;
-                Bundle toPass = new Bundle();
-                toPass.putSerializable("uid", uid);
+                Information.uid = (Information)o;
                 //Log.v("sucks", uid.getInfo().getUserName());
                 //Log.v("sucks", "fooooood:  "+ uid.getMyIntakes().get(0).getFood());
-                Intent calcIntent = new Intent(LoginActivity.this, HomeActivity.class).putExtra("uid", toPass);
+                Intent calcIntent = new Intent(LoginActivity.this, HomeActivity.class);
                 startActivityForResult(calcIntent, RC_SIGN_IN);
             }
         };
@@ -127,12 +121,10 @@ public class LoginActivity extends AppCompatActivity {
                     UserInfo ui = new UserInfo(userid, username, 10, 8, 0);
                     User u = new User(userid, username);
                     DatabaseReference mData = FirebaseDatabase.getInstance().getReference();
-                    uid = new Information(ui, u);
+                    Information.uid = new Information(ui, u);
                     mData.child("users").child(userid).setValue(u);
-                    mData.child(userid).setValue(uid);
-                    Bundle toPass = new Bundle();
-                    toPass.putSerializable("uid", uid);
-                    Intent calcIntent = new Intent(LoginActivity.this, HomeActivity.class).putExtra("uid", toPass);
+                    mData.child(userid).setValue(Information.uid);
+                    Intent calcIntent = new Intent(LoginActivity.this, HomeActivity.class);
                     startActivityForResult(calcIntent, RC_SIGN_IN);
                 } else {
                     FirebaseUser user = mAuth.getCurrentUser();
@@ -182,9 +174,7 @@ public class LoginActivity extends AppCompatActivity {
                             // Sign in success, update UI with the signed-in user's information
                             FirebaseUser user = mAuth.getCurrentUser();
                             handleUsers(user);
-                            Bundle toPass = new Bundle();
-                            toPass.putSerializable("uid", uid);
-                            Intent calcIntent = new Intent(LoginActivity.this, HomeActivity.class).putExtra("uid", toPass);
+                            Intent calcIntent = new Intent(LoginActivity.this, HomeActivity.class);
                             startActivityForResult(calcIntent, RC_SIGN_IN);
                         } else {
                             // TODO If sign in fails, display a message to the user.
