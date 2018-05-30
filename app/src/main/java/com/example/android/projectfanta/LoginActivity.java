@@ -1,5 +1,6 @@
 package com.example.android.projectfanta;
 
+import android.app.Activity;
 import android.content.Intent;
 import android.icu.text.IDNA;
 import android.support.annotation.NonNull;
@@ -100,6 +101,7 @@ public class LoginActivity extends AppCompatActivity {
 
         final DatabaseReference singleUserRef = FirebaseDatabase.getInstance().getReference().child("users").child(user.getUid());
         final String userid = user.getUid();
+        final String username = user.getDisplayName();
         final Callback readCallBack = new Callback() {
             @Override
             public void onComplete(Object o) {
@@ -117,14 +119,14 @@ public class LoginActivity extends AppCompatActivity {
             public void onDataChange(DataSnapshot snapshot) {
                 if (!snapshot.exists()) {
                     // TODO REQUEST USER INFO TO SET USER VALUES CORRECTLY
-                    String username = "Baby john doe";
+                    //String username = user.getDisplayName();
                     UserInfo ui = new UserInfo(userid, username, 10, 8, 0);
                     User u = new User(userid, username);
                     DatabaseReference mData = FirebaseDatabase.getInstance().getReference();
                     Information.uid = new Information(ui, u);
                     mData.child("users").child(userid).setValue(u);
                     mData.child(userid).setValue(Information.uid);
-                    Intent calcIntent = new Intent(LoginActivity.this, HomeActivity.class);
+                    Intent calcIntent = new Intent(LoginActivity.this, MyAccountActivity.class);
                     startActivityForResult(calcIntent, RC_SIGN_IN);
                 } else {
                     FirebaseUser user = mAuth.getCurrentUser();
@@ -173,6 +175,8 @@ public class LoginActivity extends AppCompatActivity {
                         if (task.isSuccessful()) {
                             // Sign in success, update UI with the signed-in user's information
                             FirebaseUser user = mAuth.getCurrentUser();
+                            //System.out.println("userid is" + user.getUid());
+                            //System.out.println("myName is " + user.getEmail());
                             handleUsers(user);
                             Intent calcIntent = new Intent(LoginActivity.this, HomeActivity.class);
                             startActivityForResult(calcIntent, RC_SIGN_IN);

@@ -150,8 +150,9 @@
             android:layout_width="100dp"
             android:layout_height="30dp"
             android:background="@drawable/capsule"
-            android:textAlignment="center"
-            android:text="SAVE"/>
+            android:onClick="saveClick"
+            android:text="SAVE"
+            android:textAlignment="center" />
 
     </LinearLayout>
 </LinearLayout>

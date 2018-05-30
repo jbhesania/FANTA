@@ -24,7 +24,8 @@ public class MyAccountActivity extends AppCompatActivity {
     }
 
     public void saveClick(View v){
-        // SAVE THE USER INFO
+        Intent toHome = new Intent(MyAccountActivity.this, HomeActivity.class);
+        startActivity(toHome);
     }
 
 
