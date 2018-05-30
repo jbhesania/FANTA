@@ -1,12 +1,9 @@
 package com.example.android.projectfanta;
 
 import android.os.Bundle;
-import android.support.design.widget.AppBarLayout;
-import android.support.design.widget.CollapsingToolbarLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.support.v7.widget.Toolbar;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -19,7 +16,7 @@ public class FreshFoodActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.content_fresh_food);
+        setContentView(R.layout.content_fav_food);
 
         listFresh = new ArrayList<>();
         listFresh.add(new FreshFood("Banana", R.drawable.banana, "1.3g", "27g", "14g", "0.4g", 105, "3.1g"));

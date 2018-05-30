@@ -18,9 +18,11 @@ import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.RemoteViews;
+import android.widget.SearchView;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Locale;
 
 import static android.content.Context.NOTIFICATION_SERVICE;
 
@@ -29,36 +31,24 @@ import static android.content.Context.NOTIFICATION_SERVICE;
  */
 
 public class ContactsFragment extends Fragment {
-    private static final String TAG = "ContactsFragment";
-
     List<friendsData> dataFriends;
+    ListViewAdapter lvAdapter;
+    EditText search;
 
     @Nullable
     @Override
-    public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
+    public View onCreateView(LayoutInflater inflater, @Nullable final ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.contact_fragment,container,false);
-        EditText search = (EditText)view.findViewById(R.id.searchBar);
-
+        search= (EditText) view.findViewById(R.id.searchBar);
         dataFriends = new ArrayList<>();
 
-        dataFriends.add(new friendsData(R.drawable.liam, "Liam Hemsworth"));
-        dataFriends.add(new friendsData(R.drawable.warren, "Warren Buffet"));
-        dataFriends.add(new friendsData(R.drawable.mark, "Mark Zuckerberg"));
-        dataFriends.add(new friendsData(R.drawable.liam, "Liam Hemsworth"));
-        dataFriends.add(new friendsData(R.drawable.warren, "Warren Buffet"));
-        dataFriends.add(new friendsData(R.drawable.mark, "Mark Zuckerberg"));
-        dataFriends.add(new friendsData(R.drawable.liam, "Liam Hemsworth"));
-        dataFriends.add(new friendsData(R.drawable.warren, "Warren Buffet"));
-        dataFriends.add(new friendsData(R.drawable.mark, "Mark Zuckerberg"));
-        dataFriends.add(new friendsData(R.drawable.liam, "Liam Hemsworth"));
-        dataFriends.add(new friendsData(R.drawable.warren, "Warren Buffet"));
-        dataFriends.add(new friendsData(R.drawable.mark, "Mark Zuckerberg"));
-        dataFriends.add(new friendsData(R.drawable.liam, "Liam Hemsworth"));
-        dataFriends.add(new friendsData(R.drawable.warren, "Warren Buffet"));
-        dataFriends.add(new friendsData(R.drawable.mark, "Mark Zuckerberg"));
+        //for testing search bar
+        dataFriends.add(new friendsData("Liam"));
+        dataFriends.add(new friendsData("wbuffet"));
+        dataFriends.add(new friendsData("markz_"));
 
         ListView list = (ListView)view.findViewById(R.id.listContact);
-        ListViewAdapter lvAdapter = new ListViewAdapter(getContext(), R.layout.itemrow, dataFriends);
+        lvAdapter = new ListViewAdapter(getContext(), R.layout.itemrow, dataFriends);
 
         list.setAdapter(lvAdapter);
 
@@ -71,9 +61,6 @@ public class ContactsFragment extends Fragment {
         });
 
 
-
-
-
         //TODO: get the search function to work
 
         search.addTextChangedListener(new TextWatcher() {
@@ -84,6 +71,7 @@ public class ContactsFragment extends Fragment {
 
             @Override
             public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+                ContactsFragment.this.lvAdapter.getFilter().filter(charSequence);
             }
 
             @Override
@@ -93,5 +81,4 @@ public class ContactsFragment extends Fragment {
         return view;
 
     }
-
 }
