@@ -15,7 +15,7 @@ import java.util.HashMap;
 
 public class Information implements Serializable {
 
-    public static Information uid;
+    public static Information information;
 
     private HashMap<String, Food> myFoods;
     private ArrayList<Intake> myIntakes;
@@ -25,6 +25,11 @@ public class Information implements Serializable {
     private HashMap<String, User> imFollowing;
     DatabaseReference mData;
 
+    public static final String FOOD_FILE = "myFoods";
+    public static final String INTAKE_FILE = "myIntakes";
+    public static final String MYFOLLOWERS_FILE = "myFollowers";
+    public static final String IMFOLLOWING_FILE = "imFollowing";
+    public static final String USERINFO_FILE = "userInfo";
 
     /**
      * Create information object and populates it
@@ -104,33 +109,37 @@ public class Information implements Serializable {
     }
 
     public void addIntake(Intake intake){
+        myIntakes.add(intake);
+        addIntakeToDB(intake);
+        addIntakeToMemory(intake);
+    }
+
+    private void addIntakeToDB(Intake intake) {
         if (mData == null) mData = FirebaseDatabase.getInstance().getReference();
         mData.child(myInfo.getId()).child("myIntakes").child(myIntakes.size()+"").setValue(intake);
-        myIntakes.add(intake);
     }
+
+    private void addIntakeToMemory(Intake intake) {
+
+
+    }
+
 
     public void addFood(Food food) {
-        if (mData == null) mData = FirebaseDatabase.getInstance().getReference();
-        mData.child(myInfo.getId()).child("myFoods").child(food.getName()).setValue(food);
         myFoods.put(food.getName(),food);
+        addFoodToDB(food);
+        addFoodToMemory(food);
     }
 
-//    public static InformationDB convertToDB(Information myInfo) {
-//        InformationDB db = new InformationDB(myInfo.getInfo(), myInfo.imFollowing.get(myInfo.getInfo().getUserName()));
-//        int index = 0;
-//        HashMap<String, Intake> myIntakes = db.getMyIntakes();
-//        for(Intake i : myInfo.myIntakes) {
-//            myIntakes.put(index+"", i);
-//            index++;
-//        }
-//        db.setFollowers(myInfo.myFollowers);
-//        db.setFollowing(myInfo.imFollowing);
-//        db.setInfo(myInfo.getInfo());
-//        for(String f : myInfo.myFoods.keySet()) {
-//            db.addFood(Food.convertToDB(myInfo.myFoods.get(f)));
-//        }
-//        return db;
-//    }
+    private void addFoodToDB(Food food) {
+        if (mData == null) mData = FirebaseDatabase.getInstance().getReference();
+        mData.child(myInfo.getId()).child("myFoods").child(food.getName()).setValue(food);
+    }
+
+    private void addFoodToMemory(Food food) {
+
+    }
+
 }
 
 /*

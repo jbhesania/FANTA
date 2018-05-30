@@ -7,11 +7,6 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class Food implements Serializable{
-    public static final ArrayList<String> NUTRIENTS = new ArrayList<String>(Arrays.asList("Calories",
-            "Total Fat", "Saturated Fat", "Unsaturated Fat", "Polyunsaturated Fat",
-            "Monounsaturated Fat", "Trans Fat", "Cholesterol", "Sodium", "Total Carbohydrate",
-            "Dietary Fiber", "Soluble Fiber", "Insoluble Fiber", "Total Sugars", "Added Sugars",
-            "Protein"));
 
     public static final String CALORIES = "calories";
     public static final String FAT = "fat";
@@ -22,7 +17,6 @@ public class Food implements Serializable{
     public static final String CHOLESTEROL = "cholesterol";
     public static final String CARBS = "carbs";
     public static final String POTASSIUM = "potassium";
-
 
 
     private String name;
@@ -63,59 +57,32 @@ public class Food implements Serializable{
     public boolean add(String key, double val) {
         if (nutrients == null) nutrients = new HashMap<String, Double>();
         switch (key.toLowerCase().trim()) {
-            case "calories":
-                nutrients.put("Calories", val);
+            case Food.CALORIES:
+                nutrients.put(Food.CALORIES, val);
                 return true;
-            case "total fat":
-            case "tot. fat":
-            case "fat":
-                nutrients.put("Total Fat", val);
+            case Food.FAT:
+                nutrients.put(Food.FAT, val);
                 return true;
-            case "saturated fat":
-            case "sat. fat":
-                nutrients.put("Saturated Fat", val);
+            case Food.CHOLESTEROL:
+                nutrients.put(Food.CHOLESTEROL, val);
                 return true;
-            case "unsaturated fat":
-            case "unsat. fat":
-                nutrients.put("Unsaturated Fat", val);
+            case Food.SODIUM:
+                nutrients.put(Food.SODIUM, val);
                 return true;
-            case "polyunsaturated fat":
-            case "polyunsat. fat":
-                nutrients.put("Polyunsaturated Fat", val);
+            case Food.CARBS:
+                nutrients.put(Food.CARBS, val);
                 return true;
-            case "trans fat":
-                nutrients.put("Trans Fat", val);
+            case Food.FIBER:
+                nutrients.put(Food.FIBER,val);
                 return true;
-            case "cholesterol":
-            case "cholest.":
-                nutrients.put("Cholesterol", val);
+            case Food.SUGAR:
+                nutrients.put(Food.SUGAR, val);
                 return true;
-            case "Sodium":
-            case "sodium":
-                nutrients.put("Sodium", val);
+            case Food.PROTIEN:
+                nutrients.put(Food.PROTIEN, val);
                 return true;
-            case "total carbohydrates":
-            case "total carbs":
-            case "total carb.":
-                nutrients.put("Total Carbohydrate", val);
-                return true;
-            case "dietary fiber":
-            case "fiber":
-                nutrients.put("Dietary Fiber",val);
-                return true;
-            case "sugars":
-            case "tot. sugars":
-            case "total sugars":
-            case "sugar":
-                nutrients.put("Total Sugars", val);
-                return true;
-            case "added sugars":
-            case "incl. added sugars":
-            case "includes added sugars":
-                nutrients.put("Added Sugars", val);
-                return true;
-            case "protein":
-                nutrients.put("Protein", val);
+            case Food.POTASSIUM:
+                nutrients.put(Food.POTASSIUM, val);
                 return true;
             default:
                 return false;

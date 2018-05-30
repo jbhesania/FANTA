@@ -15,7 +15,6 @@ import java.util.HashMap;
 
 public class NutritionLabelConfirmActivity extends AppCompatActivity {
 
-    private NutritionLabel label;
     private Food food;
     private Intake intake;
     private TextView name;
@@ -60,15 +59,6 @@ public class NutritionLabelConfirmActivity extends AppCompatActivity {
         dataProt.setText(parsedData.get(5));
         dataFib.setText(parsedData.get(9));
 
-       /*iod.add(Food.CHOLESTEROL, Double.parseDouble(parsedData.get(8)));
-        food.add(Food.CALORIES, Double.parseDouble(parsedData.get(3)));
-        food.add(Food.FAT, Double.parseDouble(parsedData.get(1)));
-        food.add(Food.SODIUM, Double.parseDouble(parsedData.get(6)));
-        food.add(Food.POTASSIUM, Double.parseDouble(parsedData.get(7)));
-        food.add(Food.CARBS, Double.parseDouble(parsedData.get(2)));
-        food.add(Food.SUGAR, Double.parseDouble(parsedData.get(4)));
-        food.add(Food.PROTIEN, Double.parseDouble(parsedData.get(5)));
-        food.add(Food.FIBER, Double.parseDouble(parsedData.get(9)));*/
     }
 
     @Override
@@ -90,30 +80,13 @@ public class NutritionLabelConfirmActivity extends AppCompatActivity {
         // Handle action bar item clicks here. The action bar will
         // automatically handle clicks on the Home/Up button, so long
         // as you specify a parent activity in AndroidManifest.xml.
+
+        /*
         int id = item.getItemId();
 
-        /*TextView dataCals = (TextView)findViewById(R.id.calories_field);
-        TextView dataFat = (TextView)findViewById(R.id.totalFat_field);
-        TextView dataChol = (TextView)findViewById(R.id.chol_input);
-        TextView dataSod = (TextView)findViewById(R.id.sodium_input);
-        TextView dataPot = (TextView)findViewById(R.id.potass_input);
-        TextView dataCarb = (TextView)findViewById(R.id.totCarb_input);
-        TextView dataFib = (TextView)findViewById(R.id.fiber_input);
-        TextView dataSug = (TextView)findViewById(R.id.sugar_input);
-        TextView dataProt = (TextView)findViewById(R.id.prote_input);*/
 
 
         if (!TextUtils.isEmpty(serve.getText().toString())) {
-
-            /*if (!TextUtils.isEmpty(dataCals.getText().toString())) label.setCalories(Integer.parseInt(dataCals.getText().toString()));
-            if (!TextUtils.isEmpty(dataFat.getText().toString())) label.setTotalFat(Integer.parseInt(dataFat.getText().toString()));
-            if (!TextUtils.isEmpty(dataChol.getText().toString())) label.setChol(Integer.parseInt(dataChol.getText().toString()));
-            if (!TextUtils.isEmpty(dataSod.getText().toString())) label.setSodium(Integer.parseInt(dataSod.getText().toString()));
-            if (!TextUtils.isEmpty(dataPot.getText().toString())) label.setPotassium(Integer.parseInt(dataPot.getText().toString()));
-            if (!TextUtils.isEmpty(dataCarb.getText().toString())) label.setTotalCarb(Integer.parseInt(dataCarb.getText().toString()));
-            if (!TextUtils.isEmpty(dataFib.getText().toString())) label.setFiber(Integer.parseInt(dataFib.getText().toString()));
-            if (!TextUtils.isEmpty(dataSug.getText().toString())) label.setSugar(Integer.parseInt(dataSug.getText().toString()));
-            if (!TextUtils.isEmpty(dataProt.getText().toString())) label.setProtein(Integer.parseInt(dataProt.getText().toString()));*/
 
             if (!TextUtils.isEmpty(dataCals.getText().toString())) food.add(Food.CALORIES, Double.parseDouble(dataCals.getText().toString()));
             if (!TextUtils.isEmpty(dataFat.getText().toString())) food.add(Food.FAT, Double.parseDouble(dataFat.getText().toString()));
@@ -130,7 +103,7 @@ public class NutritionLabelConfirmActivity extends AppCompatActivity {
             // Arun, push new_label to the database por favor
 
         }
-
+        */
 
         return super.onOptionsItemSelected(item);
     }
@@ -214,6 +187,7 @@ public class NutritionLabelConfirmActivity extends AppCompatActivity {
 
     public void onConfirm(View view) {
         if (!TextUtils.isEmpty(serve.getText().toString()) && !TextUtils.isEmpty(name.getText().toString())) {
+
             if (!TextUtils.isEmpty(dataCals.getText().toString())) food.add(Food.CALORIES, Double.parseDouble(dataCals.getText().toString()));
             if (!TextUtils.isEmpty(dataFat.getText().toString())) food.add(Food.FAT, Double.parseDouble(dataFat.getText().toString()));
             if (!TextUtils.isEmpty(dataChol.getText().toString())) food.add(Food.CHOLESTEROL, Double.parseDouble(dataChol.getText().toString()));
@@ -223,14 +197,19 @@ public class NutritionLabelConfirmActivity extends AppCompatActivity {
             if (!TextUtils.isEmpty(dataFib.getText().toString())) food.add(Food.FIBER, Double.parseDouble(dataFib.getText().toString()));
             if (!TextUtils.isEmpty(dataSug.getText().toString())) food.add(Food.SUGAR, Double.parseDouble(dataSug.getText().toString()));
             if (!TextUtils.isEmpty(dataProt.getText().toString())) food.add(Food.PROTIEN, Double.parseDouble(dataProt.getText().toString()));
+
             food.setName(name.getText().toString());
             intake.setFood(name.getText().toString());
             intake.setCreationTime(System.currentTimeMillis());
             intake.setServings(Double.parseDouble(serve.getText().toString()));
+
+            // WHY IS THIS HERE
             Log.v("SUCKS", food.getNutrients().size()+"");
-            Information.uid.addFood(food);
-            Information.uid.addIntake(intake);
+
+            Information.information.addFood(food);
+            Information.information.addIntake(intake);
             Intent homeIntent = new Intent(this, HomeActivity.class);
+
             startActivity(homeIntent);
         } else {
             // POP up saying to enter servings and name

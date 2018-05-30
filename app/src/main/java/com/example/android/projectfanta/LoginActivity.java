@@ -31,6 +31,9 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
+import java.io.FileInputStream;
+import java.io.ObjectInputStream;
+
 
 /**
  * A login screen that offers login via email/password.
@@ -71,12 +74,16 @@ public class LoginActivity extends AppCompatActivity {
     @Override
     public void onStart() {
         super.onStart();
-        // Check if user is signed in (non-null) and update UI accordingly.
         FirebaseUser currentUser = mAuth.getCurrentUser();
 
-        if (currentUser != null){
+        // If user is signed in on start-up
+        if (currentUser != null) {
+
+            // Part 2: Update DB using Information object IF connected to internet?? ARUN
+
+            // NOT SURE IF THIS LINE STILL NEEDS TO EXIST
             handleUsers(currentUser);
-            //popuplate uid
+
             Intent calcIntent = new Intent(LoginActivity.this, HomeActivity.class);
             startActivityForResult(calcIntent, RC_SIGN_IN);
         }
@@ -103,10 +110,7 @@ public class LoginActivity extends AppCompatActivity {
         final Callback readCallBack = new Callback() {
             @Override
             public void onComplete(Object o) {
-                //uid = InformationDB.convertToNormal((InformationDB) o);
-                Information.uid = (Information)o;
-                //Log.v("sucks", uid.getInfo().getUserName());
-                //Log.v("sucks", "fooooood:  "+ uid.getMyIntakes().get(0).getFood());
+                Information.information = (Information)o;
                 Intent calcIntent = new Intent(LoginActivity.this, HomeActivity.class);
                 startActivityForResult(calcIntent, RC_SIGN_IN);
             }
@@ -115,29 +119,32 @@ public class LoginActivity extends AppCompatActivity {
         singleUserRef.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot snapshot) {
+                // If user does not have an account
+                // JOYAAN #3
                 if (!snapshot.exists()) {
                     // TODO REQUEST USER INFO TO SET USER VALUES CORRECTLY
                     String username = "Baby john doe";
                     UserInfo ui = new UserInfo(userid, username, 10, 8, 0);
                     User u = new User(userid, username);
                     DatabaseReference mData = FirebaseDatabase.getInstance().getReference();
-                    Information.uid = new Information(ui, u);
+                    Information.information = new Information(ui, u);
                     mData.child("users").child(userid).setValue(u);
-                    mData.child(userid).setValue(Information.uid);
+                    mData.child(userid).setValue(Information.information);
                     Intent calcIntent = new Intent(LoginActivity.this, HomeActivity.class);
                     startActivityForResult(calcIntent, RC_SIGN_IN);
                 } else {
+                    // JOYAAN #2
                     FirebaseUser user = mAuth.getCurrentUser();
                     Information.read(user.getUid(), readCallBack);
                 }
+
+                // Write Information Object to memory
             }
             @Override
             public void onCancelled(DatabaseError databaseError) {
 
             }
         });
-
-
     }
 
 
@@ -200,7 +207,7 @@ public class LoginActivity extends AppCompatActivity {
     }
 
 
-    public void onClick(View v) {
+    /*public void onClick(View v) {
         if(NetworkStatus.getInstance(getApplicationContext()).isOnline()) {
             Intent signInIntent = mGoogleSignInClient.getSignInIntent();
             startActivityForResult(signInIntent, RC_SIGN_IN);
@@ -209,5 +216,5 @@ public class LoginActivity extends AppCompatActivity {
                     "No Internet Connection!", Toast.LENGTH_SHORT);
             toast.show();
         }
-    }
+    }*/
 }
