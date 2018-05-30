@@ -109,9 +109,9 @@ public class Information implements Serializable {
     }
 
     public void addIntake(Intake intake){
-        myIntakes.add(intake);
         addIntakeToDB(intake);
         addIntakeToMemory(intake);
+        myIntakes.add(intake);
     }
 
     private void addIntakeToDB(Intake intake) {
@@ -126,9 +126,9 @@ public class Information implements Serializable {
 
 
     public void addFood(Food food) {
-        myFoods.put(food.getName(),food);
         addFoodToDB(food);
         addFoodToMemory(food);
+        myFoods.put(food.getName(),food);
     }
 
     private void addFoodToDB(Food food) {
