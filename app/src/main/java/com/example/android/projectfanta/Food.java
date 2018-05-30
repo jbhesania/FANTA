@@ -54,39 +54,9 @@ public class Food implements Serializable{
      * @param val The amount of the nutrient in grams per serving
      * @return Whether or not the nutrient was sucessfully added. If false, this means the key was not recognized.
      */
-    public boolean add(String key, double val) {
+    public void add(String key, double val) {
         if (nutrients == null) nutrients = new HashMap<String, Double>();
-        switch (key.toLowerCase().trim()) {
-            case Food.CALORIES:
-                nutrients.put(Food.CALORIES, val);
-                return true;
-            case Food.FAT:
-                nutrients.put(Food.FAT, val);
-                return true;
-            case Food.CHOLESTEROL:
-                nutrients.put(Food.CHOLESTEROL, val);
-                return true;
-            case Food.SODIUM:
-                nutrients.put(Food.SODIUM, val);
-                return true;
-            case Food.CARBS:
-                nutrients.put(Food.CARBS, val);
-                return true;
-            case Food.FIBER:
-                nutrients.put(Food.FIBER,val);
-                return true;
-            case Food.SUGAR:
-                nutrients.put(Food.SUGAR, val);
-                return true;
-            case Food.PROTIEN:
-                nutrients.put(Food.PROTIEN, val);
-                return true;
-            case Food.POTASSIUM:
-                nutrients.put(Food.POTASSIUM, val);
-                return true;
-            default:
-                return false;
-        }
+        nutrients.put(key, val);
     }
 
     public Double getNutrient(String key) {return new Double(nutrients.get(key));  }
