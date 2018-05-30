@@ -56,9 +56,23 @@ public class Intake implements Serializable {
 
     public long getCreationTime() { return creationTime;  }
 
+    public void setCreationTime(long creationTime) {
+        this.creationTime = creationTime;
+    }
+
     //public Time getTimeObject() { return new Time(creationTime); }
 
     public double getServings() { return servings; }
 
+    public void setServings(double servings) {
+        this.servings = servings;
+    }
+
     public String getFood() { return food; }
+
+    public void setFood(String food) {
+        this.food = food;
+    }
+
+
 }
