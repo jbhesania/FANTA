@@ -33,6 +33,8 @@ import com.google.firebase.database.ValueEventListener;
 
 import java.io.FileInputStream;
 import java.io.ObjectInputStream;
+import java.util.ArrayList;
+import java.util.HashMap;
 
 
 /**
@@ -74,15 +76,19 @@ public class LoginActivity extends AppCompatActivity {
     @Override
     public void onStart() {
         super.onStart();
+        System.out.println("AAAAAAAAAAAAAAAAAAAAAAAAAAAAAABBBBBBBBBBBBBBBBBBBBBB");
         FirebaseUser currentUser = mAuth.getCurrentUser();
+        Information.information = new Information();
 
         // If user is signed in on start-up
         if (currentUser != null) {
-
-            // Part 2: Update DB using Information object IF connected to internet?? ARUN
-
-            // NOT SURE IF THIS LINE STILL NEEDS TO EXIST
-            handleUsers(currentUser);
+            if(Information.information.createInfoFromMemory(getApplicationContext())) {
+                // Do nothing! True Indicated success in creating Info Object
+            } else {
+                // Part 2: Update DB using Information object IF connected to internet?? ARUN
+                handleUsers(currentUser);
+                return;
+            }
 
             Intent calcIntent = new Intent(LoginActivity.this, HomeActivity.class);
             startActivityForResult(calcIntent, RC_SIGN_IN);
@@ -111,6 +117,14 @@ public class LoginActivity extends AppCompatActivity {
             @Override
             public void onComplete(Object o) {
                 Information.information = (Information)o;
+                System.out.println("CCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCC");
+                System.out.println(Information.information.getMyFoods());
+                System.out.println(Information.information.getMyFollowers());
+                System.out.println(Information.information.getMyIntakes());
+                System.out.println(Information.information.getInfo());
+                System.out.println(Information.information.getImFollowing());
+                // Write Information Object to memory
+                Information.information.writeInfoToMemory(getApplicationContext());
                 Intent calcIntent = new Intent(LoginActivity.this, HomeActivity.class);
                 startActivityForResult(calcIntent, RC_SIGN_IN);
             }
@@ -120,7 +134,6 @@ public class LoginActivity extends AppCompatActivity {
             @Override
             public void onDataChange(DataSnapshot snapshot) {
                 // If user does not have an account
-                // JOYAAN #3
                 if (!snapshot.exists()) {
                     // TODO REQUEST USER INFO TO SET USER VALUES CORRECTLY
                     String username = "Baby john doe";
@@ -128,17 +141,20 @@ public class LoginActivity extends AppCompatActivity {
                     User u = new User(userid, username);
                     DatabaseReference mData = FirebaseDatabase.getInstance().getReference();
                     Information.information = new Information(ui, u);
+
                     mData.child("users").child(userid).setValue(u);
                     mData.child(userid).setValue(Information.information);
+
+                    Information.information.writeInfoToMemory(getApplicationContext());
+
                     Intent calcIntent = new Intent(LoginActivity.this, HomeActivity.class);
                     startActivityForResult(calcIntent, RC_SIGN_IN);
                 } else {
-                    // JOYAAN #2
+                    // If the user was not signed in
                     FirebaseUser user = mAuth.getCurrentUser();
                     Information.read(user.getUid(), readCallBack);
                 }
 
-                // Write Information Object to memory
             }
             @Override
             public void onCancelled(DatabaseError databaseError) {

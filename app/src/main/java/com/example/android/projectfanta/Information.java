@@ -1,5 +1,6 @@
 package com.example.android.projectfanta;
 
+import android.content.Context;
 import android.util.Log;
 
 import com.google.firebase.auth.FirebaseUser;
@@ -9,6 +10,10 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -57,23 +62,16 @@ public class Information implements Serializable {
     public HashMap<String, Food> getMyFoods() { return myFoods; }
     public HashMap<String, User> getImFollowing() { return imFollowing; }
     public HashMap<String, User> getMyFollowers() { return myFollowers; }
-
-    public void setFollowers(HashMap<String, User> myFollowers) {
-        this.myFollowers = myFollowers;
-    }
-
+    public void setFollowers(HashMap<String, User> myFollowers) { this.myFollowers = myFollowers; }
     public void setFollowing(HashMap<String, User> imFollowing) {
         this.imFollowing = imFollowing;
     }
-
     public void setInfo(UserInfo myInfo) {
         this.myInfo = myInfo;
     }
-
     public void setFoods(HashMap<String, Food> myFoods) {
         this.myFoods = myFoods;
     }
-
     public void setIntakes(ArrayList<Intake> myIntakes) {
         this.myIntakes = myIntakes;
     }
@@ -108,20 +106,112 @@ public class Information implements Serializable {
         FirebaseDatabase.getInstance().getReference().child(uid).addListenerForSingleValueEvent(postListener);
     }
 
+    public boolean createInfoFromMemory(Context context) {
+        try {
+
+            FileInputStream foodFileIn = context.getApplicationContext().openFileInput(Information.FOOD_FILE);
+            ObjectInputStream foodIn = new ObjectInputStream(foodFileIn);
+            Information.information.setFoods((HashMap<String, Food>) foodIn.readObject());
+            foodFileIn.close();
+            foodIn.close();
+
+            FileInputStream intakeFileIn = context.getApplicationContext().openFileInput(Information.INTAKE_FILE);
+            ObjectInputStream intakeIn = new ObjectInputStream(intakeFileIn);
+            Information.information.setIntakes( (ArrayList<Intake>) intakeIn.readObject());
+            intakeFileIn.close();
+            foodIn.close();
+
+            FileInputStream imfollowingFileIn = context.getApplicationContext().openFileInput(Information.IMFOLLOWING_FILE);
+            ObjectInputStream imfollowingIn = new ObjectInputStream(imfollowingFileIn);
+            Information.information.setFollowing((HashMap<String, User>) imfollowingIn.readObject());
+            imfollowingFileIn.close();
+            imfollowingIn.close();
+
+            FileInputStream myfollowersFileIn = context.getApplicationContext().openFileInput(Information.MYFOLLOWERS_FILE);
+            ObjectInputStream myfollowersIn = new ObjectInputStream(myfollowersFileIn);
+            Information.information.setFollowers((HashMap<String, User>) myfollowersIn.readObject());
+            myfollowersFileIn.close();
+            myfollowersIn.close();
+
+            FileInputStream userFileIn = context.getApplicationContext().openFileInput(Information.USERINFO_FILE);
+            ObjectInputStream userIn = new ObjectInputStream(userFileIn);
+            Information.information.setInfo((UserInfo) userIn.readObject());
+            userFileIn.close();
+            userIn.close();
+
+            if(Information.information.getMyFoods() == null || Information.information.getMyIntakes() == null ||
+                    Information.information.getImFollowing() == null || Information.information.getMyFollowers() == null
+                    || Information.information.getInfo() == null) {
+                System.out.println(Information.information.getMyFoods());
+                System.out.println(Information.information.getMyFollowers());
+                System.out.println(Information.information.getMyIntakes());
+                System.out.println(Information.information.getInfo());
+                System.out.println(Information.information.getImFollowing());
+                throw new NullPointerException("Did not instantaie properly from files/files didnt exist");
+            }
+
+            return true;
+        } catch (Exception c) {
+            c.printStackTrace();
+            return false;
+        }
+    }
+
+    public boolean writeInfoToMemory(Context context) {
+        try {
+            FileOutputStream foodFileOut =
+                    context.getApplicationContext().openFileOutput(Information.FOOD_FILE, Context.MODE_PRIVATE);
+            ObjectOutputStream foodOut = new ObjectOutputStream(foodFileOut);
+            foodOut.writeObject(Information.information.getMyFoods());
+            foodFileOut.close();
+            foodOut.close();
+
+            FileOutputStream intakeFileOut =
+                    context.getApplicationContext().openFileOutput(Information.INTAKE_FILE, Context.MODE_PRIVATE);
+            ObjectOutputStream intakeOut = new ObjectOutputStream(intakeFileOut);
+            intakeOut.writeObject(Information.information.getMyIntakes());
+            intakeFileOut.close();
+            intakeOut.close();
+
+            FileOutputStream followersFileOut =
+                    context.getApplicationContext().openFileOutput(Information.MYFOLLOWERS_FILE, Context.MODE_PRIVATE);
+            ObjectOutputStream followersOut = new ObjectOutputStream(followersFileOut);
+            followersOut.writeObject(Information.information.getMyFollowers());
+            followersOut.close();
+            followersFileOut.close();
+
+            FileOutputStream followingFileOut =
+                    context.getApplicationContext().openFileOutput(Information.IMFOLLOWING_FILE, Context.MODE_PRIVATE);
+            ObjectOutputStream followingOut = new ObjectOutputStream(followingFileOut);
+            followingOut.writeObject(Information.information.getImFollowing());
+            followingOut.close();
+            followingFileOut.close();
+
+            FileOutputStream userFileOut =
+                    context.getApplicationContext().openFileOutput(Information.USERINFO_FILE, Context.MODE_PRIVATE);
+            ObjectOutputStream userOut = new ObjectOutputStream(userFileOut);
+            userOut.writeObject(Information.information.getInfo());
+            userFileOut.close();
+            userFileOut.close();
+
+            return true;
+        } catch (Exception c) {
+            c.printStackTrace();
+            return false;
+        }
+    }
+
+
     public void addIntake(Intake intake){
         addIntakeToDB(intake);
         addIntakeToMemory(intake);
         myIntakes.add(intake);
     }
-
     private void addIntakeToDB(Intake intake) {
         if (mData == null) mData = FirebaseDatabase.getInstance().getReference();
         mData.child(myInfo.getId()).child("myIntakes").child(myIntakes.size()+"").setValue(intake);
     }
-
     private void addIntakeToMemory(Intake intake) {
-
-
     }
 
 
@@ -130,14 +220,11 @@ public class Information implements Serializable {
         addFoodToMemory(food);
         myFoods.put(food.getName(),food);
     }
-
     private void addFoodToDB(Food food) {
         if (mData == null) mData = FirebaseDatabase.getInstance().getReference();
         mData.child(myInfo.getId()).child("myFoods").child(food.getName()).setValue(food);
     }
-
     private void addFoodToMemory(Food food) {
-
     }
 
 }
