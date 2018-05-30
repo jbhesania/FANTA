@@ -20,7 +20,7 @@ import java.util.List;
 
 public class FollowingFragment extends Fragment {
 
-    List<friendsData> dataFollowing;
+    List<User> dataFollowing;
 
     @Nullable
     @Override
@@ -31,7 +31,7 @@ public class FollowingFragment extends Fragment {
 
         dataFollowing = new ArrayList<>();
 
-        dataFollowing.add(new friendsData( "markz_"));
+        dataFollowing.add(new User( "100","markz_"));
 
         ListView list = (ListView)view.findViewById(R.id.listFollowing);
         ListViewAdapter lvAdapter = new ListViewAdapter(getContext(), R.layout.itemrow, dataFollowing);

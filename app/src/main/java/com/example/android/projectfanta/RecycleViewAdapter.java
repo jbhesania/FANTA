@@ -32,7 +32,7 @@ public class RecycleViewAdapter extends RecyclerView.Adapter<RecycleViewAdapter.
     @Override
     public MyViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         View foodView = LayoutInflater.from(parent.getContext()).
-                inflate(R.layout.cardview_item_fresh, parent, false);
+                inflate(R.layout.cardview_item, parent, false);
         return new MyViewHolder(foodView);
     }
 

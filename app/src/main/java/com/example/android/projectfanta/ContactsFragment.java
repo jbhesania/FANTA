@@ -31,7 +31,7 @@ import static android.content.Context.NOTIFICATION_SERVICE;
  */
 
 public class ContactsFragment extends Fragment {
-    List<friendsData> dataFriends;
+    List<User> dataFriends;
     ListViewAdapter lvAdapter;
     EditText search;
 
@@ -41,11 +41,6 @@ public class ContactsFragment extends Fragment {
         View view = inflater.inflate(R.layout.contact_fragment,container,false);
         search= (EditText) view.findViewById(R.id.searchBar);
         dataFriends = new ArrayList<>();
-
-        //for testing search bar
-        dataFriends.add(new friendsData("Liam"));
-        dataFriends.add(new friendsData("wbuffet"));
-        dataFriends.add(new friendsData("markz_"));
 
         ListView list = (ListView)view.findViewById(R.id.listContact);
         lvAdapter = new ListViewAdapter(getContext(), R.layout.itemrow, dataFriends);
