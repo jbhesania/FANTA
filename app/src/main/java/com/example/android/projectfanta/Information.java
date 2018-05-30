@@ -1,5 +1,6 @@
 package com.example.android.projectfanta;
 
+import android.content.Context;
 import android.util.Log;
 
 import com.google.firebase.auth.FirebaseUser;
@@ -9,13 +10,17 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.HashMap;
 
 public class Information implements Serializable {
 
-    public static Information uid;
+    public static Information information;
 
     private HashMap<String, Food> myFoods;
     private ArrayList<Intake> myIntakes;
@@ -25,6 +30,11 @@ public class Information implements Serializable {
     private HashMap<String, User> imFollowing;
     DatabaseReference mData;
 
+    public static final String FOOD_FILE = "myFoods";
+    public static final String INTAKE_FILE = "myIntakes";
+    public static final String MYFOLLOWERS_FILE = "myFollowers";
+    public static final String IMFOLLOWING_FILE = "imFollowing";
+    public static final String USERINFO_FILE = "userInfo";
 
     /**
      * Create information object and populates it
@@ -52,23 +62,16 @@ public class Information implements Serializable {
     public HashMap<String, Food> getMyFoods() { return myFoods; }
     public HashMap<String, User> getImFollowing() { return imFollowing; }
     public HashMap<String, User> getMyFollowers() { return myFollowers; }
-
-    public void setFollowers(HashMap<String, User> myFollowers) {
-        this.myFollowers = myFollowers;
-    }
-
+    public void setFollowers(HashMap<String, User> myFollowers) { this.myFollowers = myFollowers; }
     public void setFollowing(HashMap<String, User> imFollowing) {
         this.imFollowing = imFollowing;
     }
-
     public void setInfo(UserInfo myInfo) {
         this.myInfo = myInfo;
     }
-
     public void setFoods(HashMap<String, Food> myFoods) {
         this.myFoods = myFoods;
     }
-
     public void setIntakes(ArrayList<Intake> myIntakes) {
         this.myIntakes = myIntakes;
     }
@@ -103,34 +106,146 @@ public class Information implements Serializable {
         FirebaseDatabase.getInstance().getReference().child(uid).addListenerForSingleValueEvent(postListener);
     }
 
-    public void addIntake(Intake intake){
+    public boolean createInfoFromMemory(Context context) {
+        try {
+
+            FileInputStream foodFileIn = context.getApplicationContext().openFileInput(Information.FOOD_FILE);
+            ObjectInputStream foodIn = new ObjectInputStream(foodFileIn);
+            Information.information.setFoods((HashMap<String, Food>) foodIn.readObject());
+            foodFileIn.close();
+            foodIn.close();
+
+            FileInputStream intakeFileIn = context.getApplicationContext().openFileInput(Information.INTAKE_FILE);
+            ObjectInputStream intakeIn = new ObjectInputStream(intakeFileIn);
+            Information.information.setIntakes( (ArrayList<Intake>) intakeIn.readObject());
+            intakeFileIn.close();
+            foodIn.close();
+
+            FileInputStream imfollowingFileIn = context.getApplicationContext().openFileInput(Information.IMFOLLOWING_FILE);
+            ObjectInputStream imfollowingIn = new ObjectInputStream(imfollowingFileIn);
+            Information.information.setFollowing((HashMap<String, User>) imfollowingIn.readObject());
+            imfollowingFileIn.close();
+            imfollowingIn.close();
+
+            FileInputStream myfollowersFileIn = context.getApplicationContext().openFileInput(Information.MYFOLLOWERS_FILE);
+            ObjectInputStream myfollowersIn = new ObjectInputStream(myfollowersFileIn);
+            Information.information.setFollowers((HashMap<String, User>) myfollowersIn.readObject());
+            myfollowersFileIn.close();
+            myfollowersIn.close();
+
+            FileInputStream userFileIn = context.getApplicationContext().openFileInput(Information.USERINFO_FILE);
+            ObjectInputStream userIn = new ObjectInputStream(userFileIn);
+            Information.information.setInfo((UserInfo) userIn.readObject());
+            userFileIn.close();
+            userIn.close();
+
+            if(Information.information.getMyFoods() == null || Information.information.getMyIntakes() == null ||
+                    Information.information.getImFollowing() == null || Information.information.getMyFollowers() == null
+                    || Information.information.getInfo() == null) {
+                throw new NullPointerException("Did not instantaie properly from files/files didnt exist");
+            }
+
+            return true;
+        } catch (Exception c) {
+            c.printStackTrace();
+            return false;
+        }
+    }
+
+    public boolean writeInfoToMemory(Context context) {
+        try {
+            FileOutputStream foodFileOut =
+                    context.getApplicationContext().openFileOutput(Information.FOOD_FILE, Context.MODE_PRIVATE);
+            ObjectOutputStream foodOut = new ObjectOutputStream(foodFileOut);
+            foodOut.writeObject(Information.information.getMyFoods());
+            foodFileOut.close();
+            foodOut.close();
+
+            FileOutputStream intakeFileOut =
+                    context.getApplicationContext().openFileOutput(Information.INTAKE_FILE, Context.MODE_PRIVATE);
+            ObjectOutputStream intakeOut = new ObjectOutputStream(intakeFileOut);
+            intakeOut.writeObject(Information.information.getMyIntakes());
+            intakeFileOut.close();
+            intakeOut.close();
+
+            FileOutputStream followersFileOut =
+                    context.getApplicationContext().openFileOutput(Information.MYFOLLOWERS_FILE, Context.MODE_PRIVATE);
+            ObjectOutputStream followersOut = new ObjectOutputStream(followersFileOut);
+            followersOut.writeObject(Information.information.getMyFollowers());
+            followersOut.close();
+            followersFileOut.close();
+
+            FileOutputStream followingFileOut =
+                    context.getApplicationContext().openFileOutput(Information.IMFOLLOWING_FILE, Context.MODE_PRIVATE);
+            ObjectOutputStream followingOut = new ObjectOutputStream(followingFileOut);
+            followingOut.writeObject(Information.information.getImFollowing());
+            followingOut.close();
+            followingFileOut.close();
+
+            FileOutputStream userFileOut =
+                    context.getApplicationContext().openFileOutput(Information.USERINFO_FILE, Context.MODE_PRIVATE);
+            ObjectOutputStream userOut = new ObjectOutputStream(userFileOut);
+            userOut.writeObject(Information.information.getInfo());
+            userFileOut.close();
+            userFileOut.close();
+
+            return true;
+        } catch (Exception c) {
+            c.printStackTrace();
+            return false;
+        }
+    }
+
+
+    public void addIntake(Context context, Intake intake){
+        addIntakeToDB(intake);
+        myIntakes.add(intake);
+        addIntakeToMemory(context);
+    }
+    private void addIntakeToDB(Intake intake) {
         if (mData == null) mData = FirebaseDatabase.getInstance().getReference();
         mData.child(myInfo.getId()).child("myIntakes").child(myIntakes.size()+"").setValue(intake);
-        myIntakes.add(intake);
+    }
+    private void addIntakeToMemory(Context context) {
+        context.deleteFile(Information.FOOD_FILE);
+        try {
+            FileOutputStream followersFileOut =
+                    context.getApplicationContext().openFileOutput(Information.MYFOLLOWERS_FILE, Context.MODE_PRIVATE);
+            ObjectOutputStream followersOut = new ObjectOutputStream(followersFileOut);
+            followersOut.writeObject(Information.information.getMyFollowers());
+            followersOut.close();
+            followersFileOut.close();
+        }
+        catch(Exception e) {
+
+        }
     }
 
-    public void addFood(Food food) {
+
+    public void addFood(Context context, Food food) {
+        addFoodToDB(food);
+        myFoods.put(food.getName(),food);
+        addFoodToMemory(context);
+    }
+    private void addFoodToDB(Food food) {
         if (mData == null) mData = FirebaseDatabase.getInstance().getReference();
         mData.child(myInfo.getId()).child("myFoods").child(food.getName()).setValue(food);
-        myFoods.put(food.getName(),food);
+    }
+    private void addFoodToMemory(Context context) {
+        context.deleteFile(Information.FOOD_FILE);
+        try {
+            FileOutputStream foodFileOut =
+                    context.getApplicationContext().openFileOutput(Information.FOOD_FILE, Context.MODE_PRIVATE);
+            ObjectOutputStream foodOut = new ObjectOutputStream(foodFileOut);
+            foodOut.writeObject(Information.information.getMyFoods());
+            foodFileOut.close();
+            foodOut.close();
+        }
+        catch(Exception e) {
+
+        }
     }
 
-//    public static InformationDB convertToDB(Information myInfo) {
-//        InformationDB db = new InformationDB(myInfo.getInfo(), myInfo.imFollowing.get(myInfo.getInfo().getUserName()));
-//        int index = 0;
-//        HashMap<String, Intake> myIntakes = db.getMyIntakes();
-//        for(Intake i : myInfo.myIntakes) {
-//            myIntakes.put(index+"", i);
-//            index++;
-//        }
-//        db.setFollowers(myInfo.myFollowers);
-//        db.setFollowing(myInfo.imFollowing);
-//        db.setInfo(myInfo.getInfo());
-//        for(String f : myInfo.myFoods.keySet()) {
-//            db.addFood(Food.convertToDB(myInfo.myFoods.get(f)));
-//        }
-//        return db;
-//    }
 }
 
 /*

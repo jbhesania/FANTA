@@ -14,6 +14,11 @@ public class HomeActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        System.out.println("AAAAAAAAAAAAAAAAAAAAAAAA");
+        if ( Information.information.getMyFoods() != null && Information.information.getMyFoods() != null) {
+        System.out.println("Foods Size: " + Information.information.getMyFoods().size());
+        System.out.println("Intakes Size: " + Information.information.getMyIntakes().size()); }
+
         setContentView(R.layout.activity_home);
 
         BottomNavigationView navigation = (BottomNavigationView) findViewById(R.id.bottom_navigation);

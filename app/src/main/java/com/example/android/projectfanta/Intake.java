@@ -60,7 +60,9 @@ public class Intake implements Serializable {
         this.creationTime = creationTime;
     }
 
-    //public Time getTimeObject() { return new Time(creationTime); }
+    public void setTimeObject(Time creationTime) { this.creationTime = creationTime.getTime(); }
+
+    public Time returnTimeObject() { return new Time(creationTime); }
 
     public double getServings() { return servings; }
 
