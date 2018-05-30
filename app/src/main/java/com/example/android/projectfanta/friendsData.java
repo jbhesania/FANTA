@@ -6,12 +6,16 @@ package com.example.android.projectfanta;
 
 public class friendsData {
 
-    int thumbnail;
+    //int thumbnail;
     String contactName;
 
-    public friendsData(int thumbnail, String contactName) {
-        this.thumbnail = thumbnail;
+    public friendsData(String contactName) {
+        //this.thumbnail = thumbnail;
         this.contactName = contactName;
+    }
+
+    public String getContactName(){
+        return this.contactName;
     }
 
     public friendsData() {
