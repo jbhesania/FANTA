@@ -31,10 +31,10 @@ public class FollowingFragment extends Fragment {
 
         dataFollowing = new ArrayList<>();
 
-        dataFollowing.add(new friendsData(R.drawable.mark, "Mark Zuckerberg"));
+        dataFollowing.add(new friendsData( "markz_"));
 
         ListView list = (ListView)view.findViewById(R.id.listFollowing);
-        ListViewAdapter lvAdapter = new ListViewAdapter(getContext(), R.layout.itemrow2, dataFollowing);
+        ListViewAdapter lvAdapter = new ListViewAdapter(getContext(), R.layout.itemrow, dataFollowing);
 
         list.setAdapter(lvAdapter);
 

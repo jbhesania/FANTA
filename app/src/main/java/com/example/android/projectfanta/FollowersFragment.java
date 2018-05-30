@@ -32,11 +32,11 @@ public class FollowersFragment extends Fragment {
 
         dataFollowers = new ArrayList<>();
 
-        dataFollowers.add(new friendsData(R.drawable.liam, "Liam Hemsworth"));
-        dataFollowers.add(new friendsData(R.drawable.warren, "Warren Buffet"));
+        dataFollowers.add(new friendsData("liam1990"));
+        dataFollowers.add(new friendsData( "wbuffet"));
 
         ListView list = (ListView)view.findViewById(R.id.listFollowers);
-        ListViewAdapter lvAdapter = new ListViewAdapter(getContext(), R.layout.itemrow2, dataFollowers);
+        ListViewAdapter lvAdapter = new ListViewAdapter(getContext(), R.layout.itemrow, dataFollowers);
 
         list.setAdapter(lvAdapter);
 
