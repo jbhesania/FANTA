@@ -18,6 +18,7 @@ import android.widget.ListView;
 import android.widget.RemoteViews;
 import android.widget.TextView;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Locale;
 
@@ -40,17 +41,13 @@ public class ListViewAdapter extends ArrayAdapter<friendsData> implements Filter
 
     public ListViewAdapter(@NonNull Context context, int resource, @NonNull List<friendsData> objects) {
         super(context, resource, objects);
-
         this.context = context;
         this.resId = resource;
         this.data = objects;
     }
 
     static class DataHolder{
-
-        ImageView profImage;
         TextView contactName;
-        ImageView button;
     }
 
     @NonNull
@@ -65,9 +62,8 @@ public class ListViewAdapter extends ArrayAdapter<friendsData> implements Filter
             convertView = inflater.inflate(resId,null);
 
             holder = new DataHolder();
-            holder.profImage = (ImageView)convertView.findViewById(R.id.profImage);
             holder.contactName = (TextView)convertView.findViewById(R.id.contactName);
-            holder.button = (ImageView)convertView.findViewById(R.id.followButton);
+           // holder.button = (ImageView)convertView.findViewById(R.id.followButton);
 
             convertView.setTag(holder);
         }
@@ -77,7 +73,7 @@ public class ListViewAdapter extends ArrayAdapter<friendsData> implements Filter
 
         friendsData dataFriends = data.get(position);
         holder.contactName.setText(dataFriends.contactName);
-        holder.profImage.setImageResource(dataFriends.thumbnail);
+       // holder.profImage.setImageResource(dataFriends.thumbnail);
 
         //TODO: Notification appear if the plus button is clicked to send follow request
 
