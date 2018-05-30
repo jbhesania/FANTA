@@ -142,11 +142,6 @@ public class Information implements Serializable {
             if(Information.information.getMyFoods() == null || Information.information.getMyIntakes() == null ||
                     Information.information.getImFollowing() == null || Information.information.getMyFollowers() == null
                     || Information.information.getInfo() == null) {
-                System.out.println(Information.information.getMyFoods());
-                System.out.println(Information.information.getMyFollowers());
-                System.out.println(Information.information.getMyIntakes());
-                System.out.println(Information.information.getInfo());
-                System.out.println(Information.information.getImFollowing());
                 throw new NullPointerException("Did not instantaie properly from files/files didnt exist");
             }
 
@@ -202,29 +197,53 @@ public class Information implements Serializable {
     }
 
 
-    public void addIntake(Intake intake){
+    public void addIntake(Context context, Intake intake){
         addIntakeToDB(intake);
-        addIntakeToMemory(intake);
         myIntakes.add(intake);
+        addIntakeToMemory(context);
     }
     private void addIntakeToDB(Intake intake) {
         if (mData == null) mData = FirebaseDatabase.getInstance().getReference();
         mData.child(myInfo.getId()).child("myIntakes").child(myIntakes.size()+"").setValue(intake);
     }
-    private void addIntakeToMemory(Intake intake) {
+    private void addIntakeToMemory(Context context) {
+        context.deleteFile(Information.FOOD_FILE);
+        try {
+            FileOutputStream followersFileOut =
+                    context.getApplicationContext().openFileOutput(Information.MYFOLLOWERS_FILE, Context.MODE_PRIVATE);
+            ObjectOutputStream followersOut = new ObjectOutputStream(followersFileOut);
+            followersOut.writeObject(Information.information.getMyFollowers());
+            followersOut.close();
+            followersFileOut.close();
+        }
+        catch(Exception e) {
+
+        }
     }
 
 
-    public void addFood(Food food) {
+    public void addFood(Context context, Food food) {
         addFoodToDB(food);
-        addFoodToMemory(food);
         myFoods.put(food.getName(),food);
+        addFoodToMemory(context);
     }
     private void addFoodToDB(Food food) {
         if (mData == null) mData = FirebaseDatabase.getInstance().getReference();
         mData.child(myInfo.getId()).child("myFoods").child(food.getName()).setValue(food);
     }
-    private void addFoodToMemory(Food food) {
+    private void addFoodToMemory(Context context) {
+        context.deleteFile(Information.FOOD_FILE);
+        try {
+            FileOutputStream foodFileOut =
+                    context.getApplicationContext().openFileOutput(Information.FOOD_FILE, Context.MODE_PRIVATE);
+            ObjectOutputStream foodOut = new ObjectOutputStream(foodFileOut);
+            foodOut.writeObject(Information.information.getMyFoods());
+            foodFileOut.close();
+            foodOut.close();
+        }
+        catch(Exception e) {
+
+        }
     }
 
 }

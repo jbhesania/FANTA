@@ -32,16 +32,17 @@ public class Food implements Serializable{
         nutrients = new HashMap<String, Double> ();
     }
 
-    public Food() { };
+    public Food() {
+        nutrients = new HashMap<String, Double>();
+    };
 
     /**
      * Method to rename foods with already taken name.
      * @param name The name the user wanted
-     * @param info The info object that the food belongs to
      * @return
      */
-    public static String getValidName(String name, Information info) {
-        while(info.hasFood(name)) {
+    public static String getValidName(String name) {
+        while(Information.information.hasFood(name)) {
             name = name.concat("I");
         }
         return name;
@@ -55,7 +56,6 @@ public class Food implements Serializable{
      * @return Whether or not the nutrient was sucessfully added. If false, this means the key was not recognized.
      */
     public void add(String key, double val) {
-        if (nutrients == null) nutrients = new HashMap<String, Double>();
         nutrients.put(key, val);
     }
 

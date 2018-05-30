@@ -81,30 +81,6 @@ public class NutritionLabelConfirmActivity extends AppCompatActivity {
         // automatically handle clicks on the Home/Up button, so long
         // as you specify a parent activity in AndroidManifest.xml.
 
-        /*
-        int id = item.getItemId();
-
-
-
-        if (!TextUtils.isEmpty(serve.getText().toString())) {
-
-            if (!TextUtils.isEmpty(dataCals.getText().toString())) food.add(Food.CALORIES, Double.parseDouble(dataCals.getText().toString()));
-            if (!TextUtils.isEmpty(dataFat.getText().toString())) food.add(Food.FAT, Double.parseDouble(dataFat.getText().toString()));
-            if (!TextUtils.isEmpty(dataChol.getText().toString())) food.add(Food.CHOLESTEROL, Double.parseDouble(dataChol.getText().toString()));
-            if (!TextUtils.isEmpty(dataSod.getText().toString())) food.add(Food.SODIUM, Double.parseDouble(dataSod.getText().toString()));
-            if (!TextUtils.isEmpty(dataPot.getText().toString())) food.add(Food.POTASSIUM, Double.parseDouble(dataPot.getText().toString()));
-            if (!TextUtils.isEmpty(dataCarb.getText().toString())) food.add(Food.CARBS, Double.parseDouble(dataCarb.getText().toString()));
-            if (!TextUtils.isEmpty(dataFib.getText().toString())) food.add(Food.FIBER, Double.parseDouble(dataFib.getText().toString()));
-            if (!TextUtils.isEmpty(dataSug.getText().toString())) food.add(Food.SUGAR, Double.parseDouble(dataSug.getText().toString()));
-            if (!TextUtils.isEmpty(dataProt.getText().toString())) food.add(Food.PROTIEN, Double.parseDouble(dataProt.getText().toString()));
-
-            //label.printDis();
-
-            // Arun, push new_label to the database por favor
-
-        }
-        */
-
         return super.onOptionsItemSelected(item);
     }
 
@@ -198,16 +174,13 @@ public class NutritionLabelConfirmActivity extends AppCompatActivity {
             if (!TextUtils.isEmpty(dataSug.getText().toString())) food.add(Food.SUGAR, Double.parseDouble(dataSug.getText().toString()));
             if (!TextUtils.isEmpty(dataProt.getText().toString())) food.add(Food.PROTIEN, Double.parseDouble(dataProt.getText().toString()));
 
-            food.setName(name.getText().toString());
+            food.setName(Food.getValidName(name.getText().toString()));
             intake.setFood(name.getText().toString());
             intake.setCreationTime(System.currentTimeMillis());
             intake.setServings(Double.parseDouble(serve.getText().toString()));
 
-            // WHY IS THIS HERE
-            Log.v("SUCKS", food.getNutrients().size()+"");
-
-            Information.information.addFood(food);
-            Information.information.addIntake(intake);
+            Information.information.addFood(getApplicationContext(), food);
+            Information.information.addIntake(getApplicationContext(), intake);
             Intent homeIntent = new Intent(this, HomeActivity.class);
 
             startActivity(homeIntent);

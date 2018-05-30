@@ -76,7 +76,6 @@ public class LoginActivity extends AppCompatActivity {
     @Override
     public void onStart() {
         super.onStart();
-        System.out.println("AAAAAAAAAAAAAAAAAAAAAAAAAAAAAABBBBBBBBBBBBBBBBBBBBBB");
         FirebaseUser currentUser = mAuth.getCurrentUser();
         Information.information = new Information();
 
@@ -117,12 +116,6 @@ public class LoginActivity extends AppCompatActivity {
             @Override
             public void onComplete(Object o) {
                 Information.information = (Information)o;
-                System.out.println("CCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCC");
-                System.out.println(Information.information.getMyFoods());
-                System.out.println(Information.information.getMyFollowers());
-                System.out.println(Information.information.getMyIntakes());
-                System.out.println(Information.information.getInfo());
-                System.out.println(Information.information.getImFollowing());
                 // Write Information Object to memory
                 Information.information.writeInfoToMemory(getApplicationContext());
                 Intent calcIntent = new Intent(LoginActivity.this, HomeActivity.class);
