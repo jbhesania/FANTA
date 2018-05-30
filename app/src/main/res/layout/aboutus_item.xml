@@ -12,12 +12,12 @@
 
         <com.battleent.ribbonviews.RibbonLayout
             android:id="@+id/ribbonAbout"
-            android:padding="16dp"
+            android:padding="10dp"
             android:layout_width="match_parent"
             android:layout_height="200dp"
-            app:bottom_height="60"
-            app:bottom_ribbonColor="#000"
-            app:bottom_textColor="#FFF"
+            app:bottom_height="50"
+            app:bottom_ribbonColor="#fff"
+            app:bottom_textColor="#000"
             app:bottom_textSize="15"
             app:header_padding="10"
             app:header_ribbonRadius="6"
@@ -28,8 +28,8 @@
             <ImageView
                 android:layout_centerInParent="true"
                 android:id="@+id/imageView"
-                android:layout_width="150dp"
-                android:layout_height="120dp" />
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
 
         </com.battleent.ribbonviews.RibbonLayout>
 

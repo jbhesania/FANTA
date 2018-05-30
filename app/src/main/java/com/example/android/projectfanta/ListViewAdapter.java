@@ -28,18 +28,18 @@ import static android.content.Context.NOTIFICATION_SERVICE;
  * Created by User on 5/18/2018.
  */
 
-public class ListViewAdapter extends ArrayAdapter<friendsData> implements Filterable {
+public class ListViewAdapter extends ArrayAdapter<User> implements Filterable {
 
     Context context;
     int resId;
-    List<friendsData> data = null;
+    List<User> data = null;
 
 //    private NotificationCompat.Builder notification;
 //    private RemoteViews remoteView;
 //    private int notification_id;
 //    private NotificationManager notificationManager;
 
-    public ListViewAdapter(@NonNull Context context, int resource, @NonNull List<friendsData> objects) {
+    public ListViewAdapter(@NonNull Context context, int resource, @NonNull List<User> objects) {
         super(context, resource, objects);
         this.context = context;
         this.resId = resource;
@@ -71,8 +71,8 @@ public class ListViewAdapter extends ArrayAdapter<friendsData> implements Filter
             holder = (DataHolder)convertView.getTag();
         }
 
-        friendsData dataFriends = data.get(position);
-        holder.contactName.setText(dataFriends.contactName);
+        User dataFriends = data.get(position);
+        holder.contactName.setText(dataFriends.getUserName());
        // holder.profImage.setImageResource(dataFriends.thumbnail);
 
         //TODO: Notification appear if the plus button is clicked to send follow request

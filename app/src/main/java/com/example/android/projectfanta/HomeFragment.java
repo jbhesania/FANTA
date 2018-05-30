@@ -119,6 +119,15 @@ public class HomeFragment extends Fragment {
 
         //TODO: fab_search for searching recent food
 
+        fab_search.setOnClickListener(new View.OnClickListener(){
+            @Override
+                    public void onClick(View view){
+                Intent search_intent = new Intent(getContext(), SearchFoodActivity.class);
+                startActivity(search_intent);
+            }
+
+        });
+
         fab_manual.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View view){

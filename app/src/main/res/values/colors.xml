@@ -5,7 +5,7 @@
     <color name="colorAccent">#FF4081</color>
     <color name="addButton">#feab1f</color>
     <color name="cameraButton">#f65a4b</color>
-    <color name="freshButton">#75c257</color>
+    <color name="freshButton">#f8ce48</color>
     <color name="searchButton">#13d7ff</color>
     <color name="manualButton">#cd88fd</color>
 </resources>

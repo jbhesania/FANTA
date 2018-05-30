@@ -62,7 +62,7 @@
     <string name="sugar">Sugars (g)</string>
     <string name="protein">Protein (g)</string>
     <string name="servings">Servings </string>
-    
+
     <string name="title_activity_manual_entry_form">ManualEntryForm</string>
     <string name="title_activity_about_us">AboutUs</string>
     <string name="title_activity_history">History</string>
@@ -81,4 +81,6 @@
 
     <string name="open">Open</string>
     <string name="close">Close</string>
+    <string name="title_activity_search_food">SearchFoodActivity</string>
+    <string name="title_activity_food_list">FoodListActivity</string>
 </resources>
