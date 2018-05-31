@@ -295,17 +295,17 @@ public class Information implements Serializable {
         // a day or a month
         int days_months_year = 0;
         double time = 0;
-        if (end - start >= ONE_WEEK) {
+        if (end - start == ONE_WEEK) {
             time = ONE_DAY;
             days_months_year = 7;
         }
 
-        else if (end - start >= ONE_MONTH) {
+        else if (end - start == ONE_MONTH) {
             time = ONE_DAY;
             days_months_year = 31;
         }
 
-        else if (end - start >= ONE_YEAR) {
+        else if (end - start == ONE_YEAR) {
             time = ONE_MONTH;
             days_months_year = 12;
         }
