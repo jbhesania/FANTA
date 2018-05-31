@@ -20,37 +20,36 @@ import com.jjoe64.graphview.series.LineGraphSeries;
 import java.util.Calendar;
 
 public class YearFragment extends Fragment {
+    public View view;
 
-    @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                             Bundle savedInstanceState) {
-        // Inflate the layout for this fragment
-        View view = inflater.inflate(R.layout.fragment_year, container, false);
+    /**
+     * numMonths The number of days including starting month to end month. E.g from May to July, numMonths
+     * would be 3.
+     * startMonthCalendar The Calendar Object for starting day
+     * nutrient The name of the nutrient
+     * double[] An array of nutrient intake
+     * standardIntake I assume the intake is constant throughout... If not please tell me to fix it
+     */
+    public void createGraphYear(int numMonths, Calendar startMonthCalendar, String nutrient,
+                                double[] nutrientIntakeAverage, double standardIntakeAverage)
+    {
+        Calendar calendar1 = (Calendar)startMonthCalendar.clone();
+        Calendar calendar2 = (Calendar)startMonthCalendar.clone();
 
-        // generate Dates
-        Calendar calendar = Calendar.getInstance();
-
-        // Month Field 0-11 Represent January to December
-        calendar.set(2017,0,1);
-
-        Calendar calendar1 = (Calendar)calendar.clone();
-        Calendar calendar2 = (Calendar)calendar.clone();
-
-        DataPoint dp[] = new DataPoint[12];
+        DataPoint dp[] = new DataPoint[numMonths];
         long start = calendar1.getTimeInMillis();
-        for(int i = 0; i < 12; i++)
+        for(int i = 0; i < numMonths; i++)
         {
-            DataPoint point = new DataPoint(calendar1.getTime(),i+0.5);
+            DataPoint point = new DataPoint(calendar1.getTime(), nutrientIntakeAverage[i]);
             dp[i] = point;
             calendar1.add(Calendar.MONTH,1);
-            Log.e("hLabel",calendar1.get(Calendar.MONTH)+" "+calendar1.get(Calendar.DATE)+"");
         }
         long end = calendar1.getTimeInMillis();
 
-        DataPoint dpStd[] = new DataPoint[12];
-        for(int i = 0; i < 12; i++)
+        DataPoint dpStd[] = new DataPoint[numMonths];
+        for(int i = 0; i < numMonths; i++)
         {
-            dpStd[i] = new DataPoint(calendar2.getTime(),4);
+            dpStd[i] = new DataPoint(calendar2.getTime(),standardIntakeAverage);
             calendar2.add(Calendar.MONTH,1);
         }
 
@@ -60,14 +59,11 @@ public class YearFragment extends Fragment {
 
         // set date label formatter
         // use static labels for horizontal and vertical labels
-        // set date label formatter
-        /*StaticLabelsFormatter staticLabelsFormatter = new StaticLabelsFormatter(graph);
-        staticLabelsFormatter.setHorizontalLabels(new String[] {"January", "February","March",
-                "April","May","June", "July","August","September",
-                "October","November","December"});
-        graph.getGridLabelRenderer().setLabelFormatter(staticLabelsFormatter);*/
+
         graph.getGridLabelRenderer().setLabelFormatter(new DateAsXAxisLabelFormatter(getActivity()));
-        graph.getGridLabelRenderer().setNumHorizontalLabels(7);
+
+        //Arbitrary keep the label amount small
+        graph.getGridLabelRenderer().setNumHorizontalLabels(numMonths/2);
         graph.getGridLabelRenderer().setHorizontalLabelsAngle(15);
         graph.getGridLabelRenderer().setHumanRounding(false);
         graph.getGridLabelRenderer().setTextSize(36);
@@ -88,8 +84,13 @@ public class YearFragment extends Fragment {
         graph.addSeries(standard);
         graph.getLegendRenderer().setVisible(true);
         graph.getLegendRenderer().setAlign(LegendRenderer.LegendAlign.BOTTOM);
-        graph.setTitle("Protein Intake");
-
+        graph.setTitle(nutrient + " Intake");
+    }
+    @Override
+    public View onCreateView(LayoutInflater inflater, ViewGroup container,
+                             Bundle savedInstanceState) {
+        // Inflate the layout for this fragment
+        view = inflater.inflate(R.layout.fragment_year, container, false);
         return view;
     }
 

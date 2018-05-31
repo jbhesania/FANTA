@@ -18,36 +18,42 @@ import java.util.Calendar;
 
 
 public class MonthFragment extends Fragment {
+    public View view;
 
-    @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                             Bundle savedInstanceState) {
-        // Inflate the layout for this fragment
-        View view = inflater.inflate(R.layout.fragment_month, container, false);
+    /**
+     * numDays The number of days including starting day to end day. E.g from 12/10 - 12/12, numDays
+     * would be 3.
+     * startDayCalendar The Calendar Object for starting day
+     * nutrient The name of the nutrient
+     * double[] An array of nutrient intake
+     * standardIntake I assume the intake is constant throughout... If not please tell me to fix it
+     * I didn't check for nutrientIntake.length = numDays, I assume they are equal
+     *
+     * How to create and set a Calendar instance
+     * Calendar calendar = Calendar.getInstance();
+     * Month Field 0-11 Represent January to December
+     * calendar.set(2017,11,1);
+     */
+    public void createGraphMonth(int numDays, Calendar startDayCalendar, String nutrient,
+                                 double[] nutrientIntake, double standardIntake){
 
-        // generate Dates
-        Calendar calendar = Calendar.getInstance();
+        Calendar calendar1 = (Calendar)startDayCalendar.clone();
+        Calendar calendar2 = (Calendar)startDayCalendar.clone();
 
-        // Month Field 0-11 Represent January to December
-        calendar.set(2017,11,1);
-
-        Calendar calendar1 = (Calendar)calendar.clone();
-        Calendar calendar2 = (Calendar)calendar.clone();
-
-        DataPoint dp[] = new DataPoint[30];
+        DataPoint dp[] = new DataPoint[numDays];
         long start = calendar1.getTimeInMillis();
-        for(int i = 0; i < 30; i++)
+        for(int i = 0; i < numDays; i++)
         {
-            DataPoint point = new DataPoint(calendar1.getTime(),i+1);
+            DataPoint point = new DataPoint(calendar1.getTime(), nutrientIntake[i]);
             dp[i] = point;
             calendar1.add(Calendar.DATE,1);
         }
         long end = calendar1.getTimeInMillis();
 
-        DataPoint dpStd[] = new DataPoint[30];
-        for(int i = 0; i < 30; i++)
+        DataPoint dpStd[] = new DataPoint[numDays];
+        for(int i = 0; i < numDays; i++)
         {
-            dpStd[i] = new DataPoint(calendar2.getTime(),15);
+            dpStd[i] = new DataPoint(calendar2.getTime(),standardIntake);
             calendar2.add(Calendar.DATE,1);
         }
 
@@ -60,7 +66,9 @@ public class MonthFragment extends Fragment {
         // set date label formatter
         graph.getGridLabelRenderer().setLabelFormatter(new DateAsXAxisLabelFormatter(getActivity()));
         graph.getGridLabelRenderer().setTextSize(36);
-        graph.getGridLabelRenderer().setNumHorizontalLabels(4);
+
+        //Disable horizontal label since there might be a lot
+        graph.getGridLabelRenderer().setHorizontalLabelsVisible(false);
 
         // set manual x bounds to have nice steps
         graph.getViewport().setMinX(start);
@@ -79,8 +87,14 @@ public class MonthFragment extends Fragment {
         graph.addSeries(standard);
         graph.getLegendRenderer().setVisible(true);
         graph.getLegendRenderer().setAlign(LegendRenderer.LegendAlign.BOTTOM);
-        graph.setTitle("Protein Intake");
+        graph.setTitle(nutrient + " Intake");
+    }
 
+    @Override
+    public View onCreateView(LayoutInflater inflater, ViewGroup container,
+                             Bundle savedInstanceState) {
+        // Inflate the layout for this fragment
+        View view = inflater.inflate(R.layout.fragment_month, container, false);
         return view;
     }
 

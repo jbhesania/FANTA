@@ -45,7 +45,7 @@ public class FriendsFragment extends Fragment {
 
     private void setUpViewPager(ViewPager viewPager){
         SectionsPageAdapter adapter = new SectionsPageAdapter(getFragmentManager());
-        adapter.addFragment(new ContactsFragment(), "Contacts");
+        adapter.addFragment(new ContactsFragment(), "Search");
         adapter.addFragment(new FollowingFragment(), "Following");
         adapter.addFragment(new FollowersFragment(), "Followers");
         viewPager.setAdapter(adapter);
