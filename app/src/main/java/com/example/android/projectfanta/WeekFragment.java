@@ -13,89 +13,12 @@ import com.jjoe64.graphview.helper.DateAsXAxisLabelFormatter;
 import com.jjoe64.graphview.series.DataPoint;
 import com.jjoe64.graphview.series.LineGraphSeries;
 
-import java.util.ArrayList;
 import java.util.Calendar;
 
 
 public class WeekFragment extends Fragment {
     //Instance variable so that view can be accessed by createGraphWeek method as well
     public View view;
-    private static double ONE_DAY = 8.64*java.lang.Math.pow(10,7);
-
-    /**
-     * Binary Search for time boundaries
-     * @param time time we are looking for (start/end)
-     * @param intakes intakes of user
-     * @return index of intake at time boundary
-     */
-    public int searchForIntervalBoundary(long time, ArrayList<Intake> intakes) {
-
-        int intakeIndex = 0;
-        int upper = intakes.size();
-        int lower = 0;
-        boolean found = false;
-        int m;
-
-        while (found == false) {
-
-            if (upper < lower) return 0;
-
-            m = lower + (upper - lower)/2;
-
-            if (intakes.get(m).getCreationTime() < time) lower = m + 1;
-            else if (intakes.get(m).getCreationTime() > time) upper = m - 1;
-            else if (intakes.get(m).getCreationTime() == time) {
-                intakeIndex = m;
-                found = true;
-            }
-
-        }
-
-        return intakeIndex;
-
-    }
-
-    /**
-     * Sum of intakes over interval of time
-     * @param start start of interval
-     * @param end end of interval
-     * @param numDays number of days to sum intakes
-     * @return array of doubles the size of numDays with the sum of intakes for each day
-     */
-    public double[] intakeInterval(long start, long end, int numDays) {
-
-        double[] nutrientIntake = new double[numDays];
-        ArrayList<Intake> allIntakes = Information.information.getMyIntakes();
-        int startTime = searchForIntervalBoundary(start, allIntakes);
-        int endTime = searchForIntervalBoundary(end, allIntakes);
-        double intakeSum = 0;
-        long beginningOfDay = allIntakes.get(startTime).getCreationTime();
-        int day = 0;
-
-        // loop through piece returned by search
-        for (int i = startTime; i <= endTime; i++) {
-
-            // if current intake time exceeds a day from current day start
-            if (allIntakes.get(i).getCreationTime() -  beginningOfDay > ONE_DAY) {
-                // put current sum into array
-                nutrientIntake[day] = intakeSum;
-                day++;
-
-                // set sum to 0
-                intakeSum = allIntakes.get(i).getServings();
-
-                // set current intake creation time as start of new day
-                beginningOfDay = allIntakes.get(i).getCreationTime();
-
-            }
-
-            if (day == numDays) break; // check if we have intakes for the whole week
-
-        }
-
-        return nutrientIntake;
-
-    }
 
     /**
      * numDays The number of days including starting day to end day. E.g from 12/10 - 12/12, numDays

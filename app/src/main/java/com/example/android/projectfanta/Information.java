@@ -3,7 +3,6 @@ package com.example.android.projectfanta;
 import android.content.Context;
 import android.util.Log;
 
-import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -21,6 +20,11 @@ import java.util.HashMap;
 public class Information implements Serializable {
 
     public static Information information;
+    private static double ONE_DAY = 8.64*java.lang.Math.pow(10,7);
+    private static double ONE_WEEK = 7*ONE_DAY;
+    private static double ONE_MONTH = 4*ONE_WEEK;
+    private static double ONE_YEAR = 12*ONE_MONTH;
+
 
     private HashMap<String, Food> myFoods;
     private ArrayList<Intake> myIntakes;
@@ -244,6 +248,103 @@ public class Information implements Serializable {
         catch(Exception e) {
 
         }
+    }
+
+    /**
+     * Binary Search for time boundaries
+     * @param time time we are looking for (start/end)
+     * @return index of intake at time boundary
+     */
+    public int searchForIntervalBoundary(long time) {
+
+        int intakeIndex = 0;
+        int upper = myIntakes.size();
+        int lower = 0;
+        boolean found = false;
+        int m;
+
+        while (found == false) {
+
+            if (upper < lower) return 0;
+
+            m = lower + (upper - lower)/2;
+
+            if (myIntakes.get(m).getCreationTime() < time) lower = m + 1;
+            else if (myIntakes.get(m).getCreationTime() > time) upper = m - 1;
+            else if (myIntakes.get(m).getCreationTime() == time) {
+                intakeIndex = m;
+                found = true;
+            }
+
+        }
+
+        return intakeIndex;
+
+    }
+
+    /**
+     * Sum of intakes over interval of time
+     * @param start start of interval
+     * @param end end of interval
+     * @return array of doubles the size of numDays with the sum of intakes for each day.
+     *         The array that is returned can then be used for the graph.
+     */
+    public double[] intakeInterval(long start, long end) {
+
+        // Check the time interval we are looking in and set the time to
+        // a day or a month
+        int days_months_year = 0;
+        double time = 0;
+        if (end - start >= ONE_WEEK) {
+            time = ONE_DAY;
+            days_months_year = 7;
+        }
+
+        else if (end - start >= ONE_MONTH) {
+            time = ONE_DAY;
+            days_months_year = 31;
+        }
+
+        else if (end - start >= ONE_YEAR) {
+            time = ONE_MONTH;
+            days_months_year = 12;
+        }
+
+        // Create an array the size of the number of days in a week or month, or the number of
+        // months in a year
+        double[] nutrientIntake = new double[days_months_year];
+        int startTime = searchForIntervalBoundary(start);
+        int endTime = searchForIntervalBoundary(end);
+        double intakeSum = 0;
+        long beginningOfDay = myIntakes.get(startTime).getCreationTime();
+        int unit_time = 0;
+
+        // loop through piece returned by search
+        for (int i = startTime; i <= endTime; i++) {
+
+            // if current intake time exceeds a day or month from the start
+            if (myIntakes.get(i).getCreationTime() -  beginningOfDay > time) {
+
+                // put current sum into array
+                nutrientIntake[unit_time] = intakeSum;
+                unit_time++;
+
+                // set sum to 0
+                intakeSum = myIntakes.get(i).getServings();
+
+                // set current intake creation time as start of new day
+                beginningOfDay = myIntakes.get(i).getCreationTime();
+
+            }
+
+            if (unit_time == days_months_year) break; // check if we have intakes for the whole week
+
+            intakeSum += myIntakes.get(i).getServings(); // sum over intake for each time unit
+
+        }
+
+        return nutrientIntake;
+
     }
 
 }
