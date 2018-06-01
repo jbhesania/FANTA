@@ -13,88 +13,6 @@
         android:layout_centerInParent="true"
         android:layout_alignParentTop="true"/>
 
-    <LinearLayout
-        android:layout_marginTop="60dp"
-        android:layout_centerHorizontal="true"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:orientation="vertical">
-
-        <LinearLayout
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            android:layout_gravity="center">
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Today's Menu"
-                android:textColor="#000"
-                android:textStyle="bold"
-                android:textSize="23dp"
-                android:layout_marginRight="5dp"/>
-
-            <ImageView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:src="@drawable/plate"/>
-
-        </LinearLayout>
-
-        <LinearLayout
-            android:layout_marginTop="5dp"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:orientation="vertical"
-            android:layout_gravity="center">
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Apple"
-                android:textColor="#000"
-                android:textSize="15dp"
-                android:layout_marginRight="5dp"/>
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Cereal"
-                android:textColor="#000"
-                android:textSize="15dp"
-                android:layout_marginRight="5dp"/>
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Coca cola"
-                android:textColor="#000"
-                android:textSize="15dp"
-                android:layout_marginRight="5dp"/>
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Chicken sandwich"
-                android:textColor="#000"
-                android:textSize="15dp"
-                android:layout_marginRight="5dp"/>
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Ice cream"
-                android:textColor="#000"
-                android:textSize="15dp"
-                android:layout_marginRight="5dp"/>
-
-        </LinearLayout>
-
-
-
-    </LinearLayout>
-
     <android.support.design.widget.FloatingActionButton
         android:id="@+id/camera"
         android:layout_width="wrap_content"
@@ -107,7 +25,7 @@
         android:layout_gravity="bottom|center"
         android:layout_alignParentBottom="true"
         android:layout_centerInParent="true"
-        android:layout_marginBottom="243dp"
+        android:layout_marginBottom="184dp"
         android:visibility="invisible"/>
 
     <android.support.design.widget.FloatingActionButton
@@ -121,7 +39,7 @@
         android:src="@drawable/manual"
         android:layout_alignParentBottom="true"
         android:layout_centerInParent="true"
-        android:layout_marginBottom="190dp"
+        android:layout_marginBottom="132dp"
         android:visibility="invisible"/>
 
     <android.support.design.widget.FloatingActionButton
@@ -135,21 +53,7 @@
         android:src="@drawable/search"
         android:layout_alignParentBottom="true"
         android:layout_centerInParent="true"
-        android:layout_marginBottom="135dp"
-        android:visibility="invisible"/>
-
-    <android.support.design.widget.FloatingActionButton
-        android:id="@+id/fresh"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        app:backgroundTint="@color/freshButton"
-        android:elevation="10dp"
-        app:fabSize="mini"
-        app:pressedTranslationZ="12dp"
-        android:src="@drawable/favorites"
-        android:layout_alignParentBottom="true"
-        android:layout_centerInParent="true"
-        android:layout_marginBottom="80dp"
+        android:layout_marginBottom="79dp"
         android:visibility="invisible"/>
 
     <android.support.design.widget.FloatingActionButton

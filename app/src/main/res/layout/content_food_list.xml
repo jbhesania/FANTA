@@ -1,17 +1,45 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout
+<RelativeLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical">
+    android:orientation="vertical"
+    tools:context=".FoodListActivity"
+    xmlns:tools="http://schemas.android.com/tools">
 
-    <android.support.v7.widget.SearchView
+    <LinearLayout
+        android:layout_marginTop="20dp"
+        android:id="@+id/linear"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:orientation="vertical">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="What did you eat today?"
+            android:textStyle="bold|italic"
+            android:textColor="#000"
+            android:textSize="30sp"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Type something like Apple..."
+            android:textSize="15sp"
+            android:layout_gravity="center"/>
+    </LinearLayout>
+
+    <EditText
+        android:id="@+id/searchFood"
+        android:layout_below="@+id/linear"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_margin="20dp">
+        android:layout_margin="10dp">
 
-    </android.support.v7.widget.SearchView>
+    </EditText>
 
     <include layout="@layout/activity_food_list" />
 
-</LinearLayout>
+</RelativeLayout>

@@ -78,7 +78,6 @@ public class HomeFragment extends Fragment {
         fab_plus = (FloatingActionButton)view.findViewById(R.id.plus);
         fab_search = (FloatingActionButton)view.findViewById(R.id.search);
         fab_camera = (FloatingActionButton)view.findViewById(R.id.camera);
-        fab_fresh = (FloatingActionButton)view.findViewById(R.id.fresh);
         fab_manual = (FloatingActionButton)view.findViewById(R.id.manual);
 
         fabOpen = AnimationUtils.loadAnimation(getActivity(),R.anim.fab_open);
@@ -92,24 +91,20 @@ public class HomeFragment extends Fragment {
             public void onClick(View v) {
                 if(isOpen){
                     fab_camera.startAnimation(fabClose);
-                    fab_fresh.startAnimation(fabClose);
                     fab_manual.startAnimation(fabClose);
                     fab_search.startAnimation(fabClose);
                     fab_plus.startAnimation(fabBackward);
                     fab_camera.setClickable(false);
-                    fab_fresh.setClickable(false);
                     fab_manual.setClickable(false);
                     fab_search.setClickable(false);
                     isOpen = false;
                 }
                 else{
                     fab_camera.startAnimation(fabOpen);
-                    fab_fresh.startAnimation(fabOpen);
                     fab_manual.startAnimation(fabOpen);
                     fab_search.startAnimation(fabOpen);
                     fab_plus.startAnimation(fabForward);
                     fab_camera.setClickable(true);
-                    fab_fresh.setClickable(true);
                     fab_manual.setClickable(true);
                     fab_search.setClickable(true);
                     isOpen = true;
@@ -122,7 +117,7 @@ public class HomeFragment extends Fragment {
         fab_search.setOnClickListener(new View.OnClickListener(){
             @Override
                     public void onClick(View view){
-                Intent search_intent = new Intent(getContext(), SearchFoodActivity.class);
+                Intent search_intent = new Intent(getContext(), FoodListActivity.class);
                 startActivity(search_intent);
             }
 
@@ -144,13 +139,6 @@ public class HomeFragment extends Fragment {
                   }
         });
 
-        fab_fresh.setOnClickListener(new View.OnClickListener(){
-            @Override
-            public void onClick(View view){
-                Intent fresh_intent = new Intent(getContext(), FreshFoodActivity.class);
-                startActivity(fresh_intent);
-            }
-        });
 
         return view;
     }
