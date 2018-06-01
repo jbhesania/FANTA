@@ -1,6 +1,5 @@
 package com.example.android.projectfanta;
 
-import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.design.widget.BottomNavigationView;
@@ -30,6 +29,31 @@ public class HomeActivity extends AppCompatActivity {
         transaction.replace(R.id.fragment_container, new HomeFragment()).commit();
 
     }
+    
+    @Override
+    protected void onResume() {
+        super.onResume();
+    }
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+    }
+
+    @Override
+    protected void onStop() {
+        super.onStop();
+    }
+
+    @Override
+    protected void onStart() {
+        super.onStart();
+    }
 
     private BottomNavigationView.OnNavigationItemSelectedListener mOnNavigationItemSelectedListener
             = new BottomNavigationView.OnNavigationItemSelectedListener() {
@@ -54,4 +78,6 @@ public class HomeActivity extends AppCompatActivity {
             return false;
         }
     };
+
+
 }
