@@ -286,10 +286,11 @@ public class Information implements Serializable {
      * Sum of intakes over interval of time
      * @param start start of interval
      * @param end end of interval
+     * @param nutrient the nutrient we are tracking over the specified interval of time
      * @return array of doubles the size of numDays with the sum of intakes for each day.
      *         The array that is returned can then be used for the graph.
      */
-    public double[] intakeInterval(long start, long end) {
+    public double[] intakeInterval(long start, long end, String nutrient) {
 
         // Check the time interval we are looking in and set the time to
         // a day or a month
@@ -339,7 +340,11 @@ public class Information implements Serializable {
 
             if (unit_time == days_months_year) break; // check if we have intakes for the whole week
 
-            intakeSum += myIntakes.get(i).getServings(); // sum over intake for each time unit
+            // Get nutrient amount and multiply by amount of servings. Add this to running total
+            // of the amount of that nutrient.
+            intakeSum += myFoods.get(myIntakes.get(i).getFood()).getNutrient(nutrient)
+                    * myIntakes.get(i).getServings();
+
 
         }
 
