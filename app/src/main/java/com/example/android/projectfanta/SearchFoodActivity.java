@@ -7,7 +7,12 @@ import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
+import android.widget.ArrayAdapter;
+import android.widget.AutoCompleteTextView;
 import android.widget.Button;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class SearchFoodActivity extends AppCompatActivity {
 
@@ -26,7 +31,13 @@ public class SearchFoodActivity extends AppCompatActivity {
                 startActivity(search);
             }
         });
+
+        List<String> foodNames = new ArrayList<>(Information.information.getMyFoods().keySet());
+        ArrayAdapter<String> adapter = new ArrayAdapter<String>
+                (this, android.R.layout.select_dialog_item, foodNames);
+        //Getting the instance of AutoCompleteTextView
+        AutoCompleteTextView actv = (AutoCompleteTextView) findViewById(R.id.autoCompleteTextView);
+        actv.setAdapter(adapter);//setting the adapter data into the AutoCompleteTextView
+
     }
-
-
 }

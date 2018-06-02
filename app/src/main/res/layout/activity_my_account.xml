@@ -64,12 +64,15 @@
             android:src="@drawable/gender"
             android:layout_marginRight="5dp"/>
 
-        <EditText
-            android:layout_marginTop="60dp"
+        <!--TODO: Use Sticky Switch-->
+
+        <Switch
+            android:layout_marginTop="65dp"
+            android:layout_marginLeft="30dp"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:hint="Enter your gender"
-            android:textSize="15sp"
+            android:textOn="F"
+            android:textOff="M"
             android:layout_toEndOf="@+id/gender"/>
 
 

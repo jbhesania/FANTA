@@ -172,7 +172,7 @@ public class NutritionLabelConfirmActivity extends AppCompatActivity {
             if (!TextUtils.isEmpty(dataCarb.getText().toString())) food.add(Food.CARBS, Double.parseDouble(dataCarb.getText().toString()));
             if (!TextUtils.isEmpty(dataFib.getText().toString())) food.add(Food.FIBER, Double.parseDouble(dataFib.getText().toString()));
             if (!TextUtils.isEmpty(dataSug.getText().toString())) food.add(Food.SUGAR, Double.parseDouble(dataSug.getText().toString()));
-            if (!TextUtils.isEmpty(dataProt.getText().toString())) food.add(Food.PROTIEN, Double.parseDouble(dataProt.getText().toString()));
+            if (!TextUtils.isEmpty(dataProt.getText().toString())) food.add(Food.PROTEIN, Double.parseDouble(dataProt.getText().toString()));
 
             food.setName(Food.getValidName(name.getText().toString()));
             intake.setFood(food.getName());

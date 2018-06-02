@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".ChangeNutritionIntake"
-    android:layout_margin="40dp"
+    android:layout_margin="10dp"
     android:orientation="vertical">
 
     <LinearLayout
@@ -13,9 +13,10 @@
         android:layout_height="wrap_content">
 
         <TextView
+            android:layout_marginLeft="10dp"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Change Nutrition Intake"
+            android:text="Your Nutrition Intake"
             android:textSize="24sp"
             android:textColor="#000"
             android:textStyle="bold|italic"/>
@@ -25,7 +26,7 @@
         android:layout_width="220dp"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
-        android:layout_marginTop="30dp"
+        android:layout_marginTop="10dp"
         android:layout_gravity="center_horizontal">
 
         <ImageView
@@ -122,13 +123,61 @@
             android:layout_height="wrap_content"
             android:hint="Enter sugar intake"
             android:textSize="15sp"/>
+
+        <ImageView
+            android:id="@+id/cholesterol"
+            android:layout_marginTop="360dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/cholesterol"
+            android:layout_marginRight="5dp"/>
+
+        <EditText
+            android:layout_marginTop="360dp"
+            android:layout_toEndOf="@+id/sug"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:hint="Enter cholesterol intake"
+            android:textSize="15sp"/>
+
+        <ImageView
+            android:id="@+id/potassium"
+            android:layout_marginTop="420dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/potassium"
+            android:layout_marginRight="5dp"/>
+
+        <EditText
+            android:layout_marginTop="420dp"
+            android:layout_toEndOf="@+id/sug"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:hint="Enter potassium intake"
+            android:textSize="15sp"/>
+
+        <ImageView
+            android:id="@+id/fiber"
+            android:layout_marginTop="480dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/fiber"
+            android:layout_marginRight="5dp"/>
+
+        <EditText
+            android:layout_marginTop="480dp"
+            android:layout_toEndOf="@+id/sug"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:hint="Enter fiber intake"
+            android:textSize="15sp"/>
     </RelativeLayout>
 
     <LinearLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center_horizontal"
-        android:layout_marginTop="40dp">
+        android:layout_marginTop="20dp">
 
 
             <Button
