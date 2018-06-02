@@ -114,7 +114,7 @@ public class LoginActivity extends AppCompatActivity {
 
         final String userid = user.getUid();
         final String username = user.getEmail();
-        final DatabaseReference singleUserRef = FirebaseDatabase.getInstance().getReference().child("users").child("username");
+        final DatabaseReference singleUserRef = FirebaseDatabase.getInstance().getReference().child("users").child(userid);
         // cehck if a username is in user if not then do sth eelse
         //
         final Callback readCallBack = new Callback() {
@@ -124,7 +124,7 @@ public class LoginActivity extends AppCompatActivity {
                 // Write Information Object to memory
                 Information.information.writeInfoToMemory(getApplicationContext());
                 Intent calcIntent = new Intent(LoginActivity.this, HomeActivity.class);
-                startActivityForResult(calcIntent, RC_SIGN_IN);
+                startActivity(calcIntent);
             }
         };
 
