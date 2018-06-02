@@ -15,6 +15,8 @@ public class HomeActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
+        //if (getIntent().getBooleanExtra("EXIT", false)) finish();
+
         setContentView(R.layout.activity_home);
 
         BottomNavigationView navigation = (BottomNavigationView) findViewById(R.id.bottom_navigation);
@@ -30,8 +32,7 @@ public class HomeActivity extends AppCompatActivity {
     @Override
     public boolean onKeyDown(int keyCode, KeyEvent event)  {
         if (keyCode == KeyEvent.KEYCODE_BACK ) {
-            // do something on back.
-            System.out.println("IN BACK");
+            moveTaskToBack(true);
             finish(); // onPause, onStop, onDestroy
             return true;
         }
