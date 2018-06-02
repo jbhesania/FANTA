@@ -17,6 +17,7 @@ import java.io.ObjectOutputStream;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.Set;
 
 public class Information implements Serializable {
 
@@ -26,14 +27,10 @@ public class Information implements Serializable {
     private ArrayList<Intake> myIntakes;
     private UserInfo myInfo;
     // String here is the username
-    private HashMap<String, User> myFollowers;
-    private HashMap<String, User> imFollowing;
     DatabaseReference mData;
 
     public static final String FOOD_FILE = "myFoods";
     public static final String INTAKE_FILE = "myIntakes";
-    public static final String MYFOLLOWERS_FILE = "myFollowers";
-    public static final String IMFOLLOWING_FILE = "imFollowing";
     public static final String USERINFO_FILE = "userInfo";
 
     /**
@@ -48,10 +45,6 @@ public class Information implements Serializable {
         this.myFoods.put(" ", food);
         this.myIntakes = new ArrayList<Intake>();
         this.myIntakes.add(new Intake("", 0, 0));
-        this.myFollowers = new HashMap<String, User>();
-        this.myFollowers.put(user.getUserName(),user);
-        this.imFollowing = new HashMap<String, User>();
-        this.imFollowing.put(user.getUserName(),user);
     }
 
     public Information() {};
@@ -60,12 +53,6 @@ public class Information implements Serializable {
     public Food getFood(String name) { return myFoods.get(name); }
     public ArrayList<Intake> getMyIntakes() { return myIntakes; }
     public HashMap<String, Food> getMyFoods() { return myFoods; }
-    public HashMap<String, User> getImFollowing() { return imFollowing; }
-    public HashMap<String, User> getMyFollowers() { return myFollowers; }
-    public void setFollowers(HashMap<String, User> myFollowers) { this.myFollowers = myFollowers; }
-    public void setFollowing(HashMap<String, User> imFollowing) {
-        this.imFollowing = imFollowing;
-    }
     public void setInfo(UserInfo myInfo) {
         this.myInfo = myInfo;
     }
@@ -76,17 +63,14 @@ public class Information implements Serializable {
         this.myIntakes = myIntakes;
     }
 
-    /**
-     * Whether or not I follows the given user
-     * @param user the user in question
-     * @return true if i follow user, false if not
-     */
-    public boolean follows(User user) {
-        return this.imFollowing.containsKey(user.getUserName());
-    }
-
-    public boolean hasFood(String name) {
-        return myFoods.containsKey(name);
+    public boolean hasFood(String name)    {
+        Set<String> keys = myFoods.keySet();
+        for(String key: keys) {
+            if(key.toLowerCase().equals(name.toLowerCase())) {
+                return true;
+            }
+        }
+        return false;
     }
 
     static void read(String uid, final Callback call){
@@ -121,26 +105,13 @@ public class Information implements Serializable {
             intakeFileIn.close();
             foodIn.close();
 
-            FileInputStream imfollowingFileIn = context.getApplicationContext().openFileInput(Information.IMFOLLOWING_FILE);
-            ObjectInputStream imfollowingIn = new ObjectInputStream(imfollowingFileIn);
-            Information.information.setFollowing((HashMap<String, User>) imfollowingIn.readObject());
-            imfollowingFileIn.close();
-            imfollowingIn.close();
-
-            FileInputStream myfollowersFileIn = context.getApplicationContext().openFileInput(Information.MYFOLLOWERS_FILE);
-            ObjectInputStream myfollowersIn = new ObjectInputStream(myfollowersFileIn);
-            Information.information.setFollowers((HashMap<String, User>) myfollowersIn.readObject());
-            myfollowersFileIn.close();
-            myfollowersIn.close();
-
             FileInputStream userFileIn = context.getApplicationContext().openFileInput(Information.USERINFO_FILE);
             ObjectInputStream userIn = new ObjectInputStream(userFileIn);
             Information.information.setInfo((UserInfo) userIn.readObject());
             userFileIn.close();
             userIn.close();
 
-            if(Information.information.getMyFoods() == null || Information.information.getMyIntakes() == null ||
-                    Information.information.getImFollowing() == null || Information.information.getMyFollowers() == null
+            if(Information.information.getMyFoods() == null || Information.information.getMyIntakes() == null
                     || Information.information.getInfo() == null) {
                 throw new NullPointerException("Did not instantaie properly from files/files didnt exist");
             }
@@ -154,6 +125,8 @@ public class Information implements Serializable {
 
     public boolean writeInfoToMemory(Context context) {
         try {
+            this.deleteFiles(context);
+
             FileOutputStream foodFileOut =
                     context.getApplicationContext().openFileOutput(Information.FOOD_FILE, Context.MODE_PRIVATE);
             ObjectOutputStream foodOut = new ObjectOutputStream(foodFileOut);
@@ -167,20 +140,6 @@ public class Information implements Serializable {
             intakeOut.writeObject(Information.information.getMyIntakes());
             intakeFileOut.close();
             intakeOut.close();
-
-            FileOutputStream followersFileOut =
-                    context.getApplicationContext().openFileOutput(Information.MYFOLLOWERS_FILE, Context.MODE_PRIVATE);
-            ObjectOutputStream followersOut = new ObjectOutputStream(followersFileOut);
-            followersOut.writeObject(Information.information.getMyFollowers());
-            followersOut.close();
-            followersFileOut.close();
-
-            FileOutputStream followingFileOut =
-                    context.getApplicationContext().openFileOutput(Information.IMFOLLOWING_FILE, Context.MODE_PRIVATE);
-            ObjectOutputStream followingOut = new ObjectOutputStream(followingFileOut);
-            followingOut.writeObject(Information.information.getImFollowing());
-            followingOut.close();
-            followingFileOut.close();
 
             FileOutputStream userFileOut =
                     context.getApplicationContext().openFileOutput(Information.USERINFO_FILE, Context.MODE_PRIVATE);
@@ -196,6 +155,11 @@ public class Information implements Serializable {
         }
     }
 
+    public void deleteFiles(Context context) {
+        context.getApplicationContext().deleteFile(Information.INTAKE_FILE);
+        context.getApplicationContext().deleteFile(Information.FOOD_FILE);
+        context.getApplicationContext().deleteFile(Information.USERINFO_FILE);
+    }
 
     public void addIntake(Context context, Intake intake){
         addIntakeToDB(intake);
@@ -210,9 +174,9 @@ public class Information implements Serializable {
         context.deleteFile(Information.FOOD_FILE);
         try {
             FileOutputStream followersFileOut =
-                    context.getApplicationContext().openFileOutput(Information.MYFOLLOWERS_FILE, Context.MODE_PRIVATE);
+                    context.getApplicationContext().openFileOutput(Information.INTAKE_FILE, Context.MODE_PRIVATE);
             ObjectOutputStream followersOut = new ObjectOutputStream(followersFileOut);
-            followersOut.writeObject(Information.information.getMyFollowers());
+            followersOut.writeObject(Information.information.getMyIntakes());
             followersOut.close();
             followersFileOut.close();
         }
@@ -247,52 +211,3 @@ public class Information implements Serializable {
     }
 
 }
-
-/*
-    Memory Writing code
-    IN INFORMATION :
-
-    this.myUser = user;
-    this.myFoods = new HashMap<String, Food>();
-    Food one = new Food("food1", this);
-    System.out.println("HELLO ading calories " + one.add("Calories", 120));
-    this.myFoods.put("food1", one);
-    this.myIntakes = new ArrayList<Intake>();
-    Intake intake1 = new Intake(one, 2);
-    this.addIntake(intake1);
-    this.myFollowers = new HashMap<String, User>();
-    this.imFollowing = new HashMap<String, User>();
-
-    IN login acitivity:
-        User testUser = new User("fakeuid", "fakeusername");
-        Information information = new Information(testUser);
-
-        try {
-            FileOutputStream fileOut =
-                    openFileOutput("JoyaanTestFile", Context.MODE_PRIVATE);
-            ObjectOutputStream out = new ObjectOutputStream(fileOut);
-            out.writeObject(information);
-            out.close();
-            fileOut.close();
-        } catch (IOException i) {
-            i.getClass().getCanonicalName();
-            i.printStackTrace();
-        }
-
-        Information myInfo;
-        try {
-            FileInputStream fileIn = openFileInput("JoyaanTestFile");
-            ObjectInputStream in = new ObjectInputStream(fileIn);
-            myInfo = (Information) in.readObject();
-            in.close();
-            fileIn.close();
-        } catch (IOException i) {
-            i.printStackTrace();
-            return;
-        } catch (Exception c) {
-            System.out.println("Employee class not found");
-            c.printStackTrace();
-            return;
-        }
-
- */

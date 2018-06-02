@@ -1,6 +1,6 @@
 package com.example.android.projectfanta;
 /**
- * Created by juma on 18/04/17.
+ * Created by Yixuan on 18/04/17.
  */
 
 import android.content.Context;
