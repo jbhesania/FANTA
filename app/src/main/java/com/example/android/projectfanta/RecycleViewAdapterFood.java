@@ -2,17 +2,21 @@ package com.example.android.projectfanta;
 
 import android.app.Dialog;
 import android.content.Context;
+import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.Window;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -20,9 +24,10 @@ import java.util.List;
  */
 public class RecycleViewAdapterFood extends RecyclerView.Adapter<RecycleViewAdapterFood.MyViewHolder>{
 
-    private List<Food> foodData;
+    private List<Food> foodData = new ArrayList<>();
     private Context context;
     Dialog dialog;
+    EditText numberOfServing;
 
 
     public RecycleViewAdapterFood(Context context, List<Food> foodData) {
@@ -40,15 +45,12 @@ public class RecycleViewAdapterFood extends RecyclerView.Adapter<RecycleViewAdap
         dialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
         Button button = (Button)dialog.findViewById(R.id.saving);
 
-        //TODO: Intent not working for "Save Button", find out
-
-//        button.setOnClickListener(new View.OnClickListener(){
-//            @Override
-//            public void onClick(View view){
-//                Intent save_intent = new Intent(context, HomeActivity.class);
-//                context.startActivity(save_intent);
-//            }
-//        });
+        button.setOnClickListener(new View.OnClickListener(){
+            @Override
+            public void onClick(View view){
+                //TODO: SAVE BUTTON TO SAVE THE NUMBER OF SERVINGS (JOYAAN)
+            }
+        });
 
         viewHolder.food_list.setOnClickListener(new View.OnClickListener(){
             @Override
@@ -62,7 +64,7 @@ public class RecycleViewAdapterFood extends RecyclerView.Adapter<RecycleViewAdap
     }
 
     @Override
-    public void onBindViewHolder(MyViewHolder holder, int position) {
+    public void onBindViewHolder(MyViewHolder holder, final int position) {
         holder.food_list_title.setText(foodData.get(position).getName());
         holder.itemView.setOnClickListener(new View.OnClickListener(){
             @Override
@@ -70,6 +72,10 @@ public class RecycleViewAdapterFood extends RecyclerView.Adapter<RecycleViewAdap
                 final Dialog dialog = new Dialog(context);
                 dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
                 dialog.setContentView(R.layout.custom_pop_up);
+                TextView text = (TextView) dialog.findViewById(R.id.foodServings);
+                text.setText(foodData.get(position).getName());
+                //TODO: putting the number of servings to value
+                String value = numberOfServing.getText().toString();
                 dialog.show();
             }
         });
