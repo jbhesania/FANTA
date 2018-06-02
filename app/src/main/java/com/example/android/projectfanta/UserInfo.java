@@ -9,6 +9,8 @@ import com.google.firebase.database.ValueEventListener;
 
 public class UserInfo extends User {
 
+    private String name;
+    private String gender; // "f" for female, "m" for male
     private int weight;
     private int height;
     private int age;
@@ -47,9 +49,9 @@ public class UserInfo extends User {
         // perform the reset here
     }
 
-    public int getAge() {
-        return age;
-    }
+    public int getAge() { return age; }
+
+    public String getName() { return name; }
 
     public int getWeight() {
         return weight;
@@ -95,6 +97,8 @@ public class UserInfo extends User {
         return sugar;
     }
 
+    public void setName(String name) { this.name = name; }
+
     public void setAge(int age) {
         this.age = age;
     }
@@ -107,5 +111,7 @@ public class UserInfo extends User {
         this.weight = weight;
     }
 
+    public String getGender() { return gender; }
 
+    public void setGender(String gender) { this.gender = gender; }
 }
