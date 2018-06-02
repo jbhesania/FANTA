@@ -25,11 +25,13 @@ public class MyAccountActivity extends AppCompatActivity {
     private TextView age;
     private TextView weight;
     private TextView height;
+    private int pa;
 
     private UserInfo user = information.getInfo();
 
-    RadioGroup rg;
-    RadioButton rb;
+    RadioGroup genderGroup;
+    RadioGroup paGroup;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -42,15 +44,21 @@ public class MyAccountActivity extends AppCompatActivity {
         weight = (TextView)findViewById(R.id.weightText);
         height = (TextView)findViewById(R.id.heightText);
 
-        rg = (RadioGroup) findViewById(R.id.genderGroup);
+        genderGroup = (RadioGroup) findViewById(R.id.genderGroup);
+        paGroup = (RadioGroup) findViewById(R.id.paGroup);
 
         if (user.getName() != null) name.setText(user.getName());
         if (!TextUtils.isEmpty(user.getUserName().toString())) email.setText(user.getUserName());
         if (user.getAge() != 0) age.setText(Integer.toString(user.getAge()));
         if (user.getWeight() != 0) weight.setText(Integer.toString(user.getWeight()));
         if (user.getHeight() != 0) height.setText(Integer.toString(user.getHeight()));
-        if (user.getGender() == "f") rg.check(R.id.female);
-        else if(user.getGender() == "m") rg.check(R.id.male);
+        if (user.getGender() == "f") genderGroup.check(R.id.female);
+        else if(user.getGender() == "m") genderGroup.check(R.id.male);
+
+        if(user.getPa() == 1) paGroup.check(R.id.sedentary);
+        else if(user.getPa() == 2) paGroup.check(R.id.lowactive);
+        else if(user.getPa() == 3) paGroup.check(R.id.active);
+        else if(user.getPa() == 4) paGroup.check(R.id.veryactive);
 
         // Email is uneditable
         email.setEnabled(false);
@@ -62,19 +70,27 @@ public class MyAccountActivity extends AppCompatActivity {
     }
 
     public void genderGroupClick(View v) {
-        int radioId = rg.getCheckedRadioButtonId();
+        int radioId = genderGroup.getCheckedRadioButtonId();
         RadioButton rb = (RadioButton) findViewById(radioId);
-        if(rb.getText() == "Female") gender = "f";
+        if(rb.getText().equals("Female")) gender = "f";
         else gender = "m";
+    }
+
+    public void paGroupClick(View v) {
+        int radioId = paGroup.getCheckedRadioButtonId();
+        RadioButton rb = (RadioButton) findViewById(radioId);
+        if(rb.getText().equals("Sedentary")) pa = 1;
+        else if(rb.getText().equals("Low Active")) pa = 2;
+        else if(rb.getText().equals("Active")) pa = 3;
+        else if(rb.getText().equals("Very Active")) pa = 4;
     }
 
     public void saveClick(View v){
         if (!TextUtils.isEmpty(name.getText().toString())) user.setName(name.getText().toString());
         if (gender == "f" || gender == "m") user.setGender(gender);
-        //if (!TextUtils.isEmpty(gender.getText().toString())) user.setGender(Integer.parseInt(gender.getText().toString()));
         if (!TextUtils.isEmpty(age.getText().toString())) user.setAge(Integer.parseInt(age.getText().toString()));
         if (!TextUtils.isEmpty(weight.getText().toString())) user.setWeight(Integer.parseInt(weight.getText().toString()));
         if (!TextUtils.isEmpty(height.getText().toString())) user.setHeight(Integer.parseInt(height.getText().toString()));
+        if(pa >= 1 && pa <= 4) { user.setPa(pa); }
     }
-
 }
