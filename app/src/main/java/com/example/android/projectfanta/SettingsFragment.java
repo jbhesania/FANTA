@@ -137,7 +137,7 @@ public class SettingsFragment extends Fragment {
     }
 
     private void setSingleEvent(GridLayout mainGrid){
-        for(int i =0; i < mainGrid.getChildCount();i++){
+        for(int i = 0; i < mainGrid.getChildCount();i++){
             CardView cardView = (CardView)mainGrid.getChildAt(i);
             final int index = i;
             cardView.setOnClickListener(new View.OnClickListener(){
