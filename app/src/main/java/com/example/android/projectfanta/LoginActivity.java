@@ -151,7 +151,7 @@ public class LoginActivity extends AppCompatActivity {
                             mData.child(userid).setValue(Information.information);
                             Information.information.writeInfoToMemory(getApplicationContext());
 
-                            Intent calcIntent = new Intent(LoginActivity.this, IndividualMyAccountActivity.class);
+                            Intent calcIntent = new Intent(LoginActivity.this, MyAccountActivity.class);
                             startActivity(calcIntent);
                         }
 
@@ -209,8 +209,6 @@ public class LoginActivity extends AppCompatActivity {
                             // Sign in success, update UI with the signed-in user's information
                             FirebaseUser user = mAuth.getCurrentUser();
                             handleUsers(user);
-                            Intent calcIntent = new Intent(LoginActivity.this, HomeActivity.class);
-                            startActivityForResult(calcIntent, RC_SIGN_IN);
                         } else {
                             // TODO If sign in fails, display a message to the user.
                         }

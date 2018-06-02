@@ -49,9 +49,6 @@
             android:label="@string/title_activity_my_account"
             android:theme="@style/AppTheme.NoActionBar" />
 
-        <activity android:name=".IndividualMyAccountActivity"
-            android:label="MyAccountActivity"
-            android:theme="@style/AppTheme.NoActionBar" />
         <activity
             android:name=".ChangeNutritionIntake"
             android:label="@string/title_activity_change_nutrition_intake"

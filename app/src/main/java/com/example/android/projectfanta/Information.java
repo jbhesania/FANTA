@@ -52,11 +52,17 @@ public class Information implements Serializable {
     public Food getFood(String name) { return myFoods.get(name); }
     public ArrayList<Intake> getMyIntakes() { return myIntakes; }
     public HashMap<String, Food> getMyFoods() { return myFoods; }
-    public void setInfo(UserInfo myInfo) {
+
+    public void setInfoToDB(UserInfo myInfo) {
         if (mData == null) mData = FirebaseDatabase.getInstance().getReference();
         this.myInfo = myInfo;
         mData.child(myInfo.getId()).child("info").setValue(myInfo);
     }
+
+    public void setInfo(UserInfo myInfo) {
+        this.myInfo = myInfo;
+    }
+
     public void setFoods(HashMap<String, Food> myFoods) {
         this.myFoods = myFoods;
     }

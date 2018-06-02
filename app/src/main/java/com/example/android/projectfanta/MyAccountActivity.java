@@ -34,12 +34,11 @@ public class MyAccountActivity extends AppCompatActivity {
         //SharedPreferences sharedPreferences = getSharedPreferences("userInfo", MODE_PRIVATE);
         //SharedPreferences.Editor editor = sharedPreferences.edit();
 
-        UserInfo userInfo = new UserInfo(Information.information.getInfo());
-        userInfo.setAge(Integer.valueOf(age.getText().toString()));
+        Information.information.getInfo().setAge(Integer.valueOf(age.getText().toString()));
         //System.out.println("Age is " + userInfo.getAge()+ "!!!!!!!!!!!!!!");
-        userInfo.setHeight(Integer.valueOf(height.getText().toString()));
-        userInfo.setWeight(Integer.valueOf(weight.getText().toString()));
-        Information.information.setInfo(userInfo);
+        Information.information.getInfo().setHeight(Integer.valueOf(height.getText().toString()));
+        Information.information.getInfo().setWeight(Integer.valueOf(weight.getText().toString()));
+        Information.information.setInfoToDB(Information.information.getInfo());
         /*
         editor.putInt("Age", Integer.valueOf(age.getText().toString()));
         editor.putInt("Weight", Integer.valueOf(weight.getText().toString()));
