@@ -44,13 +44,8 @@ public class FoodListActivity extends AppCompatActivity {
             }
         });
 
-        listFresh = new ArrayList<>();
+        listFresh = new ArrayList<>(Information.information.getMyFoods().values());
 
-        listFresh.add(new Food("Banana"));
-        listFresh.add(new Food("Strawberry"));
-        listFresh.add(new Food("Apple"));
-        listFresh.add(new Food("Avocado"));
-        listFresh.add(new Food("Watermelon"));
 
         RecyclerView myRecyclerView = (RecyclerView) findViewById(R.id.freshFood_recycler);
         myAdapter = new RecycleViewAdapter(this,listFresh);
@@ -63,7 +58,7 @@ public class FoodListActivity extends AppCompatActivity {
         List<Food> filteredList = new ArrayList<>();
 
         for(Food food: listFresh){
-            if(food.getName().toLowerCase().contains(text.toLowerCase())){
+            if(food.getName().toLowerCase().startsWith((text.toLowerCase()))){
                 filteredList.add(food);
             }
         }
