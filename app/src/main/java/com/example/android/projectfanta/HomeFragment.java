@@ -2,6 +2,7 @@ package com.example.android.projectfanta;
 
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
@@ -11,6 +12,9 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
+
+import static android.content.Context.MODE_PRIVATE;
+import static com.google.android.gms.flags.impl.SharedPreferencesFactory.getSharedPreferences;
 
 
 /**
@@ -26,6 +30,9 @@ public class HomeFragment extends Fragment {
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
     private static final String ARG_PARAM1 = "param1";
     private static final String ARG_PARAM2 = "param2";
+    private int age;
+    private int weight;
+    private int height;
 
     // TODO: Rename and change types of parameters
     private String mParam1;

@@ -1,19 +1,17 @@
 package com.example.android.projectfanta;
 
 import android.content.Intent;
-import android.content.SharedPreferences;
 import android.os.Bundle;
-import android.support.design.widget.FloatingActionButton;
-import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.Toolbar;
 import android.view.View;
-import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
-public class MyAccountActivity extends AppCompatActivity {
+/**
+ * Created by 59881 on 6/2/2018.
+ */
 
+public class IndividualMyAccountActivity extends AppCompatActivity{
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -27,9 +25,9 @@ public class MyAccountActivity extends AppCompatActivity {
     }
 
     public void saveClick(View v){
-        EditText age = (EditText)findViewById(R.id.Age);
-        EditText weight = (EditText)findViewById(R.id.Weight);
-        EditText height = (EditText)findViewById(R.id.Height);
+        EditText age = (EditText)findViewById(R.id.Age1);
+        EditText weight = (EditText)findViewById(R.id.Weight1);
+        EditText height = (EditText)findViewById(R.id.Height1);
 
         //SharedPreferences sharedPreferences = getSharedPreferences("userInfo", MODE_PRIVATE);
         //SharedPreferences.Editor editor = sharedPreferences.edit();
@@ -45,11 +43,9 @@ public class MyAccountActivity extends AppCompatActivity {
         editor.putInt("Weight", Integer.valueOf(weight.getText().toString()));
         editor.putInt("Height", Integer.valueOf(height.getText().toString()));
         editor.apply();*/
-        Toast.makeText(MyAccountActivity.this, "Saved", Toast.LENGTH_SHORT).show();
+        Toast.makeText(IndividualMyAccountActivity.this, "Saved", Toast.LENGTH_SHORT).show();
 
-        Intent homeIntent = new Intent(MyAccountActivity.this, HomeActivity.class);
+        Intent homeIntent = new Intent(IndividualMyAccountActivity.this, HomeActivity.class);
         startActivity(homeIntent);
     }
-
-
 }

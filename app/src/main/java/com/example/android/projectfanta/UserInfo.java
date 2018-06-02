@@ -1,5 +1,6 @@
 package com.example.android.projectfanta;
 
+import android.content.SharedPreferences;
 import android.util.Log;
 
 import com.google.firebase.database.DataSnapshot;

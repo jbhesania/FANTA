@@ -1,6 +1,8 @@
 package com.example.android.projectfanta;
 
+import android.app.Activity;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.icu.text.IDNA;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
@@ -134,8 +136,7 @@ public class LoginActivity extends AppCompatActivity {
                 // If user does not have an account
                 if (!snapshot.exists()) {
                     // TODO REQUEST USER INFO TO SET USER VALUES CORRECTLY
-
-                    UserInfo ui = new UserInfo(userid, username, 10, 8, 0);
+                    UserInfo ui = new UserInfo(userid, username, 0, 0, 10);
                     User u = new User(userid, username);
                     final DatabaseReference mData = FirebaseDatabase.getInstance().getReference();
                     Information.information = new Information(ui, u);
@@ -150,8 +151,8 @@ public class LoginActivity extends AppCompatActivity {
                             mData.child(userid).setValue(Information.information);
                             Information.information.writeInfoToMemory(getApplicationContext());
 
-                            Intent calcIntent = new Intent(LoginActivity.this, HomeActivity.class);
-                            startActivityForResult(calcIntent, RC_SIGN_IN);
+                            Intent calcIntent = new Intent(LoginActivity.this, IndividualMyAccountActivity.class);
+                            startActivity(calcIntent);
                         }
 
                         @Override
