@@ -1,5 +1,6 @@
 package com.example.android.projectfanta;
 
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
@@ -9,6 +10,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import java.util.HashMap;
 
@@ -162,7 +164,8 @@ public class NutritionLabelConfirmActivity extends AppCompatActivity {
     }
 
     public void onConfirm(View view) {
-        if (!TextUtils.isEmpty(serve.getText().toString()) && !TextUtils.isEmpty(name.getText().toString())) {
+        if (!TextUtils.isEmpty(serve.getText().toString()) && !TextUtils.isEmpty(name.getText().toString())
+                && !name.getText().toString().equals("Name")) {
 
             if (!TextUtils.isEmpty(dataCals.getText().toString())) food.add(Food.CALORIES, Double.parseDouble(dataCals.getText().toString()));
             if (!TextUtils.isEmpty(dataFat.getText().toString())) food.add(Food.FAT, Double.parseDouble(dataFat.getText().toString()));
@@ -184,8 +187,28 @@ public class NutritionLabelConfirmActivity extends AppCompatActivity {
             Intent homeIntent = new Intent(this, HomeActivity.class);
 
             startActivity(homeIntent);
+
+
         } else {
             // POP up saying to enter servings and name
+            if (TextUtils.isEmpty(serve.getText().toString())) {
+                Context context = getApplicationContext();
+                CharSequence text = "Please enter number of servings";
+                int duration = Toast.LENGTH_SHORT;
+
+                Toast toast = Toast.makeText(context, text, duration);
+                toast.show();
+            }
+
+            if (TextUtils.isEmpty(name.getText().toString()) || name.getText().toString().equals("Name")) {
+                Context context = getApplicationContext();
+                CharSequence text = "Please enter a name";
+                int duration = Toast.LENGTH_SHORT;
+
+                Toast toast = Toast.makeText(context, text, duration);
+                toast.show();
+            }
+
         }
     }
 
