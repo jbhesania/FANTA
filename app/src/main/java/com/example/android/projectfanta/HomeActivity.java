@@ -6,6 +6,7 @@ import android.support.design.widget.BottomNavigationView;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AppCompatActivity;
+import android.view.KeyEvent;
 import android.view.MenuItem;
 
 public class HomeActivity extends AppCompatActivity {
@@ -25,7 +26,19 @@ public class HomeActivity extends AppCompatActivity {
         transaction.replace(R.id.fragment_container, new HomeFragment()).commit();
 
     }
-    
+
+    @Override
+    public boolean onKeyDown(int keyCode, KeyEvent event)  {
+        if (keyCode == KeyEvent.KEYCODE_BACK ) {
+            // do something on back.
+            System.out.println("IN BACK");
+            finish(); // onPause, onStop, onDestroy
+            return true;
+        }
+
+        return super.onKeyDown(keyCode, event);
+    }
+
     @Override
     protected void onResume() {
         super.onResume();

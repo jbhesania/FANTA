@@ -117,7 +117,7 @@ public final class CameraActivity extends AppCompatActivity {
 
         Snackbar.make(graphicOverlay, "Tap screen to capture", Snackbar.LENGTH_INDEFINITE)
                 .show();
-        
+
         preview.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
