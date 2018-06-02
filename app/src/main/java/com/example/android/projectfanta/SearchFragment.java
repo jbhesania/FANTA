@@ -30,7 +30,7 @@ import static android.content.Context.NOTIFICATION_SERVICE;
  * Created by User on 5/18/2018.
  */
 
-public class ContactsFragment extends Fragment {
+public class SearchFragment extends Fragment {
     List<User> dataFriends;
     ListViewAdapter lvAdapter;
     EditText search;
@@ -38,11 +38,11 @@ public class ContactsFragment extends Fragment {
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable final ViewGroup container, @Nullable Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.contact_fragment,container,false);
+        View view = inflater.inflate(R.layout.search_fragment,container,false);
         search= (EditText) view.findViewById(R.id.searchBar);
         dataFriends = new ArrayList<>();
 
-        ListView list = (ListView)view.findViewById(R.id.listContact);
+        ListView list = (ListView)view.findViewById(R.id.listSearch);
         lvAdapter = new ListViewAdapter(getContext(), R.layout.itemrow, dataFriends);
 
         list.setAdapter(lvAdapter);
@@ -55,24 +55,6 @@ public class ContactsFragment extends Fragment {
             }
         });
 
-
-        //TODO: get the search function to work
-
-        search.addTextChangedListener(new TextWatcher() {
-            @Override
-            public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
-
-            }
-
-            @Override
-            public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
-                ContactsFragment.this.lvAdapter.getFilter().filter(charSequence);
-            }
-
-            @Override
-            public void afterTextChanged(Editable editable) {
-            }
-        });
         return view;
 
     }

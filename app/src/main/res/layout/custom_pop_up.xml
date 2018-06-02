@@ -10,21 +10,31 @@
     android:elevation="30dp">
 
     <RelativeLayout
-        android:layout_width="wrap_content"
+        android:layout_width="200dp"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
         android:layout_gravity="center">
 
         <TextView
+            android:id="@+id/add"
             android:layout_marginTop="10dp"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Add Servings:"
-            android:layout_gravity="center"
+            android:text="Add servings for "
             android:textColor="#000"
-            android:layout_centerHorizontal="true"
             android:textStyle="bold|italic"
             android:textSize="18sp"/>
+
+        <TextView
+            android:id="@+id/foodServings"
+            android:layout_marginTop="10dp"
+            android:layout_toEndOf="@+id/add"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="#000"
+            android:textStyle="bold|italic"
+            android:textSize="18sp"
+            android:text=""/>
 
     </RelativeLayout>
     <RelativeLayout

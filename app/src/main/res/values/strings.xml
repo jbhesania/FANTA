@@ -51,7 +51,7 @@
     <string name="ocr_success">Text read successfully</string>
     <string name="ocr_failure">No text captured</string>
     <string name="ocr_error">"Error reading text: %1$s"</string>
-    <string name="name">Name</string>
+    <string name="name">Enter the name of the food</string>
     <string name="calories">Calories</string>
     <string name="totalFat">Total Fat (g)</string>
     <string name="cholest">Cholesterol (mg)</string>
