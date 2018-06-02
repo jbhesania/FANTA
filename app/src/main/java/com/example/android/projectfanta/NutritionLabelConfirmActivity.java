@@ -206,7 +206,7 @@ public class NutritionLabelConfirmActivity extends AppCompatActivity {
 
 
         } else {
-<<<<<<< HEAD
+
             // POP up saying to enter servings and name
             if (TextUtils.isEmpty(serve.getText().toString())) {
                 Context context = getApplicationContext();
@@ -226,11 +226,6 @@ public class NutritionLabelConfirmActivity extends AppCompatActivity {
                 toast.show();
             }
 
-=======
-            Toast toast = Toast.makeText(getApplicationContext(),
-                    "Enter a serving size and food name!", Toast.LENGTH_SHORT);
-            toast.show();
->>>>>>> master
         }
     }
 
