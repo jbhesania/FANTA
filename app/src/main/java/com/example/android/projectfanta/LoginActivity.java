@@ -115,6 +115,7 @@ public class LoginActivity extends AppCompatActivity {
     public void handleUsers(FirebaseUser user) {
 
         final String userid = user.getUid();
+
         final String username = user.getEmail();
         final DatabaseReference singleUserRef = FirebaseDatabase.getInstance().getReference().child("users").child(userid);
         // cehck if a username is in user if not then do sth eelse
@@ -137,6 +138,7 @@ public class LoginActivity extends AppCompatActivity {
                 if (!snapshot.exists()) {
                     // TODO REQUEST USER INFO TO SET USER VALUES CORRECTLY
                     UserInfo ui = new UserInfo(userid, username, "f",0, 0, 10);
+
                     User u = new User(userid, username);
                     final DatabaseReference mData = FirebaseDatabase.getInstance().getReference();
                     Information.information = new Information(ui, u);
@@ -208,6 +210,8 @@ public class LoginActivity extends AppCompatActivity {
                         if (task.isSuccessful()) {
                             // Sign in success, update UI with the signed-in user's information
                             FirebaseUser user = mAuth.getCurrentUser();
+                            //System.out.println("userid is" + user.getUid());
+                            //System.out.println("myName is " + user.getEmail());
                             handleUsers(user);
                         } else {
                             // TODO If sign in fails, display a message to the user.

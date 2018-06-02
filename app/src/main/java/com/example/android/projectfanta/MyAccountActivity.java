@@ -86,7 +86,7 @@ public class MyAccountActivity extends AppCompatActivity {
     public void genderGroupClick(View v) {
         int radioId = genderGroup.getCheckedRadioButtonId();
         RadioButton rb = (RadioButton) findViewById(radioId);
-        if(rb.getText().equals("Female")) gender = "f";
+        if (rb.getText().equals("Female")) gender = "f";
         else gender = "m";
     }
 
