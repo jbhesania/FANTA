@@ -100,6 +100,7 @@ public final class CameraActivity extends AppCompatActivity {
         // Set good defaults for capturing text.
         boolean autoFocus = true;
         boolean useFlash = false;
+        final long startTime = System.currentTimeMillis();
 
         // Check for the camera permission before accessing the camera.  If the
         // permission is not granted yet, request permission.
@@ -132,13 +133,17 @@ public final class CameraActivity extends AppCompatActivity {
         tts = new TextToSpeech(this.getApplicationContext(), listener);*/
 
         //FloatingActionButton fab = findViewById(R.id.fab);
+
         preview.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent goConfirm = new Intent(CameraActivity.this,
-                        NutritionLabelConfirmActivity.class);
-                goConfirm.putExtra("Detections", ocr.getItems());
-                startActivity(goConfirm);
+
+                if (System.currentTimeMillis() > (startTime + 2000)) {
+                    Intent goConfirm = new Intent(CameraActivity.this,
+                            NutritionLabelConfirmActivity.class);
+                    goConfirm.putExtra("Detections", ocr.getItems());
+                    startActivity(goConfirm);
+                }
             }
         });
     }
