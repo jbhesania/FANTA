@@ -85,11 +85,12 @@ public class NutritionLabelConfirmActivity extends AppCompatActivity {
 
     public HashMap<Integer, String> parseData(String[] detects) {
 
+        // Different possibilities of spellings the OCR catches
         String[] keys = {
                 "total", // 0
                 "fat lat fal", // 1
-                "carbohydrate carb. carbs.", // 2
-                "calories calri ceries caries", // 3
+                "carbohydrates carb. carbs.", // 2
+                "calories calri ceries caries caories caores caleries", // 3
                 "sugars", // 4
                 "protein", // 5
                 "sodium", // 6
@@ -212,6 +213,7 @@ public class NutritionLabelConfirmActivity extends AppCompatActivity {
         editText.setText("");
     }
 
+    // LIFECYCLE
     @Override
     protected void onResume() {
         super.onResume();
