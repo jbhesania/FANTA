@@ -20,6 +20,7 @@ public class Food implements Serializable{
 
 
     private String name;
+    private long count;
     private HashMap<String, Double> nutrients;
 
 
@@ -29,6 +30,7 @@ public class Food implements Serializable{
      */
     public Food(String name) {
         this.name = name;
+        count = 0;
         nutrients = new HashMap<String, Double> ();
     }
 
@@ -69,11 +71,16 @@ public class Food implements Serializable{
         this.name = name;
     }
 
-    //    public static FoodDB convertToDB(Food food){
-//        FoodDB db = new FoodDB(food.name);
-//        for (String key : food.getNutrients().keySet()) {
-//            db.add(key, food.getNutrient(key));
-//        }
-//        return db;
-//    }
+    public long getCount() {
+        return count;
+    }
+
+    public void setCount(long count) {
+        this.count = count;
+    }
+
+    public void incrementCount() {
+        count++;
+    }
+
 }
