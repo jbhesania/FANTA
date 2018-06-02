@@ -164,8 +164,24 @@ public class NutritionLabelConfirmActivity extends AppCompatActivity {
     }
 
     public void onConfirm(View view) {
-        if (!TextUtils.isEmpty(serve.getText().toString()) && !TextUtils.isEmpty(name.getText().toString())
-                && !name.getText().toString().equals("Name")) {
+
+        if(name.getText().toString().contains(".") || name.getText().toString().contains("/") ||
+                name.getText().toString().contains("[") || name.getText().toString().contains("]") ||
+                name.getText().toString().contains("#") || name.getText().toString().contains("$")) {
+            Toast toast = Toast.makeText(getApplicationContext(),
+                    "Names cannot contain . / [ ] # or $", Toast.LENGTH_SHORT);
+            toast.show();
+            return;
+        }
+
+        if(Information.information.hasFood(name.getText().toString())) {
+            Toast toast = Toast.makeText(getApplicationContext(),
+                    "Enter a unique name!", Toast.LENGTH_SHORT);
+            toast.show();
+            return;
+        }
+        if (!TextUtils.isEmpty(serve.getText().toString()) && !TextUtils.isEmpty(name.getText().toString())) {
+
 
             if (!TextUtils.isEmpty(dataCals.getText().toString())) food.add(Food.CALORIES, Double.parseDouble(dataCals.getText().toString()));
             if (!TextUtils.isEmpty(dataFat.getText().toString())) food.add(Food.FAT, Double.parseDouble(dataFat.getText().toString()));
@@ -190,6 +206,7 @@ public class NutritionLabelConfirmActivity extends AppCompatActivity {
 
 
         } else {
+<<<<<<< HEAD
             // POP up saying to enter servings and name
             if (TextUtils.isEmpty(serve.getText().toString())) {
                 Context context = getApplicationContext();
@@ -209,6 +226,11 @@ public class NutritionLabelConfirmActivity extends AppCompatActivity {
                 toast.show();
             }
 
+=======
+            Toast toast = Toast.makeText(getApplicationContext(),
+                    "Enter a serving size and food name!", Toast.LENGTH_SHORT);
+            toast.show();
+>>>>>>> master
         }
     }
 

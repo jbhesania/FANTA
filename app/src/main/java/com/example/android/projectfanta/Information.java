@@ -17,6 +17,7 @@ import java.io.ObjectOutputStream;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.Set;
 
 public class Information implements Serializable {
 
@@ -62,8 +63,14 @@ public class Information implements Serializable {
         this.myIntakes = myIntakes;
     }
 
-    public boolean hasFood(String name) {
-        return myFoods.containsKey(name);
+    public boolean hasFood(String name)    {
+        Set<String> keys = myFoods.keySet();
+        for(String key: keys) {
+            if(key.toLowerCase().equals(name.toLowerCase())) {
+                return true;
+            }
+        }
+        return false;
     }
 
     static void read(String uid, final Callback call){
