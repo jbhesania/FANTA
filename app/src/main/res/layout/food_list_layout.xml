@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    tools:context=".FoodListActivity"
+    android:orientation="horizontal"
+    android:id="@+id/foodList">
+
+    <TextView
+        android:background="@drawable/rectangle"
+        android:id="@+id/food"
+        android:padding="10dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Food List"
+        android:textSize="18sp">
+    </TextView>
+
+
+</RelativeLayout>

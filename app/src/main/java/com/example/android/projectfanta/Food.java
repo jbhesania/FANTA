@@ -9,14 +9,14 @@ import java.util.Map;
 public class Food implements Serializable{
 
     public static final String CALORIES = "calories";
-    public static final String FAT = "fat";
-    public static final String PROTIEN = "protein";
-    public static final String FIBER = "fiber";
-    public static final String SUGAR = "sugar";
-    public static final String SODIUM = "sodium";
-    public static final String CHOLESTEROL = "cholesterol";
     public static final String CARBS = "carbs";
+    public static final String FAT = "fat";
+    public static final String PROTEIN = "protein";
+    public static final String SODIUM = "sodium";
+    public static final String SUGAR = "sugar";
+    public static final String CHOLESTEROL = "cholesterol";
     public static final String POTASSIUM = "potassium";
+    public static final String FIBER = "fiber";
 
 
     private String name;
