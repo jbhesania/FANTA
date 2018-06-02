@@ -6,13 +6,22 @@ import android.os.Bundle;
 import android.support.design.widget.TabLayout;
 import android.support.v4.app.Fragment;
 import android.support.v4.view.ViewPager;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ListView;
 
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.GenericTypeIndicator;
+import com.google.firebase.database.ValueEventListener;
+
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 
 
@@ -31,6 +40,9 @@ public class FriendsFragment extends Fragment {
     private static final String ARG_PARAM2 = "param2";
     private SectionsPageAdapter myAdapter;
     private ViewPager myPager;
+    private HashMap<String, User> users;
+    private HashMap<String, Food> theirFoods;
+    private ArrayList<Intake> theirIntakes;
 
 
     // TODO: Rename and change types of parameters
@@ -77,6 +89,55 @@ public class FriendsFragment extends Fragment {
             mParam2 = getArguments().getString(ARG_PARAM2);
         }
 
+    }
+
+    @Override
+    public void onStart() {
+        super.onStart();
+    }
+
+    /**
+     * read the list of users from the database and sets it to users
+     * asynchronous need null checks on the users field even after call
+     */
+    private void readUserMap(){
+        DatabaseReference usersRef = FirebaseDatabase.getInstance().getReference().child("users");
+        usersRef.addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                GenericTypeIndicator<HashMap<String, User>> hash = new GenericTypeIndicator<HashMap<String, User>>() {};
+                users = dataSnapshot.getValue(hash);
+            }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+
+            }
+        });
+    }
+
+    /**
+     * loads the foods and intakes of a given userid
+     * asynchronous need null checks on the theirFoods and theirIntakes even after call
+     * @param uid the uid of the user to load their intakes and foods
+     */
+    public void readUserInfo(final String uid){
+        DatabaseReference usersRef = FirebaseDatabase.getInstance().getReference().child(uid);
+        usersRef.addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                GenericTypeIndicator<HashMap<String, Food>> hash = new GenericTypeIndicator<HashMap<String, Food>>() {};
+                GenericTypeIndicator<ArrayList<Intake>> list = new GenericTypeIndicator<ArrayList<Intake>>() {};
+
+                theirFoods = dataSnapshot.child("myFoods").getValue(hash);
+                theirIntakes = dataSnapshot.child("myIntakes").getValue(list);
+            }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+
+            }
+        });
     }
 
     @Override
