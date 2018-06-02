@@ -8,6 +8,7 @@ import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AppCompatActivity;
 import android.view.MenuItem;
+import android.widget.Toast;
 
 public class HomeActivity extends AppCompatActivity {
 
@@ -41,8 +42,14 @@ public class HomeActivity extends AppCompatActivity {
                     transaction.replace(R.id.fragment_container, new HistoryFragment()).commit();
                     return true;
                 case R.id.friends:
-                    transaction.replace(R.id.fragment_container, new FriendsFragment()).commit();
-                    return true;
+                    if(NetworkStatus.getInstance(getApplication()).isOnline()){
+                        transaction.replace(R.id.fragment_container, new FriendsFragment()).commit();
+                        return true;
+                    }else {
+                        Toast.makeText(getApplicationContext(), "No Internet Connection!",
+                                Toast.LENGTH_SHORT).show();
+                        return false;
+                    }
                 case R.id.setting:
                     transaction.replace(R.id.fragment_container, new SettingsFragment()).commit();
                     return true;
