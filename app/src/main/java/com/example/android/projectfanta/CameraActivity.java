@@ -70,6 +70,7 @@ public final class CameraActivity extends AppCompatActivity {
     public static final String AutoFocus = "AutoFocus";
     public static final String UseFlash = "UseFlash";
     public static final String TextBlockObject = "String";
+    public static final int DELAY_MS = 3000;
 
     private CameraSource cameraSource;
     private CameraSourcePreview preview;
@@ -116,29 +117,12 @@ public final class CameraActivity extends AppCompatActivity {
 
         Snackbar.make(graphicOverlay, "Tap screen to capture", Snackbar.LENGTH_INDEFINITE)
                 .show();
-
-        // Set up the Text To Speech engine.
-        /*TextToSpeech.OnInitListener listener =
-                new TextToSpeech.OnInitListener() {
-                    @Override
-                    public void onInit(final int status) {
-                        if (status == TextToSpeech.SUCCESS) {
-                            Log.d("OnInitListener", "Text to speech engine started successfully.");
-                            tts.setLanguage(Locale.US);
-                        } else {
-                            Log.d("OnInitListener", "Error starting the text to speech engine.");
-                        }
-                    }
-                };
-        tts = new TextToSpeech(this.getApplicationContext(), listener);*/
-
-        //FloatingActionButton fab = findViewById(R.id.fab);
-
+        
         preview.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
 
-                if (System.currentTimeMillis() > (startTime + 2000)) {
+                if (System.currentTimeMillis() > (startTime + DELAY_MS)) {
                     Intent goConfirm = new Intent(CameraActivity.this,
                             NutritionLabelConfirmActivity.class);
                     goConfirm.putExtra("Detections", ocr.getItems());
