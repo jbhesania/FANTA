@@ -1,13 +1,9 @@
 package com.example.android.projectfanta;
 
-import android.app.Dialog;
-import android.graphics.Color;
-import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.support.v7.widget.SearchView;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.widget.EditText;
@@ -18,7 +14,7 @@ import java.util.List;
 public class FoodListActivity extends AppCompatActivity {
     List<Food> listFresh;
     EditText searchBar;
-    RecycleViewAdapter myAdapter;
+    RecycleViewAdapterFood myAdapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -47,7 +43,7 @@ public class FoodListActivity extends AppCompatActivity {
         listFresh = new ArrayList<>(Information.information.getMyFoods().values());
 
         RecyclerView myRecyclerView = (RecyclerView) findViewById(R.id.freshFood_recycler);
-        myAdapter = new RecycleViewAdapter(this,listFresh);
+        myAdapter = new RecycleViewAdapterFood(this,listFresh);
         myRecyclerView.setLayoutManager(new LinearLayoutManager(getApplicationContext()));
         myRecyclerView.setAdapter(myAdapter);
 

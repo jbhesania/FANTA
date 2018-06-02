@@ -10,6 +10,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+
 import android.widget.AdapterView;
 import android.widget.ListView;
 
@@ -23,6 +24,7 @@ import com.google.firebase.database.ValueEventListener;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
+
 
 
 /**
@@ -57,9 +59,8 @@ public class FriendsFragment extends Fragment {
 
     private void setUpViewPager(ViewPager viewPager){
         SectionsPageAdapter adapter = new SectionsPageAdapter(getFragmentManager());
-        adapter.addFragment(new ContactsFragment(), "Search");
-        adapter.addFragment(new FollowingFragment(), "Following");
-        adapter.addFragment(new FollowersFragment(), "Followers");
+        adapter.addFragment(new SearchFragment(), "Search");
+        adapter.addFragment(new InstructionFragment(), "Instruction");
         viewPager.setAdapter(adapter);
     }
 
@@ -150,14 +151,6 @@ public class FriendsFragment extends Fragment {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_friends, container, false);
-
-//        list.setOnItemClickListener(new AdapterView.OnItemClickListener(){
-//            @Override
-//            public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
-//                //TODO: make screen for friends profile
-//            }
-//        });
-
 
         myAdapter = new SectionsPageAdapter(getFragmentManager());
 

@@ -8,7 +8,7 @@
     android:id="@+id/foodList">
 
     <TextView
-        android:background="@drawable/rectangle"
+
         android:id="@+id/food"
         android:padding="10dp"
         android:layout_width="match_parent"

@@ -2,36 +2,35 @@ package com.example.android.projectfanta;
 
 import android.app.Dialog;
 import android.content.Context;
+import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
-import android.support.v7.widget.PopupMenu;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
-import android.view.MenuInflater;
-import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.Window;
 import android.widget.Button;
-import android.widget.ImageButton;
-import android.widget.ImageView;
+import android.widget.EditText;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
-import android.widget.Toast;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
  * Created by User on 5/17/2018.
  */
-public class RecycleViewAdapter extends RecyclerView.Adapter<RecycleViewAdapter.MyViewHolder>{
+public class RecycleViewAdapterFood extends RecyclerView.Adapter<RecycleViewAdapterFood.MyViewHolder>{
 
-    private List<Food> foodData;
+    private List<Food> foodData = new ArrayList<>();
     private Context context;
     Dialog dialog;
+    EditText numberOfServing;
 
 
-    public RecycleViewAdapter(Context context, List<Food> foodData) {
+    public RecycleViewAdapterFood(Context context, List<Food> foodData) {
         this.context = context;
         this.foodData = foodData;
     }
@@ -39,17 +38,25 @@ public class RecycleViewAdapter extends RecyclerView.Adapter<RecycleViewAdapter.
     @Override
     public MyViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         View foodView = (View) LayoutInflater.from(parent.getContext()).inflate(R.layout.food_list_layout,parent,false);
-        MyViewHolder viewHolder = new MyViewHolder(foodView);
+        final MyViewHolder viewHolder = new MyViewHolder(foodView);
 
         dialog = new Dialog(context);
         dialog.setContentView(R.layout.custom_pop_up);
         dialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
-        Button button;
-        button = (Button)dialog.findViewById(R.id.saving);
+        Button button = (Button)dialog.findViewById(R.id.saving);
+
+        button.setOnClickListener(new View.OnClickListener(){
+            @Override
+            public void onClick(View view){
+                //TODO: SAVE BUTTON TO SAVE THE NUMBER OF SERVINGS (JOYAAN)
+            }
+        });
 
         viewHolder.food_list.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View view){
+                TextView text = (TextView) dialog.findViewById(R.id.foodServings);
+                text.setText(foodData.get(viewHolder.getAdapterPosition()).getName());
                 dialog.show();
             }
         });
@@ -57,7 +64,7 @@ public class RecycleViewAdapter extends RecyclerView.Adapter<RecycleViewAdapter.
     }
 
     @Override
-    public void onBindViewHolder(MyViewHolder holder, int position) {
+    public void onBindViewHolder(MyViewHolder holder, final int position) {
         holder.food_list_title.setText(foodData.get(position).getName());
         holder.itemView.setOnClickListener(new View.OnClickListener(){
             @Override
@@ -65,6 +72,10 @@ public class RecycleViewAdapter extends RecyclerView.Adapter<RecycleViewAdapter.
                 final Dialog dialog = new Dialog(context);
                 dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
                 dialog.setContentView(R.layout.custom_pop_up);
+                TextView text = (TextView) dialog.findViewById(R.id.foodServings);
+                text.setText(foodData.get(position).getName());
+                //TODO: putting the number of servings to value
+                String value = numberOfServing.getText().toString();
                 dialog.show();
             }
         });
@@ -76,7 +87,7 @@ public class RecycleViewAdapter extends RecyclerView.Adapter<RecycleViewAdapter.
         return foodData.size();
     }
 
-    public static class MyViewHolder extends RecyclerView.ViewHolder{
+    public static class MyViewHolder extends RecyclerView.ViewHolder {
 
         private RelativeLayout food_list;
         TextView food_list_title;
@@ -86,27 +97,8 @@ public class RecycleViewAdapter extends RecyclerView.Adapter<RecycleViewAdapter.
             super(itemView);
             food_list = (RelativeLayout) itemView.findViewById(R.id.foodList);
             food_list_title = (TextView) itemView.findViewById(R.id.food);
-//            overflow = (ImageView) itemView.findViewById(R.id.overflow);
-
         }
     }
-//    private class MyMenuItemClickListener implements PopupMenu.OnMenuItemClickListener {
-//
-//        public MyMenuItemClickListener() {
-//        }
-//
-//        @Override
-//        public boolean onMenuItemClick(MenuItem menuItem) {
-//            switch (menuItem.getItemId()) {
-//                case R.id.overflow:
-//                    Toast.makeText(foodContext, "Added to list", Toast.LENGTH_SHORT).show();
-//                    return true;
-//
-//                default:
-//            }
-//            return false;
-//        }
-//    }
 
     public void filterList(List<Food> filtered){
         foodData = filtered;
