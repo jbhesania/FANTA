@@ -10,6 +10,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import java.util.HashMap;
 
@@ -162,6 +163,21 @@ public class NutritionLabelConfirmActivity extends AppCompatActivity {
     }
 
     public void onConfirm(View view) {
+        if(name.getText().toString().contains(".") || name.getText().toString().contains("/") ||
+                name.getText().toString().contains("[") || name.getText().toString().contains("]") ||
+                name.getText().toString().contains("#") || name.getText().toString().contains("$")) {
+            Toast toast = Toast.makeText(getApplicationContext(),
+                    "Names cannot contain . / [ ] # or $", Toast.LENGTH_SHORT);
+            toast.show();
+            return;
+        }
+
+        if(Information.information.hasFood(name.getText().toString())) {
+            Toast toast = Toast.makeText(getApplicationContext(),
+                    "Enter a unique name!", Toast.LENGTH_SHORT);
+            toast.show();
+            return;
+        }
         if (!TextUtils.isEmpty(serve.getText().toString()) && !TextUtils.isEmpty(name.getText().toString())) {
 
             if (!TextUtils.isEmpty(dataCals.getText().toString())) food.add(Food.CALORIES, Double.parseDouble(dataCals.getText().toString()));
@@ -185,7 +201,9 @@ public class NutritionLabelConfirmActivity extends AppCompatActivity {
 
             startActivity(homeIntent);
         } else {
-            // POP up saying to enter servings and name
+            Toast toast = Toast.makeText(getApplicationContext(),
+                    "Enter a serving size and food name!", Toast.LENGTH_SHORT);
+            toast.show();
         }
     }
 
