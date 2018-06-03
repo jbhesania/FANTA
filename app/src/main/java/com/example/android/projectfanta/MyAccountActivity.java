@@ -48,7 +48,6 @@ public class MyAccountActivity extends AppCompatActivity {
         genderGroup = (RadioGroup) findViewById(R.id.genderGroup);
         paGroup = (RadioGroup) findViewById(R.id.paGroup);
 
-
         if(user != null ) {
             if (user.getAge() != 0) age.setText(Integer.toString(user.getAge()));
             if (user.getWeight() != 0) weight.setText(Integer.toString(user.getWeight()));
@@ -61,7 +60,6 @@ public class MyAccountActivity extends AppCompatActivity {
             else if (user.getPa() == 3) paGroup.check(R.id.active);
             else if (user.getPa() == 4) paGroup.check(R.id.veryactive);
         }
-
 
     }
 
