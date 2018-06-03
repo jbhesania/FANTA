@@ -20,8 +20,17 @@ import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.RemoteViews;
 import android.widget.SearchView;
+import android.widget.Toast;
+
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.GenericTypeIndicator;
+import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Locale;
 
@@ -36,6 +45,9 @@ public class SearchFragment extends Fragment {
     ListViewAdapter lvAdapter;
     EditText search;
     Button searchBtn;
+    private HashMap<String, User> users;
+    private HashMap<String, Food> theirFoods;
+    private ArrayList<Intake> theirIntakes;
 
     @Nullable
     @Override
@@ -45,13 +57,20 @@ public class SearchFragment extends Fragment {
         searchBtn = (Button) view.findViewById(R.id.searchUser);
 
         //TODO: stores the username in a string called username
-        String username = search.getText().toString();
+        final String username = search.getText().toString();
         dataFriends = new ArrayList<>();
 
         searchBtn.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View view){
-                //TODO: send the username to the database to search for a certain user
+                //TODO: send the username to the database to search for a certain
+                String username = search.getText().toString();
+                if (users != null) {
+                    User user = users.get(username);
+                    readUserInfo(user.getId());
+                } else {
+                   // display some loading thing?
+                }
             }
         });
 
@@ -67,8 +86,53 @@ public class SearchFragment extends Fragment {
                 startActivity(contact_intent);
             }
         });
-
+        readUserMap();
         return view;
 
+    }
+
+    /**
+     * read the list of users from the database and sets it to users
+     * asynchronous need null checks on the users field even after call
+     */
+    private void readUserMap(){
+        DatabaseReference usersRef = FirebaseDatabase.getInstance().getReference().child("users");
+        usersRef.addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                GenericTypeIndicator<HashMap<String, User>> hash = new GenericTypeIndicator<HashMap<String, User>>() {};
+                users = dataSnapshot.getValue(hash);
+            }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+
+            }
+        });
+    }
+
+
+    /**
+     * loads the foods and intakes of a given userid
+     * asynchronous need null checks on the theirFoods and theirIntakes even after call
+     * @param uid the uid of the user to load their intakes and foods
+     */
+    public void readUserInfo(final String uid){
+        DatabaseReference usersRef = FirebaseDatabase.getInstance().getReference().child(uid);
+        usersRef.addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                GenericTypeIndicator<HashMap<String, Food>> hash = new GenericTypeIndicator<HashMap<String, Food>>() {};
+                GenericTypeIndicator<ArrayList<Intake>> list = new GenericTypeIndicator<ArrayList<Intake>>() {};
+
+                theirFoods = dataSnapshot.child("myFoods").getValue(hash);
+                theirIntakes = dataSnapshot.child("myIntakes").getValue(list);
+            }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+
+            }
+        });
     }
 }
