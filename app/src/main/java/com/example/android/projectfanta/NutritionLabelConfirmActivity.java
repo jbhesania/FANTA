@@ -259,6 +259,7 @@ public class NutritionLabelConfirmActivity extends AppCompatActivity {
 
             // check
             Integer.parseInt(data);
+            //Double.parseDouble()
             valid = true;
 
         }

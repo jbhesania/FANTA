@@ -2,15 +2,9 @@ package com.example.android.projectfanta;
 
 import android.graphics.Color;
 import android.os.Bundle;
-import android.support.design.widget.NavigationView;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentActivity;
-import android.util.Log;
 import android.view.LayoutInflater;
-
-import android.view.Menu;
-import android.view.MenuInflater;
-import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Toast;
@@ -135,37 +129,38 @@ public class WeekFragment extends Fragment{
 
     public static void setNutrient(String input)
     {
+        UserInfo user = Information.information.getInfo();
         nutrient = input;
         switch(input){
             case "calories":
-                recNutrient = 200.0;
+                recNutrient = user.getRecCalories();
                 break;
             case "carbs":
-                recNutrient = 200.0;
+                recNutrient = user.getRecCarbs();
                 break;
             case "fat":
-                recNutrient = 200.0;
+                recNutrient = user.getRecFat();
                 break;
             case "protein":
-                recNutrient = 200.0;
+                recNutrient = user.getRecProtein();
                 break;
             case "sodium":
-                recNutrient = 200.0;
+                recNutrient = user.getRecSodium();
                 break;
             case "sugar":
-                recNutrient = 200.0;
+                recNutrient = user.getRecSugars();
                 break;
             case "cholesterol":
-                recNutrient = 200.0;
+                recNutrient = user.getRecCholesterol();
                 break;
             case "potassium":
-                recNutrient = 200.0;
+                recNutrient = user.getRecPotassium();
                 break;
             case "fiber":
-                recNutrient = 200.0;
+                recNutrient = user.getRecFiber();
                 break;
             default:
-                recNutrient = 200.0;
+                recNutrient = user.getRecCalories();
         }
     }
 

@@ -1,11 +1,8 @@
 package com.example.android.projectfanta;
 
-import android.content.Context;
 import android.graphics.Color;
-import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -13,7 +10,6 @@ import android.view.ViewGroup;
 import com.jjoe64.graphview.GraphView;
 import com.jjoe64.graphview.LegendRenderer;
 import com.jjoe64.graphview.helper.DateAsXAxisLabelFormatter;
-import com.jjoe64.graphview.helper.StaticLabelsFormatter;
 import com.jjoe64.graphview.series.DataPoint;
 import com.jjoe64.graphview.series.LineGraphSeries;
 
@@ -23,6 +19,43 @@ public class YearFragment extends Fragment {
     public View view;
     public static String nutrient;
     public static double recNutrient;
+
+    public static void setNutrient(String input)
+    {
+        UserInfo user = Information.information.getInfo();
+        nutrient = input;
+        switch(input){
+            case "calories":
+                recNutrient = user.getRecCalories();
+                break;
+            case "carbs":
+                recNutrient = user.getRecCarbs();
+                break;
+            case "fat":
+                recNutrient = user.getRecFat();
+                break;
+            case "protein":
+                recNutrient = user.getRecProtein();
+                break;
+            case "sodium":
+                recNutrient = user.getRecSodium();
+                break;
+            case "sugar":
+                recNutrient = user.getRecSugars();
+                break;
+            case "cholesterol":
+                recNutrient = user.getRecCholesterol();
+                break;
+            case "potassium":
+                recNutrient = user.getRecPotassium();
+                break;
+            case "fiber":
+                recNutrient = user.getRecFiber();
+                break;
+            default:
+                recNutrient = user.getRecCalories();
+        }
+    }
 
     /**
      * numMonths The number of days including starting month to end month. E.g from May to July, numMonths
