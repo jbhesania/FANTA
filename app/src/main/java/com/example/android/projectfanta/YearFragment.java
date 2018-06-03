@@ -21,6 +21,8 @@ import java.util.Calendar;
 
 public class YearFragment extends Fragment {
     public View view;
+    public static String nutrient;
+    public static double recNutrient;
 
     /**
      * numMonths The number of days including starting month to end month. E.g from May to July, numMonths
@@ -31,7 +33,7 @@ public class YearFragment extends Fragment {
      * standardIntake I assume the intake is constant throughout... If not please tell me to fix it
      */
     public void createGraphYear(int numMonths, Calendar startMonthCalendar, String nutrient,
-                                double[] nutrientIntakeAverage, double standardIntakeAverage)
+                                double[] nutrientIntakeAverage, double standardIntakeAverage,View view)
     {
         Calendar calendar1 = (Calendar)startMonthCalendar.clone();
         Calendar calendar2 = (Calendar)startMonthCalendar.clone();
@@ -91,6 +93,22 @@ public class YearFragment extends Fragment {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         view = inflater.inflate(R.layout.fragment_year, container, false);
+        Calendar today = Calendar.getInstance();
+        today.add(Calendar.DAY_OF_MONTH, 1);
+        today.set(Calendar.HOUR_OF_DAY, 0);
+        today.set(Calendar.MINUTE, 0);
+        today.set(Calendar.SECOND, 0);
+        today.set(Calendar.MILLISECOND, 0);
+        long end = today.getTimeInMillis()+864*(long)java.lang.Math.pow(10,5);
+        //long end = System.currentTimeMillis();
+        long start = end - 31*864*(long)java.lang.Math.pow(10,5);
+        //createGraphWeek(7, , "Protein",
+        Calendar test = Calendar.getInstance();
+        test.setTimeInMillis(start-864*(long)java.lang.Math.pow(10,5));
+
+        double[] intakes = Information.information.intakeInterval(start, end,"calories");
+
+        createGraphYear(7,test,"calories",intakes,recNutrient,view);
         return view;
     }
 

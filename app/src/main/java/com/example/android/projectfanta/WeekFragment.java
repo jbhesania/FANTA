@@ -2,6 +2,7 @@ package com.example.android.projectfanta;
 
 import android.graphics.Color;
 import android.os.Bundle;
+import android.support.design.widget.NavigationView;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentActivity;
 import android.util.Log;
@@ -26,11 +27,11 @@ import com.jjoe64.graphview.series.Series;
 import java.util.Calendar;
 
 
-public class WeekFragment extends Fragment {
+public class WeekFragment extends Fragment{
     //Instance variable so that view can be accessed by createGraphWeek method as well
     public static GraphView graph;
     public static String nutrient;
-    public static double recNutrient = 250.0;
+    public static double recNutrient;
 
     /**
      * numDays The number of days including starting day to end day. E.g from 12/10 - 12/12, numDays
@@ -184,6 +185,7 @@ public class WeekFragment extends Fragment {
         //System.out.println(Information.information.getMyFoods().get(
         //Information.information.getMyIntakes().get(2).getFood()).getNutrient("calories")
         //);
+
         Calendar today = Calendar.getInstance();
         today.add(Calendar.DAY_OF_MONTH, 1);
         today.set(Calendar.HOUR_OF_DAY, 0);

@@ -16,9 +16,49 @@ import com.jjoe64.graphview.series.LineGraphSeries;
 
 import java.util.Calendar;
 
+import static com.example.android.projectfanta.WeekFragment.recNutrient;
+
 
 public class MonthFragment extends Fragment {
     public View view;
+    public static String nutrient;
+    public static double recNutrient;
+
+    public static void setNutrient(String input)
+    {
+        nutrient = input;
+        switch(input){
+            case "calories":
+                recNutrient = 200.0;
+                break;
+            case "carbs":
+                recNutrient = 200.0;
+                break;
+            case "fat":
+                recNutrient = 200.0;
+                break;
+            case "protein":
+                recNutrient = 200.0;
+                break;
+            case "sodium":
+                recNutrient = 200.0;
+                break;
+            case "sugar":
+                recNutrient = 200.0;
+                break;
+            case "cholesterol":
+                recNutrient = 200.0;
+                break;
+            case "potassium":
+                recNutrient = 200.0;
+                break;
+            case "fiber":
+                recNutrient = 200.0;
+                break;
+            default:
+                recNutrient = 200.0;
+        }
+    }
 
     /**
      * numDays The number of days including starting day to end day. E.g from 12/10 - 12/12, numDays
@@ -35,7 +75,7 @@ public class MonthFragment extends Fragment {
      * calendar.set(2017,11,1);
      */
     public void createGraphMonth(int numDays, Calendar startDayCalendar, String nutrient,
-                                 double[] nutrientIntake, double standardIntake){
+                                 double[] nutrientIntake, double standardIntake,View view){
 
         Calendar calendar1 = (Calendar)startDayCalendar.clone();
         Calendar calendar2 = (Calendar)startDayCalendar.clone();
@@ -95,6 +135,22 @@ public class MonthFragment extends Fragment {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_month, container, false);
+        Calendar today = Calendar.getInstance();
+        today.add(Calendar.DAY_OF_MONTH, 1);
+        today.set(Calendar.HOUR_OF_DAY, 0);
+        today.set(Calendar.MINUTE, 0);
+        today.set(Calendar.SECOND, 0);
+        today.set(Calendar.MILLISECOND, 0);
+        long end = today.getTimeInMillis()+864*(long)java.lang.Math.pow(10,5);
+        //long end = System.currentTimeMillis();
+        long start = end - 31*864*(long)java.lang.Math.pow(10,5);
+        //createGraphWeek(7, , "Protein",
+        Calendar test = Calendar.getInstance();
+        test.setTimeInMillis(start-864*(long)java.lang.Math.pow(10,5));
+
+        double[] intakes = Information.information.intakeInterval(start, end,"calories");
+
+        createGraphMonth(7,test,"calories",intakes,recNutrient,view);
         return view;
     }
 

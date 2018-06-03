@@ -10,6 +10,7 @@
     android:orientation="vertical">
 
     <android.support.design.widget.NavigationView
+        android:id="@+id/Navigate"
         android:layout_width="wrap_content"
         android:layout_height="match_parent"
         app:itemTextColor="#000"
@@ -69,6 +70,4 @@
             app:layout_behavior="@string/appbar_scrolling_view_behavior" />
 
         </android.support.design.widget.CoordinatorLayout>
-
-
 </android.support.v4.widget.DrawerLayout>
