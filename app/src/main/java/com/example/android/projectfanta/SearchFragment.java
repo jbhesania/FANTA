@@ -10,6 +10,7 @@ import android.support.v4.app.Fragment;
 import android.support.v4.app.NotificationCompat;
 import android.text.Editable;
 import android.text.TextWatcher;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -55,7 +56,7 @@ public class SearchFragment extends Fragment {
         View view = inflater.inflate(R.layout.search_fragment,container,false);
         search= (EditText) view.findViewById(R.id.searchBar);
         searchBtn = (Button) view.findViewById(R.id.searchUser);
-
+        readUserMap();
         //TODO: stores the username in a string called username
         final String username = search.getText().toString();
         dataFriends = new ArrayList<>();
@@ -65,11 +66,23 @@ public class SearchFragment extends Fragment {
             public void onClick(View view){
                 //TODO: send the username to the database to search for a certain
                 String username = search.getText().toString();
+                Log.v("SUCKS", username);
+                String userid = "";
                 if (users != null) {
-                    User user = users.get(username);
-                    readUserInfo(user.getId());
+                    for (String id : users.keySet()) {
+                        if (users.get(id).getUserName().equals(username)){
+                            userid = id;
+                            Log.v("SUCKS", users.get(id).getUserName());
+                            break;
+                        }
+                    }
+                    if (userid.equals("")){
+                        Toast.makeText(getContext(), "No Such User", Toast.LENGTH_LONG).show();
+                    } else {
+                        readUserInfo(userid);
+                    }
                 } else {
-                   // display some loading thing?
+                    Toast.makeText(getContext(), "Loading Users", Toast.LENGTH_SHORT).show();
                 }
             }
         });
@@ -86,7 +99,7 @@ public class SearchFragment extends Fragment {
                 startActivity(contact_intent);
             }
         });
-        readUserMap();
+
         return view;
 
     }
