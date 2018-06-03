@@ -3,10 +3,13 @@ package com.example.android.projectfanta;
 import android.content.Context;
 import android.net.Uri;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
 import android.support.design.widget.AppBarLayout;
 import android.support.design.widget.NavigationView;
 import android.support.design.widget.TabLayout;
 import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentActivity;
+import android.support.v4.app.FragmentManager;
 import android.support.v4.view.ViewPager;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
@@ -41,7 +44,8 @@ public class HistoryFragment extends Fragment {
     private ActionBarDrawerToggle toggle;
 
     private SectionsPageAdapter myAdapters;
-    private ViewPager myPagers;;
+    private ViewPager myPagers;
+    private FragmentActivity myContext;
 
     public HistoryFragment() {
         // Required empty public constructor
@@ -84,6 +88,7 @@ public class HistoryFragment extends Fragment {
 
     @Override
     public void onAttach(Context context) {
+        myContext=(FragmentActivity)context;
         super.onAttach(context);
     }
 
@@ -95,9 +100,10 @@ public class HistoryFragment extends Fragment {
         drawerLayout = (DrawerLayout) view.findViewById(R.id.drawer);
         toggle = new ActionBarDrawerToggle(getActivity(),drawerLayout, R.string.open, R.string.close);
         drawerLayout.addDrawerListener(toggle);
-        NavigationView myNav = (NavigationView) view.findViewById(R.id.nv);
+        //NavigationView myNav = (NavigationView) view.findViewById(R.id.nv);
         toggle.syncState();
-        ((AppCompatActivity)getActivity()).getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        //((AppCompatActivity)getActivity()).getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        //setupDrawerContent(myNav);
 
         myAdapters = new SectionsPageAdapter(getFragmentManager());
 
@@ -109,10 +115,10 @@ public class HistoryFragment extends Fragment {
         return view;
     }
 
-//    public void selectItemDrawer(MenuItem menuItem){
+//    public void selectItemDrawer(MenuItem menuItem) {
 //        Fragment myFragment = null;
 //        Class fragmentClass;
-//        switch (menuItem.getItemId()){
+//        switch (menuItem.getItemId()) {
 //            case R.id.cal:
 //                fragmentClass = HistoryFragment.class;
 //                break;
@@ -143,10 +149,26 @@ public class HistoryFragment extends Fragment {
 //            default:
 //                fragmentClass = HistoryFragment.class;
 //        }
-//        try{
-//            myFragment = (Fragment)fragmentClass.newInstance();
+//        try {
+//            myFragment = (Fragment) fragmentClass.newInstance();
+//        } catch (Exception e) {
+//            e.printStackTrace();
 //        }
+//        FragmentManager fragmentManager = myContext.getSupportFragmentManager();
+//        fragmentManager.beginTransation().replace(R.id.main_content,myFragment).commit();
+//        menuItem.setCheckable(true);
+//        //setTitle(menuItem.getTitle());
+//        drawerLayout.closeDrawers();
 
+
+//    private void setupDrawerContent(NavigationView navigationView){
+//        navigationView.setNavigationItemSelectedListener(new NavigationView.OnNavigationItemSelectedListener() {
+//            @Override
+//            public boolean onNavigationItemSelected(@NonNull MenuItem item) {
+//                selectItemDrawer(item);
+//                return true;
+//            }
+//        });
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
@@ -185,3 +207,4 @@ public class HistoryFragment extends Fragment {
         void onFragmentInteraction(Uri uri);
     }
 }
+
