@@ -189,7 +189,11 @@ public class WeekFragment extends Fragment{
         Calendar test = Calendar.getInstance();
         test.setTimeInMillis(start);
 
+        setNutrient("calories");
         double[] intakes = Information.information.intakeInterval(start, end,"calories");
+
+        System.out.println(recNutrient);
+        System.out.println(Information.information.getInfo().getRecCalories());
 
         createGraphWeek(7,test,"calories",intakes,recNutrient,view);
         return view;

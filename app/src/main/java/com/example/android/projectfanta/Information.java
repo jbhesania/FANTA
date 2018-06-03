@@ -58,15 +58,10 @@ public class Information implements Serializable {
     public ArrayList<Intake> getMyIntakes() { return myIntakes; }
     public HashMap<String, Food> getMyFoods() { return myFoods; }
 
-    public void setInfoToDB() {
-        if (mData == null) mData = FirebaseDatabase.getInstance().getReference();
-        mData.child(myInfo.getId()).child("info").setValue(myInfo);
-    }
 
     public void setInfo(UserInfo myInfo) {
         this.myInfo = myInfo;
     }
-
     public void setFoods(HashMap<String, Food> myFoods) {
         this.myFoods = myFoods;
     }
@@ -196,6 +191,7 @@ public class Information implements Serializable {
         }
     }
 
+
     public void addFood(Context context, Food food) {
         addFoodToDB(food);
         myFoods.put(food.getName(),food);
@@ -311,7 +307,7 @@ public class Information implements Serializable {
 
     }
 
-}
+
 
 /*
     Memory Writing code
@@ -362,3 +358,27 @@ public class Information implements Serializable {
 
  */
 
+
+    public void addUserInfo(Context context) {
+        addUserInfoToDB();
+        addUserInfoToMemory(context);
+    }
+    public void addUserInfoToDB() {
+        if (mData == null) mData = FirebaseDatabase.getInstance().getReference();
+        mData.child(myInfo.getId()).child("info").setValue(myInfo);
+    }
+    private void addUserInfoToMemory(Context context) {
+        context.deleteFile(Information.USERINFO_FILE);
+        try {
+            FileOutputStream userFileOut =
+                    context.getApplicationContext().openFileOutput(Information.USERINFO_FILE, Context.MODE_PRIVATE);
+            ObjectOutputStream userOut = new ObjectOutputStream(userFileOut);
+            userOut.writeObject(Information.information.getInfo());
+            userFileOut.close();
+            userOut.close();
+        }
+        catch(Exception e) {
+
+        }
+    }
+}

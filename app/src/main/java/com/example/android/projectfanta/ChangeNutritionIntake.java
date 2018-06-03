@@ -2,17 +2,11 @@ package com.example.android.projectfanta;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.design.widget.FloatingActionButton;
-import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.Toolbar;
 import android.text.TextUtils;
 import android.view.View;
-import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
-
-import org.w3c.dom.Text;
 
 import static com.example.android.projectfanta.Information.information;
 import java.math.BigDecimal;
@@ -69,7 +63,7 @@ public class ChangeNutritionIntake extends AppCompatActivity {
         if (!TextUtils.isEmpty(potassium.getText().toString())) user.setRecPotassium(Double.parseDouble(potassium.getText().toString()));
         if (!TextUtils.isEmpty(fiber.getText().toString())) user.setRecFiber(Double.parseDouble(fiber.getText().toString()));
         Toast.makeText(ChangeNutritionIntake.this, "Saved", Toast.LENGTH_SHORT).show();
-        Information.information.setInfoToDB();
+        Information.information.addUserInfo(getApplicationContext());
         Intent homeIntent = new Intent(this, HomeActivity.class);
         startActivity(homeIntent);
     }
