@@ -4,6 +4,7 @@ import android.content.Context;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.design.widget.AppBarLayout;
+import android.support.design.widget.NavigationView;
 import android.support.design.widget.TabLayout;
 import android.support.v4.app.Fragment;
 import android.support.v4.view.ViewPager;
@@ -94,8 +95,9 @@ public class HistoryFragment extends Fragment {
         drawerLayout = (DrawerLayout) view.findViewById(R.id.drawer);
         toggle = new ActionBarDrawerToggle(getActivity(),drawerLayout, R.string.open, R.string.close);
         drawerLayout.addDrawerListener(toggle);
+        NavigationView myNav = (NavigationView) view.findViewById(R.id.nv);
         toggle.syncState();
-        //((AppCompatActivity)getActivity()).getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        ((AppCompatActivity)getActivity()).getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
         myAdapters = new SectionsPageAdapter(getFragmentManager());
 
@@ -106,6 +108,44 @@ public class HistoryFragment extends Fragment {
         tab.setupWithViewPager(myPagers);
         return view;
     }
+
+//    public void selectItemDrawer(MenuItem menuItem){
+//        Fragment myFragment = null;
+//        Class fragmentClass;
+//        switch (menuItem.getItemId()){
+//            case R.id.cal:
+//                fragmentClass = HistoryFragment.class;
+//                break;
+//            case R.id.car:
+//                fragmentClass = HistoryFragment.class;
+//                break;
+//            case R.id.fats:
+//                fragmentClass = HistoryFragment.class;
+//                break;
+//            case R.id.prot:
+//                fragmentClass = HistoryFragment.class;
+//                break;
+//            case R.id.sod:
+//                fragmentClass = HistoryFragment.class;
+//                break;
+//            case R.id.sug:
+//                fragmentClass = HistoryFragment.class;
+//                break;
+//            case R.id.cholesterol:
+//                fragmentClass = HistoryFragment.class;
+//                break;
+//            case R.id.potassium:
+//                fragmentClass = HistoryFragment.class;
+//                break;
+//            case R.id.fiber:
+//                fragmentClass = HistoryFragment.class;
+//                break;
+//            default:
+//                fragmentClass = HistoryFragment.class;
+//        }
+//        try{
+//            myFragment = (Fragment)fragmentClass.newInstance();
+//        }
 
 
     @Override
