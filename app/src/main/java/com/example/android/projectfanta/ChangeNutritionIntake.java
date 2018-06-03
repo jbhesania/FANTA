@@ -96,38 +96,38 @@ public class ChangeNutritionIntake extends AppCompatActivity {
         double paMultiplier = 1.0;
         if(pa == 2) {
             if(age <= 18) {
-                if(gender == "m") { paMultiplier = 1.13; }
+                if(gender.equals("m")) { paMultiplier = 1.13; }
                 else { paMultiplier = 1.16; }
             }
             else {
-                if(gender == "m") { paMultiplier = 1.11; }
+                if(gender.equals("m")) { paMultiplier = 1.11; }
                 else { paMultiplier = 1.12; }
             }
         }
         else if(pa == 3) {
             if(age <= 18) {
-                if(gender == "m") { paMultiplier = 1.26; }
+                if(gender.equals("m")) { paMultiplier = 1.26; }
                 else { paMultiplier = 1.31; }
             }
             else {
-                if(gender == "m") { paMultiplier = 1.25; }
+                if(gender.equals("m")) { paMultiplier = 1.25; }
                 else { paMultiplier = 1.27; }
             }
         }
         else if(pa == 4) {
             if(age <= 18) {
-                if(gender == "m") { paMultiplier = 1.42; }
+                if(gender.equals("m")) { paMultiplier = 1.42; }
                 else { paMultiplier = 1.56; }
             }
             else {
-                if(gender == "m") { paMultiplier = 1.48; }
+                if(gender.equals("m")) { paMultiplier = 1.48; }
                 else { paMultiplier = 1.45; }
             }
         }
 
         // Calories
         if( age <= 8) {
-            if(gender == "m") {
+            if(gender.equals("m")) {
                 recCal = 88.5 - (61.9*age) + paMultiplier * (26.7*weight + 903*height)+20;
             }
             else {
@@ -135,7 +135,7 @@ public class ChangeNutritionIntake extends AppCompatActivity {
             }
         }
         else if( age <= 18) {
-            if(gender == "m") {
+            if(gender.equals("m")) {
                 recCal = 88.5 - (61.9*age) + paMultiplier * (26.7*weight + 903*height)+25;
             }
             else {
@@ -143,7 +143,7 @@ public class ChangeNutritionIntake extends AppCompatActivity {
             }
         }
         else {
-            if(gender == "m") {
+            if(gender.equals("m")) {
                 recCal = 662 - (9.53*age) + paMultiplier * (15.9*weight+539.6*height);
             }
             else {
@@ -156,8 +156,8 @@ public class ChangeNutritionIntake extends AppCompatActivity {
         recFat = 0.030555 * recCal;
         recProt = 0.8 *weight;
         recSod = 1.5;
-        if(gender == "f") { recSug = 24; }
-        else { recSug = 36; }
+        if(gender.equals("m")) { recSug = 36; }
+        else { recSug = 24; }
         recChol = 0.2;
         recPot = 4.7;
         recFiber = 0.014 * recCal;
