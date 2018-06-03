@@ -22,8 +22,8 @@ public class Information implements Serializable {
     public static Information information;
     private static double ONE_DAY = 8.64*java.lang.Math.pow(10,7);
     private static double ONE_WEEK = 7*ONE_DAY;
-    private static double ONE_MONTH = 4*ONE_WEEK;
-    private static double ONE_YEAR = 12*ONE_MONTH;
+    private static double ONE_MONTH = 31*ONE_DAY;
+    private static double ONE_YEAR = 365*ONE_DAY;
 
 
     private HashMap<String, Food> myFoods;
@@ -295,8 +295,8 @@ public class Information implements Serializable {
         }
 
         else if (end - start == ONE_YEAR) {
-            time = ONE_MONTH;
-            days_months_year = 12;
+            time = ONE_DAY;
+            days_months_year = 365;
 
         }
 

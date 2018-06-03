@@ -127,6 +127,7 @@ public class MonthFragment extends Fragment {
         graph.addSeries(standard);
         graph.getLegendRenderer().setVisible(true);
         graph.getLegendRenderer().setAlign(LegendRenderer.LegendAlign.BOTTOM);
+        graph.getLegendRenderer().setVisible(false);
         graph.setTitle(nutrient + " Intake");
     }
 
@@ -146,11 +147,11 @@ public class MonthFragment extends Fragment {
         long start = end - 31*864*(long)java.lang.Math.pow(10,5);
         //createGraphWeek(7, , "Protein",
         Calendar test = Calendar.getInstance();
-        test.setTimeInMillis(start-864*(long)java.lang.Math.pow(10,5));
+        test.setTimeInMillis(start - 864*(long)java.lang.Math.pow(10,5));
 
         double[] intakes = Information.information.intakeInterval(start, end,"calories");
 
-        createGraphMonth(7,test,"calories",intakes,recNutrient,view);
+        createGraphMonth(31,test,"calories",intakes,recNutrient,view);
         return view;
     }
 

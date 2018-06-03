@@ -44,7 +44,7 @@ public class YearFragment extends Fragment {
         {
             DataPoint point = new DataPoint(calendar1.getTime(), nutrientIntakeAverage[i]);
             dp[i] = point;
-            calendar1.add(Calendar.MONTH,1);
+            calendar1.add(Calendar.DATE,1);
         }
         long end = calendar1.getTimeInMillis();
 
@@ -52,7 +52,7 @@ public class YearFragment extends Fragment {
         for(int i = 0; i < numMonths; i++)
         {
             dpStd[i] = new DataPoint(calendar2.getTime(),standardIntakeAverage);
-            calendar2.add(Calendar.MONTH,1);
+            calendar2.add(Calendar.DATE,1);
         }
 
         GraphView graph = (GraphView) view.findViewById(R.id.graph);
@@ -65,8 +65,8 @@ public class YearFragment extends Fragment {
         graph.getGridLabelRenderer().setLabelFormatter(new DateAsXAxisLabelFormatter(getActivity()));
 
         //Arbitrary keep the label amount small
-        graph.getGridLabelRenderer().setNumHorizontalLabels(numMonths/2);
-        graph.getGridLabelRenderer().setHorizontalLabelsAngle(15);
+        graph.getGridLabelRenderer().setNumHorizontalLabels(9);
+        graph.getGridLabelRenderer().setHorizontalLabelsAngle(30);
         graph.getGridLabelRenderer().setHumanRounding(false);
         graph.getGridLabelRenderer().setTextSize(36);
 
@@ -86,6 +86,7 @@ public class YearFragment extends Fragment {
         graph.addSeries(standard);
         graph.getLegendRenderer().setVisible(true);
         graph.getLegendRenderer().setAlign(LegendRenderer.LegendAlign.BOTTOM);
+        graph.getLegendRenderer().setVisible(false);
         graph.setTitle(nutrient + " Intake");
     }
     @Override
@@ -101,14 +102,14 @@ public class YearFragment extends Fragment {
         today.set(Calendar.MILLISECOND, 0);
         long end = today.getTimeInMillis()+864*(long)java.lang.Math.pow(10,5);
         //long end = System.currentTimeMillis();
-        long start = end - 31*864*(long)java.lang.Math.pow(10,5);
+        long start = end - 365*864*(long)java.lang.Math.pow(10,5);
         //createGraphWeek(7, , "Protein",
         Calendar test = Calendar.getInstance();
-        test.setTimeInMillis(start-864*(long)java.lang.Math.pow(10,5));
+        test.setTimeInMillis(start - 864*(long)java.lang.Math.pow(10,5));
 
         double[] intakes = Information.information.intakeInterval(start, end,"calories");
 
-        createGraphYear(7,test,"calories",intakes,recNutrient,view);
+        createGraphYear(365,test,"calories",intakes,recNutrient,view);
         return view;
     }
 
