@@ -32,6 +32,25 @@
             android:layout_toEndOf="@+id/myAcc"/>
     </RelativeLayout>
 
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center">
+
+        <Button
+            android:id="@+id/save"
+            android:layout_width="100dp"
+            android:layout_height="30dp"
+            android:background="@drawable/capsule"
+            android:onClick="saveClick"
+            android:text="SAVE"
+            android:textAlignment="center" />
+
+    </LinearLayout>
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
     <RelativeLayout
         android:layout_width="200dp"
         android:layout_height="wrap_content"
@@ -158,20 +177,6 @@
 
     </RelativeLayout>
 
-    <LinearLayout
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center">
-
-        <Button
-            android:id="@+id/save"
-            android:layout_width="100dp"
-            android:layout_height="30dp"
-            android:background="@drawable/capsule"
-            android:onClick="saveClick"
-            android:text="SAVE"
-            android:textAlignment="center" />
-
-    </LinearLayout>
+    </ScrollView>
 
 </LinearLayout>
