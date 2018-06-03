@@ -3,7 +3,13 @@ package com.example.android.projectfanta;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentActivity;
+import android.util.Log;
 import android.view.LayoutInflater;
+
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Toast;
@@ -22,7 +28,9 @@ import java.util.Calendar;
 
 public class WeekFragment extends Fragment {
     //Instance variable so that view can be accessed by createGraphWeek method as well
-    public GraphView graph;
+    public static GraphView graph;
+    public static String nutrient;
+    public static double recNutrient = 250.0;
 
     /**
      * numDays The number of days including starting day to end day. E.g from 12/10 - 12/12, numDays
@@ -38,8 +46,8 @@ public class WeekFragment extends Fragment {
      * Month Field 0-11 Represent January to December
      * calendar.set(2017,11,1);
      */
-    public void createGraphWeek(int numDays, Calendar startDayCalendar, String nutrient,
-    double[] nutrientIntake, double standardIntake,View view)
+    public static void createGraphWeek(int numDays, Calendar startDayCalendar, String nutrient,
+                                       double[] nutrientIntake, double standardIntake,View view)
     {
         Calendar calendar1 = (Calendar)startDayCalendar.clone();
         Calendar calendar2 = (Calendar)startDayCalendar.clone();
@@ -72,7 +80,8 @@ public class WeekFragment extends Fragment {
         // set date label formatter
         // use static labels for horizontal and vertical labels
         // set date label formatter
-        graph.getGridLabelRenderer().setLabelFormatter(new DateAsXAxisLabelFormatter(getActivity()));
+        final FragmentActivity activity = (FragmentActivity)view.getContext();
+        graph.getGridLabelRenderer().setLabelFormatter(new DateAsXAxisLabelFormatter(activity));
         graph.getGridLabelRenderer().setHorizontalLabelsAngle(35);
         graph.getGridLabelRenderer().setNumHorizontalLabels(numDays+1);
         graph.getGridLabelRenderer().setTextSize(36);
@@ -99,7 +108,7 @@ public class WeekFragment extends Fragment {
             public void onTap(Series series, DataPointInterface dataPoint) {
                 Calendar calendar = Calendar.getInstance();
                 calendar.setTimeInMillis((long)dataPoint.getX());
-                Toast.makeText(getActivity(), "Date: "
+                Toast.makeText(activity, "Date: "
                                 + calendar.get(Calendar.DATE) + "/"
                                 + (calendar.get(Calendar.MONTH)+1) + "/"
                                 + calendar.get(Calendar.YEAR)+ "\n"
@@ -123,14 +132,58 @@ public class WeekFragment extends Fragment {
         graph.setTitle(nutrient+" "+"Intake");
     }
 
+    public static void setNutrient(String input)
+    {
+        nutrient = input;
+        switch(input){
+            case "calories":
+                recNutrient = 200.0;
+                break;
+            case "carbs":
+                recNutrient = 200.0;
+                break;
+            case "fat":
+                recNutrient = 200.0;
+                break;
+            case "protein":
+                recNutrient = 200.0;
+                break;
+            case "sodium":
+                recNutrient = 200.0;
+                break;
+            case "sugar":
+                recNutrient = 200.0;
+                break;
+            case "cholesterol":
+                recNutrient = 200.0;
+                break;
+            case "potassium":
+                recNutrient = 200.0;
+                break;
+            case "fiber":
+                recNutrient = 200.0;
+                break;
+            default:
+                recNutrient = 200.0;
+        }
+    }
+
+
+
+    @Override
+    public void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setHasOptionsMenu(true);
+    }
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_week, container, false);
         //System.out.println(Information.information.getMyFoods().get(
-                //Information.information.getMyIntakes().get(2).getFood()).getNutrient("calories")
-                //);
+        //Information.information.getMyIntakes().get(2).getFood()).getNutrient("calories")
+        //);
         Calendar today = Calendar.getInstance();
         today.add(Calendar.DAY_OF_MONTH, 1);
         today.set(Calendar.HOUR_OF_DAY, 0);
@@ -145,8 +198,10 @@ public class WeekFragment extends Fragment {
         test.setTimeInMillis(start-864*(long)java.lang.Math.pow(10,5));
 
         double[] intakes = Information.information.intakeInterval(start, end,"calories");
-        createGraphWeek(7,test,"calories",intakes,200,view);
 
+        createGraphWeek(7,test,"calories",intakes,recNutrient,view);
         return view;
     }
+
 }
+

@@ -31,7 +31,8 @@
         </activity>
         <activity
             android:name=".HomeActivity"
-            android:label="@string/title_activity_home" />
+            android:label="@string/title_activity_home"
+            android:theme="@style/Theme.AppCompat.DayNight"/>
         <activity
             android:name=".Settings"
             android:label="@string/title_activity_settings" />
@@ -43,7 +44,7 @@
             android:name=".HistoryFragment"
             android:label="@string/title_activity_history"
             android:parentActivityName=".HomeActivity"
-            android:theme="@style/AppTheme.NoActionBar" />
+            android:theme="@style/Theme.AppCompat" />
         <activity
             android:name=".MyAccountActivity"
             android:label="@string/title_activity_my_account"

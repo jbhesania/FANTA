@@ -5,15 +5,22 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.support.design.widget.AppBarLayout;
 import android.support.design.widget.TabLayout;
+import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.Fragment;
 import android.support.v4.view.ViewPager;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.view.LayoutInflater;
+import android.view.Menu;
+import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+
+import static com.example.android.projectfanta.WeekFragment.nutrient;
+import static com.example.android.projectfanta.WeekFragment.recNutrient;
 
 
 /**
@@ -75,6 +82,7 @@ public class HistoryFragment extends Fragment {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        setHasOptionsMenu(true);
         if (getArguments() != null) {
             mParam1 = getArguments().getString(ARG_PARAM1);
             mParam2 = getArguments().getString(ARG_PARAM2);
@@ -91,6 +99,7 @@ public class HistoryFragment extends Fragment {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_history, container, false);
+        setHasOptionsMenu(true);
         drawerLayout = (DrawerLayout) view.findViewById(R.id.drawer);
         toggle = new ActionBarDrawerToggle(getActivity(),drawerLayout, R.string.open, R.string.close);
         drawerLayout.addDrawerListener(toggle);
@@ -104,17 +113,10 @@ public class HistoryFragment extends Fragment {
 
         TabLayout tab = (TabLayout)view.findViewById(R.id.historyTabs);
         tab.setupWithViewPager(myPagers);
+        setHasOptionsMenu(true);
         return view;
     }
 
-
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        if(toggle.onOptionsItemSelected(item)){
-            return true;
-        }
-        return super.onOptionsItemSelected(item);
-    }
 
     // TODO: Rename method, update argument and hook method into UI event
     public void onButtonPressed(Uri uri) {
@@ -143,5 +145,46 @@ public class HistoryFragment extends Fragment {
     public interface OnFragmentInteractionListener {
         // TODO: Update argument type and name
         void onFragmentInteraction(Uri uri);
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+
+        Log.d("debugging", "ItemDebug");
+        Log.d("debugging","ItemDebug");
+        switch (item.getItemId()){
+            case R.id.cal:
+                WeekFragment.setNutrient("calories");
+                return true;
+            case R.id.car:
+                WeekFragment.setNutrient("carbs");
+                return true;
+            case R.id.fats:
+                WeekFragment.setNutrient("fat");
+                return true;
+            case R.id.prot:
+                WeekFragment.setNutrient("protein");
+                return true;
+            case R.id.sod:
+                WeekFragment.setNutrient("sodium");
+                return true;
+            case R.id.sug:
+                WeekFragment.setNutrient("sugar");
+                return true;
+            case R.id.fiber:
+                WeekFragment.setNutrient("fiber");
+                return true;
+            default:
+                WeekFragment.setNutrient("calories");
+                return true;
+        }
+    }
+
+    @Override
+    public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
+        Log.d("debugging", "MenuDebug");
+        Log.d("debugging","MenuDebug");
+        inflater.inflate(R.menu.drawer_menu, menu);
+        super.onCreateOptionsMenu(menu, inflater);
     }
 }

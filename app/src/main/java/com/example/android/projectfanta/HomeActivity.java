@@ -7,7 +7,13 @@ import android.support.design.widget.BottomNavigationView;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
+import android.view.Menu;
+import android.view.MenuInflater;
 import android.view.MenuItem;
+
+import static com.example.android.projectfanta.WeekFragment.nutrient;
+import static com.example.android.projectfanta.WeekFragment.recNutrient;
 
 public class HomeActivity extends AppCompatActivity {
 
@@ -54,4 +60,5 @@ public class HomeActivity extends AppCompatActivity {
             return false;
         }
     };
+
 }
