@@ -75,11 +75,11 @@ public class RecycleViewAdapterFood extends RecyclerView.Adapter<RecycleViewAdap
                 TextView text = (TextView) dialog.findViewById(R.id.foodServings);
                 text.setText(foodData.get(position).getName());
                 //TODO: putting the number of servings to value
-                String value = numberOfServing.getText().toString();
                 dialog.show();
             }
         });
     }
+//    String value = numberOfServing.getText().toString();
 
 
     @Override

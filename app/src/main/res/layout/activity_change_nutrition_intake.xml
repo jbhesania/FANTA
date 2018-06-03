@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".ChangeNutritionIntake"
-    android:layout_margin="10dp"
+    android:layout_margin="40dp"
     android:orientation="vertical">
 
     <LinearLayout
@@ -21,39 +21,10 @@
             android:textColor="#000"
             android:textStyle="bold|italic"/>
     </LinearLayout>
-    <LinearLayout
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center_horizontal"
-        android:layout_marginTop="10dp">
-        <Button
-            android:id="@+id/saveBtn"
-            android:layout_width="120dp"
-            android:layout_height="30dp"
-            android:background="@drawable/capsule"
-            android:text="SAVE"
-            android:onClick="saveNutritionIntakeButton"
-            android:textAlignment="center" />
-    </LinearLayout>
-    <LinearLayout
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center_horizontal"
-        android:layout_marginTop="10dp">
-        <Button
-            android:id="@+id/recBtn"
-            android:layout_width="120dp"
-            android:layout_height="30dp"
-            android:background="@drawable/capsule"
-            android:text="RECOMMENDED"
-            android:onClick="recommendedButton"
-            android:textAlignment="center"
-            android:layout_gravity="center_vertical" />
-
-    </LinearLayout>
     <ScrollView
+        android:layout_marginTop="20dp"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="450dp">
 
         <RelativeLayout
             android:layout_width="220dp"
@@ -214,5 +185,33 @@
                 android:textSize="15sp"/>
         </RelativeLayout>
     </ScrollView>
+
+    <RelativeLayout
+        android:layout_marginTop="50dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:orientation="horizontal">
+        <Button
+            android:id="@+id/saveBtn"
+            android:layout_width="120dp"
+            android:layout_height="30dp"
+            android:background="@drawable/capsule"
+            android:text="SAVE"
+            android:onClick="saveNutritionIntakeButton"
+            android:textAlignment="center"
+            android:layout_marginRight="20dp"/>
+
+        <Button
+            android:layout_toEndOf="@id/saveBtn"
+            android:id="@+id/recBtn"
+            android:layout_width="120dp"
+            android:layout_height="30dp"
+            android:background="@drawable/capsule"
+            android:text="RECOMMENDED"
+            android:onClick="recommendedButton"
+            android:textAlignment="center"
+            android:layout_gravity="center_vertical" />
+    </RelativeLayout>
 
 </LinearLayout>
