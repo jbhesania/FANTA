@@ -98,8 +98,6 @@ public class RecycleViewAdapterFood extends RecyclerView.Adapter<RecycleViewAdap
                         dialog.dismiss();
 
                         //TODO the keyboard still doesnt actually go away
-
-
                     }
                 });
             }

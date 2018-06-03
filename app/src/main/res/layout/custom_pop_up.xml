@@ -56,7 +56,7 @@
             android:id="@+id/edit"
             android:layout_centerHorizontal="true"
             android:layout_width="40dp"
-            android:inputType="number"
+            android:inputType="number|numberDecimal"
             android:layout_height="wrap_content"
             android:layout_gravity="center"/>
 
