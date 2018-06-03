@@ -53,6 +53,8 @@ public class Information implements Serializable {
     public Food getFood(String name) { return myFoods.get(name); }
     public ArrayList<Intake> getMyIntakes() { return myIntakes; }
     public HashMap<String, Food> getMyFoods() { return myFoods; }
+
+
     public void setInfo(UserInfo myInfo) {
         this.myInfo = myInfo;
     }
@@ -210,4 +212,27 @@ public class Information implements Serializable {
         }
     }
 
+
+    public void addUserInfo(Context context) {
+        addUserInfoToDB();
+        addUserInfoToMemory(context);
+    }
+    public void addUserInfoToDB() {
+        if (mData == null) mData = FirebaseDatabase.getInstance().getReference();
+        mData.child(myInfo.getId()).child("info").setValue(myInfo);
+    }
+    private void addUserInfoToMemory(Context context) {
+        context.deleteFile(Information.USERINFO_FILE);
+        try {
+            FileOutputStream userFileOut =
+                    context.getApplicationContext().openFileOutput(Information.USERINFO_FILE, Context.MODE_PRIVATE);
+            ObjectOutputStream userOut = new ObjectOutputStream(userFileOut);
+            userOut.writeObject(Information.information.getInfo());
+            userFileOut.close();
+            userOut.close();
+        }
+        catch(Exception e) {
+
+        }
+    }
 }

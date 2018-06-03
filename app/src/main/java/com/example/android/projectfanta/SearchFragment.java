@@ -14,6 +14,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.ListView;
@@ -30,19 +31,31 @@ import static android.content.Context.NOTIFICATION_SERVICE;
  * Created by User on 5/18/2018.
  */
 
-public class ContactsFragment extends Fragment {
+public class SearchFragment extends Fragment {
     List<User> dataFriends;
     ListViewAdapter lvAdapter;
     EditText search;
+    Button searchBtn;
 
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable final ViewGroup container, @Nullable Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.contact_fragment,container,false);
+        View view = inflater.inflate(R.layout.search_fragment,container,false);
         search= (EditText) view.findViewById(R.id.searchBar);
+        searchBtn = (Button) view.findViewById(R.id.searchUser);
+
+        //TODO: stores the username in a string called username
+        String username = search.getText().toString();
         dataFriends = new ArrayList<>();
 
-        ListView list = (ListView)view.findViewById(R.id.listContact);
+        searchBtn.setOnClickListener(new View.OnClickListener(){
+            @Override
+            public void onClick(View view){
+                //TODO: send the username to the database to search for a certain user
+            }
+        });
+
+        ListView list = (ListView)view.findViewById(R.id.listSearch);
         lvAdapter = new ListViewAdapter(getContext(), R.layout.itemrow, dataFriends);
 
         list.setAdapter(lvAdapter);
@@ -55,24 +68,6 @@ public class ContactsFragment extends Fragment {
             }
         });
 
-
-        //TODO: get the search function to work
-
-        search.addTextChangedListener(new TextWatcher() {
-            @Override
-            public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
-
-            }
-
-            @Override
-            public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
-                ContactsFragment.this.lvAdapter.getFilter().filter(charSequence);
-            }
-
-            @Override
-            public void afterTextChanged(Editable editable) {
-            }
-        });
         return view;
 
     }
