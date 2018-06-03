@@ -42,9 +42,6 @@ public class FriendsFragment extends Fragment {
     private static final String ARG_PARAM2 = "param2";
     private SectionsPageAdapter myAdapter;
     private ViewPager myPager;
-    private HashMap<String, User> users;
-    private HashMap<String, Food> theirFoods;
-    private ArrayList<Intake> theirIntakes;
 
 
     // TODO: Rename and change types of parameters
@@ -89,56 +86,11 @@ public class FriendsFragment extends Fragment {
             mParam1 = getArguments().getString(ARG_PARAM1);
             mParam2 = getArguments().getString(ARG_PARAM2);
         }
-
     }
 
     @Override
     public void onStart() {
         super.onStart();
-    }
-
-    /**
-     * read the list of users from the database and sets it to users
-     * asynchronous need null checks on the users field even after call
-     */
-    private void readUserMap(){
-        DatabaseReference usersRef = FirebaseDatabase.getInstance().getReference().child("users");
-        usersRef.addListenerForSingleValueEvent(new ValueEventListener() {
-            @Override
-            public void onDataChange(DataSnapshot dataSnapshot) {
-                GenericTypeIndicator<HashMap<String, User>> hash = new GenericTypeIndicator<HashMap<String, User>>() {};
-                users = dataSnapshot.getValue(hash);
-            }
-
-            @Override
-            public void onCancelled(DatabaseError databaseError) {
-
-            }
-        });
-    }
-
-    /**
-     * loads the foods and intakes of a given userid
-     * asynchronous need null checks on the theirFoods and theirIntakes even after call
-     * @param uid the uid of the user to load their intakes and foods
-     */
-    public void readUserInfo(final String uid){
-        DatabaseReference usersRef = FirebaseDatabase.getInstance().getReference().child(uid);
-        usersRef.addListenerForSingleValueEvent(new ValueEventListener() {
-            @Override
-            public void onDataChange(DataSnapshot dataSnapshot) {
-                GenericTypeIndicator<HashMap<String, Food>> hash = new GenericTypeIndicator<HashMap<String, Food>>() {};
-                GenericTypeIndicator<ArrayList<Intake>> list = new GenericTypeIndicator<ArrayList<Intake>>() {};
-
-                theirFoods = dataSnapshot.child("myFoods").getValue(hash);
-                theirIntakes = dataSnapshot.child("myIntakes").getValue(list);
-            }
-
-            @Override
-            public void onCancelled(DatabaseError databaseError) {
-
-            }
-        });
     }
 
     @Override
