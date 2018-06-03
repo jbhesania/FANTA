@@ -23,7 +23,7 @@ public class HomeActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        ArrayList<Food> foodsToDisplay =  (ArrayList) Information.information.getMyFoods().values();
+        /*ArrayList<Food> foodsToDisplay =  new ArrayList<Food>(Information.information.getMyFoods().values());
         for (Food entry: foodsToDisplay) {
             if(entry.getCount() <= 0) {
                 foodsToDisplay.remove(entry);
@@ -52,7 +52,7 @@ public class HomeActivity extends AppCompatActivity {
             }
 
             // tODO display these foods ( foodsToDisplay ) with a label at top saying "Your Favorite Foods"
-        }
+        }*/
 
 
         setContentView(R.layout.activity_home);

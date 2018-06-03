@@ -14,9 +14,7 @@ import static com.example.android.projectfanta.Information.information;
 
 public class MyAccountActivity extends AppCompatActivity {
 
-    private TextView name;
     private String gender;
-    private TextView email;
     private TextView age;
     private TextView weight;
     private TextView height;
@@ -32,7 +30,6 @@ public class MyAccountActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_my_account);
 
-
         age = (TextView)findViewById(R.id.ageText);
         weight = (TextView)findViewById(R.id.weightText);
         height = (TextView)findViewById(R.id.heightText);
@@ -44,16 +41,17 @@ public class MyAccountActivity extends AppCompatActivity {
             if (user.getAge() != 0) age.setText(Integer.toString(user.getAge()));
             if (user.getWeight() != 0) weight.setText(Integer.toString(user.getWeight()));
             if (user.getHeight() != 0) height.setText(Integer.toString(user.getHeight()));
-            if (user.getGender() == ("f")) genderGroup.check(R.id.female);
-            else if (user.getGender()==("m")) genderGroup.check(R.id.male);
+
+            if (user.getGender().equals("f")) genderGroup.check(R.id.female);
+
+            else if (user.getGender().equals("m")) genderGroup.check(R.id.male);
+
 
             if (user.getPa() == 1) paGroup.check(R.id.sedentary);
             else if (user.getPa() == 2) paGroup.check(R.id.lowactive);
             else if (user.getPa() == 3) paGroup.check(R.id.active);
             else if (user.getPa() == 4) paGroup.check(R.id.veryactive);
         }
-
-        // Email is uneditable
 
 
     }
@@ -73,18 +71,23 @@ public class MyAccountActivity extends AppCompatActivity {
     public void paGroupClick(View v) {
         int radioId = paGroup.getCheckedRadioButtonId();
         RadioButton rb = (RadioButton) findViewById(radioId);
-        if(rb.getText()==("Sedentary")) pa = 1;
-        else if(rb.getText()==("Low Active")) pa = 2;
-        else if(rb.getText()==("Active")) pa = 3;
-        else if(rb.getText()==("Very Active")) pa = 4;
+        if(rb.getText().toString().equals("Sedentary")) pa = 1;
+        else if(rb.getText().toString().equals("Low Active")) pa = 2;
+        else if(rb.getText().toString().equals("Active")) pa = 3;
+        else if(rb.getText().toString().equals("Very Active")) pa = 4;
     }
 
-    public void saveClick(View v){
+    protected void saveClick(View v){
+
         if (gender == "f" || gender == "m") user.setGender(gender);
         if (!TextUtils.isEmpty(age.getText().toString())) user.setAge(Integer.parseInt(age.getText().toString()));
         if (!TextUtils.isEmpty(weight.getText().toString())) user.setWeight(Integer.parseInt(weight.getText().toString()));
         if (!TextUtils.isEmpty(height.getText().toString())) user.setHeight(Integer.parseInt(height.getText().toString()));
         if(pa >= 1 && pa <= 4) { user.setPa(pa); }
+
+
+        Toast.makeText(MyAccountActivity.this, "Saved", Toast.LENGTH_SHORT).show();
+
 
         if(user.getRecCalories() == 0 && user.getRecCarbs() == 0 && user.getRecCholesterol() == 0 && user.getRecFiber() == 0 && user.getRecPotassium() == 0 &&
                 user.getRecProtein() == 0 && user.getRecSugars() == 0 && user.getRecSodium() == 0) {
