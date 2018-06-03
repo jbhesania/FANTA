@@ -71,10 +71,10 @@ public class MyAccountActivity extends AppCompatActivity {
     public void paGroupClick(View v) {
         int radioId = paGroup.getCheckedRadioButtonId();
         RadioButton rb = (RadioButton) findViewById(radioId);
-        if(rb.getText()==("Sedentary")) pa = 1;
-        else if(rb.getText()==("Low Active")) pa = 2;
-        else if(rb.getText()==("Active")) pa = 3;
-        else if(rb.getText()==("Very Active")) pa = 4;
+        if(rb.getText().toString().equals("Sedentary")) pa = 1;
+        else if(rb.getText().toString().equals("Low Active")) pa = 2;
+        else if(rb.getText().toString().equals("Active")) pa = 3;
+        else if(rb.getText().toString().equals("Very Active")) pa = 4;
     }
 
     protected void saveClick(View v){
