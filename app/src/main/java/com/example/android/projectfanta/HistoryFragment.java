@@ -1,6 +1,7 @@
 package com.example.android.projectfanta;
 
 import android.content.Context;
+import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
@@ -18,6 +19,7 @@ import android.view.LayoutInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Toast;
 
 
 /**
@@ -100,10 +102,10 @@ public class HistoryFragment extends Fragment {
         drawerLayout = (DrawerLayout) view.findViewById(R.id.drawer);
         toggle = new ActionBarDrawerToggle(getActivity(),drawerLayout, R.string.open, R.string.close);
         drawerLayout.addDrawerListener(toggle);
-        //NavigationView myNav = (NavigationView) view.findViewById(R.id.nv);
+        NavigationView myNav = (NavigationView) view.findViewById(R.id.nv);
         toggle.syncState();
-        //((AppCompatActivity)getActivity()).getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-        //setupDrawerContent(myNav);
+        //((AppCompatActivity)getContext()).getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        setupDrawerContent(myNav);
 
         myAdapters = new SectionsPageAdapter(getFragmentManager());
 
@@ -115,60 +117,63 @@ public class HistoryFragment extends Fragment {
         return view;
     }
 
-//    public void selectItemDrawer(MenuItem menuItem) {
-//        Fragment myFragment = null;
-//        Class fragmentClass;
-//        switch (menuItem.getItemId()) {
-//            case R.id.cal:
-//                fragmentClass = HistoryFragment.class;
-//                break;
-//            case R.id.car:
-//                fragmentClass = HistoryFragment.class;
-//                break;
-//            case R.id.fats:
-//                fragmentClass = HistoryFragment.class;
-//                break;
-//            case R.id.prot:
-//                fragmentClass = HistoryFragment.class;
-//                break;
-//            case R.id.sod:
-//                fragmentClass = HistoryFragment.class;
-//                break;
-//            case R.id.sug:
-//                fragmentClass = HistoryFragment.class;
-//                break;
-//            case R.id.cholesterol:
-//                fragmentClass = HistoryFragment.class;
-//                break;
-//            case R.id.potassium:
-//                fragmentClass = HistoryFragment.class;
-//                break;
-//            case R.id.fiber:
-//                fragmentClass = HistoryFragment.class;
-//                break;
-//            default:
-//                fragmentClass = HistoryFragment.class;
-//        }
-//        try {
-//            myFragment = (Fragment) fragmentClass.newInstance();
-//        } catch (Exception e) {
-//            e.printStackTrace();
-//        }
-//        FragmentManager fragmentManager = myContext.getSupportFragmentManager();
-//        fragmentManager.beginTransation().replace(R.id.main_content,myFragment).commit();
-//        menuItem.setCheckable(true);
-//        //setTitle(menuItem.getTitle());
-//        drawerLayout.closeDrawers();
+    public void selectItemDrawer(MenuItem menuItem) {
+        Fragment myFragment = null;
+        Class fragmentClass;
+        switch (menuItem.getItemId()) {
+            case R.id.cal:
+                fragmentClass = HistoryFragment.class;
+                break;
+            case R.id.car:
+                fragmentClass = HomeFragment.class;
+                Toast.makeText(getActivity(), "This is my Toast message!",
+                        Toast.LENGTH_LONG).show();
+                break;
+            case R.id.fats:
+                fragmentClass = HistoryFragment.class;
+                break;
+            case R.id.prot:
+                fragmentClass = HistoryFragment.class;
+                break;
+            case R.id.sod:
+                fragmentClass = HistoryFragment.class;
+                break;
+            case R.id.sug:
+                fragmentClass = HistoryFragment.class;
+                break;
+            case R.id.cholesterol:
+                fragmentClass = HistoryFragment.class;
+                break;
+            case R.id.potassium:
+                fragmentClass = HistoryFragment.class;
+                break;
+            case R.id.fiber:
+                fragmentClass = HistoryFragment.class;
+                break;
+            default:
+                fragmentClass = HistoryFragment.class;
+        }
+        try {
+            myFragment = (Fragment) fragmentClass.newInstance();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        FragmentManager fragmentManager = myContext.getSupportFragmentManager();
+        fragmentManager.beginTransaction().replace(R.id.main_content,myFragment).commit();
+        menuItem.setCheckable(true);
+        //setTitle(menuItem.getTitle());
+        drawerLayout.closeDrawers();
+    }
 
-
-//    private void setupDrawerContent(NavigationView navigationView){
-//        navigationView.setNavigationItemSelectedListener(new NavigationView.OnNavigationItemSelectedListener() {
-//            @Override
-//            public boolean onNavigationItemSelected(@NonNull MenuItem item) {
-//                selectItemDrawer(item);
-//                return true;
-//            }
-//        });
+    private void setupDrawerContent(NavigationView navigationView){
+        navigationView.setNavigationItemSelectedListener(new NavigationView.OnNavigationItemSelectedListener() {
+            @Override
+            public boolean onNavigationItemSelected(@NonNull MenuItem item) {
+                selectItemDrawer(item);
+                return true;
+            }
+        });
+    }
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
@@ -207,4 +212,3 @@ public class HistoryFragment extends Fragment {
         void onFragmentInteraction(Uri uri);
     }
 }
-
