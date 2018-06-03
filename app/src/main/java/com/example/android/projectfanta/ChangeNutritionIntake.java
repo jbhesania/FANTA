@@ -10,6 +10,7 @@ import android.text.TextUtils;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import org.w3c.dom.Text;
 
@@ -53,7 +54,7 @@ public class ChangeNutritionIntake extends AppCompatActivity {
         if (user.getRecSodium() != 0) sodium.setText(Double.toString(round(user.getRecSodium(), 1)));
         if (user.getRecSugars() != 0) sugars.setText(Double.toString(round(user.getRecSugars(), 1)));
         if (user.getRecCholesterol() != 0) cholesterol.setText(Double.toString(round(user.getRecCholesterol(), 1)));
-        if (user.getRecPotassium() != 0) protein.setText(Double.toString(round(user.getRecPotassium(),1)));
+        if (user.getRecPotassium() != 0) potassium.setText(Double.toString(round(user.getRecPotassium(),1)));
         if (user.getRecFiber() != 0) fiber.setText(Double.toString(round(user.getRecFiber(), 1)));
     }
 
@@ -67,6 +68,11 @@ public class ChangeNutritionIntake extends AppCompatActivity {
         if (!TextUtils.isEmpty(cholesterol.getText().toString())) user.setRecCholesterol(Double.parseDouble(cholesterol.getText().toString()));
         if (!TextUtils.isEmpty(potassium.getText().toString())) user.setRecPotassium(Double.parseDouble(potassium.getText().toString()));
         if (!TextUtils.isEmpty(fiber.getText().toString())) user.setRecFiber(Double.parseDouble(fiber.getText().toString()));
+        Toast.makeText(ChangeNutritionIntake.this, "Saved", Toast.LENGTH_SHORT).show();
+        Information.information.setInfoToDB();
+        Intent homeIntent = new Intent(this, HomeActivity.class);
+        startActivity(homeIntent);
+
     }
 
     protected void recommendedButton(View v) {
