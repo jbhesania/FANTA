@@ -2,6 +2,7 @@ package com.example.android.projectfanta;
 
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
@@ -11,6 +12,9 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
+
+import static android.content.Context.MODE_PRIVATE;
+import static com.google.android.gms.flags.impl.SharedPreferencesFactory.getSharedPreferences;
 
 
 /**
@@ -26,6 +30,9 @@ public class HomeFragment extends Fragment {
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
     private static final String ARG_PARAM1 = "param1";
     private static final String ARG_PARAM2 = "param2";
+    private int age;
+    private int weight;
+    private int height;
 
     // TODO: Rename and change types of parameters
     private String mParam1;
@@ -78,7 +85,6 @@ public class HomeFragment extends Fragment {
         fab_plus = (FloatingActionButton)view.findViewById(R.id.plus);
         fab_search = (FloatingActionButton)view.findViewById(R.id.search);
         fab_camera = (FloatingActionButton)view.findViewById(R.id.camera);
-        fab_fresh = (FloatingActionButton)view.findViewById(R.id.fresh);
         fab_manual = (FloatingActionButton)view.findViewById(R.id.manual);
 
         fabOpen = AnimationUtils.loadAnimation(getActivity(),R.anim.fab_open);
@@ -92,24 +98,20 @@ public class HomeFragment extends Fragment {
             public void onClick(View v) {
                 if(isOpen){
                     fab_camera.startAnimation(fabClose);
-                    fab_fresh.startAnimation(fabClose);
                     fab_manual.startAnimation(fabClose);
                     fab_search.startAnimation(fabClose);
                     fab_plus.startAnimation(fabBackward);
                     fab_camera.setClickable(false);
-                    fab_fresh.setClickable(false);
                     fab_manual.setClickable(false);
                     fab_search.setClickable(false);
                     isOpen = false;
                 }
                 else{
                     fab_camera.startAnimation(fabOpen);
-                    fab_fresh.startAnimation(fabOpen);
                     fab_manual.startAnimation(fabOpen);
                     fab_search.startAnimation(fabOpen);
                     fab_plus.startAnimation(fabForward);
                     fab_camera.setClickable(true);
-                    fab_fresh.setClickable(true);
                     fab_manual.setClickable(true);
                     fab_search.setClickable(true);
                     isOpen = true;
@@ -122,7 +124,7 @@ public class HomeFragment extends Fragment {
         fab_search.setOnClickListener(new View.OnClickListener(){
             @Override
                     public void onClick(View view){
-                Intent search_intent = new Intent(getContext(), SearchFoodActivity.class);
+                Intent search_intent = new Intent(getContext(), FoodListActivity.class);
                 startActivity(search_intent);
             }
 
@@ -144,13 +146,6 @@ public class HomeFragment extends Fragment {
                   }
         });
 
-        fab_fresh.setOnClickListener(new View.OnClickListener(){
-            @Override
-            public void onClick(View view){
-                Intent fresh_intent = new Intent(getContext(), FreshFoodActivity.class);
-                startActivity(fresh_intent);
-            }
-        });
 
         return view;
     }

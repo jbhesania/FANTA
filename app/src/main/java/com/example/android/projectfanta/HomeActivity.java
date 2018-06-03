@@ -1,16 +1,14 @@
 package com.example.android.projectfanta;
 
-import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.design.widget.BottomNavigationView;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AppCompatActivity;
-import android.util.Log;
-import android.view.Menu;
-import android.view.MenuInflater;
+import android.view.KeyEvent;
 import android.view.MenuItem;
+import android.widget.Toast;
 
 import static com.example.android.projectfanta.WeekFragment.nutrient;
 import static com.example.android.projectfanta.WeekFragment.recNutrient;
@@ -20,10 +18,6 @@ public class HomeActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        System.out.println("AAAAAAAAAAAAAAAAAAAAAAAA");
-        if ( Information.information.getMyFoods() != null && Information.information.getMyFoods() != null) {
-        System.out.println("Foods Size: " + Information.information.getMyFoods().size());
-        System.out.println("Intakes Size: " + Information.information.getMyIntakes().size()); }
 
         setContentView(R.layout.activity_home);
 
@@ -35,6 +29,42 @@ public class HomeActivity extends AppCompatActivity {
         FragmentTransaction transaction = frag.beginTransaction();
         transaction.replace(R.id.fragment_container, new HomeFragment()).commit();
 
+    }
+
+    @Override
+    public boolean onKeyDown(int keyCode, KeyEvent event)  {
+        if (keyCode == KeyEvent.KEYCODE_BACK ) {
+            moveTaskToBack(true);
+            finish(); // onPause, onStop, onDestroy
+            return true;
+        }
+
+        return super.onKeyDown(keyCode, event);
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+    }
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+    }
+
+    @Override
+    protected void onStop() {
+        super.onStop();
+    }
+
+    @Override
+    protected void onStart() {
+        super.onStart();
     }
 
     private BottomNavigationView.OnNavigationItemSelectedListener mOnNavigationItemSelectedListener
@@ -51,8 +81,14 @@ public class HomeActivity extends AppCompatActivity {
                     transaction.replace(R.id.fragment_container, new HistoryFragment()).commit();
                     return true;
                 case R.id.friends:
-                    transaction.replace(R.id.fragment_container, new FriendsFragment()).commit();
-                    return true;
+                    if(NetworkStatus.getInstance(getApplication()).isOnline()){
+                        transaction.replace(R.id.fragment_container, new FriendsFragment()).commit();
+                        return true;
+                    }else {
+                        Toast.makeText(getApplicationContext(), "No Internet Connection!",
+                                Toast.LENGTH_SHORT).show();
+                        return false;
+                    }
                 case R.id.setting:
                     transaction.replace(R.id.fragment_container, new SettingsFragment()).commit();
                     return true;
@@ -60,4 +96,6 @@ public class HomeActivity extends AppCompatActivity {
             return false;
         }
     };
+
+
 }
