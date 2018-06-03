@@ -87,7 +87,7 @@ public class MyAccountActivity extends AppCompatActivity {
         else if(rb.getText().equals("Very Active")) pa = 4;
     }
 
-    protected void saveClick(View v){
+    public void saveClick(View v){
         if (gender == "f" || gender == "m") user.setGender(gender);
         if (!TextUtils.isEmpty(age.getText().toString())) user.setAge(Integer.parseInt(age.getText().toString()));
         if (!TextUtils.isEmpty(weight.getText().toString())) user.setWeight(Integer.parseInt(weight.getText().toString()));
