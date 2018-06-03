@@ -31,7 +31,6 @@
             android:src="@drawable/profile"
             android:layout_toEndOf="@+id/myAcc"/>
     </RelativeLayout>
-
         <RelativeLayout
             android:layout_width="200dp"
             android:layout_height="wrap_content"

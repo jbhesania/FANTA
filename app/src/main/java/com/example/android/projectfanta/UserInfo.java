@@ -1,5 +1,6 @@
 package com.example.android.projectfanta;
 
+import android.content.SharedPreferences;
 import android.util.Log;
 
 import com.google.firebase.database.DataSnapshot;
@@ -30,18 +31,16 @@ public class UserInfo extends User {
         super();
     }
 
-    public UserInfo(String id, String uname, int w, int h, int a) {
+    public UserInfo(String id, String g, String uname, int w, int h, int a) {
         super(id, uname);
         weight = w;
         height = h;
         age = a;
+        gender = gender;
         // we should add the logic for set nutrional values to defulats resetNutrionalValues
 
     }
 
-    public UserInfo( UserInfo copy) {
-        this(copy.getId(), copy.getUserName(), copy.getWeight(), copy.getHeight(), copy.getAge());
-    }
 
     /**
      *
