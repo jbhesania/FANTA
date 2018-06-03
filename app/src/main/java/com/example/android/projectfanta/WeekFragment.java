@@ -6,19 +6,23 @@ import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Toast;
 
 import com.jjoe64.graphview.GraphView;
 import com.jjoe64.graphview.LegendRenderer;
 import com.jjoe64.graphview.helper.DateAsXAxisLabelFormatter;
 import com.jjoe64.graphview.series.DataPoint;
+import com.jjoe64.graphview.series.DataPointInterface;
 import com.jjoe64.graphview.series.LineGraphSeries;
+import com.jjoe64.graphview.series.OnDataPointTapListener;
+import com.jjoe64.graphview.series.Series;
 
 import java.util.Calendar;
 
 
 public class WeekFragment extends Fragment {
     //Instance variable so that view can be accessed by createGraphWeek method as well
-    public View view;
+    public GraphView graph;
 
     /**
      * numDays The number of days including starting day to end day. E.g from 12/10 - 12/12, numDays
@@ -35,7 +39,7 @@ public class WeekFragment extends Fragment {
      * calendar.set(2017,11,1);
      */
     public void createGraphWeek(int numDays, Calendar startDayCalendar, String nutrient,
-    double[] nutrientIntake, double standardIntake)
+    double[] nutrientIntake, double standardIntake,View view)
     {
         Calendar calendar1 = (Calendar)startDayCalendar.clone();
         Calendar calendar2 = (Calendar)startDayCalendar.clone();
@@ -61,7 +65,7 @@ public class WeekFragment extends Fragment {
         }
 
         //Drawing the graph on View
-        GraphView graph = (GraphView) view.findViewById(R.id.graph);
+        graph = (GraphView) view.findViewById(R.id.graph);
         LineGraphSeries<DataPoint> series = new LineGraphSeries<>(dp);
         series.setTitle("User");
 
@@ -89,11 +93,33 @@ public class WeekFragment extends Fragment {
         standard.setTitle("Standard");
         standard.setColor(Color.GREEN);
 
+        //Show data onClicked
+        series.setOnDataPointTapListener(new OnDataPointTapListener() {
+            @Override
+            public void onTap(Series series, DataPointInterface dataPoint) {
+                Calendar calendar = Calendar.getInstance();
+                calendar.setTimeInMillis((long)dataPoint.getX());
+                Toast.makeText(getActivity(), "Date: "
+                                + calendar.get(Calendar.DATE) + "/"
+                                + (calendar.get(Calendar.MONTH)+1) + "/"
+                                + calendar.get(Calendar.YEAR)+ "\n"
+                                + graph.getTitle()+": "+ dataPoint.getY() + " "
+                                + graph.getGridLabelRenderer().getVerticalAxisTitle(),
+                        Toast.LENGTH_SHORT).show();
+            }
+        });
+
+        graph.getViewport().setScrollable(true);
+        graph.getViewport().setScrollableY(true);
+        graph.getViewport().setScalable(true);
+        graph.getViewport().setScalableY(true);
+
+
         //Adding them to the view
         graph.addSeries(series);
         graph.addSeries(standard);
-        graph.getLegendRenderer().setVisible(true);
-        graph.getLegendRenderer().setAlign(LegendRenderer.LegendAlign.BOTTOM);
+        graph.getLegendRenderer().setVisible(false);
+        graph.getLegendRenderer().setAlign(LegendRenderer.LegendAlign.TOP);
         graph.setTitle(nutrient+" "+"Intake");
     }
 
@@ -101,7 +127,7 @@ public class WeekFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        view = inflater.inflate(R.layout.fragment_week, container, false);
+        View view = inflater.inflate(R.layout.fragment_week, container, false);
         //System.out.println(Information.information.getMyFoods().get(
                 //Information.information.getMyIntakes().get(2).getFood()).getNutrient("calories")
                 //);
@@ -115,7 +141,11 @@ public class WeekFragment extends Fragment {
         //long end = System.currentTimeMillis();
         long start = end - 7*864*(long)java.lang.Math.pow(10,5);
         //createGraphWeek(7, , "Protein",
+        Calendar test = Calendar.getInstance();
+        test.setTimeInMillis(start-864*(long)java.lang.Math.pow(10,5));
+
         double[] intakes = Information.information.intakeInterval(start, end,"calories");
+        createGraphWeek(7,test,"calories",intakes,200,view);
 
         return view;
     }
