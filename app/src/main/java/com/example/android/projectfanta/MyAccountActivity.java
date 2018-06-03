@@ -88,7 +88,6 @@ public class MyAccountActivity extends AppCompatActivity {
     }
 
     protected void saveClick(View v){
-        if (!TextUtils.isEmpty(name.getText().toString())) user.setName(name.getText().toString());
         if (gender == "f" || gender == "m") user.setGender(gender);
         if (!TextUtils.isEmpty(age.getText().toString())) user.setAge(Integer.parseInt(age.getText().toString()));
         if (!TextUtils.isEmpty(weight.getText().toString())) user.setWeight(Integer.parseInt(weight.getText().toString()));
