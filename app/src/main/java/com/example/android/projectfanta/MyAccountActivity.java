@@ -51,6 +51,7 @@ public class MyAccountActivity extends AppCompatActivity {
             if (user.getHeight() != 0) height.setText(Integer.toString(user.getHeight()));
 
             if (user.getGender().equals("f")) genderGroup.check(R.id.female);
+
             else if (user.getGender().equals("m")) genderGroup.check(R.id.male);
 
             if (user.getPa() == 1) paGroup.check(R.id.sedentary);
@@ -58,6 +59,7 @@ public class MyAccountActivity extends AppCompatActivity {
             else if (user.getPa() == 3) paGroup.check(R.id.active);
             else if (user.getPa() == 4) paGroup.check(R.id.veryactive);
         }
+
 
     }
 
@@ -82,13 +84,14 @@ public class MyAccountActivity extends AppCompatActivity {
         else if(rb.getText().equals("Very Active")) pa = 4;
     }
 
-
     protected void saveClick(View v){
+
         if (gender == "f" || gender == "m") user.setGender(gender);
         if (!TextUtils.isEmpty(age.getText().toString())) user.setAge(Integer.parseInt(age.getText().toString()));
         if (!TextUtils.isEmpty(weight.getText().toString())) user.setWeight(Integer.parseInt(weight.getText().toString()));
         if (!TextUtils.isEmpty(height.getText().toString())) user.setHeight(Integer.parseInt(height.getText().toString()));
         if(pa >= 1 && pa <= 4) { user.setPa(pa); }
+
 
         Toast.makeText(MyAccountActivity.this, "Saved", Toast.LENGTH_SHORT).show();
 

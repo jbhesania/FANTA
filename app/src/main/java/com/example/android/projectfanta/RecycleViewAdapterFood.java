@@ -1,5 +1,6 @@
 package com.example.android.projectfanta;
 
+import android.app.Activity;
 import android.app.Dialog;
 import android.content.Context;
 import android.content.Intent;
@@ -11,6 +12,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.Window;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.RelativeLayout;
@@ -25,14 +27,19 @@ import java.util.List;
 public class RecycleViewAdapterFood extends RecyclerView.Adapter<RecycleViewAdapterFood.MyViewHolder>{
 
     private List<Food> foodData = new ArrayList<>();
-    private Context context;
+    private final Context context;
+    private final Activity activity;
     Dialog dialog;
     EditText numberOfServing;
+    Button button;
+    String value;
 
 
-    public RecycleViewAdapterFood(Context context, List<Food> foodData) {
+    public RecycleViewAdapterFood(Activity activity, Context context, List<Food> foodData) {
         this.context = context;
         this.foodData = foodData;
+        this.activity = activity;
+
     }
 
     @Override
@@ -43,14 +50,7 @@ public class RecycleViewAdapterFood extends RecyclerView.Adapter<RecycleViewAdap
         dialog = new Dialog(context);
         dialog.setContentView(R.layout.custom_pop_up);
         dialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
-        Button button = (Button)dialog.findViewById(R.id.saving);
 
-        button.setOnClickListener(new View.OnClickListener(){
-            @Override
-            public void onClick(View view){
-                //TODO: SAVE BUTTON TO SAVE THE NUMBER OF SERVINGS (JOYAAN)
-            }
-        });
 
         viewHolder.food_list.setOnClickListener(new View.OnClickListener(){
             @Override
@@ -72,10 +72,36 @@ public class RecycleViewAdapterFood extends RecyclerView.Adapter<RecycleViewAdap
                 final Dialog dialog = new Dialog(context);
                 dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
                 dialog.setContentView(R.layout.custom_pop_up);
+
                 TextView text = (TextView) dialog.findViewById(R.id.foodServings);
                 text.setText(foodData.get(position).getName());
+
                 //TODO: putting the number of servings to value
+
                 dialog.show();
+
+                numberOfServing = (EditText) dialog.findViewById(R.id.edit);
+                button = (Button)dialog.findViewById(R.id.saving);
+                button.setOnClickListener(new View.OnClickListener(){
+                    @Override
+                    public void onClick(View view){
+
+                        value = numberOfServing.getText().toString();
+                        Double servings = new Double(value);
+                        Intake newIntake = new Intake(foodData.get(position).getName(), servings);
+                        Information.information.addIntake(context, newIntake);
+
+                        InputMethodManager inputMethodManager =
+                                (InputMethodManager) activity.getSystemService(
+                                        Activity.INPUT_METHOD_SERVICE);
+                        inputMethodManager.hideSoftInputFromWindow(
+                                activity.getCurrentFocus().getWindowToken(), 0);
+
+                        dialog.dismiss();
+
+                        //TODO the keyboard still doesnt actually go away
+                    }
+                });
             }
         });
     }

@@ -43,7 +43,7 @@ public class FoodListActivity extends AppCompatActivity {
         listFresh = new ArrayList<>(Information.information.getMyFoods().values());
 
         RecyclerView myRecyclerView = (RecyclerView) findViewById(R.id.freshFood_recycler);
-        myAdapter = new RecycleViewAdapterFood(this,listFresh);
+        myAdapter = new RecycleViewAdapterFood(this,this,listFresh);
         myRecyclerView.setLayoutManager(new LinearLayoutManager(getApplicationContext()));
         myRecyclerView.setAdapter(myAdapter);
 
