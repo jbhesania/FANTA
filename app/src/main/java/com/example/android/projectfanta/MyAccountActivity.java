@@ -19,9 +19,12 @@ import android.widget.Toast;
 
 import com.example.android.projectfanta.UserInfo;
 import static com.example.android.projectfanta.Information.information;
+
 public class MyAccountActivity extends AppCompatActivity {
 
+    private TextView name;
     private String gender;
+    private TextView email;
     private TextView age;
     private TextView weight;
     private TextView height;
@@ -37,6 +40,7 @@ public class MyAccountActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_my_account);
 
+
         age = (TextView)findViewById(R.id.ageText);
         weight = (TextView)findViewById(R.id.weightText);
         height = (TextView)findViewById(R.id.heightText);
@@ -44,12 +48,10 @@ public class MyAccountActivity extends AppCompatActivity {
         genderGroup = (RadioGroup) findViewById(R.id.genderGroup);
         paGroup = (RadioGroup) findViewById(R.id.paGroup);
 
-
         if(user != null ) {
             if (user.getAge() != 0) age.setText(Integer.toString(user.getAge()));
             if (user.getWeight() != 0) weight.setText(Integer.toString(user.getWeight()));
             if (user.getHeight() != 0) height.setText(Integer.toString(user.getHeight()));
-
             if (user.getGender().equals("f")) genderGroup.check(R.id.female);
             else if (user.getGender().equals("m")) genderGroup.check(R.id.male);
 
@@ -59,6 +61,8 @@ public class MyAccountActivity extends AppCompatActivity {
             else if (user.getPa() == 4) paGroup.check(R.id.veryactive);
         }
 
+        // Email is uneditable
+
 
     }
 
@@ -66,7 +70,6 @@ public class MyAccountActivity extends AppCompatActivity {
     public void onStart(){
         super.onStart();
     }
-
 
     protected void genderGroupClick(View v) {
         int radioId = genderGroup.getCheckedRadioButtonId();
@@ -85,15 +88,12 @@ public class MyAccountActivity extends AppCompatActivity {
     }
 
     protected void saveClick(View v){
+        if (!TextUtils.isEmpty(name.getText().toString())) user.setName(name.getText().toString());
         if (gender == "f" || gender == "m") user.setGender(gender);
         if (!TextUtils.isEmpty(age.getText().toString())) user.setAge(Integer.parseInt(age.getText().toString()));
         if (!TextUtils.isEmpty(weight.getText().toString())) user.setWeight(Integer.parseInt(weight.getText().toString()));
         if (!TextUtils.isEmpty(height.getText().toString())) user.setHeight(Integer.parseInt(height.getText().toString()));
         if(pa >= 1 && pa <= 4) { user.setPa(pa); }
-
-        information.setInfoToDB();
-        Toast.makeText(MyAccountActivity.this, "Saved", Toast.LENGTH_SHORT).show();
-
 
         if(user.getRecCalories() == 0 && user.getRecCarbs() == 0 && user.getRecCholesterol() == 0 && user.getRecFiber() == 0 && user.getRecPotassium() == 0 &&
                 user.getRecProtein() == 0 && user.getRecSugars() == 0 && user.getRecSodium() == 0) {
@@ -198,7 +198,6 @@ public class MyAccountActivity extends AppCompatActivity {
         }
         Toast.makeText(MyAccountActivity.this, "Saved", Toast.LENGTH_SHORT).show();
         Information.information.setInfoToDB();
-
         Intent homeIntent = new Intent(MyAccountActivity.this, HomeActivity.class);
         startActivity(homeIntent);
     }
