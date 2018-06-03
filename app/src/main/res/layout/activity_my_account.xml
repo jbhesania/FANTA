@@ -32,6 +32,26 @@
             android:layout_toEndOf="@+id/myAcc"/>
     </RelativeLayout>
 
+<<<<<<< HEAD
+=======
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal">
+
+        <Button
+            android:id="@+id/save"
+            android:layout_width="100dp"
+            android:layout_height="30dp"
+            android:background="@drawable/capsule"
+            android:onClick="saveClick"
+            android:text="SAVE"
+            android:textAlignment="center" />
+
+    </LinearLayout>
+
+>>>>>>> 26c2fa270faf7d1e0960a4f1e2fc894b4b476ef5
     <ScrollView
         android:id="@+id/scroll"
         android:layout_width="match_parent"
