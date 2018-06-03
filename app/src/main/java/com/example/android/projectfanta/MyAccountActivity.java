@@ -52,8 +52,10 @@ public class MyAccountActivity extends AppCompatActivity {
             if (user.getAge() != 0) age.setText(Integer.toString(user.getAge()));
             if (user.getWeight() != 0) weight.setText(Integer.toString(user.getWeight()));
             if (user.getHeight() != 0) height.setText(Integer.toString(user.getHeight()));
-            if (user.getGender().equals("f")) genderGroup.check(R.id.female);
-            else if (user.getGender().equals("m")) genderGroup.check(R.id.male);
+            if(user.getGender() != null) {
+                if (user.getGender() == ("f")) genderGroup.check(R.id.female);
+                else if (user.getGender().equals("m")) genderGroup.check(R.id.male);
+            }
 
             if (user.getPa() == 1) paGroup.check(R.id.sedentary);
             else if (user.getPa() == 2) paGroup.check(R.id.lowactive);
