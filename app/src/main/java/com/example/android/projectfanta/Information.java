@@ -20,10 +20,10 @@ import java.util.HashMap;
 public class Information implements Serializable {
 
     public static Information information;
-    private static double ONE_DAY = 8.64*java.lang.Math.pow(10,7);
-    private static double ONE_WEEK = 7*ONE_DAY;
-    private static double ONE_MONTH = 31*ONE_DAY;
-    private static double ONE_YEAR = 365*ONE_DAY;
+    private static long ONE_DAY = 864 * (long)java.lang.Math.pow(10,5);
+    private static long ONE_WEEK = 7*ONE_DAY;
+    private static long ONE_MONTH = 31*ONE_DAY;
+    private static long ONE_YEAR = 365*ONE_DAY;
 
 
     private HashMap<String, Food> myFoods;
@@ -283,19 +283,15 @@ public class Information implements Serializable {
         // Check the time interval we are looking in and set the time to
         // a day or a month
         int days_months_year = 0;
-        double time = 0;
         if (end - start == ONE_WEEK) {
-            time = ONE_DAY;
             days_months_year = 7;
         }
 
         else if (end - start == ONE_MONTH) {
-            time = ONE_DAY;
             days_months_year = 31;
         }
 
         else if (end - start == ONE_YEAR) {
-            time = ONE_DAY;
             days_months_year = 365;
 
         }
@@ -324,7 +320,7 @@ public class Information implements Serializable {
             current_idx = 0;
             long curr_time;
             for (int j = 0; j < days_months_year; j++) {
-                curr_time = start + (days_months_year*j);
+                curr_time = start + (ONE_DAY*j);
                 if (curr_time < myIntakes.get(i).getCreationTime()) {
                     current_idx = j;
                 }

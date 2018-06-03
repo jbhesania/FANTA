@@ -65,14 +65,14 @@ public class YearFragment extends Fragment {
         graph.getGridLabelRenderer().setLabelFormatter(new DateAsXAxisLabelFormatter(getActivity()));
 
         //Arbitrary keep the label amount small
-        graph.getGridLabelRenderer().setNumHorizontalLabels(9);
+        graph.getGridLabelRenderer().setNumHorizontalLabels(6);
         graph.getGridLabelRenderer().setHorizontalLabelsAngle(30);
         graph.getGridLabelRenderer().setHumanRounding(false);
         graph.getGridLabelRenderer().setTextSize(36);
 
         // set manual x bounds to have nice steps
         graph.getViewport().setMinX(start);
-        graph.getViewport().setMaxX(end);
+        graph.getViewport().setMaxX(end + 31 * 8.64*java.lang.Math.pow(10,7));
         graph.getViewport().setXAxisBoundsManual(true);
 
         graph.getGridLabelRenderer().setHorizontalAxisTitle("date");
