@@ -1,21 +1,18 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:gravity="center_horizontal"
-    android:orientation="vertical"
-    tools:context=".NutritionLabelConfirmActivity">
+    android:layout_height="match_parent"
+    android:layout_margin="20dp"
+    tools:context=".NutritionLabelConfirmActivity"
+    android:id="@+id/big">
 
-
-    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-        xmlns:app="http://schemas.android.com/apk/res-auto"
-        xmlns:tools="http://schemas.android.com/tools"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:orientation="horizontal"
-        tools:context=".NutritionLabelConfirmActivity">
+    <RelativeLayout
+        android:id="@+id/relLayout1"
+        android:layout_marginTop="15dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content">
 
         <EditText
             android:id="@+id/name"
@@ -24,347 +21,358 @@
             android:ems="10"
             android:gravity="center"
             android:inputType="textPersonName"
-            android:text="@string/name"
+            android:hint="@string/name"
             tools:layout_editor_absoluteX="65dp"
             tools:layout_editor_absoluteY="16dp"
-            android:onClick="onClick"
-            />
-    </LinearLayout>
+            android:onClick="onClick" />
+    </RelativeLayout>
 
-    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-        xmlns:app="http://schemas.android.com/apk/res-auto"
-        xmlns:tools="http://schemas.android.com/tools"
-        android:layout_width="match_parent"
+    <RelativeLayout
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:gravity="left"
-        android:orientation="horizontal"
-        tools:context=".NutritionLabelConfirmActivity">
+        android:layout_below="@id/relLayout1">
 
-        <TextView
-            android:id="@+id/addServings"
-            android:textSize="20dp"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:ems="10"
-            android:gravity="center_horizontal"
-            android:inputType="textPersonName"
-            android:text="@string/servings"
-            tools:layout_editor_absoluteX="65dp"
-            tools:layout_editor_absoluteY="16dp"
-            />
-
-        <EditText
-            android:id="@+id/servings"
+        <RelativeLayout
+            android:layout_centerHorizontal="true"
+            android:id="@+id/relLayout2"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:gravity="center"
-            android:inputType="number|numberDecimal" />
+            android:orientation="horizontal">
 
-    </LinearLayout>
+            <TextView
+                android:layout_marginTop="15dp"
+                android:id="@+id/addServings"
+                android:textSize="20dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:ems="10"
+                android:gravity="center_horizontal"
+                android:inputType="textPersonName"
+                android:text="@string/servings"
+                tools:layout_editor_absoluteX="65dp"
+                tools:layout_editor_absoluteY="16dp"/>
 
-    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-        xmlns:app="http://schemas.android.com/apk/res-auto"
-        xmlns:tools="http://schemas.android.com/tools"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:gravity="left"
-        android:orientation="horizontal"
-        tools:context=".NutritionLabelConfirmActivity">
+            <EditText
+                android:layout_toEndOf="@id/addServings"
+                android:id="@+id/servings"
+                android:layout_width="40dp"
+                android:layout_height="wrap_content"
+                android:inputType="number"
+                android:gravity="center"/>
 
-        <TextView
-            android:id="@+id/calories"
-            android:textSize="20dp"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:ems="10"
-            android:gravity="center_horizontal"
-            android:inputType="textPersonName"
-            android:text="@string/calories"
-            tools:layout_editor_absoluteX="65dp"
-            tools:layout_editor_absoluteY="16dp"
-            />
+        </RelativeLayout>
 
-        <EditText
-            android:id="@+id/calories_field"
+        <RelativeLayout
+            android:layout_centerHorizontal="true"
+            android:id="@+id/relLayout3"
+            android:layout_below="@id/relLayout2"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:inputType="number|numberDecimal"
-            android:gravity="center"/>
+            android:orientation="horizontal">
 
-    </LinearLayout>
+            <TextView
+                android:layout_marginTop="15dp"
+                android:id="@+id/calories"
+                android:textSize="20dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:ems="10"
+                android:gravity="center_horizontal"
+                android:inputType="textPersonName"
+                android:text="@string/calories"
+                tools:layout_editor_absoluteX="65dp"
+                tools:layout_editor_absoluteY="16dp" />
 
-    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-        xmlns:app="http://schemas.android.com/apk/res-auto"
-        xmlns:tools="http://schemas.android.com/tools"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:gravity="left"
-        android:orientation="horizontal"
-        tools:context=".NutritionLabelConfirmActivity">
+            <EditText
+                android:layout_toEndOf="@id/calories"
+                android:id="@+id/calories_field"
+                android:layout_width="40dp"
+                android:layout_height="wrap_content"
+                android:inputType="number"
+                android:gravity="center"/>
 
-        <TextView
-            android:id="@+id/totalFat"
-            android:textSize="20dp"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:ems="10"
-            android:gravity="center_horizontal"
-            android:inputType="textPersonName"
-            android:text="@string/totalFat"
-            tools:layout_editor_absoluteX="65dp"
-            tools:layout_editor_absoluteY="16dp"
-            />
+        </RelativeLayout>
 
-        <EditText
-            android:id="@+id/totalFat_field"
+        <RelativeLayout
+            android:layout_centerHorizontal="true"
+            android:layout_below="@+id/relLayout3"
+            xmlns:tools="http://schemas.android.com/tools"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:inputType="number|numberDecimal"
-            android:gravity="center"/>
+            android:gravity="left"
+            android:id="@+id/relLayout4"
+            android:orientation="horizontal">
 
-    </LinearLayout>
+            <TextView
+                android:layout_marginTop="15dp"
+                android:id="@+id/totalFat"
+                android:textSize="20dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:ems="10"
+                android:gravity="center_horizontal"
+                android:inputType="textPersonName"
+                android:text="@string/totalFat"
+                tools:layout_editor_absoluteX="65dp"
+                tools:layout_editor_absoluteY="16dp" />
 
-    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-        xmlns:app="http://schemas.android.com/apk/res-auto"
-        xmlns:tools="http://schemas.android.com/tools"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:gravity="left"
-        android:orientation="horizontal"
-        tools:context=".NutritionLabelConfirmActivity">
+            <EditText
+                android:layout_toEndOf="@id/totalFat"
+                android:id="@+id/totalFat_field"
+                android:layout_width="40dp"
+                android:layout_height="wrap_content"
+                android:inputType="number"
+                android:gravity="center"/>
 
-        <TextView
-            android:id="@+id/cholest"
-            android:textSize="20dp"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:ems="10"
-            android:gravity="center_horizontal"
-            android:inputType="textPersonName"
-            android:text="@string/cholest"
-            tools:layout_editor_absoluteX="65dp"
-            tools:layout_editor_absoluteY="16dp"
-            />
+        </RelativeLayout>
 
-        <EditText
-            android:id="@+id/chol_input"
+        <RelativeLayout
+            android:layout_centerHorizontal="true"
+            android:id="@+id/relLayout5"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:inputType="number|numberDecimal"
-            android:gravity="center"/>
+            android:gravity="left"
+            android:layout_below="@+id/relLayout4"
+            android:orientation="horizontal">
 
-    </LinearLayout>
+            <TextView
+                android:layout_marginTop="15dp"
+                android:id="@+id/cholest"
+                android:textSize="20dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:ems="10"
+                android:gravity="center_horizontal"
+                android:inputType="textPersonName"
+                android:text="@string/cholest"
+                tools:layout_editor_absoluteX="65dp"
+                tools:layout_editor_absoluteY="16dp" />
 
-    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-        xmlns:app="http://schemas.android.com/apk/res-auto"
-        xmlns:tools="http://schemas.android.com/tools"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:gravity="left"
-        android:orientation="horizontal"
-        tools:context=".NutritionLabelConfirmActivity">
+            <EditText
+                android:layout_toEndOf="@+id/cholest"
+                android:id="@+id/chol_input"
+                android:layout_width="40dp"
+                android:layout_height="wrap_content"
+                android:inputType="number"
+                android:gravity="center"/>
 
-        <TextView
-            android:id="@+id/sodi"
-            android:textSize="20dp"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:ems="10"
-            android:gravity="center_horizontal"
-            android:inputType="textPersonName"
-            android:text="@string/sodium"
-            tools:layout_editor_absoluteX="65dp"
-            tools:layout_editor_absoluteY="16dp"
-            />
+        </RelativeLayout>
 
-        <EditText
-            android:id="@+id/sodium_input"
+        <RelativeLayout
+            android:layout_below="@id/relLayout5"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:inputType="number|numberDecimal"
-            android:gravity="center"/>
+            android:gravity="left"
+            android:id="@+id/relLayout6"
+            android:orientation="horizontal">
 
-    </LinearLayout>
+            <TextView
+                android:layout_marginTop="15dp"
+                android:id="@+id/sodi"
+                android:textSize="20dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:ems="10"
+                android:gravity="center_horizontal"
+                android:inputType="textPersonName"
+                android:text="@string/sodium"
+                tools:layout_editor_absoluteX="65dp"
+                tools:layout_editor_absoluteY="16dp" />
 
-    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-        xmlns:app="http://schemas.android.com/apk/res-auto"
-        xmlns:tools="http://schemas.android.com/tools"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:gravity="left"
-        android:orientation="horizontal"
-        tools:context=".NutritionLabelConfirmActivity">
+            <EditText
+                android:layout_toEndOf="@id/sodi"
+                android:id="@+id/sodium_input"
+                android:layout_width="40dp"
+                android:layout_height="wrap_content"
+                android:inputType="number"
+                android:gravity="center"/>
 
-        <TextView
-            android:id="@+id/potas"
-            android:textSize="20dp"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:ems="10"
-            android:gravity="center_horizontal"
-            android:inputType="textPersonName"
-            android:text="@string/potassium"
-            tools:layout_editor_absoluteX="65dp"
-            tools:layout_editor_absoluteY="16dp"
-            />
+        </RelativeLayout>
 
-        <EditText
-            android:id="@+id/potass_input"
+        <RelativeLayout
+            android:layout_below="@id/relLayout6"
+            android:id="@+id/relLayout7"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:inputType="number|numberDecimal"
-            android:gravity="center"/>
+            android:gravity="left"
+            android:orientation="horizontal">
 
-    </LinearLayout>
+            <TextView
+                android:layout_marginTop="15dp"
+                android:id="@+id/potas"
+                android:textSize="20dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:ems="10"
+                android:gravity="center_horizontal"
+                android:inputType="textPersonName"
+                android:text="@string/potassium"
+                tools:layout_editor_absoluteX="65dp"
+                tools:layout_editor_absoluteY="16dp"
+                />
 
-    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-        xmlns:app="http://schemas.android.com/apk/res-auto"
-        xmlns:tools="http://schemas.android.com/tools"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:gravity="left"
-        android:orientation="horizontal"
-        tools:context=".NutritionLabelConfirmActivity">
+            <EditText
+                android:layout_toEndOf="@id/potas"
+                android:id="@+id/potass_input"
+                android:layout_width="40dp"
+                android:layout_height="wrap_content"
+                android:inputType="number"
+                android:gravity="center"/>
 
-        <TextView
-            android:id="@+id/total_carb"
-            android:textSize="20dp"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:ems="10"
-            android:gravity="center_horizontal"
-            android:inputType="textPersonName"
-            android:text="@string/total_carb"
-            tools:layout_editor_absoluteX="65dp"
-            tools:layout_editor_absoluteY="16dp"
-            />
+        </RelativeLayout>
 
-        <EditText
-            android:id="@+id/totCarb_input"
+        <RelativeLayout
+            android:id="@+id/relLayout8"
+            android:layout_below="@+id/relLayout7"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:inputType="number|numberDecimal"
-            android:gravity="center"/>
+            android:gravity="left"
+            android:orientation="horizontal">
 
-    </LinearLayout>
+            <TextView
+                android:layout_marginTop="15dp"
+                android:id="@+id/total_carb"
+                android:textSize="20dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:ems="10"
+                android:gravity="center_horizontal"
+                android:inputType="textPersonName"
+                android:text="@string/total_carb"
+                tools:layout_editor_absoluteX="65dp"
+                tools:layout_editor_absoluteY="16dp"/>
 
-    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-        xmlns:app="http://schemas.android.com/apk/res-auto"
-        xmlns:tools="http://schemas.android.com/tools"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:gravity="left"
-        android:orientation="horizontal"
-        tools:context=".NutritionLabelConfirmActivity">
+            <EditText
+                android:layout_toEndOf="@+id/total_carb"
+                android:id="@+id/totCarb_input"
+                android:layout_width="40dp"
+                android:layout_height="wrap_content"
+                android:inputType="number"
+                android:gravity="center"/>
 
-        <TextView
-            android:id="@+id/sugar"
-            android:textSize="20dp"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:ems="10"
-            android:gravity="center_horizontal"
-            android:inputType="textPersonName"
-            android:text="@string/sugar"
-            tools:layout_editor_absoluteX="65dp"
-            tools:layout_editor_absoluteY="16dp"
-            />
+        </RelativeLayout>
 
-        <EditText
-            android:id="@+id/sugar_input"
+        <RelativeLayout
+            android:id="@+id/relLayout9"
+            android:layout_below="@id/relLayout8"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:inputType="number|numberDecimal"
-            android:gravity="center"/>
+            android:gravity="left"
+            android:orientation="horizontal">
 
-    </LinearLayout>
+            <TextView
+                android:layout_marginTop="15dp"
+                android:id="@+id/sugar"
+                android:textSize="20dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:ems="10"
+                android:gravity="center_horizontal"
+                android:inputType="textPersonName"
+                android:text="@string/sugar"
+                tools:layout_editor_absoluteX="65dp"
+                tools:layout_editor_absoluteY="16dp" />
 
-    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-        xmlns:app="http://schemas.android.com/apk/res-auto"
-        xmlns:tools="http://schemas.android.com/tools"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:gravity="left"
-        android:orientation="horizontal"
-        tools:context=".NutritionLabelConfirmActivity">
+            <EditText
+                android:layout_toEndOf="@id/sugar"
+                android:id="@+id/sugar_input"
+                android:layout_width="40dp"
+                android:layout_height="wrap_content"
+                android:inputType="number"
+                android:gravity="center"/>
 
-        <TextView
-            android:id="@+id/fiber"
-            android:textSize="20dp"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:ems="10"
-            android:gravity="center_horizontal"
-            android:inputType="textPersonName"
-            android:text="@string/diet_fiber"
-            tools:layout_editor_absoluteX="65dp"
-            tools:layout_editor_absoluteY="16dp"
-            />
+        </RelativeLayout>
 
-        <EditText
-            android:id="@+id/fiber_input"
-            android:gravity="center"
+        <RelativeLayout
+            android:id="@+id/relLayout10"
+            android:layout_below="@id/relLayout9"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:inputType="number|numberDecimal"
-            />
+            android:gravity="left"
+            android:orientation="horizontal">
 
-    </LinearLayout>
+            <TextView
+                android:layout_marginTop="15dp"
+                android:id="@+id/fiber"
+                android:textSize="20dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:ems="10"
+                android:gravity="center_horizontal"
+                android:inputType="textPersonName"
+                android:text="@string/diet_fiber"
+                tools:layout_editor_absoluteX="65dp"
+                tools:layout_editor_absoluteY="16dp" />
 
-    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-        xmlns:app="http://schemas.android.com/apk/res-auto"
-        xmlns:tools="http://schemas.android.com/tools"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:gravity="left"
-        android:orientation="horizontal"
-        tools:context=".NutritionLabelConfirmActivity">
+            <EditText
+                android:layout_toEndOf="@id/fiber"
+                android:id="@+id/fiber_input"
+                android:gravity="center"
+                android:layout_width="40dp"
+                android:layout_height="wrap_content"
+                android:inputType="number" />
 
-        <TextView
-            android:id="@+id/prot"
-            android:textSize="20dp"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:ems="10"
-            android:gravity="center_horizontal"
-            android:inputType="textPersonName"
-            android:text="@string/protein"
-            tools:layout_editor_absoluteX="65dp"
-            tools:layout_editor_absoluteY="16dp"
-            />
+        </RelativeLayout>
 
-        <EditText
-            android:id="@+id/prote_input"
+        <RelativeLayout
+            android:id="@+id/relLayout11"
+            android:layout_below="@id/relLayout10"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:inputType="number|numberDecimal"
-            android:gravity="center"/>
-    </LinearLayout>
+            android:gravity="left"
+            android:orientation="horizontal">
 
-    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-        xmlns:app="http://schemas.android.com/apk/res-auto"
-        xmlns:tools="http://schemas.android.com/tools"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:gravity="left"
-        android:orientation="horizontal"
-        tools:context=".NutritionLabelConfirmActivity">
+            <TextView
+                android:layout_marginTop="15dp"
+                android:id="@+id/prot"
+                android:textSize="20dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:ems="10"
+                android:gravity="center_horizontal"
+                android:inputType="textPersonName"
+                android:text="@string/protein"
+                tools:layout_editor_absoluteX="65dp"
+                tools:layout_editor_absoluteY="16dp"
+                />
 
-        <Button
-            android:id="@+id/quit"
+            <EditText
+                android:layout_toEndOf="@id/prot"
+                android:id="@+id/prote_input"
+                android:layout_width="40dp"
+                android:layout_height="wrap_content"
+                android:inputType="number"
+                android:gravity="center"/>
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:layout_below="@id/relLayout11"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/exit"
-            android:onClick="exit"
-            />
+            android:gravity="left"
+            android:orientation="horizontal"
+            android:layout_marginTop="40dp"
+            android:layout_centerHorizontal="true"
+            tools:context=".NutritionLabelConfirmActivity">
 
-        <Button
-            android:id="@+id/confirm"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/confirm"
-            android:onClick="onConfirm"
-            />
-    </LinearLayout>
+            <Button
+                android:layout_marginLeft="40dp"
+                android:background="@drawable/capsule"
+                android:layout_toEndOf="@id/confirm"
+                android:id="@+id/quit"
+                android:layout_width="100dp"
+                android:layout_height="30dp"
+                android:text="@string/exit"
+                android:onClick="exit" />
 
-</LinearLayout>
+            <Button
+                android:background="@drawable/capsule"
+                android:id="@+id/confirm"
+                android:layout_width="100dp"
+                android:layout_height="30dp"
+                android:text="@string/confirm"
+                android:onClick="onConfirm" />
+        </RelativeLayout>
+    </RelativeLayout>
+
+</RelativeLayout>
