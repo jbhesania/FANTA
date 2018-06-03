@@ -54,9 +54,8 @@ public class Information implements Serializable {
     public ArrayList<Intake> getMyIntakes() { return myIntakes; }
     public HashMap<String, Food> getMyFoods() { return myFoods; }
 
-    public void setInfoToDB(UserInfo myInfo) {
+    public void setInfoToDB() {
         if (mData == null) mData = FirebaseDatabase.getInstance().getReference();
-        this.myInfo = myInfo;
         mData.child(myInfo.getId()).child("info").setValue(myInfo);
     }
 
@@ -192,7 +191,6 @@ public class Information implements Serializable {
 
         }
     }
-
 
     public void addFood(Context context, Food food) {
         addFoodToDB(food);

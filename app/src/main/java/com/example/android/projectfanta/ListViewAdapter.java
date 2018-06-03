@@ -63,7 +63,7 @@ public class ListViewAdapter extends ArrayAdapter<User> implements Filterable {
 
             holder = new DataHolder();
             holder.contactName = (TextView)convertView.findViewById(R.id.contactName);
-           // holder.button = (ImageView)convertView.findViewById(R.id.followButton);
+            // holder.button = (ImageView)convertView.findViewById(R.id.followButton);
 
             convertView.setTag(holder);
         }
@@ -73,7 +73,7 @@ public class ListViewAdapter extends ArrayAdapter<User> implements Filterable {
 
         User dataFriends = data.get(position);
         holder.contactName.setText(dataFriends.getUserName());
-       // holder.profImage.setImageResource(dataFriends.thumbnail);
+        // holder.profImage.setImageResource(dataFriends.thumbnail);
 
         //TODO: Notification appear if the plus button is clicked to send follow request
 

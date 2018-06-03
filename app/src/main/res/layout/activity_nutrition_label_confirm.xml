@@ -1,20 +1,15 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:gravity="center_horizontal"
-    android:orientation="vertical"
+    android:layout_height="match_parent"
     tools:context=".NutritionLabelConfirmActivity">
 
 
-    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-        xmlns:app="http://schemas.android.com/apk/res-auto"
-        xmlns:tools="http://schemas.android.com/tools"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:orientation="horizontal"
+    <RelativeLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         tools:context=".NutritionLabelConfirmActivity">
 
         <EditText
@@ -24,12 +19,11 @@
             android:ems="10"
             android:gravity="center"
             android:inputType="textPersonName"
-            android:text="@string/name"
+            android:hint="@string/name"
             tools:layout_editor_absoluteX="65dp"
             tools:layout_editor_absoluteY="16dp"
-            android:onClick="onClick"
-            />
-    </LinearLayout>
+            android:onClick="onClick" />
+    </RelativeLayout>
 
     <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
         xmlns:app="http://schemas.android.com/apk/res-auto"
@@ -57,8 +51,8 @@
             android:id="@+id/servings"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:inputType="number"
-            android:gravity="center"/>
+            android:gravity="center"
+            android:inputType="number|numberDecimal" />
 
     </LinearLayout>
 
@@ -88,7 +82,7 @@
             android:id="@+id/calories_field"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:inputType="number"
+            android:inputType="number|numberDecimal"
             android:gravity="center"/>
 
     </LinearLayout>
@@ -119,7 +113,7 @@
             android:id="@+id/totalFat_field"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:inputType="number"
+            android:inputType="number|numberDecimal"
             android:gravity="center"/>
 
     </LinearLayout>
@@ -150,7 +144,7 @@
             android:id="@+id/chol_input"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:inputType="number"
+            android:inputType="number|numberDecimal"
             android:gravity="center"/>
 
     </LinearLayout>
@@ -181,7 +175,7 @@
             android:id="@+id/sodium_input"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:inputType="number"
+            android:inputType="number|numberDecimal"
             android:gravity="center"/>
 
     </LinearLayout>
@@ -212,7 +206,7 @@
             android:id="@+id/potass_input"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:inputType="number"
+            android:inputType="number|numberDecimal"
             android:gravity="center"/>
 
     </LinearLayout>
@@ -243,7 +237,7 @@
             android:id="@+id/totCarb_input"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:inputType="number"
+            android:inputType="number|numberDecimal"
             android:gravity="center"/>
 
     </LinearLayout>
@@ -274,7 +268,7 @@
             android:id="@+id/sugar_input"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:inputType="number"
+            android:inputType="number|numberDecimal"
             android:gravity="center"/>
 
     </LinearLayout>
@@ -306,7 +300,7 @@
             android:gravity="center"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:inputType="number"
+            android:inputType="number|numberDecimal"
             />
 
     </LinearLayout>
@@ -337,7 +331,7 @@
             android:id="@+id/prote_input"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:inputType="number"
+            android:inputType="number|numberDecimal"
             android:gravity="center"/>
     </LinearLayout>
 
@@ -367,4 +361,4 @@
             />
     </LinearLayout>>
 
-</LinearLayout>
+</RelativeLayout>
