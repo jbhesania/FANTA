@@ -52,11 +52,11 @@ public class MyAccountActivity extends AppCompatActivity {
         genderGroup = (RadioGroup) findViewById(R.id.genderGroup);
         paGroup = (RadioGroup) findViewById(R.id.paGroup);
 
-        /*
+
         if(user != null ) {
-            if (user.getName() != null) name.setText(user.getName());
-            if (!TextUtils.isEmpty(user.getUserName().toString()))
-                email.setText(user.getUserName());
+            //if (user.getName() != null) name.setText(user.getName());
+            /*if (!TextUtils.isEmpty(user.getUserName().toString()))
+                email.setText(user.getUserName());*/
             if (user.getAge() != 0) age.setText(Integer.toString(user.getAge()));
             if (user.getWeight() != 0) weight.setText(Integer.toString(user.getWeight()));
             if (user.getHeight() != 0) height.setText(Integer.toString(user.getHeight()));
@@ -72,7 +72,7 @@ public class MyAccountActivity extends AppCompatActivity {
 
         // Email is uneditable
         email.setEnabled(false);
-        */
+
 
     }
 
