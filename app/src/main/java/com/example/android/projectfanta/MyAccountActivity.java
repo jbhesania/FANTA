@@ -53,7 +53,7 @@ public class MyAccountActivity extends AppCompatActivity {
             if (user.getWeight() != 0) weight.setText(Integer.toString(user.getWeight()));
             if (user.getHeight() != 0) height.setText(Integer.toString(user.getHeight()));
             if (user.getGender() == ("f")) genderGroup.check(R.id.female);
-            else if (user.getGender().equals("m")) genderGroup.check(R.id.male);
+            else if (user.getGender()==("m")) genderGroup.check(R.id.male);
 
             if (user.getPa() == 1) paGroup.check(R.id.sedentary);
             else if (user.getPa() == 2) paGroup.check(R.id.lowactive);
@@ -71,20 +71,20 @@ public class MyAccountActivity extends AppCompatActivity {
         super.onStart();
     }
 
-    protected void genderGroupClick(View v) {
+    public void genderGroupClick(View v) {
         int radioId = genderGroup.getCheckedRadioButtonId();
         RadioButton rb = (RadioButton) findViewById(radioId);
-        if (rb.getText().equals("Female")) gender = "f";
+        if (rb.getText()==("Female")) gender = "f";
         else gender = "m";
     }
 
-    protected void paGroupClick(View v) {
+    public void paGroupClick(View v) {
         int radioId = paGroup.getCheckedRadioButtonId();
         RadioButton rb = (RadioButton) findViewById(radioId);
-        if(rb.getText().equals("Sedentary")) pa = 1;
-        else if(rb.getText().equals("Low Active")) pa = 2;
-        else if(rb.getText().equals("Active")) pa = 3;
-        else if(rb.getText().equals("Very Active")) pa = 4;
+        if(rb.getText()==("Sedentary")) pa = 1;
+        else if(rb.getText()==("Low Active")) pa = 2;
+        else if(rb.getText()==("Active")) pa = 3;
+        else if(rb.getText()==("Very Active")) pa = 4;
     }
 
     public void saveClick(View v){
@@ -118,38 +118,38 @@ public class MyAccountActivity extends AppCompatActivity {
             double paMultiplier = 1.0;
             if(pa == 2) {
                 if(age <= 18) {
-                    if(gender.equals("m")) { paMultiplier = 1.13; }
+                    if(gender == "m") { paMultiplier = 1.13; }
                     else { paMultiplier = 1.16; }
                 }
                 else {
-                    if(gender.equals("m")) { paMultiplier = 1.11; }
+                    if(gender == "m") { paMultiplier = 1.11; }
                     else { paMultiplier = 1.12; }
                 }
             }
             else if(pa == 3) {
                 if(age <= 18) {
-                    if(gender.equals("m")) { paMultiplier = 1.26; }
+                    if(gender==("m")) { paMultiplier = 1.26; }
                     else { paMultiplier = 1.31; }
                 }
                 else {
-                    if(gender.equals("m")) { paMultiplier = 1.25; }
+                    if(gender==("m")) { paMultiplier = 1.25; }
                     else { paMultiplier = 1.27; }
                 }
             }
             else if(pa == 4) {
                 if(age <= 18) {
-                    if(gender.equals("m")) { paMultiplier = 1.42; }
+                    if(gender==("m")) { paMultiplier = 1.42; }
                     else { paMultiplier = 1.56; }
                 }
                 else {
-                    if(gender.equals("m")) { paMultiplier = 1.48; }
+                    if(gender==("m")) { paMultiplier = 1.48; }
                     else { paMultiplier = 1.45; }
                 }
             }
 
             // Calories
             if( age <= 8) {
-                if(gender.equals("m")) {
+                if(gender==("m")) {
                     recCal = 88.5 - (61.9*age) + paMultiplier * (26.7*weight + 903*height)+20;
                 }
                 else {
@@ -157,7 +157,7 @@ public class MyAccountActivity extends AppCompatActivity {
                 }
             }
             else if( age <= 18) {
-                if(gender.equals("m")) {
+                if(gender==("m")) {
                     recCal = 88.5 - (61.9*age) + paMultiplier * (26.7*weight + 903*height)+25;
                 }
                 else {
@@ -165,7 +165,7 @@ public class MyAccountActivity extends AppCompatActivity {
                 }
             }
             else {
-                if(gender.equals("m")) {
+                if(gender==("m")) {
                     recCal = 662 - (9.53*age) + paMultiplier * (15.9*weight+539.6*height);
                 }
                 else {
@@ -178,7 +178,7 @@ public class MyAccountActivity extends AppCompatActivity {
             recFat = 0.030555 * recCal;
             recProt = 0.8 *weight;
             recSod = 1.5;
-            if(gender.equals("m")) { recSug = 36; }
+            if(gender==("m")) { recSug = 36; }
             else { recSug = 24; }
             recChol = 0.2;
             recPot = 4.7;
