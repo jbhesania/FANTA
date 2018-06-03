@@ -10,12 +10,51 @@ import android.support.v7.app.AppCompatActivity;
 import android.view.MenuItem;
 import android.widget.Toast;
 
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
+import java.util.List;
+import java.util.Map;
+import java.util.Set;
+
 public class HomeActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        
+
+        ArrayList<Food> foodsToDisplay =  (ArrayList) Information.information.getMyFoods().values();
+        for (Food entry: foodsToDisplay) {
+            if(entry.getCount() <= 0) {
+                foodsToDisplay.remove(entry);
+            }
+        }
+        if(foodsToDisplay.size() == 0) {
+            //TODO display a meesage saying that they have not yet eaten any foods!
+        }
+        else {
+            Collections.sort(foodsToDisplay, new Comparator<Food>(){
+                // Reverse order sorting means 1 and -1 are switched
+                public int compare(Food o1, Food o2) {
+                    if (o1.getCount() <= o2.getCount()) {
+                        return 1;
+                    } else if (o1.getCount() >= o2.getCount()){
+                        return -1;
+                    } else {
+                        return 0;
+                    }
+                }
+            });
+
+            // only display 8 or fewer items
+            if(foodsToDisplay.size() > 8) {
+                foodsToDisplay.subList(0,8).clear();
+            }
+
+            // tODO display these foods ( foodsToDisplay ) with a label at top saying "Your Favorite Foods"
+        }
+
+
         setContentView(R.layout.activity_home);
 
         BottomNavigationView navigation = (BottomNavigationView) findViewById(R.id.bottom_navigation);
