@@ -102,6 +102,21 @@ public class WeekFragment extends Fragment {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         view = inflater.inflate(R.layout.fragment_week, container, false);
+        //System.out.println(Information.information.getMyFoods().get(
+                //Information.information.getMyIntakes().get(2).getFood()).getNutrient("calories")
+                //);
+        Calendar today = Calendar.getInstance();
+        today.add(Calendar.DAY_OF_MONTH, 1);
+        today.set(Calendar.HOUR_OF_DAY, 0);
+        today.set(Calendar.MINUTE, 0);
+        today.set(Calendar.SECOND, 0);
+        today.set(Calendar.MILLISECOND, 0);
+        long end = today.getTimeInMillis()+864*(long)java.lang.Math.pow(10,5);
+        //long end = System.currentTimeMillis();
+        long start = end - 7*864*(long)java.lang.Math.pow(10,5);
+        //createGraphWeek(7, , "Protein",
+        double[] intakes = Information.information.intakeInterval(start, end,"calories");
+
         return view;
     }
 }

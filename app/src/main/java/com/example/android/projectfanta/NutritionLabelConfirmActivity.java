@@ -4,7 +4,6 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.text.TextUtils;
-import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -165,14 +164,32 @@ public class NutritionLabelConfirmActivity extends AppCompatActivity {
         if (!TextUtils.isEmpty(serve.getText().toString()) && !TextUtils.isEmpty(name.getText().toString())) {
 
             if (!TextUtils.isEmpty(dataCals.getText().toString())) food.add(Food.CALORIES, Double.parseDouble(dataCals.getText().toString()));
+            else food.add(Food.CALORIES, 0.0);
+
             if (!TextUtils.isEmpty(dataFat.getText().toString())) food.add(Food.FAT, Double.parseDouble(dataFat.getText().toString()));
+            else food.add(Food.FAT, 0.0);
+
             if (!TextUtils.isEmpty(dataChol.getText().toString())) food.add(Food.CHOLESTEROL, Double.parseDouble(dataChol.getText().toString()));
+            else food.add(Food.CHOLESTEROL, 0.0);
+
             if (!TextUtils.isEmpty(dataSod.getText().toString())) food.add(Food.SODIUM, Double.parseDouble(dataSod.getText().toString()));
+            else food.add(Food.SODIUM, 0.0);
+
             if (!TextUtils.isEmpty(dataPot.getText().toString())) food.add(Food.POTASSIUM, Double.parseDouble(dataPot.getText().toString()));
+            else food.add(Food.POTASSIUM, 0.0);
+
             if (!TextUtils.isEmpty(dataCarb.getText().toString())) food.add(Food.CARBS, Double.parseDouble(dataCarb.getText().toString()));
+            else food.add(Food.CARBS, 0.0);
+
             if (!TextUtils.isEmpty(dataFib.getText().toString())) food.add(Food.FIBER, Double.parseDouble(dataFib.getText().toString()));
+            else food.add(Food.FIBER, 0.0);
+
             if (!TextUtils.isEmpty(dataSug.getText().toString())) food.add(Food.SUGAR, Double.parseDouble(dataSug.getText().toString()));
+            else food.add(Food.SUGAR, 0.0);
+
             if (!TextUtils.isEmpty(dataProt.getText().toString())) food.add(Food.PROTIEN, Double.parseDouble(dataProt.getText().toString()));
+            else food.add(Food.PROTIEN, 0.0);
+
 
             food.setName(Food.getValidName(name.getText().toString()));
             intake.setFood(food.getName());

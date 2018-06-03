@@ -257,25 +257,13 @@ public class Information implements Serializable {
      */
     public int searchForIntervalBoundary(long time) {
 
-        int intakeIndex = 0;
-        int upper = myIntakes.size();
-        int lower = 0;
-        boolean found = false;
-        int m;
+        int intakeIndex = 1;
 
-        while (found == false) {
-
-            if (upper < lower) return 0;
-
-            m = lower + (upper - lower)/2;
-
-            if (myIntakes.get(m).getCreationTime() < time) lower = m + 1;
-            else if (myIntakes.get(m).getCreationTime() > time) upper = m - 1;
-            else if (myIntakes.get(m).getCreationTime() == time) {
-                intakeIndex = m;
-                found = true;
+        for (int i = myIntakes.size() - 1; i > 0; i--) {
+            if (myIntakes.get(i).getCreationTime() < time) {
+                intakeIndex = i;
+                break;
             }
-
         }
 
         return intakeIndex;
@@ -309,44 +297,44 @@ public class Information implements Serializable {
         else if (end - start == ONE_YEAR) {
             time = ONE_MONTH;
             days_months_year = 12;
+
         }
 
         // Create an array the size of the number of days in a week or month, or the number of
         // months in a year
         double[] nutrientIntake = new double[days_months_year];
-        int startTime = searchForIntervalBoundary(start);
-        int endTime = searchForIntervalBoundary(end);
+        int startIndex = searchForIntervalBoundary(start);
+        int endIndex = searchForIntervalBoundary(end);
         double intakeSum = 0;
-        long beginningOfDay = myIntakes.get(startTime).getCreationTime();
-        int unit_time = 0;
+        //long beginningOfDay = myIntakes.get(startIndex).getCreationTime();
+        long beginningOfDay = start;
+        int current_idx = 0;
+
+        // handle no foods yet
+        if( myIntakes.size() == 1 ) return nutrientIntake;
 
         // loop through piece returned by search
-        for (int i = startTime; i <= endTime; i++) {
-
-            // if current intake time exceeds a day or month from the start
-            if (myIntakes.get(i).getCreationTime() -  beginningOfDay > time) {
-
-                // put current sum into array
-                nutrientIntake[unit_time] = intakeSum;
-                unit_time++;
-
-                // set sum to 0
-                intakeSum = myIntakes.get(i).getServings();
-
-                // set current intake creation time as start of new day
-                beginningOfDay = myIntakes.get(i).getCreationTime();
-
-            }
-
-            if (unit_time == days_months_year) break; // check if we have intakes for the whole week
+        for (int i = startIndex; i <= endIndex; i++) {
 
             // Get nutrient amount and multiply by amount of servings. Add this to running total
             // of the amount of that nutrient.
             intakeSum += myFoods.get(myIntakes.get(i).getFood()).getNutrient(nutrient)
                     * myIntakes.get(i).getServings();
 
+            current_idx = 0;
+            long curr_time;
+            for (int j = 0; j < days_months_year; j++) {
+                curr_time = start + (days_months_year*j);
+                if (curr_time < myIntakes.get(i).getCreationTime()) {
+                    current_idx = j;
+                }
+            }
+
+            nutrientIntake[current_idx] += myFoods.get(myIntakes.get(i).getFood()).getNutrient(nutrient)
+                    * myIntakes.get(i).getServings();;
 
         }
+
 
         return nutrientIntake;
 
