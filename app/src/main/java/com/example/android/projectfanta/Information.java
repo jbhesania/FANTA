@@ -279,6 +279,8 @@ public class Information implements Serializable {
         // handle no foods yet
         if( myIntakes.size() == 1 ) return nutrientIntake;
 
+        long curr_time;
+
         // loop through piece returned by search
         for (int i = startIndex; i <= endIndex; i++) {
 
@@ -288,19 +290,22 @@ public class Information implements Serializable {
                     * myIntakes.get(i).getServings();
 
             current_idx = 0;
-            long curr_time;
             for (int j = 0; j < days_months_year; j++) {
                 curr_time = start + (ONE_DAY*j);
-                if (curr_time < myIntakes.get(i).getCreationTime()) {
+                if (curr_time <= myIntakes.get(i).getCreationTime()) {
                     current_idx = j;
                 }
             }
 
             nutrientIntake[current_idx] += myFoods.get(myIntakes.get(i).getFood()).getNutrient(nutrient)
-                    * myIntakes.get(i).getServings();;
+                    * myIntakes.get(i).getServings();
 
         }
 
+        for(int i = 0; i < nutrientIntake.length; i++) {
+            System.out.print("Day" + i + ": ");
+            System.out.println(nutrientIntake[i]);
+        }
 
         return nutrientIntake;
 

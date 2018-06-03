@@ -133,12 +133,10 @@ public class YearFragment extends Fragment {
         today.set(Calendar.MINUTE, 0);
         today.set(Calendar.SECOND, 0);
         today.set(Calendar.MILLISECOND, 0);
-        long end = today.getTimeInMillis()+864*(long)java.lang.Math.pow(10,5);
-        //long end = System.currentTimeMillis();
+        long end = today.getTimeInMillis();
         long start = end - 365*864*(long)java.lang.Math.pow(10,5);
-        //createGraphWeek(7, , "Protein",
         Calendar test = Calendar.getInstance();
-        test.setTimeInMillis(start - 864*(long)java.lang.Math.pow(10,5));
+        test.setTimeInMillis(start);
 
         double[] intakes = Information.information.intakeInterval(start, end,"calories");
 
