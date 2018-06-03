@@ -42,9 +42,6 @@ public class MyAccountActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_my_account);
 
-        name = (TextView)findViewById(R.id.nameText);
-        //gender = (Switch) findViewById(R.id.genderSwitch);
-        email = (TextView)findViewById(R.id.emailText);
         age = (TextView)findViewById(R.id.ageText);
         weight = (TextView)findViewById(R.id.weightText);
         height = (TextView)findViewById(R.id.heightText);
@@ -54,9 +51,6 @@ public class MyAccountActivity extends AppCompatActivity {
 
 
         if(user != null ) {
-            //if (user.getName() != null) name.setText(user.getName());
-            /*if (!TextUtils.isEmpty(user.getUserName().toString()))
-                email.setText(user.getUserName());*/
             if (user.getAge() != 0) age.setText(Integer.toString(user.getAge()));
             if (user.getWeight() != 0) weight.setText(Integer.toString(user.getWeight()));
             if (user.getHeight() != 0) height.setText(Integer.toString(user.getHeight()));
@@ -71,7 +65,7 @@ public class MyAccountActivity extends AppCompatActivity {
         }
 
         // Email is uneditable
-        email.setEnabled(false);
+        //email.setEnabled(false);
 
 
     }
