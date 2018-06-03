@@ -42,9 +42,7 @@ public class MyAccountActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_my_account);
 
-        name = (TextView)findViewById(R.id.nameText);
         //gender = (Switch) findViewById(R.id.genderSwitch);
-        email = (TextView)findViewById(R.id.emailText);
         age = (TextView)findViewById(R.id.ageText);
         weight = (TextView)findViewById(R.id.weightText);
         height = (TextView)findViewById(R.id.heightText);
@@ -52,7 +50,11 @@ public class MyAccountActivity extends AppCompatActivity {
         genderGroup = (RadioGroup) findViewById(R.id.genderGroup);
         paGroup = (RadioGroup) findViewById(R.id.paGroup);
 
+<<<<<<< HEAD
 
+=======
+        /*
+>>>>>>> userinterfaces
         if(user != null ) {
             if (user.getName() != null) name.setText(user.getName());
             if (!TextUtils.isEmpty(user.getUserName().toString()))
@@ -62,16 +64,25 @@ public class MyAccountActivity extends AppCompatActivity {
             if (user.getHeight() != 0) height.setText(Integer.toString(user.getHeight()));
             if (user.getGender() == "f") genderGroup.check(R.id.female);
             else if (user.getGender() == "m") genderGroup.check(R.id.male);
+<<<<<<< HEAD
 
 
+=======
+>>>>>>> userinterfaces
             if (user.getPa() == 1) paGroup.check(R.id.sedentary);
             else if (user.getPa() == 2) paGroup.check(R.id.lowactive);
             else if (user.getPa() == 3) paGroup.check(R.id.active);
             else if (user.getPa() == 4) paGroup.check(R.id.veryactive);
         }
+<<<<<<< HEAD
 
         // Email is uneditable
         email.setEnabled(false);
+=======
+        // Email is uneditable
+        email.setEnabled(false);
+        */
+>>>>>>> userinterfaces
 
     }
 
@@ -105,6 +116,7 @@ public class MyAccountActivity extends AppCompatActivity {
         if (!TextUtils.isEmpty(weight.getText().toString())) user.setWeight(Integer.parseInt(weight.getText().toString()));
         if (!TextUtils.isEmpty(height.getText().toString())) user.setHeight(Integer.parseInt(height.getText().toString()));
         if(pa >= 1 && pa <= 4) { user.setPa(pa); }
+<<<<<<< HEAD
         Toast.makeText(MyAccountActivity.this, "Saved", Toast.LENGTH_SHORT).show();
 
         if(user.getRecCalories() == 0 && user.getRecCarbs() == 0 && user.getRecCholesterol() == 0 && user.getRecFiber() == 0 && user.getRecPotassium() == 0 &&
@@ -164,6 +176,11 @@ public class MyAccountActivity extends AppCompatActivity {
 
         }
         Information.information.setInfoToDB();
+=======
+        information.setInfoToDB(user);
+        Toast.makeText(MyAccountActivity.this, "Saved", Toast.LENGTH_SHORT).show();
+
+>>>>>>> userinterfaces
         Intent homeIntent = new Intent(MyAccountActivity.this, HomeActivity.class);
         startActivity(homeIntent);
     }

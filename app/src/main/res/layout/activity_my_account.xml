@@ -32,69 +32,15 @@
             android:layout_toEndOf="@+id/myAcc"/>
     </RelativeLayout>
 
-
-    <LinearLayout
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center_horizontal">
-
-        <Button
-            android:id="@+id/save"
-            android:layout_width="100dp"
-            android:layout_height="30dp"
-            android:background="@drawable/capsule"
-            android:onClick="saveClick"
-            android:text="SAVE"
-            android:textAlignment="center" />
-
-    </LinearLayout>
-
-    <ScrollView
-        android:layout_width="match_parent"
-        android:layout_height="match_parent">
-
         <RelativeLayout
             android:layout_width="200dp"
             android:layout_height="wrap_content"
             android:orientation="vertical"
-            android:layout_marginTop="20dp"
+            android:layout_marginTop="25dp"
             android:layout_gravity="center_horizontal">
 
-            <ImageView
-                android:id="@+id/email"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:src="@drawable/email"
-                android:layout_marginRight="5dp"/>
-
-            <EditText
-                android:id="@+id/emailText"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:hint="Email"
-                android:textSize="15sp"
-                android:layout_toEndOf="@+id/email"/>
 
             <ImageView
-                android:layout_marginTop="60dp"
-                android:id="@+id/name"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:src="@drawable/name"
-                android:layout_marginRight="5dp"/>
-
-            <EditText
-                android:id="@+id/nameText"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="60dp"
-                android:hint="Enter your name"
-                android:textSize="15sp"
-                android:layout_toEndOf="@+id/name" />
-
-
-            <ImageView
-                android:layout_marginTop="120dp"
                 android:id="@+id/gender"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -103,7 +49,6 @@
 
             <RadioGroup
                 android:id="@+id/genderGroup"
-                android:layout_marginTop="120dp"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_toEndOf="@+id/gender">
@@ -123,7 +68,7 @@
 
             <ImageView
                 android:id="@+id/birthdayP"
-                android:layout_marginTop="180dp"
+                android:layout_marginTop="80dp"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:src="@drawable/birthday"
@@ -131,7 +76,7 @@
 
             <EditText
                 android:id="@+id/ageText"
-                android:layout_marginTop="180dp"
+                android:layout_marginTop="80dp"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:hint="Enter your age"
@@ -140,7 +85,7 @@
 
             <ImageView
                 android:id="@+id/weight"
-                android:layout_marginTop="240dp"
+                android:layout_marginTop="140dp"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:src="@drawable/weight"
@@ -152,12 +97,12 @@
                 android:layout_height="wrap_content"
                 android:hint="Enter your weight"
                 android:textSize="15sp"
-                android:layout_marginTop="240dp"
+                android:layout_marginTop="140dp"
                 android:layout_toEndOf="@+id/weight"/>
 
             <ImageView
                 android:id="@+id/height"
-                android:layout_marginTop="300dp"
+                android:layout_marginTop="200dp"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:src="@drawable/height"
@@ -166,15 +111,22 @@
             <EditText
                 android:id="@+id/heightText"
                 android:layout_toEndOf="@+id/height"
-                android:layout_marginTop="300dp"
+                android:layout_marginTop="200dp"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:hint="Enter your height"
                 android:textSize="15sp"/>
 
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginRight="5dp"
+                android:src="@drawable/running"
+                android:layout_marginTop="260dp"/>
+
             <RadioGroup
                 android:id="@+id/paGroup"
-                android:layout_marginTop="360dp"
+                android:layout_marginTop="260dp"
                 android:layout_width="match_parent"
                 android:layout_height="180dp"
                 android:layout_toEndOf="@+id/gender">
@@ -206,6 +158,20 @@
 
         </RelativeLayout>
 
-    </ScrollView>
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center">
+
+        <Button
+            android:id="@+id/save"
+            android:layout_width="100dp"
+            android:layout_height="30dp"
+            android:background="@drawable/capsule"
+            android:onClick="saveClick"
+            android:text="SAVE"
+            android:textAlignment="center" />
+
+    </LinearLayout>
 
 </LinearLayout>
