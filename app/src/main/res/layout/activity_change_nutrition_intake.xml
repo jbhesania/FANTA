@@ -23,7 +23,6 @@
             android:textStyle="bold"/>
     </LinearLayout>
 
-
         <RelativeLayout
             android:id="@+id/lin2"
             android:layout_centerHorizontal="true"

@@ -18,14 +18,6 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
-
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.Comparator;
-import java.util.List;
-import java.util.Map;
-import java.util.Set;
-
 public class HomeActivity extends AppCompatActivity {
     Dialog dialog;
     EditText numberOfServing;
@@ -155,5 +147,55 @@ public class HomeActivity extends AppCompatActivity {
         }
     };
 
+    /*public void nutrientChoose(View v) {
+        RadioGroup rg = (RadioGroup) findViewById(R.id.nutrientGraph);
+        int id = rg.getCheckedRadioButtonId();
+
+        RadioButton nutrient = (RadioButton) findViewById(id);
+        switch (nutrient.getText().toString()) {
+            case "Calories":
+                WeekFragment.setNutrient("calories");
+                MonthFragment.setNutrient("calories");
+                YearFragment.setNutrient("calories");
+            case "Total Fat":
+                WeekFragment.setNutrient("fat");
+                MonthFragment.setNutrient("fat");
+                YearFragment.setNutrient("fat");
+            case "Cholesterol":
+                WeekFragment.setNutrient("cholesterol");
+                MonthFragment.setNutrient("cholesterol");
+                YearFragment.setNutrient("cholesterol");
+            case "Sodium":
+                WeekFragment.setNutrient("sodium");
+                MonthFragment.setNutrient("sodium");
+                YearFragment.setNutrient("sodium");
+            case "Potassium":
+                WeekFragment.setNutrient("potassium");
+                MonthFragment.setNutrient("potassium");
+                YearFragment.setNutrient("potassium");
+            case "Total Carbs":
+                WeekFragment.setNutrient("carbs");
+                MonthFragment.setNutrient("carbs");
+                YearFragment.setNutrient("carbs");
+            case "Dietary Fiber":
+                WeekFragment.setNutrient("fiber");
+                MonthFragment.setNutrient("fiber");
+                YearFragment.setNutrient("fiber");
+            case "Sugars":
+                WeekFragment.setNutrient("sugar");
+                MonthFragment.setNutrient("sugar");
+                YearFragment.setNutrient("sugar");
+            case "Protein":
+                WeekFragment.setNutrient("protein");
+                MonthFragment.setNutrient("protein");
+                YearFragment.setNutrient("protein");
+            default:
+                WeekFragment.setNutrient("calories");
+                MonthFragment.setNutrient("calories");
+                YearFragment.setNutrient("calories");
+
+
+        }*/
+    //}
 
 }
