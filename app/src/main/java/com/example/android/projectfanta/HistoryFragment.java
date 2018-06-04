@@ -1,12 +1,16 @@
 package com.example.android.projectfanta;
 
+import android.app.Activity;
 import android.content.Context;
+import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
 import android.support.design.widget.NavigationView;
 import android.support.design.widget.TabLayout;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentActivity;
+
 import android.support.v4.view.ViewPager;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
@@ -15,6 +19,7 @@ import android.view.LayoutInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Toast;
 
 
 /**
@@ -38,14 +43,9 @@ public class HistoryFragment extends Fragment implements NavigationView.OnNaviga
     private FriendsFragment.OnFragmentInteractionListener mListener;
     public View view;
 
-    private DrawerLayout drawerLayout;
-    private ActionBarDrawerToggle toggle;
-    private NavigationView navigationView;
-
     private SectionsPageAdapter myAdapters;
     private ViewPager myPagers;
 
-    private FragmentActivity myContext;
 
     public HistoryFragment() {
         // Required empty public constructor
@@ -89,7 +89,6 @@ public class HistoryFragment extends Fragment implements NavigationView.OnNaviga
 
     @Override
     public void onAttach(Context context) {
-        myContext=(FragmentActivity)context;
         super.onAttach(context);
     }
 
@@ -97,13 +96,8 @@ public class HistoryFragment extends Fragment implements NavigationView.OnNaviga
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        view = inflater.inflate(R.layout.fragment_history, container, false);
-        setHasOptionsMenu(true);
-        drawerLayout = (DrawerLayout) view.findViewById(R.id.drawer);
-        toggle = new ActionBarDrawerToggle(getActivity(),drawerLayout, R.string.open, R.string.close);
-        drawerLayout.addDrawerListener(toggle);
+        View view = inflater.inflate(R.layout.fragment_history, container, false);
 
-        toggle.syncState();
 
         myAdapters = new SectionsPageAdapter(getFragmentManager());
 
@@ -114,38 +108,6 @@ public class HistoryFragment extends Fragment implements NavigationView.OnNaviga
         tab.setupWithViewPager(myPagers);
 
         return view;
-    }
-
-
-    @Override
-    public boolean onNavigationItemSelected(MenuItem menuItem) {
-        Log.e("Debug", "NavigationItemCalled");
-        switch (menuItem.getItemId()){
-            case R.id.cal:
-                WeekFragment.setNutrient("calories");
-                return true;
-            case R.id.car:
-                WeekFragment.setNutrient("carbs");
-                return true;
-            case R.id.fats:
-                WeekFragment.setNutrient("fat");
-                return true;
-            case R.id.prot:
-                WeekFragment.setNutrient("protein");
-                return true;
-            case R.id.sod:
-                WeekFragment.setNutrient("sodium");
-                return true;
-            case R.id.sug:
-                WeekFragment.setNutrient("sugar");
-                return true;
-            case R.id.fiber:
-                WeekFragment.setNutrient("fiber");
-                return true;
-            default:
-                WeekFragment.setNutrient("calories");
-                return true;
-        }
     }
 
     // TODO: Rename method, update argument and hook method into UI event
@@ -160,6 +122,12 @@ public class HistoryFragment extends Fragment implements NavigationView.OnNaviga
         super.onDetach();
         mListener = null;
     }
+
+    @Override
+    public boolean onNavigationItemSelected(@NonNull MenuItem item) {
+        return false;
+    }
+
 
     /**
      * This interface must be implemented by activities that contain this
@@ -176,4 +144,3 @@ public class HistoryFragment extends Fragment implements NavigationView.OnNaviga
         void onFragmentInteraction(Uri uri);
     }
 }
-

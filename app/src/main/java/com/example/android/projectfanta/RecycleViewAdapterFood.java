@@ -7,7 +7,6 @@ import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -102,6 +101,10 @@ public class RecycleViewAdapterFood extends RecyclerView.Adapter<RecycleViewAdap
                                 activity.getCurrentFocus().getWindowToken(), 0);
 
                         dialog.dismiss();
+
+                        Intent intent = new Intent(activity, HomeActivity.class);
+                        activity.startActivity(intent);
+                        activity.finish();
 
                         //TODO the keyboard still doesnt actually go away
                     }
