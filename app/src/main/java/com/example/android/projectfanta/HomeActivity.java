@@ -48,7 +48,8 @@ public class HomeActivity extends AppCompatActivity {
                     transaction.replace(R.id.fragment_container, new HomeFragment()).commit();
                     return true;
                 case R.id.history:
-                    transaction.replace(R.id.fragment_container, new HistoryFragment()).commit();
+                    HistoryFragment.historyFragment = new HistoryFragment();
+                    transaction.replace(R.id.fragment_container, HistoryFragment.historyFragment).commit();
                     return true;
                 case R.id.friends:
                     transaction.replace(R.id.fragment_container, new FriendsFragment()).commit();
