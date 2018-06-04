@@ -6,17 +6,8 @@ import android.support.design.widget.BottomNavigationView;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AppCompatActivity;
-import android.view.KeyEvent;
 import android.view.MenuItem;
 import android.widget.Toast;
-
-
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.Comparator;
-import java.util.List;
-import java.util.Map;
-import java.util.Set;
 
 public class HomeActivity extends AppCompatActivity {
 
@@ -55,7 +46,6 @@ public class HomeActivity extends AppCompatActivity {
             // tODO display these foods ( foodsToDisplay ) with a label at top saying "Your Favorite Foods"
         }*/
 
-
         setContentView(R.layout.activity_home);
 
         BottomNavigationView navigation = (BottomNavigationView) findViewById(R.id.bottom_navigation);
@@ -69,14 +59,8 @@ public class HomeActivity extends AppCompatActivity {
     }
 
     @Override
-    public boolean onKeyDown(int keyCode, KeyEvent event)  {
-        if (keyCode == KeyEvent.KEYCODE_BACK ) {
-            moveTaskToBack(true);
-            finish(); // onPause, onStop, onDestroy
-            return true;
-        }
-
-        return super.onKeyDown(keyCode, event);
+    public void onBackPressed() {
+        moveTaskToBack(true);
     }
 
     @Override
