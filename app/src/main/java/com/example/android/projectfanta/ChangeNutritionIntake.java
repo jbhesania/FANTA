@@ -8,9 +8,10 @@ import android.view.View;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import static com.example.android.projectfanta.Information.information;
 import java.math.BigDecimal;
 import java.math.RoundingMode;
+
+import static com.example.android.projectfanta.Information.information;
 
 public class ChangeNutritionIntake extends AppCompatActivity {
 
@@ -52,7 +53,7 @@ public class ChangeNutritionIntake extends AppCompatActivity {
         if (user.getRecFiber() != 0) fiber.setText(Double.toString(round(user.getRecFiber(), 1)));
     }
 
-    protected void saveNutritionIntakeButton(View v){
+    public void saveNutritionIntakeButton(View v){
         if (!TextUtils.isEmpty(calories.getText().toString())) user.setRecCalories(Double.parseDouble(calories.getText().toString()));
         if (!TextUtils.isEmpty(carbs.getText().toString())) user.setRecCarbs(Double.parseDouble(carbs.getText().toString()));
         if (!TextUtils.isEmpty(fat.getText().toString())) user.setRecFat(Double.parseDouble(fat.getText().toString()));
@@ -68,7 +69,7 @@ public class ChangeNutritionIntake extends AppCompatActivity {
         startActivity(homeIntent);
     }
 
-    protected void recommendedButton(View v) {
+    public void recommendedButton(View v) {
         double recCal;
         double recCarbs;
         double recFat;
