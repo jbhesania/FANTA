@@ -2,6 +2,7 @@ package com.example.android.projectfanta;
 
 import android.graphics.Color;
 import android.os.Bundle;
+import android.os.Handler;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentActivity;
 import android.view.LayoutInflater;
@@ -19,6 +20,7 @@ import com.jjoe64.graphview.series.OnDataPointTapListener;
 import com.jjoe64.graphview.series.Series;
 
 import java.util.Calendar;
+import java.util.List;
 
 
 public class WeekFragment extends Fragment{
@@ -27,6 +29,10 @@ public class WeekFragment extends Fragment{
     public static String nutrient = "calories";
     public static double recNutrient;
     public static View global_view;
+
+
+    public static LineGraphSeries<DataPoint> series;
+    public static LineGraphSeries<DataPoint> standard;
 
     private static long start, end;
     private static Calendar day1;
@@ -72,13 +78,14 @@ public class WeekFragment extends Fragment{
         }
 
         //Drawing the graph on View
-        LineGraphSeries<DataPoint> series = new LineGraphSeries<>(dp);
+        series = new LineGraphSeries<>(dp);
         series.setTitle("User");
 
         // set date label formatter
         // use static labels for horizontal and vertical labels
         // set date label formatter
         final FragmentActivity activity = (FragmentActivity)view.getContext();
+        graph = (GraphView) global_view.findViewById(R.id.graph);
         graph.getGridLabelRenderer().setLabelFormatter(new DateAsXAxisLabelFormatter(activity));
         graph.getGridLabelRenderer().setHorizontalLabelsAngle(35);
         graph.getGridLabelRenderer().setNumHorizontalLabels(numDays+1);
@@ -96,7 +103,7 @@ public class WeekFragment extends Fragment{
         graph.getGridLabelRenderer().setVerticalAxisTitle("mg");
 
         //Graphing standard intake
-        LineGraphSeries<DataPoint> standard = new LineGraphSeries<>(dpStd);
+        standard = new LineGraphSeries<>(dpStd);
         standard.setTitle("Standard");
         standard.setColor(Color.GREEN);
 
@@ -169,10 +176,17 @@ public class WeekFragment extends Fragment{
 
     // Creates array and graphs it
     public static void graphUpdate() {
-        graph = (GraphView) global_view.findViewById(R.id.graph);
-        graph.removeAllSeries();
         double[] intakes = Information.information.intakeInterval(start,end,nutrient);
-        createGraphWeek(7,day1,nutrient,intakes,recNutrient,global_view);
+        DataPoint dp[] = new DataPoint[7];
+
+        //Create Data set for user line
+        for(int i = 0; i < dp.length; i++)
+        {
+            DataPoint point = new DataPoint(day1.getTime(), intakes[i]);
+            dp[i] = point;
+            day1.add(Calendar.DATE,1);
+        }
+        series.resetData(dp);
     }
 
     @Override
@@ -198,14 +212,14 @@ public class WeekFragment extends Fragment{
         day1 = Calendar.getInstance();
         day1.setTimeInMillis(start);
 
-        //double[] intakes = Information.information.intakeInterval(start, end,nutrient);
+        double[] intakes = Information.information.intakeInterval(start, end,nutrient);
 
         System.out.println(recNutrient);
         System.out.println(Information.information.getInfo().getRecCalories());
 
-        //createGraphWeek(7,day1,nutrient,intakes,recNutrient,global_view);
+        createGraphWeek(7,day1,nutrient,intakes,recNutrient,global_view);
 
-        graphUpdate();
+        //graphUpdate();
         return global_view;
     }
 
