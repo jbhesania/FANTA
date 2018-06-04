@@ -23,7 +23,6 @@
             android:textStyle="bold"/>
     </LinearLayout>
 
-
         <RelativeLayout
             android:id="@+id/lin2"
             android:layout_centerHorizontal="true"
@@ -41,12 +40,19 @@
                 android:src="@drawable/calories"
                 android:layout_marginRight="5dp"/>
 
+            <TextView
+                android:layout_marginTop="6dp"
+                android:id="@+id/texts"
+                android:layout_toEndOf="@id/cal"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Calories"/>
+
             <EditText
                 android:id="@+id/calText"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_toEndOf="@+id/cal"
-                android:hint="Enter calories intake"
+                android:layout_toEndOf="@+id/texts"
                 android:inputType="numberDecimal"
                 android:textSize="15sp" />
 
@@ -57,6 +63,14 @@
                 android:layout_height="wrap_content"
                 android:src="@drawable/carbohydrate"
                 android:layout_marginRight="5dp"/>
+
+            <TextView
+                android:layout_marginTop="6dp"
+                android:id="@+id/textss"
+                android:layout_toEndOf="@id/carbs"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Calories"/>
 
             <EditText
                 android:id="@+id/carbsText"

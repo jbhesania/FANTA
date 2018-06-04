@@ -269,7 +269,7 @@
                 android:ems="10"
                 android:gravity="center_horizontal"
                 android:inputType="textPersonName"
-                android:text="@string/sugar"
+                android:text="@string/diet_fiber"
                 tools:layout_editor_absoluteX="65dp"
                 tools:layout_editor_absoluteY="16dp" />
 
@@ -300,7 +300,7 @@
                 android:ems="10"
                 android:gravity="center_horizontal"
                 android:inputType="textPersonName"
-                android:text="@string/diet_fiber"
+                android:text="@string/sugar"
                 tools:layout_editor_absoluteX="65dp"
                 tools:layout_editor_absoluteY="16dp" />
 
