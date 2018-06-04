@@ -6,17 +6,15 @@ import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
-import android.support.design.widget.AppBarLayout;
 import android.support.design.widget.NavigationView;
 import android.support.design.widget.TabLayout;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentActivity;
-import android.support.v4.app.FragmentManager;
-import android.support.v4.app.FragmentTransaction;
+
 import android.support.v4.view.ViewPager;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
-import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.MenuItem;
 import android.view.View;
@@ -32,7 +30,7 @@ import android.widget.Toast;
  * Use the {@link HistoryFragment#newInstance} factory method to
  * create an instance of this fragment.
  */
-public class HistoryFragment extends Fragment {
+public class HistoryFragment extends Fragment implements NavigationView.OnNavigationItemSelectedListener{
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
     private static final String ARG_PARAM1 = "param1";
@@ -42,10 +40,12 @@ public class HistoryFragment extends Fragment {
     private String mParam1;
     private String mParam2;
 
-    private OnFragmentInteractionListener mListener;
+    private FriendsFragment.OnFragmentInteractionListener mListener;
+    public View view;
 
     private SectionsPageAdapter myAdapters;
     private ViewPager myPagers;
+
 
     public HistoryFragment() {
         // Required empty public constructor
@@ -80,6 +80,7 @@ public class HistoryFragment extends Fragment {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        setHasOptionsMenu(true);
         if (getArguments() != null) {
             mParam1 = getArguments().getString(ARG_PARAM1);
             mParam2 = getArguments().getString(ARG_PARAM2);
@@ -97,6 +98,7 @@ public class HistoryFragment extends Fragment {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_history, container, false);
 
+
         myAdapters = new SectionsPageAdapter(getFragmentManager());
 
         myPagers = (ViewPager) view.findViewById(R.id.historyContainer);
@@ -104,6 +106,7 @@ public class HistoryFragment extends Fragment {
 
         TabLayout tab = (TabLayout)view.findViewById(R.id.historyTabs);
         tab.setupWithViewPager(myPagers);
+
         return view;
     }
 
@@ -114,12 +117,17 @@ public class HistoryFragment extends Fragment {
         }
     }
 
-
     @Override
     public void onDetach() {
         super.onDetach();
         mListener = null;
     }
+
+    @Override
+    public boolean onNavigationItemSelected(@NonNull MenuItem item) {
+        return false;
+    }
+
 
     /**
      * This interface must be implemented by activities that contain this

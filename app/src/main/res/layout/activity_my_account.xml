@@ -84,6 +84,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:hint="Enter your age"
+                android:inputType="numberDecimal"
                 android:textSize="15sp"
                 android:layout_toEndOf="@+id/birthdayP"/>
 
@@ -101,6 +102,7 @@
                 android:layout_height="wrap_content"
                 android:hint="Enter your weight"
                 android:textSize="15sp"
+                android:inputType="numberDecimal"
                 android:layout_marginTop="140dp"
                 android:layout_toEndOf="@+id/weight"/>
 
@@ -118,6 +120,7 @@
                 android:layout_marginTop="200dp"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:inputType="numberDecimal"
                 android:hint="Enter your height"
                 android:textSize="15sp"/>
 

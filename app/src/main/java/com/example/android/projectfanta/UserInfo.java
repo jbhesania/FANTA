@@ -31,12 +31,12 @@ public class UserInfo extends User {
         super();
     }
 
-    public UserInfo(String id, String g, String uname, int w, int h, int a) {
+    public UserInfo(String id, String uname, String g, int w, int h, int a) {
         super(id, uname);
         weight = w;
         height = h;
         age = a;
-        gender = gender;
+        gender = g;
         // we should add the logic for set nutrional values to defulats resetNutrionalValues
 
     }

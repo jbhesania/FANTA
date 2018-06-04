@@ -9,6 +9,19 @@
     tools:context=".HistoryFragment"
     android:orientation="vertical">
 
+
+    <android.support.design.widget.NavigationView
+
+        android:id="@+id/nv"
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        app:itemTextColor="#000"
+        android:background="#fff"
+        app:itemIconTint="@color/addButton"
+        app:menu="@menu/drawer_menu"
+        android:layout_gravity="start">
+    </android.support.design.widget.NavigationView>
+
     <FrameLayout
         android:id="@+id/main_content"
         android:layout_width="match_parent"
@@ -51,6 +64,21 @@
 
             </android.support.design.widget.TabLayout>
         </android.support.design.widget.AppBarLayout>
+
+        <RelativeLayout
+            android:layout_marginLeft="70dp"
+            android:layout_marginTop="500dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content">
+
+            <Button
+                android:id="@+id/nutrients"
+                android:layout_width="wrap_content"
+                android:layout_height="30dp"
+                android:background="@drawable/capsule"
+                android:text="SELECT SPECIFIC NUTRIENT"
+                android:textAlignment="center" />
+        </RelativeLayout>
 
         <android.support.v4.view.ViewPager
             android:id="@+id/historyContainer"
