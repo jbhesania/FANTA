@@ -1,6 +1,5 @@
 package com.example.android.projectfanta;
 
-import android.app.Activity;
 import android.app.Dialog;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
@@ -12,7 +11,6 @@ import android.view.KeyEvent;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.Window;
-import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
@@ -70,7 +68,6 @@ public class HomeActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
 
         setContentView(R.layout.activity_home);
-
         BottomNavigationView navigation = (BottomNavigationView) findViewById(R.id.bottom_navigation);
         BottomNavigationBarHelper.removeShiftMode(navigation);
         navigation.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener);
@@ -123,6 +120,7 @@ public class HomeActivity extends AppCompatActivity {
         public boolean onNavigationItemSelected(@NonNull MenuItem item) {
             FragmentManager frag = getSupportFragmentManager();
             FragmentTransaction transaction = frag.beginTransaction();
+
             switch (item.getItemId()) {
                 case R.id.home:
                     transaction.replace(R.id.fragment_container, new HomeFragment()).commit();

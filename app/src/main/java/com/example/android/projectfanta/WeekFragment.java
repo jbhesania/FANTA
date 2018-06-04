@@ -2,7 +2,6 @@ package com.example.android.projectfanta;
 
 import android.graphics.Color;
 import android.os.Bundle;
-import android.os.Handler;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentActivity;
 import android.view.LayoutInflater;
@@ -20,7 +19,6 @@ import com.jjoe64.graphview.series.OnDataPointTapListener;
 import com.jjoe64.graphview.series.Series;
 
 import java.util.Calendar;
-import java.util.List;
 
 
 public class WeekFragment extends Fragment{
@@ -98,6 +96,26 @@ public class WeekFragment extends Fragment{
         graph.getViewport().setXAxisBoundsManual(true);
         graph.getGridLabelRenderer().setHumanRounding(false);
 
+
+        /*double max = nutrientIntake[0];
+        for (int ktr = 0; ktr < nutrientIntake.length; ktr++) {
+            if (nutrientIntake[ktr] > max) {
+                max = nutrientIntake[ktr];
+            }
+        }
+        System.out.println("MAX = " + max);
+        double min = nutrientIntake[0];
+        for (int ktr = 0; ktr < nutrientIntake.length; ktr++) {
+            if (nutrientIntake[ktr] < min) {
+                min = nutrientIntake[ktr];
+            }
+        }
+        System.out.println("MIN = " + min);
+
+        graph.getViewport().setYAxisBoundsManual(true);
+        graph.getViewport().setMinY(min);
+        graph.getViewport().setMaxY(max);*/
+
         //Legend
         graph.getGridLabelRenderer().setHorizontalAxisTitle("date");
         graph.getGridLabelRenderer().setVerticalAxisTitle("mg");
@@ -123,10 +141,10 @@ public class WeekFragment extends Fragment{
             }
         });
 
-        graph.getViewport().setScrollable(true);
+        /*graph.getViewport().setScrollable(true);
         graph.getViewport().setScrollableY(true);
         graph.getViewport().setScalable(true);
-        graph.getViewport().setScalableY(true);
+        graph.getViewport().setScalableY(true);*/
 
 
         //Adding them to the view
@@ -175,18 +193,23 @@ public class WeekFragment extends Fragment{
     }
 
     // Creates array and graphs it
-    public static void graphUpdate() {
-        double[] intakes = Information.information.intakeInterval(start,end,nutrient);
-        DataPoint dp[] = new DataPoint[7];
+    public  static void graphUpdate(String s, boolean rewrite) {
 
-        //Create Data set for user line
-        for(int i = 0; i < dp.length; i++)
-        {
-            DataPoint point = new DataPoint(day1.getTime(), intakes[i]);
-            dp[i] = point;
-            day1.add(Calendar.DATE,1);
-        }
-        series.resetData(dp);
+        setNutrient(s);
+
+        if(rewrite) graph.removeAllSeries();
+
+        double[] intakes = Information.information.intakeInterval(start, end,nutrient);
+
+        /*Fragment frg = null;
+        FragmentManager frg = getSupportFragmentManager().findFragmentByTag("Your_Fragment_TAG");
+        final FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
+        ft.detach(frg);
+        ft.attach(frg);
+        ft.commit();*/
+
+        createGraphWeek(7,day1,nutrient,intakes,recNutrient,global_view);
+
     }
 
     @Override
@@ -212,14 +235,7 @@ public class WeekFragment extends Fragment{
         day1 = Calendar.getInstance();
         day1.setTimeInMillis(start);
 
-        double[] intakes = Information.information.intakeInterval(start, end,nutrient);
-
-        System.out.println(recNutrient);
-        System.out.println(Information.information.getInfo().getRecCalories());
-
-        createGraphWeek(7,day1,nutrient,intakes,recNutrient,global_view);
-
-        //graphUpdate();
+        graphUpdate( nutrient, false);
         return global_view;
     }
 

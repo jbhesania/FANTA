@@ -46,6 +46,7 @@ public class HistoryFragment extends Fragment {
     Dialog dialog;
 
 
+
     public HistoryFragment() {
         // Required empty public constructor
     }
@@ -142,55 +143,35 @@ public class HistoryFragment extends Fragment {
 
         switch (nutrient.getText().toString()) {
             case "Calories":
-                WeekFragment.setNutrient("calories");
-                MonthFragment.setNutrient("calories");
-                YearFragment.setNutrient("calories");
-                WeekFragment.graphUpdate();
+                WeekFragment.graphUpdate("calories", true);
+                break;
             case "Total Fat":
-                WeekFragment.setNutrient("fat");
-                MonthFragment.setNutrient("fat");
-                YearFragment.setNutrient("fat");
-                WeekFragment.graphUpdate();
+                WeekFragment.graphUpdate("fat", true);
+                break;
             case "Cholesterol":
-                WeekFragment.setNutrient("cholesterol");
-                MonthFragment.setNutrient("cholesterol");
-                YearFragment.setNutrient("cholesterol");
-                WeekFragment.graphUpdate();
+                WeekFragment.graphUpdate("cholesterol", true);
+                break;
             case "Sodium":
-                WeekFragment.setNutrient("sodium");
-                MonthFragment.setNutrient("sodium");
-                YearFragment.setNutrient("sodium");
-                WeekFragment.graphUpdate();
+                WeekFragment.graphUpdate("sodium",true);
+                break;
             case "Potassium":
-                WeekFragment.setNutrient("potassium");
-                MonthFragment.setNutrient("potassium");
-                YearFragment.setNutrient("potassium");
-                WeekFragment.graphUpdate();
+                WeekFragment.graphUpdate("potassium",true);
+                break;
             case "Total Carbs":
-                WeekFragment.setNutrient("carbs");
-                MonthFragment.setNutrient("carbs");
-                YearFragment.setNutrient("carbs");
-                WeekFragment.graphUpdate();
+                WeekFragment.graphUpdate("carbs", true);
+                break;
             case "Dietary Fiber":
-                WeekFragment.setNutrient("fiber");
-                MonthFragment.setNutrient("fiber");
-                YearFragment.setNutrient("fiber");
-                WeekFragment.graphUpdate();
+                WeekFragment.graphUpdate("fiber",true);
+                break;
             case "Sugars":
-                WeekFragment.setNutrient("sugar");
-                MonthFragment.setNutrient("sugar");
-                YearFragment.setNutrient("sugar");
-                WeekFragment.graphUpdate();
+                WeekFragment.graphUpdate("sugar",true);
+                break;
             case "Protein":
-                WeekFragment.setNutrient("protein");
-                MonthFragment.setNutrient("protein");
-                YearFragment.setNutrient("protein");
-                WeekFragment.graphUpdate();
+                WeekFragment.graphUpdate("protein",true);
+                break;
             default:
-                WeekFragment.setNutrient("calories");
-                MonthFragment.setNutrient("calories");
-                YearFragment.setNutrient("calories");
-                WeekFragment.graphUpdate();
+                WeekFragment.graphUpdate("calories",true);
+                break;
 
 
         }
