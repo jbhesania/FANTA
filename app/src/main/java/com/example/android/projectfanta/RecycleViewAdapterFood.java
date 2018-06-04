@@ -86,6 +86,10 @@ public class RecycleViewAdapterFood extends RecyclerView.Adapter<RecycleViewAdap
                     public void onClick(View view){
 
                         value = numberOfServing.getText().toString();
+                        if(value == null || value.equals("")) {
+                            dialog.dismiss();
+                            return;
+                        }
                         Double servings = new Double(value);
                         Intake newIntake = new Intake(foodData.get(position).getName(), servings);
                         Information.information.addIntake(context, newIntake);

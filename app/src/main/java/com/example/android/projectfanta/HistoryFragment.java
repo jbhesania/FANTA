@@ -1,25 +1,20 @@
 package com.example.android.projectfanta;
 
-import android.app.Activity;
+import android.app.Dialog;
 import android.content.Context;
-import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
-import android.support.design.widget.NavigationView;
 import android.support.design.widget.TabLayout;
 import android.support.v4.app.Fragment;
-import android.support.v4.app.FragmentActivity;
-
 import android.support.v4.view.ViewPager;
-import android.support.v4.widget.DrawerLayout;
-import android.support.v7.app.ActionBarDrawerToggle;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Toast;
+import android.widget.Button;
+import android.widget.RadioButton;
+import android.widget.RadioGroup;
 
 
 /**
@@ -30,7 +25,7 @@ import android.widget.Toast;
  * Use the {@link HistoryFragment#newInstance} factory method to
  * create an instance of this fragment.
  */
-public class HistoryFragment extends Fragment implements NavigationView.OnNavigationItemSelectedListener{
+public class HistoryFragment extends Fragment {
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
     private static final String ARG_PARAM1 = "param1";
@@ -39,12 +34,16 @@ public class HistoryFragment extends Fragment implements NavigationView.OnNaviga
     // TODO: Rename and change types of parameters
     private String mParam1;
     private String mParam2;
-
+    RadioGroup rg;
     private FriendsFragment.OnFragmentInteractionListener mListener;
     public View view;
 
     private SectionsPageAdapter myAdapters;
     private ViewPager myPagers;
+    Button select;
+    RadioButton nutrient;
+    Button select_nutrient;
+    Dialog dialog;
 
 
     public HistoryFragment() {
@@ -96,7 +95,36 @@ public class HistoryFragment extends Fragment implements NavigationView.OnNaviga
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        View view = inflater.inflate(R.layout.fragment_history, container, false);
+
+        view = inflater.inflate(R.layout.fragment_history, container, false);
+        setHasOptionsMenu(true);
+        select = (Button)view.findViewById(R.id.select);
+
+
+        select.setOnClickListener(new View.OnClickListener(){
+            @Override
+            public void onClick(View view){
+               dialog = new Dialog(getActivity());
+               dialog.setContentView(R.layout.custom_select);
+               dialog.show();
+                select_nutrient = (Button)dialog.findViewById(R.id.nut);
+                rg = (RadioGroup) dialog.findViewById(R.id.nutrientGraph);
+
+                select_nutrient.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                        int id = rg.getCheckedRadioButtonId();
+                        nutrient = (RadioButton) dialog.findViewById(id);
+                        nutrientChoose();
+                        System.out.println(nutrient.getText().toString());
+                        dialog.dismiss();
+                    }
+                });
+
+            }
+        });
+
+
 
 
         myAdapters = new SectionsPageAdapter(getFragmentManager());
@@ -110,10 +138,61 @@ public class HistoryFragment extends Fragment implements NavigationView.OnNaviga
         return view;
     }
 
-    // TODO: Rename method, update argument and hook method into UI event
-    public void onButtonPressed(Uri uri) {
-        if (mListener != null) {
-            mListener.onFragmentInteraction(uri);
+    public void nutrientChoose() {
+
+        switch (nutrient.getText().toString()) {
+            case "Calories":
+                WeekFragment.setNutrient("calories");
+                MonthFragment.setNutrient("calories");
+                YearFragment.setNutrient("calories");
+                WeekFragment.graphUpdate();
+            case "Total Fat":
+                WeekFragment.setNutrient("fat");
+                MonthFragment.setNutrient("fat");
+                YearFragment.setNutrient("fat");
+                WeekFragment.graphUpdate();
+            case "Cholesterol":
+                WeekFragment.setNutrient("cholesterol");
+                MonthFragment.setNutrient("cholesterol");
+                YearFragment.setNutrient("cholesterol");
+                WeekFragment.graphUpdate();
+            case "Sodium":
+                WeekFragment.setNutrient("sodium");
+                MonthFragment.setNutrient("sodium");
+                YearFragment.setNutrient("sodium");
+                WeekFragment.graphUpdate();
+            case "Potassium":
+                WeekFragment.setNutrient("potassium");
+                MonthFragment.setNutrient("potassium");
+                YearFragment.setNutrient("potassium");
+                WeekFragment.graphUpdate();
+            case "Total Carbs":
+                WeekFragment.setNutrient("carbs");
+                MonthFragment.setNutrient("carbs");
+                YearFragment.setNutrient("carbs");
+                WeekFragment.graphUpdate();
+            case "Dietary Fiber":
+                WeekFragment.setNutrient("fiber");
+                MonthFragment.setNutrient("fiber");
+                YearFragment.setNutrient("fiber");
+                WeekFragment.graphUpdate();
+            case "Sugars":
+                WeekFragment.setNutrient("sugar");
+                MonthFragment.setNutrient("sugar");
+                YearFragment.setNutrient("sugar");
+                WeekFragment.graphUpdate();
+            case "Protein":
+                WeekFragment.setNutrient("protein");
+                MonthFragment.setNutrient("protein");
+                YearFragment.setNutrient("protein");
+                WeekFragment.graphUpdate();
+            default:
+                WeekFragment.setNutrient("calories");
+                MonthFragment.setNutrient("calories");
+                YearFragment.setNutrient("calories");
+                WeekFragment.graphUpdate();
+
+
         }
     }
 
@@ -123,7 +202,6 @@ public class HistoryFragment extends Fragment implements NavigationView.OnNaviga
         mListener = null;
     }
 
-    @Override
     public boolean onNavigationItemSelected(@NonNull MenuItem item) {
         return false;
     }
