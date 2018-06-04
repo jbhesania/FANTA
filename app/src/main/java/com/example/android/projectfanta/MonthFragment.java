@@ -3,7 +3,6 @@ package com.example.android.projectfanta;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -19,6 +18,45 @@ import java.util.Calendar;
 
 public class MonthFragment extends Fragment {
     public View view;
+    public static String nutrient;
+    public static double recNutrient;
+
+    public static void setNutrient(String input)
+    {
+        UserInfo user = Information.information.getInfo();
+        nutrient = input;
+        switch(input){
+            case "calories":
+                recNutrient = user.getRecCalories();
+                break;
+            case "carbs":
+                recNutrient = user.getRecCarbs();
+                break;
+            case "fat":
+                recNutrient = user.getRecFat();
+                break;
+            case "protein":
+                recNutrient = user.getRecProtein();
+                break;
+            case "sodium":
+                recNutrient = user.getRecSodium();
+                break;
+            case "sugar":
+                recNutrient = user.getRecSugars();
+                break;
+            case "cholesterol":
+                recNutrient = user.getRecCholesterol();
+                break;
+            case "potassium":
+                recNutrient = user.getRecPotassium();
+                break;
+            case "fiber":
+                recNutrient = user.getRecFiber();
+                break;
+            default:
+                recNutrient = user.getRecCalories();
+        }
+    }
 
     /**
      * numDays The number of days including starting day to end day. E.g from 12/10 - 12/12, numDays
@@ -35,7 +73,7 @@ public class MonthFragment extends Fragment {
      * calendar.set(2017,11,1);
      */
     public void createGraphMonth(int numDays, Calendar startDayCalendar, String nutrient,
-                                 double[] nutrientIntake, double standardIntake){
+                                 double[] nutrientIntake, double standardIntake,View view){
 
         Calendar calendar1 = (Calendar)startDayCalendar.clone();
         Calendar calendar2 = (Calendar)startDayCalendar.clone();
@@ -87,6 +125,7 @@ public class MonthFragment extends Fragment {
         graph.addSeries(standard);
         graph.getLegendRenderer().setVisible(true);
         graph.getLegendRenderer().setAlign(LegendRenderer.LegendAlign.BOTTOM);
+        graph.getLegendRenderer().setVisible(false);
         graph.setTitle(nutrient + " Intake");
     }
 
@@ -95,6 +134,20 @@ public class MonthFragment extends Fragment {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_month, container, false);
+        Calendar today = Calendar.getInstance();
+        today.add(Calendar.DAY_OF_MONTH, 1);
+        today.set(Calendar.HOUR_OF_DAY, 0);
+        today.set(Calendar.MINUTE, 0);
+        today.set(Calendar.SECOND, 0);
+        today.set(Calendar.MILLISECOND, 0);
+        long end = today.getTimeInMillis();
+        long start = end - 31*864*(long)java.lang.Math.pow(10,5);
+        Calendar test = Calendar.getInstance();
+        test.setTimeInMillis(start);
+
+        double[] intakes = Information.information.intakeInterval(start, end,"calories");
+
+        createGraphMonth(31,test,"calories",intakes,recNutrient,view);
         return view;
     }
 

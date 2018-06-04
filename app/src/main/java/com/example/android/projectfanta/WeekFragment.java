@@ -1,31 +1,31 @@
 package com.example.android.projectfanta;
 
-import android.content.Context;
 import android.graphics.Color;
-import android.graphics.Paint;
-import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
-import android.util.Log;
+import android.support.v4.app.FragmentActivity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Toast;
 
 import com.jjoe64.graphview.GraphView;
-import com.jjoe64.graphview.GridLabelRenderer;
 import com.jjoe64.graphview.LegendRenderer;
 import com.jjoe64.graphview.helper.DateAsXAxisLabelFormatter;
-import com.jjoe64.graphview.helper.StaticLabelsFormatter;
 import com.jjoe64.graphview.series.DataPoint;
+import com.jjoe64.graphview.series.DataPointInterface;
 import com.jjoe64.graphview.series.LineGraphSeries;
+import com.jjoe64.graphview.series.OnDataPointTapListener;
+import com.jjoe64.graphview.series.Series;
 
 import java.util.Calendar;
-import java.util.Date;
 
 
-public class WeekFragment extends Fragment {
+public class WeekFragment extends Fragment{
     //Instance variable so that view can be accessed by createGraphWeek method as well
-    public View view;
+    public static GraphView graph;
+    public static String nutrient;
+    public static double recNutrient;
 
     /**
      * numDays The number of days including starting day to end day. E.g from 12/10 - 12/12, numDays
@@ -41,8 +41,8 @@ public class WeekFragment extends Fragment {
      * Month Field 0-11 Represent January to December
      * calendar.set(2017,11,1);
      */
-    public void createGraphWeek(int numDays, Calendar startDayCalendar, String nutrient,
-    double[] nutrientIntake, double standardIntake)
+    public static void createGraphWeek(int numDays, Calendar startDayCalendar, String nutrient,
+                                       double[] nutrientIntake, double standardIntake,View view)
     {
         Calendar calendar1 = (Calendar)startDayCalendar.clone();
         Calendar calendar2 = (Calendar)startDayCalendar.clone();
@@ -68,14 +68,15 @@ public class WeekFragment extends Fragment {
         }
 
         //Drawing the graph on View
-        GraphView graph = (GraphView) view.findViewById(R.id.graph);
+        graph = (GraphView) view.findViewById(R.id.graph);
         LineGraphSeries<DataPoint> series = new LineGraphSeries<>(dp);
         series.setTitle("User");
 
         // set date label formatter
         // use static labels for horizontal and vertical labels
         // set date label formatter
-        graph.getGridLabelRenderer().setLabelFormatter(new DateAsXAxisLabelFormatter(getActivity()));
+        final FragmentActivity activity = (FragmentActivity)view.getContext();
+        graph.getGridLabelRenderer().setLabelFormatter(new DateAsXAxisLabelFormatter(activity));
         graph.getGridLabelRenderer().setHorizontalLabelsAngle(35);
         graph.getGridLabelRenderer().setNumHorizontalLabels(numDays+1);
         graph.getGridLabelRenderer().setTextSize(36);
@@ -96,19 +97,107 @@ public class WeekFragment extends Fragment {
         standard.setTitle("Standard");
         standard.setColor(Color.GREEN);
 
+        //Show data onClicked
+        series.setOnDataPointTapListener(new OnDataPointTapListener() {
+            @Override
+            public void onTap(Series series, DataPointInterface dataPoint) {
+                Calendar calendar = Calendar.getInstance();
+                calendar.setTimeInMillis((long)dataPoint.getX());
+                Toast.makeText(activity, "Date: "
+                                + calendar.get(Calendar.DATE) + "/"
+                                + (calendar.get(Calendar.MONTH)+1) + "/"
+                                + calendar.get(Calendar.YEAR)+ "\n"
+                                + graph.getTitle()+": "+ dataPoint.getY() + " "
+                                + graph.getGridLabelRenderer().getVerticalAxisTitle(),
+                        Toast.LENGTH_SHORT).show();
+            }
+        });
+
+        graph.getViewport().setScrollable(true);
+        graph.getViewport().setScrollableY(true);
+        graph.getViewport().setScalable(true);
+        graph.getViewport().setScalableY(true);
+
+
         //Adding them to the view
         graph.addSeries(series);
         graph.addSeries(standard);
-        graph.getLegendRenderer().setVisible(true);
-        graph.getLegendRenderer().setAlign(LegendRenderer.LegendAlign.BOTTOM);
+        graph.getLegendRenderer().setVisible(false);
+        graph.getLegendRenderer().setAlign(LegendRenderer.LegendAlign.TOP);
         graph.setTitle(nutrient+" "+"Intake");
+    }
+
+    public static void setNutrient(String input)
+    {
+        UserInfo user = Information.information.getInfo();
+        nutrient = input;
+        switch(input){
+            case "calories":
+                recNutrient = user.getRecCalories();
+                break;
+            case "carbs":
+                recNutrient = user.getRecCarbs();
+                break;
+            case "fat":
+                recNutrient = user.getRecFat();
+                break;
+            case "protein":
+                recNutrient = user.getRecProtein();
+                break;
+            case "sodium":
+                recNutrient = user.getRecSodium();
+                break;
+            case "sugar":
+                recNutrient = user.getRecSugars();
+                break;
+            case "cholesterol":
+                recNutrient = user.getRecCholesterol();
+                break;
+            case "potassium":
+                recNutrient = user.getRecPotassium();
+                break;
+            case "fiber":
+                recNutrient = user.getRecFiber();
+                break;
+            default:
+                recNutrient = user.getRecCalories();
+        }
+    }
+
+
+
+    @Override
+    public void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setHasOptionsMenu(true);
     }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        view = inflater.inflate(R.layout.fragment_week, container, false);
+        View view = inflater.inflate(R.layout.fragment_week, container, false);
+
+        Calendar today = Calendar.getInstance();
+        today.add(Calendar.DAY_OF_MONTH, 1);
+        today.set(Calendar.HOUR_OF_DAY, 0);
+        today.set(Calendar.MINUTE, 0);
+        today.set(Calendar.SECOND, 0);
+        today.set(Calendar.MILLISECOND, 0);
+        long end = today.getTimeInMillis();
+        long start = end - 7*864*(long)java.lang.Math.pow(10,5);
+        Calendar test = Calendar.getInstance();
+        test.setTimeInMillis(start);
+
+        setNutrient("calories");
+        double[] intakes = Information.information.intakeInterval(start, end,"calories");
+
+        System.out.println(recNutrient);
+        System.out.println(Information.information.getInfo().getRecCalories());
+
+        createGraphWeek(7,test,"calories",intakes,recNutrient,view);
         return view;
     }
+
 }
+

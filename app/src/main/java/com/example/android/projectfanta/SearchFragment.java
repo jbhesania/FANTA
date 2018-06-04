@@ -80,9 +80,10 @@ public class SearchFragment extends Fragment {
                         Toast.makeText(getContext(), "No Such User", Toast.LENGTH_LONG).show();
                     } else {
                         readUserInfo(userid);
+                        Toast.makeText(getContext(), "Loading User", Toast.LENGTH_SHORT).show();
                     }
                 } else {
-                    Toast.makeText(getContext(), "Loading Users", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(getContext(), "Loading User List", Toast.LENGTH_SHORT).show();
                 }
             }
         });
@@ -104,11 +105,12 @@ public class SearchFragment extends Fragment {
 
     }
 
+
     /**
      * read the list of users from the database and sets it to users
      * asynchronous need null checks on the users field even after call
      */
-    private void readUserMap(){
+    public void readUserMap(){
         DatabaseReference usersRef = FirebaseDatabase.getInstance().getReference().child("users");
         usersRef.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
@@ -123,7 +125,6 @@ public class SearchFragment extends Fragment {
             }
         });
     }
-
 
     /**
      * loads the foods and intakes of a given userid
