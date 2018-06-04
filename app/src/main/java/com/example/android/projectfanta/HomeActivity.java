@@ -39,7 +39,7 @@ public class HomeActivity extends AppCompatActivity {
 
         TextView foodText = findViewById(view.getId());
         final String foodName = foodText.getText().toString();
-        if(foodName.equals("")) {
+        if(foodName == null || foodName.equals("")) {
             return;
         }
 
@@ -55,7 +55,8 @@ public class HomeActivity extends AppCompatActivity {
             public void onClick(View view){
 
                 value = numberOfServing.getText().toString();
-                if(value == null) {
+                if(value == null || value.equals("")) {
+                    dialog.dismiss();
                     return;
                 }
                 Double servings = new Double(value);

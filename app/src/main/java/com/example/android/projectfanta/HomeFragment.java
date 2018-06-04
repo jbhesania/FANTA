@@ -95,11 +95,18 @@ public class HomeFragment extends Fragment {
 
         ArrayList<Food> foods =  new ArrayList<Food>(Information.information.getMyFoods().values());
         ArrayList<Food> foodsToDisplay = new ArrayList<>();
-        for(Food food: foodsToDisplay) {
+        for(int i = 0; i < foods.size(); i++) {
+            if(foods.get(i).getCount() > 0) {
+                foodsToDisplay.add(foods.get(i));
+            }
+        }
+        /*
+        for(Food food: foods) {
+            System.out.println("joyaan HHHHHHHHHHHHHHHHHHHHHHHHHHHHH" + food.getCount() +" "+ foods.size() +" "+ foodsToDisplay.size());
             if(food.getCount() > 0) {
                 foodsToDisplay.add(food);
             }
-        }
+        } */
         if(foodsToDisplay.size() == 0) {
             TextView text = (TextView) view.findViewById(R.id.onetext);
             text.setText("You have no favorite foods yet!");

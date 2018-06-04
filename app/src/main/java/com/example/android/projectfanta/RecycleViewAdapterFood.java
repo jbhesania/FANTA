@@ -87,7 +87,8 @@ public class RecycleViewAdapterFood extends RecyclerView.Adapter<RecycleViewAdap
                     public void onClick(View view){
 
                         value = numberOfServing.getText().toString();
-                        if(value == null) {
+                        if(value == null || value.equals("")) {
+                            dialog.dismiss();
                             return;
                         }
                         Double servings = new Double(value);
