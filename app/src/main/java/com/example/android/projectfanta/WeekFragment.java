@@ -24,8 +24,12 @@ import java.util.Calendar;
 public class WeekFragment extends Fragment{
     //Instance variable so that view can be accessed by createGraphWeek method as well
     public static GraphView graph;
-    public static String nutrient;
+    public static String nutrient = "calories";
     public static double recNutrient;
+    public static View global_view;
+
+    private static long start, end;
+    private static Calendar day1;
 
     /**
      * numDays The number of days including starting day to end day. E.g from 12/10 - 12/12, numDays
@@ -68,7 +72,6 @@ public class WeekFragment extends Fragment{
         }
 
         //Drawing the graph on View
-        graph = (GraphView) view.findViewById(R.id.graph);
         LineGraphSeries<DataPoint> series = new LineGraphSeries<>(dp);
         series.setTitle("User");
 
@@ -164,7 +167,13 @@ public class WeekFragment extends Fragment{
         }
     }
 
-
+    // Creates array and graphs it
+    public static void graphUpdate() {
+        graph = (GraphView) global_view.findViewById(R.id.graph);
+        graph.removeAllSeries();
+        double[] intakes = Information.information.intakeInterval(start,end,nutrient);
+        createGraphWeek(7,day1,nutrient,intakes,recNutrient,global_view);
+    }
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -176,7 +185,7 @@ public class WeekFragment extends Fragment{
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        View view = inflater.inflate(R.layout.fragment_week, container, false);
+        global_view = inflater.inflate(R.layout.fragment_week, container, false);
 
         Calendar today = Calendar.getInstance();
         today.add(Calendar.DAY_OF_MONTH, 1);
@@ -184,19 +193,20 @@ public class WeekFragment extends Fragment{
         today.set(Calendar.MINUTE, 0);
         today.set(Calendar.SECOND, 0);
         today.set(Calendar.MILLISECOND, 0);
-        long end = today.getTimeInMillis();
-        long start = end - 7*864*(long)java.lang.Math.pow(10,5);
-        Calendar test = Calendar.getInstance();
-        test.setTimeInMillis(start);
+        end = today.getTimeInMillis();
+        start = end - 7*864*(long)java.lang.Math.pow(10,5);
+        day1 = Calendar.getInstance();
+        day1.setTimeInMillis(start);
 
-        setNutrient("calories");
-        double[] intakes = Information.information.intakeInterval(start, end,"calories");
+        //double[] intakes = Information.information.intakeInterval(start, end,nutrient);
 
         System.out.println(recNutrient);
         System.out.println(Information.information.getInfo().getRecCalories());
 
-        createGraphWeek(7,test,"calories",intakes,recNutrient,view);
-        return view;
+        //createGraphWeek(7,day1,nutrient,intakes,recNutrient,global_view);
+
+        graphUpdate();
+        return global_view;
     }
 
 }

@@ -45,61 +45,70 @@
         android:layout_gravity="center">
 
         <RadioGroup
-            android:id="@+id/genderGroup"
+            android:id="@+id/nutrientGraph"
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
             <RadioButton
                 android:id="@+id/c"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Calories"/>
+                android:text="Calories"
+                />
             <RadioButton
                 android:id="@+id/tf"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Total fat"/>
+                android:text="Total Fat"
+                />
             <RadioButton
                 android:id="@+id/ch"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Cholestrol"/>
+                android:text="Cholesterol"
+                />
             <RadioButton
                 android:id="@+id/s"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Sodium"/>
+                android:text="Sodium"
+                />
             <RadioButton
                 android:id="@+id/p"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Potassium"/>
+                android:text="Potassium"
+                />
             <RadioButton
                 android:id="@+id/tc"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Total Carbs"/>
+                android:text="Total Carbs"
+                />
             <RadioButton
                 android:id="@+id/df"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Dietary Fiber"/>
+                android:text="Dietary Fiber"
+                />
             <RadioButton
                 android:id="@+id/su"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Sugars"/>
+                android:text="Sugars"
+                />
             <RadioButton
                 android:id="@+id/pr"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Protein"/>
+                android:text="Protein"
+                />
         </RadioGroup>
 
 
     </RelativeLayout>
 
     <Button
-        android:id="@+id/saving"
+        android:id="@+id/nut"
         android:layout_marginTop="24dp"
         android:layout_width="70dp"
         android:layout_height="20dp"
