@@ -43,11 +43,12 @@
 
             <EditText
                 android:id="@+id/calText"
-                android:layout_toEndOf="@+id/cal"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_toEndOf="@+id/cal"
                 android:hint="Enter calories intake"
-                android:textSize="15sp"/>
+                android:inputType="numberDecimal"
+                android:textSize="15sp" />
 
             <ImageView
                 android:id="@+id/carbs"
@@ -64,6 +65,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:hint="Enter carbohydrate intake"
+                android:inputType="numberDecimal"
                 android:textSize="15sp"/>
 
             <ImageView
@@ -81,6 +83,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:hint="Enter fat intake"
+                android:inputType="numberDecimal"
                 android:textSize="15sp"/>
 
             <ImageView
@@ -98,6 +101,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:hint="Enter protein intake"
+                android:inputType="numberDecimal"
                 android:textSize="15sp"/>
 
             <ImageView
@@ -115,6 +119,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:hint="Enter sodium intake"
+                android:inputType="numberDecimal"
                 android:textSize="15sp"/>
 
 
@@ -133,6 +138,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:hint="Enter sugar intake"
+                android:inputType="numberDecimal"
                 android:textSize="15sp"/>
 
             <ImageView
@@ -150,6 +156,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:hint="Enter cholesterol intake"
+                android:inputType="numberDecimal"
                 android:textSize="15sp"/>
 
             <ImageView
@@ -183,6 +190,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:hint="Enter fiber intake"
+                android:inputType="numberDecimal"
                 android:textSize="15sp"/>
         </RelativeLayout>
     <RelativeLayout
