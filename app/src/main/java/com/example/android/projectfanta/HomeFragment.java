@@ -1,10 +1,7 @@
 package com.example.android.projectfanta;
 
-import android.app.Activity;
-import android.app.Dialog;
 import android.content.Context;
 import android.content.Intent;
-import android.content.SharedPreferences;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
@@ -12,20 +9,13 @@ import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.view.Window;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
-import android.view.inputmethod.InputMethodManager;
-import android.widget.Button;
-import android.widget.EditText;
 import android.widget.TextView;
 
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
-
-import static android.content.Context.MODE_PRIVATE;
-import static com.google.android.gms.flags.impl.SharedPreferencesFactory.getSharedPreferences;
 
 
 /**
@@ -212,6 +202,7 @@ public class HomeFragment extends Fragment {
             @Override
             public void onClick(View view){
                 Intent manual_intent = new Intent(getContext(), NutritionLabelConfirmActivity.class);
+                manual_intent.putExtra("MAN", true);
                 startActivity(manual_intent);
             }
         });
