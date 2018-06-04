@@ -118,6 +118,13 @@ public class NutritionLabelConfirmActivity extends AppCompatActivity {
 
             if(stringArray[i].length() <= 2) continue; // vitamin C -> calories issue
 
+            // Check for over 2000 calorie value
+            if(stringArray[i].equals("2,000") ||
+                    stringArray[i].equals("2000") ||
+                    stringArray[i].equals("3,000") ||
+                    stringArray[i].equals("3000")) continue;
+
+
             if (keys[0].contains(stringArray[i].toLowerCase())) {
                 for (int j = 1; j <= 2; ++j) {
 
@@ -257,7 +264,6 @@ public class NutritionLabelConfirmActivity extends AppCompatActivity {
 
             // check
             Double.parseDouble(data);
-            //Double.parseDouble()
             valid = true;
 
         }
