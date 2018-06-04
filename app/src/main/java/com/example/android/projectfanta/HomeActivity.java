@@ -1,5 +1,7 @@
 package com.example.android.projectfanta;
 
+import android.app.Activity;
+import android.app.Dialog;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.design.widget.BottomNavigationView;
@@ -8,6 +10,12 @@ import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AppCompatActivity;
 import android.view.KeyEvent;
 import android.view.MenuItem;
+import android.view.View;
+import android.view.Window;
+import android.view.inputmethod.InputMethodManager;
+import android.widget.Button;
+import android.widget.EditText;
+import android.widget.TextView;
 import android.widget.Toast;
 
 
@@ -19,42 +27,54 @@ import java.util.Map;
 import java.util.Set;
 
 public class HomeActivity extends AppCompatActivity {
+    Dialog dialog;
+    EditText numberOfServing;
+    Button button;
+    String value;
+
+    public void homeAddIntake(View view){
+        final Dialog dialog = new Dialog(this);
+        dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
+        dialog.setContentView(R.layout.custom_pop_up);
+
+        TextView foodText = findViewById(view.getId());
+        final String foodName = foodText.getText().toString();
+        if(foodName.equals("")) {
+            return;
+        }
+
+        TextView text = (TextView) dialog.findViewById(R.id.foodServings);
+        text.setText(foodName);
+
+        dialog.show();
+
+        numberOfServing = (EditText) dialog.findViewById(R.id.edit);
+        button = (Button)dialog.findViewById(R.id.saving);
+        button.setOnClickListener(new View.OnClickListener(){
+            @Override
+            public void onClick(View view){
+
+                value = numberOfServing.getText().toString();
+                if(value == null) {
+                    return;
+                }
+                Double servings = new Double(value);
+                Intake newIntake = new Intake(foodName, servings);
+                Information.information.addIntake(getApplicationContext(), newIntake);
+
+                dialog.dismiss();
+
+                //TODO the keyboard still doesnt actually go away
+            }
+        });
+    }
+
+
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
-        ArrayList<Food> foodsToDisplay =  new ArrayList<Food>(Information.information.getMyFoods().values());
-        for(int i = 0; i < foodsToDisplay.size(); i++){
-            if(foodsToDisplay.get(i).getCount() <= 0) {
-                foodsToDisplay.remove(i);
-            }
-        }
-        if(foodsToDisplay.size() == 0) {
-            //TODO display a meesage saying that they have not yet eaten any foods!
-        }
-        else {
-            Collections.sort(foodsToDisplay, new Comparator<Food>(){
-                // Reverse order sorting means 1 and -1 are switched
-                public int compare(Food o1, Food o2) {
-                    if (o1.getCount() <= o2.getCount()) {
-                        return 1;
-                    } else if (o1.getCount() >= o2.getCount()){
-                        return -1;
-                    } else {
-                        return 0;
-                    }
-                }
-            });
-
-            // only display 8 or fewer items
-            if(foodsToDisplay.size() > 8) {
-                foodsToDisplay.subList(0,8).clear();
-            }
-
-            // tODO display these foods ( foodsToDisplay ) with a label at top saying "Your Favorite Foods"
-        }
-
 
         setContentView(R.layout.activity_home);
 

@@ -170,6 +170,7 @@ public class Information implements Serializable {
     public void addIntake(Context context, Intake intake){
         addIntakeToDB(intake);
         myIntakes.add(intake);
+        Information.information.getFood(intake.getFood()).incrementCount();
         addIntakeToMemory(context);
     }
     private void addIntakeToDB(Intake intake) {
