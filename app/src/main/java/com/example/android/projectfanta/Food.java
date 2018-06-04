@@ -1,5 +1,7 @@
 package com.example.android.projectfanta;
 
+import android.content.Context;
+
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -79,8 +81,9 @@ public class Food implements Serializable{
         this.count = count;
     }
 
-    public void incrementCount() {
+    public void incrementCount(Context context) {
         count++;
+        Information.information.updateFood(context, this);
     }
 
 }

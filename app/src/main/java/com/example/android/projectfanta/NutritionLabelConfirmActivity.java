@@ -217,6 +217,7 @@ public class NutritionLabelConfirmActivity extends AppCompatActivity {
             Intent homeIntent = new Intent(this, HomeActivity.class);
 
             startActivity(homeIntent);
+            finish();
 
 
         } else {
@@ -246,6 +247,7 @@ public class NutritionLabelConfirmActivity extends AppCompatActivity {
     public void exit(View view){
         Intent homeIntent = new Intent(this, HomeActivity.class);
         startActivity(homeIntent);
+        finish();
     }
 
     public boolean isDouble(String data) {

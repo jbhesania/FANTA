@@ -7,7 +7,6 @@ import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -87,6 +86,10 @@ public class RecycleViewAdapterFood extends RecyclerView.Adapter<RecycleViewAdap
                     public void onClick(View view){
 
                         value = numberOfServing.getText().toString();
+                        if(value == null || value.equals("")) {
+                            dialog.dismiss();
+                            return;
+                        }
                         Double servings = new Double(value);
                         Intake newIntake = new Intake(foodData.get(position).getName(), servings);
                         Information.information.addIntake(context, newIntake);
@@ -98,6 +101,10 @@ public class RecycleViewAdapterFood extends RecyclerView.Adapter<RecycleViewAdap
                                 activity.getCurrentFocus().getWindowToken(), 0);
 
                         dialog.dismiss();
+
+                        Intent intent = new Intent(activity, HomeActivity.class);
+                        activity.startActivity(intent);
+                        activity.finish();
 
                         //TODO the keyboard still doesnt actually go away
                     }

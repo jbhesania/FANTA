@@ -170,6 +170,7 @@ public class Information implements Serializable {
     public void addIntake(Context context, Intake intake){
         addIntakeToDB(intake);
         myIntakes.add(intake);
+        Information.information.getFood(intake.getFood()).incrementCount(context);
         addIntakeToMemory(context);
     }
     private void addIntakeToDB(Intake intake) {
@@ -214,6 +215,16 @@ public class Information implements Serializable {
         catch(Exception e) {
 
         }
+    }
+
+
+    public void updateFood(Context context, Food food) {
+        updateFoodToDB(food);
+        addFoodToMemory(context);
+    }
+    private void updateFoodToDB(Food food) {
+        if (mData == null) mData = FirebaseDatabase.getInstance().getReference();
+        mData.child(myInfo.getId()).child("myFoods").child(food.getName()).child("count").setValue(food.getCount());
     }
 
     /**
