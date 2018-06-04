@@ -151,7 +151,7 @@
             <EditText
                 android:layout_toEndOf="@+id/cholest"
                 android:id="@+id/chol_input"
-                android:layout_width="40dp"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:inputType="number|numberDecimal"
                 android:gravity="center"/>
@@ -182,7 +182,7 @@
             <EditText
                 android:layout_toEndOf="@id/sodi"
                 android:id="@+id/sodium_input"
-                android:layout_width="40dp"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:inputType="number|numberDecimal"
                 android:gravity="center"/>
@@ -214,7 +214,7 @@
             <EditText
                 android:layout_toEndOf="@id/potas"
                 android:id="@+id/potass_input"
-                android:layout_width="40dp"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:inputType="number|numberDecimal"
                 android:gravity="center"/>
@@ -245,7 +245,7 @@
             <EditText
                 android:layout_toEndOf="@+id/total_carb"
                 android:id="@+id/totCarb_input"
-                android:layout_width="40dp"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:inputType="number|numberDecimal"
                 android:gravity="center"/>
@@ -276,7 +276,7 @@
             <EditText
                 android:layout_toEndOf="@id/sugar"
                 android:id="@+id/sugar_input"
-                android:layout_width="40dp"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:inputType="number|numberDecimal"
                 android:gravity="center"/>
@@ -308,7 +308,7 @@
                 android:layout_toEndOf="@id/fiber"
                 android:id="@+id/fiber_input"
                 android:gravity="center"
-                android:layout_width="40dp"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:inputType="number|numberDecimal" />
 
@@ -339,7 +339,7 @@
             <EditText
                 android:layout_toEndOf="@id/prot"
                 android:id="@+id/prote_input"
-                android:layout_width="40dp"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:inputType="number|numberDecimal"
                 android:gravity="center"/>
