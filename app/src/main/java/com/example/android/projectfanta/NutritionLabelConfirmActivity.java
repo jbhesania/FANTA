@@ -39,19 +39,20 @@ public class NutritionLabelConfirmActivity extends AppCompatActivity {
         String[] detections = intent.getStringArrayExtra("Detections");
         HashMap<Integer, String> parsedData;
 
+        dataCals = (TextView)findViewById(R.id.calories_field);
+        dataFat = (TextView)findViewById(R.id.totalFat_field);
+        dataChol = (TextView)findViewById(R.id.chol_input);
+        dataSod = (TextView)findViewById(R.id.sodium_input);
+        dataPot = (TextView)findViewById(R.id.potass_input);
+        dataCarb = (TextView)findViewById(R.id.totCarb_input);
+        dataFib = (TextView)findViewById(R.id.fiber_input);
+        dataSug = (TextView)findViewById(R.id.sugar_input);
+        dataProt = (TextView)findViewById(R.id.prote_input);
+        name = (TextView)findViewById(R.id.name);
+        serve = (TextView)findViewById(R.id.servings);
+
         if (!intent.getBooleanExtra("MAN", false)) {
             parsedData = parseData(detections);
-            dataCals = (TextView)findViewById(R.id.calories_field);
-            dataFat = (TextView)findViewById(R.id.totalFat_field);
-            dataChol = (TextView)findViewById(R.id.chol_input);
-            dataSod = (TextView)findViewById(R.id.sodium_input);
-            dataPot = (TextView)findViewById(R.id.potass_input);
-            dataCarb = (TextView)findViewById(R.id.totCarb_input);
-            dataFib = (TextView)findViewById(R.id.fiber_input);
-            dataSug = (TextView)findViewById(R.id.sugar_input);
-            dataProt = (TextView)findViewById(R.id.prote_input);
-            name = (TextView)findViewById(R.id.name);
-            serve = (TextView)findViewById(R.id.servings);
 
             dataChol.setText(parsedData.get(8));
             dataCals.setText(parsedData.get(3));
