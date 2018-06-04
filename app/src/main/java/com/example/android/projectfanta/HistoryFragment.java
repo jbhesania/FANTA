@@ -3,13 +3,14 @@ package com.example.android.projectfanta;
 import android.content.Context;
 import android.net.Uri;
 import android.os.Bundle;
-import android.support.design.widget.AppBarLayout;
+import android.support.design.widget.NavigationView;
 import android.support.design.widget.TabLayout;
 import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentActivity;
 import android.support.v4.view.ViewPager;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
-import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.MenuItem;
 import android.view.View;
@@ -24,7 +25,7 @@ import android.view.ViewGroup;
  * Use the {@link HistoryFragment#newInstance} factory method to
  * create an instance of this fragment.
  */
-public class HistoryFragment extends Fragment {
+public class HistoryFragment extends Fragment implements NavigationView.OnNavigationItemSelectedListener{
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
     private static final String ARG_PARAM1 = "param1";
@@ -34,13 +35,17 @@ public class HistoryFragment extends Fragment {
     private String mParam1;
     private String mParam2;
 
-    private OnFragmentInteractionListener mListener;
+    private FriendsFragment.OnFragmentInteractionListener mListener;
+    public View view;
 
     private DrawerLayout drawerLayout;
     private ActionBarDrawerToggle toggle;
+    private NavigationView navigationView;
 
     private SectionsPageAdapter myAdapters;
-    private ViewPager myPagers;;
+    private ViewPager myPagers;
+
+    private FragmentActivity myContext;
 
     public HistoryFragment() {
         // Required empty public constructor
@@ -75,6 +80,7 @@ public class HistoryFragment extends Fragment {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        setHasOptionsMenu(true);
         if (getArguments() != null) {
             mParam1 = getArguments().getString(ARG_PARAM1);
             mParam2 = getArguments().getString(ARG_PARAM2);
@@ -83,6 +89,7 @@ public class HistoryFragment extends Fragment {
 
     @Override
     public void onAttach(Context context) {
+        myContext=(FragmentActivity)context;
         super.onAttach(context);
     }
 
@@ -90,12 +97,13 @@ public class HistoryFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        View view = inflater.inflate(R.layout.fragment_history, container, false);
+        view = inflater.inflate(R.layout.fragment_history, container, false);
+        setHasOptionsMenu(true);
         drawerLayout = (DrawerLayout) view.findViewById(R.id.drawer);
         toggle = new ActionBarDrawerToggle(getActivity(),drawerLayout, R.string.open, R.string.close);
         drawerLayout.addDrawerListener(toggle);
+
         toggle.syncState();
-        //((AppCompatActivity)getActivity()).getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
         myAdapters = new SectionsPageAdapter(getFragmentManager());
 
@@ -104,16 +112,40 @@ public class HistoryFragment extends Fragment {
 
         TabLayout tab = (TabLayout)view.findViewById(R.id.historyTabs);
         tab.setupWithViewPager(myPagers);
+
         return view;
     }
 
 
     @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        if(toggle.onOptionsItemSelected(item)){
-            return true;
+    public boolean onNavigationItemSelected(MenuItem menuItem) {
+        Log.e("Debug", "NavigationItemCalled");
+        switch (menuItem.getItemId()){
+            case R.id.cal:
+                WeekFragment.setNutrient("calories");
+                return true;
+            case R.id.car:
+                WeekFragment.setNutrient("carbs");
+                return true;
+            case R.id.fats:
+                WeekFragment.setNutrient("fat");
+                return true;
+            case R.id.prot:
+                WeekFragment.setNutrient("protein");
+                return true;
+            case R.id.sod:
+                WeekFragment.setNutrient("sodium");
+                return true;
+            case R.id.sug:
+                WeekFragment.setNutrient("sugar");
+                return true;
+            case R.id.fiber:
+                WeekFragment.setNutrient("fiber");
+                return true;
+            default:
+                WeekFragment.setNutrient("calories");
+                return true;
         }
-        return super.onOptionsItemSelected(item);
     }
 
     // TODO: Rename method, update argument and hook method into UI event
@@ -122,7 +154,6 @@ public class HistoryFragment extends Fragment {
             mListener.onFragmentInteraction(uri);
         }
     }
-
 
     @Override
     public void onDetach() {
@@ -145,3 +176,4 @@ public class HistoryFragment extends Fragment {
         void onFragmentInteraction(Uri uri);
     }
 }
+

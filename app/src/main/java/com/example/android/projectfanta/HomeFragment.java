@@ -133,7 +133,7 @@ public class HomeFragment extends Fragment {
         fab_manual.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View view){
-                Intent manual_intent = new Intent(getContext(), ManualEntryForm.class);
+                Intent manual_intent = new Intent(getContext(), NutritionLabelConfirmActivity.class);
                 startActivity(manual_intent);
             }
         });

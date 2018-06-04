@@ -76,6 +76,8 @@ public class RecycleViewAdapterFood extends RecyclerView.Adapter<RecycleViewAdap
                 TextView text = (TextView) dialog.findViewById(R.id.foodServings);
                 text.setText(foodData.get(position).getName());
 
+                //TODO: putting the number of servings to value
+
                 dialog.show();
 
                 numberOfServing = (EditText) dialog.findViewById(R.id.edit);
@@ -103,6 +105,7 @@ public class RecycleViewAdapterFood extends RecyclerView.Adapter<RecycleViewAdap
             }
         });
     }
+//    String value = numberOfServing.getText().toString();
 
 
     @Override

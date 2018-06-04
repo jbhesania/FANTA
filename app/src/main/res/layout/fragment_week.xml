@@ -12,15 +12,4 @@
         android:layout_centerHorizontal="true"
         android:layout_centerInParent="true" />
 
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:text="December 12 2017"
-        android:textSize="15sp"
-        android:textColor="#000"
-        android:textStyle="bold|italic"
-        android:gravity="center_horizontal"
-        android:layout_marginTop="30dp"/>
-
-
 </RelativeLayout>
