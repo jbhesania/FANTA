@@ -23,10 +23,10 @@ public class HomeActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        ArrayList<Food> foodsToDisplay =  (ArrayList) Information.information.getMyFoods().values();
-        for (Food entry: foodsToDisplay) {
-            if(entry.getCount() <= 0) {
-                foodsToDisplay.remove(entry);
+        ArrayList<Food> foodsToDisplay =  new ArrayList<Food>(Information.information.getMyFoods().values());
+        for(int i = 0; i < foodsToDisplay.size(); i++){
+            if(foodsToDisplay.get(i).getCount() <= 0) {
+                foodsToDisplay.remove(i);
             }
         }
         if(foodsToDisplay.size() == 0) {
