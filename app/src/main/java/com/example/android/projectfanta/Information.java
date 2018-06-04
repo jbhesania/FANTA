@@ -3,7 +3,6 @@ package com.example.android.projectfanta;
 import android.content.Context;
 import android.util.Log;
 
-import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -22,6 +21,11 @@ import java.util.Set;
 public class Information implements Serializable {
 
     public static Information information;
+    private static long ONE_DAY = 864 * (long)java.lang.Math.pow(10,5);
+    private static long ONE_WEEK = 7*ONE_DAY;
+    private static long ONE_MONTH = 31*ONE_DAY;
+    private static long ONE_YEAR = 365*ONE_DAY;
+
 
     private HashMap<String, Food> myFoods;
     private ArrayList<Intake> myIntakes;
@@ -211,6 +215,148 @@ public class Information implements Serializable {
 
         }
     }
+
+    /**
+     * Binary Search for time boundaries
+     * @param time time we are looking for (start/end)
+     * @return index of intake at time boundary
+     */
+    public int searchForIntervalBoundary(long time) {
+
+        int intakeIndex = 1;
+
+        for (int i = myIntakes.size() - 1; i > 0; i--) {
+            if (myIntakes.get(i).getCreationTime() < time) {
+                intakeIndex = i;
+                break;
+            }
+        }
+
+        return intakeIndex;
+
+    }
+
+    /**
+     * Sum of intakes over interval of time
+     * @param start start of interval
+     * @param end end of interval
+     * @param nutrient the nutrient we are tracking over the specified interval of time
+     * @return array of doubles the size of numDays with the sum of intakes for each day.
+     *         The array that is returned can then be used for the graph.
+     */
+    public double[] intakeInterval(long start, long end, String nutrient) {
+
+        // Check the time interval we are looking in and set the time to
+        // a day or a month
+        int days_months_year = 0;
+        if (end - start == ONE_WEEK) {
+            days_months_year = 7;
+        }
+
+        else if (end - start == ONE_MONTH) {
+            days_months_year = 31;
+        }
+
+        else if (end - start == ONE_YEAR) {
+            days_months_year = 365;
+
+        }
+
+        // Create an array the size of the number of days in a week or month, or the number of
+        // months in a year
+        double[] nutrientIntake = new double[days_months_year];
+        int startIndex = searchForIntervalBoundary(start);
+        int endIndex = searchForIntervalBoundary(end);
+        double intakeSum = 0;
+        //long beginningOfDay = myIntakes.get(startIndex).getCreationTime();
+        long beginningOfDay = start;
+        int current_idx = 0;
+
+        // handle no foods yet
+        if( myIntakes.size() == 1 ) return nutrientIntake;
+
+        long curr_time;
+
+        // loop through piece returned by search
+        for (int i = startIndex; i <= endIndex; i++) {
+
+            // Get nutrient amount and multiply by amount of servings. Add this to running total
+            // of the amount of that nutrient.
+            intakeSum += myFoods.get(myIntakes.get(i).getFood()).getNutrient(nutrient)
+                    * myIntakes.get(i).getServings();
+
+            current_idx = 0;
+            for (int j = 0; j < days_months_year; j++) {
+                curr_time = start + (ONE_DAY*j);
+                if (curr_time <= myIntakes.get(i).getCreationTime()) {
+                    current_idx = j;
+                }
+            }
+
+            nutrientIntake[current_idx] += myFoods.get(myIntakes.get(i).getFood()).getNutrient(nutrient)
+                    * myIntakes.get(i).getServings();
+
+        }
+
+        for(int i = 0; i < nutrientIntake.length; i++) {
+            System.out.print("Day" + i + ": ");
+            System.out.println(nutrientIntake[i]);
+        }
+
+        return nutrientIntake;
+
+    }
+
+
+
+/*
+    Memory Writing code
+    IN INFORMATION :
+
+    this.myUser = user;
+    this.myFoods = new HashMap<String, Food>();
+    Food one = new Food("food1", this);
+    System.out.println("HELLO ading calories " + one.add("Calories", 120));
+    this.myFoods.put("food1", one);
+    this.myIntakes = new ArrayList<Intake>();
+    Intake intake1 = new Intake(one, 2);
+    this.addIntake(intake1);
+    this.myFollowers = new HashMap<String, User>();
+    this.imFollowing = new HashMap<String, User>();
+
+    IN login acitivity:
+        User testUser = new User("fakeuid", "fakeusername");
+        Information information = new Information(testUser);
+
+        try {
+            FileOutputStream fileOut =
+                    openFileOutput("JoyaanTestFile", Context.MODE_PRIVATE);
+            ObjectOutputStream out = new ObjectOutputStream(fileOut);
+            out.writeObject(information);
+            out.close();
+            fileOut.close();
+        } catch (IOException i) {
+            i.getClass().getCanonicalName();
+            i.printStackTrace();
+        }
+
+        Information myInfo;
+        try {
+            FileInputStream fileIn = openFileInput("JoyaanTestFile");
+            ObjectInputStream in = new ObjectInputStream(fileIn);
+            myInfo = (Information) in.readObject();
+            in.close();
+            fileIn.close();
+        } catch (IOException i) {
+            i.printStackTrace();
+            return;
+        } catch (Exception c) {
+            System.out.println("Employee class not found");
+            c.printStackTrace();
+            return;
+        }
+
+ */
 
 
     public void addUserInfo(Context context) {
