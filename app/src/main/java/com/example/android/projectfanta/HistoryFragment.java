@@ -1,7 +1,11 @@
 package com.example.android.projectfanta;
 
+import android.app.AlertDialog;
+import android.app.Dialog;
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.Color;
+import android.graphics.drawable.ColorDrawable;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.design.widget.NavigationView;
@@ -16,6 +20,8 @@ import android.view.LayoutInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.Window;
+import android.widget.Button;
 import android.widget.Toast;
 
 
@@ -27,7 +33,7 @@ import android.widget.Toast;
  * Use the {@link HistoryFragment#newInstance} factory method to
  * create an instance of this fragment.
  */
-public class HistoryFragment extends Fragment implements NavigationView.OnNavigationItemSelectedListener{
+public class HistoryFragment extends Fragment {
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
     private static final String ARG_PARAM1 = "param1";
@@ -40,14 +46,11 @@ public class HistoryFragment extends Fragment implements NavigationView.OnNaviga
     private FriendsFragment.OnFragmentInteractionListener mListener;
     public View view;
 
-    private DrawerLayout drawerLayout;
-    private ActionBarDrawerToggle toggle;
-    private NavigationView navigationView;
-
     private SectionsPageAdapter myAdapters;
     private ViewPager myPagers;
+    Button select;
+    Dialog dialog;
 
-    private FragmentActivity myContext;
 
     public HistoryFragment() {
         // Required empty public constructor
@@ -91,7 +94,6 @@ public class HistoryFragment extends Fragment implements NavigationView.OnNaviga
 
     @Override
     public void onAttach(Context context) {
-        myContext=(FragmentActivity)context;
         super.onAttach(context);
     }
 
@@ -101,12 +103,18 @@ public class HistoryFragment extends Fragment implements NavigationView.OnNaviga
         // Inflate the layout for this fragment
         view = inflater.inflate(R.layout.fragment_history, container, false);
         setHasOptionsMenu(true);
-        drawerLayout = (DrawerLayout) view.findViewById(R.id.drawer);
-        toggle = new ActionBarDrawerToggle(getActivity(),drawerLayout, R.string.open, R.string.close);
-        drawerLayout.addDrawerListener(toggle);
-        NavigationView myNav = (NavigationView) view.findViewById(R.id.nv);
-        toggle.syncState();
-        toggle.syncState();
+        select = (Button)view.findViewById(R.id.select);
+
+        select.setOnClickListener(new View.OnClickListener(){
+            @Override
+            public void onClick(View view){
+               Dialog dialog = new Dialog(getActivity());
+               dialog.setContentView(R.layout.custom_pop_up);
+               dialog.show();
+                Toast.makeText(getContext(), "Clicked",
+                        Toast.LENGTH_LONG).show();
+            }
+        });
 
         myAdapters = new SectionsPageAdapter(getFragmentManager());
 
@@ -117,39 +125,6 @@ public class HistoryFragment extends Fragment implements NavigationView.OnNaviga
         tab.setupWithViewPager(myPagers);
 
         return view;
-    }
-
-
-
-    @Override
-    public boolean onNavigationItemSelected(MenuItem menuItem) {
-        Log.e("Debug", "NavigationItemCalled");
-        switch (menuItem.getItemId()){
-            case R.id.cal:
-                WeekFragment.setNutrient("calories");
-                return true;
-            case R.id.car:
-                WeekFragment.setNutrient("carbs");
-                return true;
-            case R.id.fats:
-                WeekFragment.setNutrient("fat");
-                return true;
-            case R.id.prot:
-                WeekFragment.setNutrient("protein");
-                return true;
-            case R.id.sod:
-                WeekFragment.setNutrient("sodium");
-                return true;
-            case R.id.sug:
-                WeekFragment.setNutrient("sugar");
-                return true;
-            case R.id.fiber:
-                WeekFragment.setNutrient("fiber");
-                return true;
-            default:
-                WeekFragment.setNutrient("calories");
-                return true;
-        }
     }
 
     // TODO: Rename method, update argument and hook method into UI event

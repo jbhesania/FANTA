@@ -28,7 +28,7 @@
             android:id="@+id/lin2"
             android:layout_centerHorizontal="true"
             android:layout_below="@+id/lin"
-            android:layout_marginTop="5dp"
+            android:layout_marginTop="20dp"
             android:layout_width="220dp"
             android:layout_height="wrap_content"
             android:orientation="horizontal"

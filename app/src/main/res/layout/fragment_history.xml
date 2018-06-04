@@ -1,32 +1,33 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.v4.widget.DrawerLayout
+<RelativeLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/drawer"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".HistoryFragment"
     android:orientation="vertical">
 
-    <android.support.design.widget.NavigationView
-
-        android:id="@+id/nv"
+    <RelativeLayout
+        android:layout_marginLeft="70dp"
+        android:layout_marginTop="530dp"
         android:layout_width="wrap_content"
-        android:layout_height="match_parent"
-        app:itemTextColor="#000"
-        android:background="#fff"
-        app:itemIconTint="@color/addButton"
-        app:menu="@menu/drawer_menu"
-        android:layout_gravity="start">
-    </android.support.design.widget.NavigationView>
+        android:layout_height="wrap_content">
 
+        <Button
+            android:id="@+id/select"
+            android:layout_width="wrap_content"
+            android:layout_height="30dp"
+            android:background="@drawable/capsule"
+            android:text="SELECT SPECIFIC NUTRIENT"
+            android:textAlignment="center" />
+    </RelativeLayout>
     <FrameLayout
+        android:layout_centerHorizontal="true"
         android:id="@+id/main_content"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        tools:context=".FriendsFragment"
-        android:layout_below="@+id/drawer">
+        android:layout_height="wrap_content"
+        tools:context=".FriendsFragment">
 
         <android.support.design.widget.AppBarLayout
             android:id="@+id/appbar"
@@ -64,28 +65,14 @@
             </android.support.design.widget.TabLayout>
         </android.support.design.widget.AppBarLayout>
 
-        <RelativeLayout
-            android:layout_marginLeft="70dp"
-            android:layout_marginTop="550dp"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content">
-
-            <Button
-                android:id="@+id/save"
-                android:layout_width="wrap_content"
-                android:layout_height="30dp"
-                android:background="@drawable/capsule"
-                android:text="SELECT SPECIFIC NUTRIENT"
-                android:textAlignment="center" />
-        </RelativeLayout>
-
         <android.support.v4.view.ViewPager
             android:id="@+id/historyContainer"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            app:layout_behavior="@string/appbar_scrolling_view_behavior" />
+            android:layout_height="500dp"
+            app:layout_behavior="@string/appbar_scrolling_view_behavior">
 
+        </android.support.v4.view.ViewPager>
 
         </FrameLayout>
 
-</android.support.v4.widget.DrawerLayout>
+</RelativeLayout>
