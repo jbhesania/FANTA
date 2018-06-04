@@ -26,24 +26,27 @@
 
     <RelativeLayout
         android:id="@+id/lins"
-        android:orientation="vertical"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
         android:layout_centerHorizontal="true"
-        android:layout_marginTop="250dp">
+        android:layout_marginTop="91dp"
+        android:orientation="vertical">
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="My Favorite Food"
-            android:textStyle="bold"
+            android:layout_alignParentStart="true"
+            android:layout_alignParentTop="true"
+            android:text="My Favorite Foods"
             android:textColor="#000"
-            android:textSize="20sp"/>
+            android:textSize="30sp"
+            android:textStyle="bold" />
 
     </RelativeLayout>
 
     <RelativeLayout
-        android:id="@+id/linn"
+        android:id="@+id/one"
         android:orientation="vertical"
         android:layout_below="@+id/lins"
         android:layout_width="wrap_content"
@@ -51,43 +54,32 @@
         android:layout_centerInParent="true">
 
         <TextView
+            android:id="@+id/onetext"
+            android:onClick="homeAddIntake"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Apple"
+            android:text=""
+            android:padding="5dp"
             android:textColor="#000"
             android:textSize="18sp"/>
 
     </RelativeLayout>
 
     <RelativeLayout
-        android:id="@+id/aa"
+        android:id="@+id/two"
         android:orientation="vertical"
-        android:layout_below="@+id/linn"
+        android:layout_below="@+id/one"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_centerInParent="true">
 
         <TextView
+            android:id="@+id/twotext"
+            android:onClick="homeAddIntake"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Sweet Corn"
-            android:textColor="#000"
-            android:textSize="18sp"/>
-
-    </RelativeLayout>
-
-    <RelativeLayout
-        android:orientation="vertical"
-        android:id="@+id/linsz"
-        android:layout_below="@+id/aa"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_centerInParent="true">
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Grapes"
+            android:text=""
+            android:padding="5dp"
             android:textColor="#000"
             android:textSize="18sp"/>
 
@@ -95,16 +87,19 @@
 
     <RelativeLayout
         android:orientation="vertical"
-        android:id="@+id/linszz"
-        android:layout_below="@+id/linsz"
+        android:id="@+id/three"
+        android:layout_below="@+id/two"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_centerInParent="true">
 
         <TextView
+            android:id="@+id/threetext"
+            android:onClick="homeAddIntake"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Apple Pie"
+            android:text=""
+            android:padding="5dp"
             android:textColor="#000"
             android:textSize="18sp"/>
 
@@ -112,20 +107,65 @@
 
     <RelativeLayout
         android:orientation="vertical"
-        android:id="@+id/linszs"
-        android:layout_below="@+id/linszz"
+        android:id="@+id/four"
+        android:layout_below="@+id/three"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_centerInParent="true">
 
         <TextView
+            android:id="@+id/fourtext"
+            android:onClick="homeAddIntake"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Banana"
+            android:text=""
+            android:padding="5dp"
             android:textColor="#000"
             android:textSize="18sp"/>
 
     </RelativeLayout>
+
+    <RelativeLayout
+        android:orientation="vertical"
+        android:id="@+id/five"
+        android:layout_below="@+id/four"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true">
+
+        <TextView
+            android:id="@+id/fivetext"
+            android:onClick="homeAddIntake"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text=""
+            android:padding="5dp"
+            android:textColor="#000"
+            android:textSize="18sp"/>
+
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:id="@+id/six"
+        android:orientation="vertical"
+        android:layout_below="@+id/five"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true">
+
+        <TextView
+            android:id="@+id/sixtext"
+            android:onClick="homeAddIntake"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text=""
+            android:padding="5dp"
+            android:textColor="#000"
+            android:textSize="18sp"/>
+
+    </RelativeLayout>
+
+
 
     <android.support.design.widget.FloatingActionButton
         android:id="@+id/camera"

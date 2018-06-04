@@ -1,5 +1,7 @@
 package com.example.android.projectfanta;
 
+import android.app.Activity;
+import android.app.Dialog;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -10,8 +12,17 @@ import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.Window;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
+import android.view.inputmethod.InputMethodManager;
+import android.widget.Button;
+import android.widget.EditText;
+import android.widget.TextView;
+
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
 
 import static android.content.Context.MODE_PRIVATE;
 import static com.google.android.gms.flags.impl.SharedPreferencesFactory.getSharedPreferences;
@@ -65,17 +76,84 @@ public class HomeFragment extends Fragment {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+
+
         if (getArguments() != null) {
             mParam1 = getArguments().getString(ARG_PARAM1);
             mParam2 = getArguments().getString(ARG_PARAM2);
         }
     }
 
+
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_home, container, false);
+
+        ArrayList<Food> foods =  new ArrayList<Food>(Information.information.getMyFoods().values());
+        ArrayList<Food> foodsToDisplay = new ArrayList<>();
+        for(int i = 0; i < foods.size(); i++) {
+            if(foods.get(i).getCount() > 0) {
+                foodsToDisplay.add(foods.get(i));
+            }
+        }
+        /*
+        for(Food food: foods) {
+            System.out.println("joyaan HHHHHHHHHHHHHHHHHHHHHHHHHHHHH" + food.getCount() +" "+ foods.size() +" "+ foodsToDisplay.size());
+            if(food.getCount() > 0) {
+                foodsToDisplay.add(food);
+            }
+        } */
+        if(foodsToDisplay.size() == 0) {
+            TextView text = (TextView) view.findViewById(R.id.onetext);
+            text.setText("You have no favorite foods yet!");
+        }
+        else {
+            Collections.sort(foodsToDisplay, new Comparator<Food>(){
+                // Reverse order sorting means 1 and -1 are switched
+                public int compare(Food o1, Food o2) {
+                    if (o1.getCount() <= o2.getCount()) {
+                        return 1;
+                    } else if (o1.getCount() >= o2.getCount()){
+                        return -1;
+                    } else {
+                        return 0;
+                    }
+                }
+            });
+
+            TextView text1 = (TextView) view.findViewById(R.id.onetext);
+            text1.setText(foodsToDisplay.get(0).getName());
+
+            if(foodsToDisplay.size() > 1) {
+                TextView text = (TextView) view.findViewById(R.id.twotext);
+                text.setText(foodsToDisplay.get(1).getName());
+            }
+
+            if(foodsToDisplay.size() > 2) {
+                TextView text = (TextView) view.findViewById(R.id.threetext);
+                text.setText(foodsToDisplay.get(2).getName());
+            }
+
+            if(foodsToDisplay.size() > 3) {
+                TextView text = (TextView) view.findViewById(R.id.fourtext);
+                text.setText(foodsToDisplay.get(3).getName());
+            }
+
+            if(foodsToDisplay.size() > 4) {
+                TextView text = (TextView) view.findViewById(R.id.fivetext);
+                text.setText(foodsToDisplay.get(4).getName());
+            }
+
+            if(foodsToDisplay.size() > 5) {
+                TextView text = (TextView) view.findViewById(R.id.sixtext);
+                text.setText(foodsToDisplay.get(5).getName());
+            }
+        }
+
 
         // UI components for navigation bar
         final FloatingActionButton fab_plus, fab_search, fab_camera, fab_fresh, fab_manual;

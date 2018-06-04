@@ -137,7 +137,7 @@ public class LoginActivity extends AppCompatActivity {
                 // If user does not have an account
                 if (!snapshot.exists()) {
                     // TODO REQUEST USER INFO TO SET USER VALUES CORRECTLY
-                    UserInfo ui = new UserInfo(userid, username, "f",0, 0, 10);
+                    UserInfo ui = new UserInfo(userid, username, "f",0, 0, 0);
 
                     User u = new User(userid, username);
                     final DatabaseReference mData = FirebaseDatabase.getInstance().getReference();
