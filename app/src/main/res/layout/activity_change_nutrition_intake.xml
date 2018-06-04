@@ -1,65 +1,37 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".ChangeNutritionIntake"
-    android:layout_margin="10dp"
+    android:layout_marginTop="20dp"
     android:orientation="vertical">
 
     <LinearLayout
+        android:layout_centerHorizontal="true"
+        android:id="@+id/lin"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content">
 
         <TextView
-            android:layout_marginLeft="10dp"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Your Nutrition Intake"
             android:textSize="24sp"
             android:textColor="#000"
-            android:textStyle="bold|italic"/>
+            android:textStyle="bold"/>
     </LinearLayout>
-    <LinearLayout
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center_horizontal"
-        android:layout_marginTop="10dp">
-        <Button
-            android:id="@+id/saveBtn"
-            android:layout_width="120dp"
-            android:layout_height="30dp"
-            android:background="@drawable/capsule"
-            android:text="SAVE"
-            android:onClick="saveNutritionIntakeButton"
-            android:textAlignment="center" />
-    </LinearLayout>
-    <LinearLayout
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center_horizontal"
-        android:layout_marginTop="10dp">
-        <Button
-            android:id="@+id/recBtn"
-            android:layout_width="120dp"
-            android:layout_height="30dp"
-            android:background="@drawable/capsule"
-            android:text="RECOMMENDED"
-            android:onClick="recommendedButton"
-            android:textAlignment="center"
-            android:layout_gravity="center_vertical" />
 
-    </LinearLayout>
-    <ScrollView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content">
 
         <RelativeLayout
+            android:id="@+id/lin2"
+            android:layout_centerHorizontal="true"
+            android:layout_below="@+id/lin"
+            android:layout_marginTop="5dp"
             android:layout_width="220dp"
             android:layout_height="wrap_content"
             android:orientation="horizontal"
-            android:layout_marginTop="10dp"
             android:layout_gravity="center_horizontal">
 
             <ImageView
@@ -79,7 +51,7 @@
 
             <ImageView
                 android:id="@+id/carbs"
-                android:layout_marginTop="60dp"
+                android:layout_marginTop="49dp"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:src="@drawable/carbohydrate"
@@ -87,7 +59,7 @@
 
             <EditText
                 android:id="@+id/carbsText"
-                android:layout_marginTop="60dp"
+                android:layout_marginTop="49dp"
                 android:layout_toEndOf="@+id/carbs"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -96,15 +68,15 @@
 
             <ImageView
                 android:id="@+id/fat"
-                android:layout_marginTop="120dp"
+                android:layout_marginTop="95dp"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:src="@drawable/fat"
                 android:layout_marginRight="5dp"/>
 
             <EditText
+                android:layout_marginTop="95dp"
                 android:id="@+id/fatText"
-                android:layout_marginTop="120dp"
                 android:layout_toEndOf="@+id/fat"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -113,7 +85,7 @@
 
             <ImageView
                 android:id="@+id/prot"
-                android:layout_marginTop="180dp"
+                android:layout_marginTop="140dp"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:src="@drawable/proteins"
@@ -121,7 +93,7 @@
 
             <EditText
                 android:id="@+id/protText"
-                android:layout_marginTop="180dp"
+                android:layout_marginTop="140dp"
                 android:layout_toEndOf="@id/prot"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -130,7 +102,7 @@
 
             <ImageView
                 android:id="@+id/sod"
-                android:layout_marginTop="240dp"
+                android:layout_marginTop="190dp"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:src="@drawable/sodium"
@@ -139,7 +111,7 @@
             <EditText
                 android:id="@+id/sodText"
                 android:layout_toEndOf="@+id/sod"
-                android:layout_marginTop="240dp"
+                android:layout_marginTop="190dp"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:hint="Enter sodium intake"
@@ -148,7 +120,7 @@
 
             <ImageView
                 android:id="@+id/sug"
-                android:layout_marginTop="300dp"
+                android:layout_marginTop="235dp"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:src="@drawable/sugar"
@@ -156,7 +128,7 @@
 
             <EditText
                 android:id="@+id/sugText"
-                android:layout_marginTop="300dp"
+                android:layout_marginTop="235dp"
                 android:layout_toEndOf="@+id/sug"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -165,7 +137,7 @@
 
             <ImageView
                 android:id="@+id/cholesterol"
-                android:layout_marginTop="360dp"
+                android:layout_marginTop="285dp"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:src="@drawable/cholesterol"
@@ -173,7 +145,7 @@
 
             <EditText
                 android:id="@+id/cholesterolText"
-                android:layout_marginTop="360dp"
+                android:layout_marginTop="285dp"
                 android:layout_toEndOf="@+id/sug"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -182,7 +154,7 @@
 
             <ImageView
                 android:id="@+id/potassium"
-                android:layout_marginTop="420dp"
+                android:layout_marginTop="330dp"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:src="@drawable/potassium"
@@ -190,7 +162,7 @@
 
             <EditText
                 android:id="@+id/potassiumText"
-                android:layout_marginTop="420dp"
+                android:layout_marginTop="330dp"
                 android:layout_toEndOf="@+id/sug"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -198,7 +170,7 @@
                 android:textSize="15sp"/>
             <ImageView
                 android:id="@+id/fiber"
-                android:layout_marginTop="480dp"
+                android:layout_marginTop="375dp"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:src="@drawable/fiber"
@@ -206,13 +178,40 @@
 
             <EditText
                 android:id="@+id/fiberText"
-                android:layout_marginTop="480dp"
+                android:layout_marginTop="375dp"
                 android:layout_toEndOf="@+id/sug"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:hint="Enter fiber intake"
                 android:textSize="15sp"/>
         </RelativeLayout>
-    </ScrollView>
+    <RelativeLayout
+        android:layout_centerHorizontal="true"
+        android:layout_below="@+id/lin2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:padding="30dp"
+        android:orientation="horizontal">
+        <Button
+            android:id="@+id/saveBtn"
+            android:layout_width="120dp"
+            android:layout_height="30dp"
+            android:background="@drawable/capsule"
+            android:text="SAVE"
+            android:onClick="saveNutritionIntakeButton"
+            android:textAlignment="center"
+            android:layout_marginRight="20dp"/>
 
-</LinearLayout>
+        <Button
+            android:layout_toEndOf="@id/saveBtn"
+            android:id="@+id/recBtn"
+            android:layout_width="120dp"
+            android:layout_height="30dp"
+            android:background="@drawable/capsule"
+            android:text="RECOMMENDED"
+            android:onClick="recommendedButton"
+            android:textAlignment="center"
+            android:layout_gravity="center_vertical" />
+    </RelativeLayout>
+
+</RelativeLayout>

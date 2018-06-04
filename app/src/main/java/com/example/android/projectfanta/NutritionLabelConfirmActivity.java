@@ -114,21 +114,18 @@ public class NutritionLabelConfirmActivity extends AppCompatActivity {
         HashMap<Integer, String> map = new HashMap<Integer, String>();
 
         String[] stringArray = string.split(" ");
-        System.out.println(stringArray.length);
         for(int i = 0; i < stringArray.length-1; ++i) {
 
             if(stringArray[i].length() <= 2) continue; // vitamin C -> calories issue
 
-            System.out.println(keys[0] + " == " + stringArray[i + 1].toLowerCase());
             if (keys[0].contains(stringArray[i].toLowerCase())) {
                 for (int j = 1; j <= 2; ++j) {
-                    System.out.println(keys[j] + " == " + stringArray[i + 1].toLowerCase());
 
                     if (keys[j].contains(stringArray[i + 1].toLowerCase())) {
                         String data = stringArray[i + 2];
                         data = data.replaceAll("[' 'mgq]+", "");
                         data = data.replaceAll("[OoDQ]", "0");
-                        if (isInteger(data)) {
+                        if (isDouble(data)) {
                             System.out.println("Added " + data + " " + keys[j]);
                             map.put(j, data);
                             stringArray[i] = "";
@@ -140,14 +137,13 @@ public class NutritionLabelConfirmActivity extends AppCompatActivity {
                 }
             } else {
                 for (int j = 3; j < keys.length; ++j) {
-                    System.out.println(keys[j] + " == " + stringArray[i].toLowerCase());
 
                     if (keys[j].contains(stringArray[i].toLowerCase())) {
                         String data = stringArray[i + 1];
                         data = data.replaceAll("[' 'mgq]+", "");
                         data = data.replaceAll("[OoDQ]", "0");
 
-                        if (isInteger(data)) {
+                        if (isDouble(data)) {
                             System.out.println("Added " + data + " " + keys[j]);
 
                             map.put(j, data);
@@ -252,13 +248,13 @@ public class NutritionLabelConfirmActivity extends AppCompatActivity {
         startActivity(homeIntent);
     }
 
-    public boolean isInteger(String data) {
+    public boolean isDouble(String data) {
 
         boolean valid = false;
         try {
 
             // check
-            Integer.parseInt(data);
+            Double.parseDouble(data);
             //Double.parseDouble()
             valid = true;
 

@@ -3,28 +3,18 @@ package com.example.android.projectfanta;
 import android.content.Context;
 import android.net.Uri;
 import android.os.Bundle;
-import android.support.design.widget.AppBarLayout;
 import android.support.design.widget.NavigationView;
 import android.support.design.widget.TabLayout;
-import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.Fragment;
-import android.support.v4.view.GravityCompat;
+import android.support.v4.app.FragmentActivity;
 import android.support.v4.view.ViewPager;
 import android.support.v4.widget.DrawerLayout;
-import android.support.v7.app.ActionBar;
 import android.support.v7.app.ActionBarDrawerToggle;
-import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.LayoutInflater;
-import android.view.Menu;
-import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
-
-import static com.example.android.projectfanta.WeekFragment.nutrient;
-import static com.example.android.projectfanta.WeekFragment.recNutrient;
 
 
 /**
@@ -54,6 +44,8 @@ public class HistoryFragment extends Fragment implements NavigationView.OnNaviga
 
     private SectionsPageAdapter myAdapters;
     private ViewPager myPagers;
+
+    private FragmentActivity myContext;
 
     public HistoryFragment() {
         // Required empty public constructor
@@ -97,6 +89,7 @@ public class HistoryFragment extends Fragment implements NavigationView.OnNaviga
 
     @Override
     public void onAttach(Context context) {
+        myContext=(FragmentActivity)context;
         super.onAttach(context);
     }
 
@@ -109,23 +102,7 @@ public class HistoryFragment extends Fragment implements NavigationView.OnNaviga
         drawerLayout = (DrawerLayout) view.findViewById(R.id.drawer);
         toggle = new ActionBarDrawerToggle(getActivity(),drawerLayout, R.string.open, R.string.close);
         drawerLayout.addDrawerListener(toggle);
-        //Navigation
-        navigationView = view.findViewById(R.id.Navigate);
-        navigationView.setNavigationItemSelectedListener(
-                new NavigationView.OnNavigationItemSelectedListener() {
-                    @Override
-                    public boolean onNavigationItemSelected(MenuItem menuItem) {
-                        // set item as selected to persist highlight
-                        menuItem.setChecked(true);
-                        // close drawer when item is tapped
-                        drawerLayout.closeDrawers();
 
-                        // Add code here to update the UI based on the item selected
-                        // For example, swap UI fragments here
-
-                        return true;
-                    }
-                });
         toggle.syncState();
 
         myAdapters = new SectionsPageAdapter(getFragmentManager());
@@ -138,6 +115,7 @@ public class HistoryFragment extends Fragment implements NavigationView.OnNaviga
 
         return view;
     }
+
 
     @Override
     public boolean onNavigationItemSelected(MenuItem menuItem) {
@@ -198,3 +176,4 @@ public class HistoryFragment extends Fragment implements NavigationView.OnNaviga
         void onFragmentInteraction(Uri uri);
     }
 }
+

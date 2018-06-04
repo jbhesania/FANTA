@@ -8,9 +8,9 @@
     <item android:id="@+id/prot" android:title="Protein" android:icon="@drawable/proteins"></item>
     <item android:id="@+id/sod" android:title="Sodium" android:icon="@drawable/sodium"></item>
     <item android:id="@+id/sug" android:title="Sugar" android:icon="@drawable/sugar"></item>
-    <item android:id="@+id/cholesterol" android:title="Sugar" android:icon="@drawable/cholesterol"></item>
-    <item android:id="@+id/potassium" android:title="Sugar" android:icon="@drawable/potassium"></item>
-    <item android:id="@+id/fiber" android:title="Sugar" android:icon="@drawable/fiber"></item>
+    <item android:id="@+id/cholesterol" android:title="Cholesterol" android:icon="@drawable/cholesterol"></item>
+    <item android:id="@+id/potassium" android:title="Potassium" android:icon="@drawable/potassium"></item>
+    <item android:id="@+id/fiber" android:title="Fiber" android:icon="@drawable/fiber"></item>
 
 
 </menu>
