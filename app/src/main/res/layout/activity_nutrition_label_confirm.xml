@@ -262,7 +262,7 @@
 
             <TextView
                 android:layout_marginTop="15dp"
-                android:id="@+id/sugar"
+                android:id="@+id/fiber"
                 android:textSize="20dp"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -274,8 +274,8 @@
                 tools:layout_editor_absoluteY="16dp" />
 
             <EditText
-                android:layout_toEndOf="@id/sugar"
-                android:id="@+id/sugar_input"
+                android:layout_toEndOf="@id/fiber"
+                android:id="@+id/fiber_input"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:inputType="number|numberDecimal"
@@ -293,7 +293,7 @@
 
             <TextView
                 android:layout_marginTop="15dp"
-                android:id="@+id/fiber"
+                android:id="@+id/sugar"
                 android:textSize="20dp"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -305,8 +305,8 @@
                 tools:layout_editor_absoluteY="16dp" />
 
             <EditText
-                android:layout_toEndOf="@id/fiber"
-                android:id="@+id/fiber_input"
+                android:layout_toEndOf="@id/sugar"
+                android:id="@+id/sugar_input"
                 android:gravity="center"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
