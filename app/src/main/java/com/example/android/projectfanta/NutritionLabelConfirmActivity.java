@@ -37,29 +37,33 @@ public class NutritionLabelConfirmActivity extends AppCompatActivity {
         setContentView(R.layout.activity_nutrition_label_confirm);
         Intent intent = getIntent();
         String[] detections = intent.getStringArrayExtra("Detections");
-        HashMap<Integer, String> parsedData = parseData(detections);
-        dataCals = (TextView)findViewById(R.id.calories_field);
-        dataFat = (TextView)findViewById(R.id.totalFat_field);
-        dataChol = (TextView)findViewById(R.id.chol_input);
-        dataSod = (TextView)findViewById(R.id.sodium_input);
-        dataPot = (TextView)findViewById(R.id.potass_input);
-        dataCarb = (TextView)findViewById(R.id.totCarb_input);
-        dataFib = (TextView)findViewById(R.id.fiber_input);
-        dataSug = (TextView)findViewById(R.id.sugar_input);
-        dataProt = (TextView)findViewById(R.id.prote_input);
-        name = (TextView)findViewById(R.id.name);
-        serve = (TextView)findViewById(R.id.servings);
+        HashMap<Integer, String> parsedData;
 
-        dataChol.setText(parsedData.get(8));
-        dataCals.setText(parsedData.get(3));
-        dataFat.setText(parsedData.get(1));
-        dataSod.setText(parsedData.get(6));
-        dataPot.setText(parsedData.get(7));
-        dataCarb.setText(parsedData.get(2));
-        dataSug.setText(parsedData.get(4));
-        dataProt.setText(parsedData.get(5));
-        dataFib.setText(parsedData.get(9));
+        if (!intent.getBooleanExtra("MAN", false)) {
+            parsedData = parseData(detections);
+            dataCals = (TextView)findViewById(R.id.calories_field);
+            dataFat = (TextView)findViewById(R.id.totalFat_field);
+            dataChol = (TextView)findViewById(R.id.chol_input);
+            dataSod = (TextView)findViewById(R.id.sodium_input);
+            dataPot = (TextView)findViewById(R.id.potass_input);
+            dataCarb = (TextView)findViewById(R.id.totCarb_input);
+            dataFib = (TextView)findViewById(R.id.fiber_input);
+            dataSug = (TextView)findViewById(R.id.sugar_input);
+            dataProt = (TextView)findViewById(R.id.prote_input);
+            name = (TextView)findViewById(R.id.name);
+            serve = (TextView)findViewById(R.id.servings);
 
+            dataChol.setText(parsedData.get(8));
+            dataCals.setText(parsedData.get(3));
+            dataFat.setText(parsedData.get(1));
+            dataSod.setText(parsedData.get(6));
+            dataPot.setText(parsedData.get(7));
+            dataCarb.setText(parsedData.get(2));
+            dataSug.setText(parsedData.get(4));
+            dataProt.setText(parsedData.get(5));
+            dataFib.setText(parsedData.get(9));
+        }
+        
     }
 
     @Override
@@ -117,6 +121,13 @@ public class NutritionLabelConfirmActivity extends AppCompatActivity {
         for(int i = 0; i < stringArray.length-1; ++i) {
 
             if(stringArray[i].length() <= 2) continue; // vitamin C -> calories issue
+
+            // Check for over 2000 calorie value
+            if(stringArray[i].equals("2,000") ||
+                    stringArray[i].equals("2000") ||
+                    stringArray[i].equals("3,000") ||
+                    stringArray[i].equals("3000")) continue;
+
 
             if (keys[0].contains(stringArray[i].toLowerCase())) {
                 for (int j = 1; j <= 2; ++j) {
@@ -257,7 +268,6 @@ public class NutritionLabelConfirmActivity extends AppCompatActivity {
 
             // check
             Double.parseDouble(data);
-            //Double.parseDouble()
             valid = true;
 
         }
