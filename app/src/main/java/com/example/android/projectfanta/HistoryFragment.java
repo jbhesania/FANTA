@@ -109,10 +109,8 @@ public class HistoryFragment extends Fragment {
             @Override
             public void onClick(View view){
                Dialog dialog = new Dialog(getActivity());
-               dialog.setContentView(R.layout.custom_pop_up);
+               dialog.setContentView(R.layout.custom_select);
                dialog.show();
-                Toast.makeText(getContext(), "Clicked",
-                        Toast.LENGTH_LONG).show();
             }
         });
 
