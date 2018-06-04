@@ -44,12 +44,8 @@ public class HistoryFragment extends Fragment {
 
     private OnFragmentInteractionListener mListener;
 
-    private DrawerLayout drawerLayout;
-    private ActionBarDrawerToggle toggle;
-
     private SectionsPageAdapter myAdapters;
     private ViewPager myPagers;
-    android.support.v4.app.FragmentTransaction fragmentTransaction;
 
     public HistoryFragment() {
         // Required empty public constructor
@@ -100,66 +96,6 @@ public class HistoryFragment extends Fragment {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_history, container, false);
-        drawerLayout = (DrawerLayout) view.findViewById(R.id.drawer);
-        toggle = new ActionBarDrawerToggle(getActivity(),drawerLayout, R.string.open, R.string.close);
-        drawerLayout.addDrawerListener(toggle);
-        NavigationView myNav = (NavigationView) view.findViewById(R.id.nv);
-        myNav.setNavigationItemSelectedListener(new NavigationView.OnNavigationItemSelectedListener() {
-                                                    @Override
-                                                    public boolean onNavigationItemSelected(@NonNull MenuItem item) {
-                                                        switch (item.getItemId()) {
-                                                            case R.id.cal:
-                                                                startActivity(new Intent(getContext(), HistoryActivity.class));
-                                                                drawerLayout.closeDrawers();
-                                                                Toast.makeText(getActivity(), "Clicked!", Toast.LENGTH_LONG).show();
-                                                                break;
-                                                            case R.id.car:
-                                                                startActivity(new Intent(getContext(), HistoryActivity.class));
-                                                                drawerLayout.closeDrawers();
-                                                                Toast.makeText(getActivity(), "Clicked!", Toast.LENGTH_LONG).show();
-                                                                break;
-                                                            case R.id.fats:
-                                                                startActivity(new Intent(getContext(), HistoryActivity.class));
-                                                                drawerLayout.closeDrawers();
-                                                                Toast.makeText(getActivity(), "Clicked!", Toast.LENGTH_LONG).show();
-                                                                break;
-                                                            case R.id.prot:
-                                                                startActivity(new Intent(getContext(), HistoryActivity.class));
-                                                                drawerLayout.closeDrawers();
-                                                                Toast.makeText(getActivity(), "Clicked!", Toast.LENGTH_LONG).show();
-                                                                break;
-                                                            case R.id.sod:
-                                                                startActivity(new Intent(getContext(), HistoryActivity.class));
-                                                                drawerLayout.closeDrawers();
-                                                                Toast.makeText(getActivity(), "Clicked!", Toast.LENGTH_LONG).show();
-                                                                break;
-                                                            case R.id.sug:
-                                                                startActivity(new Intent(getContext(), HistoryActivity.class));
-                                                                drawerLayout.closeDrawers();
-                                                                Toast.makeText(getActivity(), "Clicked!", Toast.LENGTH_LONG).show();
-                                                                break;
-                                                            case R.id.cholesterol:
-                                                                startActivity(new Intent(getContext(), HistoryActivity.class));
-                                                                drawerLayout.closeDrawers();
-                                                                Toast.makeText(getActivity(), "Clicked!", Toast.LENGTH_LONG).show();
-                                                                break;
-                                                            case R.id.potassium:
-                                                                startActivity(new Intent(getContext(), HistoryActivity.class));
-                                                                drawerLayout.closeDrawers();
-                                                                Toast.makeText(getActivity(), "Clicked!", Toast.LENGTH_LONG).show();
-                                                                break;
-                                                            case R.id.fiber:
-                                                                startActivity(new Intent(getContext(), HistoryActivity.class));
-                                                                drawerLayout.closeDrawers();
-                                                                Toast.makeText(getActivity(), "Clicked!", Toast.LENGTH_LONG).show();
-                                                                break;
-                                                        }
-                                                        return true;
-                                                    }
-                                                });
-
-        toggle.syncState();
-        //((AppCompatActivity)getContext()).getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
         myAdapters = new SectionsPageAdapter(getFragmentManager());
 
@@ -169,14 +105,6 @@ public class HistoryFragment extends Fragment {
         TabLayout tab = (TabLayout)view.findViewById(R.id.historyTabs);
         tab.setupWithViewPager(myPagers);
         return view;
-    }
-
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        if(toggle.onOptionsItemSelected(item)){
-            return true;
-        }
-        return super.onOptionsItemSelected(item);
     }
 
     // TODO: Rename method, update argument and hook method into UI event
