@@ -9,9 +9,9 @@
     android:orientation="vertical">
 
     <RelativeLayout
-        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="40dp"
         android:layout_alignParentBottom="true"
-        android:layout_marginBottom="30dp"
+        android:layout_centerHorizontal="true"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content">
 
@@ -23,6 +23,8 @@
             android:text="SELECT SPECIFIC NUTRIENT"
             android:textAlignment="center" />
     </RelativeLayout>
+
+
     <FrameLayout
         android:layout_centerHorizontal="true"
         android:id="@+id/main_content"
@@ -65,21 +67,6 @@
 
             </android.support.design.widget.TabLayout>
         </android.support.design.widget.AppBarLayout>
-
-        <RelativeLayout
-            android:layout_marginLeft="70dp"
-            android:layout_marginTop="500dp"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content">
-
-            <Button
-                android:id="@+id/nutrients"
-                android:layout_width="wrap_content"
-                android:layout_height="30dp"
-                android:background="@drawable/capsule"
-                android:text="SELECT SPECIFIC NUTRIENT"
-                android:textAlignment="center" />
-        </RelativeLayout>
 
         <android.support.v4.view.ViewPager
             android:id="@+id/historyContainer"
