@@ -4,13 +4,12 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:layout_margin="20dp"
+    android:layout_margin="5dp"
     tools:context=".NutritionLabelConfirmActivity"
     android:id="@+id/big">
 
     <RelativeLayout
         android:id="@+id/relLayout1"
-        android:layout_marginTop="15dp"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content">
 
@@ -25,6 +24,7 @@
             tools:layout_editor_absoluteX="65dp"
             tools:layout_editor_absoluteY="16dp"
             android:onClick="onClick" />
+
     </RelativeLayout>
 
     <RelativeLayout
@@ -38,14 +38,14 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="horizontal">
-
             <TextView
-                android:layout_marginTop="15dp"
+                android:layout_marginTop="10dp"
                 android:id="@+id/addServings"
-                android:textSize="20dp"
+                android:textSize="20sp"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:ems="10"
+                android:textColor="#000"
                 android:gravity="center_horizontal"
                 android:inputType="textPersonName"
                 android:text="@string/servings"
@@ -53,6 +53,7 @@
                 tools:layout_editor_absoluteY="16dp"/>
 
             <EditText
+                android:textColor="#000"
                 android:layout_toEndOf="@id/addServings"
                 android:id="@+id/servings"
                 android:layout_width="40dp"
@@ -71,7 +72,8 @@
             android:orientation="horizontal">
 
             <TextView
-                android:layout_marginTop="15dp"
+                android:textColor="#000"
+                android:layout_marginTop="10dp"
                 android:id="@+id/calories"
                 android:textSize="20dp"
                 android:layout_width="wrap_content"
@@ -84,6 +86,7 @@
                 tools:layout_editor_absoluteY="16dp" />
 
             <EditText
+                android:textColor="#000"
                 android:layout_toEndOf="@id/calories"
                 android:id="@+id/calories_field"
                 android:layout_width="40dp"
@@ -104,7 +107,8 @@
             android:orientation="horizontal">
 
             <TextView
-                android:layout_marginTop="15dp"
+                android:textColor="#000"
+                android:layout_marginTop="10dp"
                 android:id="@+id/totalFat"
                 android:textSize="20dp"
                 android:layout_width="wrap_content"
@@ -117,6 +121,7 @@
                 tools:layout_editor_absoluteY="16dp" />
 
             <EditText
+                android:textColor="#000"
                 android:layout_toEndOf="@id/totalFat"
                 android:id="@+id/totalFat_field"
                 android:layout_width="40dp"
@@ -136,6 +141,7 @@
             android:orientation="horizontal">
 
             <TextView
+                android:textColor="#000"
                 android:layout_marginTop="15dp"
                 android:id="@+id/cholest"
                 android:textSize="20dp"
@@ -149,9 +155,10 @@
                 tools:layout_editor_absoluteY="16dp" />
 
             <EditText
+                android:textColor="#000"
                 android:layout_toEndOf="@+id/cholest"
                 android:id="@+id/chol_input"
-                android:layout_width="wrap_content"
+                android:layout_width="40dp"
                 android:layout_height="wrap_content"
                 android:inputType="number|numberDecimal"
                 android:gravity="center"/>
@@ -159,6 +166,7 @@
         </RelativeLayout>
 
         <RelativeLayout
+            android:textColor="#000"
             android:layout_below="@id/relLayout5"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -167,6 +175,7 @@
             android:orientation="horizontal">
 
             <TextView
+                android:textColor="#000"
                 android:layout_marginTop="15dp"
                 android:id="@+id/sodi"
                 android:textSize="20dp"
@@ -180,9 +189,10 @@
                 tools:layout_editor_absoluteY="16dp" />
 
             <EditText
+                android:textColor="#000"
                 android:layout_toEndOf="@id/sodi"
                 android:id="@+id/sodium_input"
-                android:layout_width="wrap_content"
+                android:layout_width="40dp"
                 android:layout_height="wrap_content"
                 android:inputType="number|numberDecimal"
                 android:gravity="center"/>
@@ -198,6 +208,7 @@
             android:orientation="horizontal">
 
             <TextView
+                android:textColor="#000"
                 android:layout_marginTop="15dp"
                 android:id="@+id/potas"
                 android:textSize="20dp"
@@ -212,9 +223,10 @@
                 />
 
             <EditText
+                android:textColor="#000"
                 android:layout_toEndOf="@id/potas"
                 android:id="@+id/potass_input"
-                android:layout_width="wrap_content"
+                android:layout_width="40dp"
                 android:layout_height="wrap_content"
                 android:inputType="number|numberDecimal"
                 android:gravity="center"/>
@@ -230,6 +242,7 @@
             android:orientation="horizontal">
 
             <TextView
+                android:textColor="#000"
                 android:layout_marginTop="15dp"
                 android:id="@+id/total_carb"
                 android:textSize="20dp"
@@ -243,9 +256,10 @@
                 tools:layout_editor_absoluteY="16dp"/>
 
             <EditText
+                android:textColor="#000"
                 android:layout_toEndOf="@+id/total_carb"
                 android:id="@+id/totCarb_input"
-                android:layout_width="wrap_content"
+                android:layout_width="40dp"
                 android:layout_height="wrap_content"
                 android:inputType="number|numberDecimal"
                 android:gravity="center"/>
@@ -261,6 +275,7 @@
             android:orientation="horizontal">
 
             <TextView
+                android:textColor="#000"
                 android:layout_marginTop="15dp"
                 android:id="@+id/fiber"
                 android:textSize="20dp"
@@ -274,9 +289,10 @@
                 tools:layout_editor_absoluteY="16dp" />
 
             <EditText
+                android:textColor="#000"
                 android:layout_toEndOf="@id/fiber"
                 android:id="@+id/fiber_input"
-                android:layout_width="wrap_content"
+                android:layout_width="40dp"
                 android:layout_height="wrap_content"
                 android:inputType="number|numberDecimal"
                 android:gravity="center"/>
@@ -292,6 +308,7 @@
             android:orientation="horizontal">
 
             <TextView
+                android:textColor="#000"
                 android:layout_marginTop="15dp"
                 android:id="@+id/sugar"
                 android:textSize="20dp"
@@ -305,10 +322,11 @@
                 tools:layout_editor_absoluteY="16dp" />
 
             <EditText
+                android:textColor="#000"
                 android:layout_toEndOf="@id/sugar"
                 android:id="@+id/sugar_input"
                 android:gravity="center"
-                android:layout_width="wrap_content"
+                android:layout_width="40dp"
                 android:layout_height="wrap_content"
                 android:inputType="number|numberDecimal" />
 
@@ -323,6 +341,7 @@
             android:orientation="horizontal">
 
             <TextView
+                android:textColor="#000"
                 android:layout_marginTop="15dp"
                 android:id="@+id/prot"
                 android:textSize="20dp"
@@ -339,19 +358,17 @@
             <EditText
                 android:layout_toEndOf="@id/prot"
                 android:id="@+id/prote_input"
-                android:layout_width="wrap_content"
+                android:layout_width="40dp"
                 android:layout_height="wrap_content"
                 android:inputType="number|numberDecimal"
                 android:gravity="center"/>
         </RelativeLayout>
 
         <RelativeLayout
-            android:layout_below="@id/relLayout11"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:gravity="left"
+            android:layout_alignParentBottom="true"
             android:orientation="horizontal"
-            android:layout_marginTop="40dp"
             android:layout_centerHorizontal="true"
             tools:context=".NutritionLabelConfirmActivity">
 
