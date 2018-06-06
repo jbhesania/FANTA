@@ -4,6 +4,7 @@ import android.graphics.Color;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentActivity;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -193,7 +194,7 @@ public class WeekFragment extends Fragment{
     }
 
     // Creates array and graphs it
-    public  static void graphUpdate(String s, boolean rewrite) {
+    public static void graphUpdate(String s, boolean rewrite) {
 
         setNutrient(s);
 
@@ -208,7 +209,19 @@ public class WeekFragment extends Fragment{
         ft.attach(frg);
         ft.commit();*/
 
+        day1.setTimeInMillis(start);
         createGraphWeek(7,day1,nutrient,intakes,recNutrient,global_view);
+        graph.onDataChanged(false,false);
+
+    }
+
+    public  static void generateGraph(String s) {
+
+        setNutrient(s);
+
+        double[] intakes = Information.information.intakeInterval(start, end,nutrient);
+        createGraphWeek(7,day1,nutrient,intakes,recNutrient,global_view);
+        graph.onDataChanged(false,false);
 
     }
 
@@ -216,6 +229,12 @@ public class WeekFragment extends Fragment{
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setHasOptionsMenu(true);
+    }
+
+    @Override
+    public void onResume(){
+        super.onResume();
+        Log.e("check", "OnResume invoked");
     }
 
     @Override

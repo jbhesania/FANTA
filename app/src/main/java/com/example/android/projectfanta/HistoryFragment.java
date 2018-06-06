@@ -44,6 +44,7 @@ public class HistoryFragment extends Fragment {
     RadioButton nutrient;
     Button select_nutrient;
     Dialog dialog;
+    public WeekFragment wf;
 
 
 
@@ -53,7 +54,8 @@ public class HistoryFragment extends Fragment {
 
     private void setUpViewPager(ViewPager viewPager){
         SectionsPageAdapter adapter = new SectionsPageAdapter(getFragmentManager());
-        adapter.addFragment(new WeekFragment(), "Week");
+        wf = new WeekFragment();
+        adapter.addFragment(wf, "Week");
         adapter.addFragment(new MonthFragment(), "Month");
         adapter.addFragment(new YearFragment(), "Year");
         viewPager.setAdapter(adapter);
@@ -140,6 +142,12 @@ public class HistoryFragment extends Fragment {
     }
 
     public void nutrientChoose() {
+
+        getActivity().getSupportFragmentManager()
+                .beginTransaction()
+                .detach(wf)
+                .attach(wf)
+                .commit();
 
         switch (nutrient.getText().toString()) {
             case "Calories":
