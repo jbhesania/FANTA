@@ -25,6 +25,7 @@ public class Settings extends AppCompatActivity {
     }
 
     public void logOut(View v) {
+        Information.information.deleteFiles(getApplicationContext());
         googleSignOut();
         FirebaseAuth.getInstance().signOut();
         Intent intent = new Intent(this, LoginActivity.class);

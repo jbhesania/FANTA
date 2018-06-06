@@ -1,26 +1,20 @@
 package com.example.android.projectfanta;
 
+import android.app.Dialog;
 import android.content.Context;
 import android.net.Uri;
 import android.os.Bundle;
-import android.support.design.widget.AppBarLayout;
+import android.support.annotation.NonNull;
 import android.support.design.widget.TabLayout;
-import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.Fragment;
 import android.support.v4.view.ViewPager;
-import android.support.v4.widget.DrawerLayout;
-import android.support.v7.app.ActionBarDrawerToggle;
-import android.support.v7.app.AppCompatActivity;
-import android.util.Log;
 import android.view.LayoutInflater;
-import android.view.Menu;
-import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
-
-import static com.example.android.projectfanta.WeekFragment.nutrient;
-import static com.example.android.projectfanta.WeekFragment.recNutrient;
+import android.widget.Button;
+import android.widget.RadioButton;
+import android.widget.RadioGroup;
 
 
 /**
@@ -41,14 +35,19 @@ public class HistoryFragment extends Fragment {
     // TODO: Rename and change types of parameters
     private String mParam1;
     private String mParam2;
-
-    private OnFragmentInteractionListener mListener;
-
-    private DrawerLayout drawerLayout;
-    private ActionBarDrawerToggle toggle;
+    RadioGroup rg;
+    private FriendsFragment.OnFragmentInteractionListener mListener;
+    public View view;
 
     private SectionsPageAdapter myAdapters;
-    private ViewPager myPagers;;
+    private ViewPager myPagers;
+    Button select;
+    RadioButton nutrient;
+    Button select_nutrient;
+    Dialog dialog;
+    public WeekFragment wf;
+
+
 
     public HistoryFragment() {
         // Required empty public constructor
@@ -56,7 +55,8 @@ public class HistoryFragment extends Fragment {
 
     private void setUpViewPager(ViewPager viewPager){
         SectionsPageAdapter adapter = new SectionsPageAdapter(getFragmentManager());
-        adapter.addFragment(new WeekFragment(), "Week");
+        wf = new WeekFragment();
+        adapter.addFragment(wf, "Week");
         adapter.addFragment(new MonthFragment(), "Month");
         adapter.addFragment(new YearFragment(), "Year");
         viewPager.setAdapter(adapter);
@@ -99,13 +99,37 @@ public class HistoryFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        View view = inflater.inflate(R.layout.fragment_history, container, false);
+
+        view = inflater.inflate(R.layout.fragment_history, container, false);
         setHasOptionsMenu(true);
-        drawerLayout = (DrawerLayout) view.findViewById(R.id.drawer);
-        toggle = new ActionBarDrawerToggle(getActivity(),drawerLayout, R.string.open, R.string.close);
-        drawerLayout.addDrawerListener(toggle);
-        toggle.syncState();
-        //((AppCompatActivity)getActivity()).getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        select = (Button)view.findViewById(R.id.select);
+
+
+        select.setOnClickListener(new View.OnClickListener(){
+            @Override
+            public void onClick(View view){
+               dialog = new Dialog(getActivity());
+               dialog.setContentView(R.layout.custom_select);
+               dialog.show();
+                select_nutrient = (Button)dialog.findViewById(R.id.nut);
+                rg = (RadioGroup) dialog.findViewById(R.id.nutrientGraph);
+
+                select_nutrient.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                        int id = rg.getCheckedRadioButtonId();
+                        nutrient = (RadioButton) dialog.findViewById(id);
+                        nutrientChoose();
+                        System.out.println(nutrient.getText().toString());
+                        dialog.dismiss();
+                    }
+                });
+
+            }
+        });
+
+
+
 
         myAdapters = new SectionsPageAdapter(getFragmentManager());
 
@@ -114,24 +138,64 @@ public class HistoryFragment extends Fragment {
 
         TabLayout tab = (TabLayout)view.findViewById(R.id.historyTabs);
         tab.setupWithViewPager(myPagers);
-        setHasOptionsMenu(true);
+
         return view;
     }
 
+    public void nutrientChoose() {
 
-    // TODO: Rename method, update argument and hook method into UI event
-    public void onButtonPressed(Uri uri) {
-        if (mListener != null) {
-            mListener.onFragmentInteraction(uri);
+        getActivity().getSupportFragmentManager()
+                .beginTransaction()
+                .detach(wf)
+                .attach(wf)
+                .commit();
+
+        switch (nutrient.getText().toString()) {
+            case "Calories":
+                WeekFragment.graphUpdate("calories", true);
+                break;
+            case "Total Fat":
+                WeekFragment.graphUpdate("fat", true);
+                break;
+            case "Cholesterol":
+                WeekFragment.graphUpdate("cholesterol", true);
+                break;
+            case "Sodium":
+                WeekFragment.graphUpdate("sodium",true);
+                break;
+            case "Potassium":
+                WeekFragment.graphUpdate("potassium",true);
+                break;
+            case "Total Carbs":
+                WeekFragment.graphUpdate("carbs", true);
+                break;
+            case "Dietary Fiber":
+                WeekFragment.graphUpdate("fiber",true);
+                break;
+            case "Sugars":
+                WeekFragment.graphUpdate("sugar",true);
+                break;
+            case "Protein":
+                WeekFragment.graphUpdate("protein",true);
+                break;
+            default:
+                WeekFragment.graphUpdate("calories",true);
+                break;
+
+
         }
     }
-
 
     @Override
     public void onDetach() {
         super.onDetach();
         mListener = null;
     }
+
+    public boolean onNavigationItemSelected(@NonNull MenuItem item) {
+        return false;
+    }
+
 
     /**
      * This interface must be implemented by activities that contain this
@@ -146,46 +210,5 @@ public class HistoryFragment extends Fragment {
     public interface OnFragmentInteractionListener {
         // TODO: Update argument type and name
         void onFragmentInteraction(Uri uri);
-    }
-
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-
-        Log.d("debugging", "ItemDebug");
-        Log.d("debugging","ItemDebug");
-        switch (item.getItemId()){
-            case R.id.cal:
-                WeekFragment.setNutrient("calories");
-                return true;
-            case R.id.car:
-                WeekFragment.setNutrient("carbs");
-                return true;
-            case R.id.fats:
-                WeekFragment.setNutrient("fat");
-                return true;
-            case R.id.prot:
-                WeekFragment.setNutrient("protein");
-                return true;
-            case R.id.sod:
-                WeekFragment.setNutrient("sodium");
-                return true;
-            case R.id.sug:
-                WeekFragment.setNutrient("sugar");
-                return true;
-            case R.id.fiber:
-                WeekFragment.setNutrient("fiber");
-                return true;
-            default:
-                WeekFragment.setNutrient("calories");
-                return true;
-        }
-    }
-
-    @Override
-    public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
-        Log.d("debugging", "MenuDebug");
-        Log.d("debugging","MenuDebug");
-        inflater.inflate(R.menu.drawer_menu, menu);
-        super.onCreateOptionsMenu(menu, inflater);
     }
 }

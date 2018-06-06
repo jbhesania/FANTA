@@ -51,7 +51,7 @@
     <string name="ocr_success">Text read successfully</string>
     <string name="ocr_failure">No text captured</string>
     <string name="ocr_error">"Error reading text: %1$s"</string>
-    <string name="name">Name</string>
+    <string name="name">Enter the name of the food</string>
     <string name="calories">Calories</string>
     <string name="totalFat">Total Fat (g)</string>
     <string name="cholest">Cholesterol (mg)</string>
@@ -85,4 +85,7 @@
     <string name="title_activity_food_list">FoodListActivity</string>
     <string name="confirm">confirm</string>
     <string name="exit">exit</string>
+
+    <string name="navigation_drawer_open">Open navigation drawer</string>
+    <string name="navigation_drawer_close">Close navigation drawer</string>
 </resources>

@@ -11,6 +11,11 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
+import android.widget.TextView;
+
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
 
 
 /**
@@ -26,6 +31,9 @@ public class HomeFragment extends Fragment {
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
     private static final String ARG_PARAM1 = "param1";
     private static final String ARG_PARAM2 = "param2";
+    private int age;
+    private int weight;
+    private int height;
 
     // TODO: Rename and change types of parameters
     private String mParam1;
@@ -58,17 +66,84 @@ public class HomeFragment extends Fragment {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+
+
         if (getArguments() != null) {
             mParam1 = getArguments().getString(ARG_PARAM1);
             mParam2 = getArguments().getString(ARG_PARAM2);
         }
     }
 
+
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_home, container, false);
+
+        ArrayList<Food> foods =  new ArrayList<Food>(Information.information.getMyFoods().values());
+        ArrayList<Food> foodsToDisplay = new ArrayList<>();
+        for(int i = 0; i < foods.size(); i++) {
+            if(foods.get(i).getCount() > 0) {
+                foodsToDisplay.add(foods.get(i));
+            }
+        }
+        /*
+        for(Food food: foods) {
+            System.out.println("joyaan HHHHHHHHHHHHHHHHHHHHHHHHHHHHH" + food.getCount() +" "+ foods.size() +" "+ foodsToDisplay.size());
+            if(food.getCount() > 0) {
+                foodsToDisplay.add(food);
+            }
+        } */
+        if(foodsToDisplay.size() == 0) {
+            TextView text = (TextView) view.findViewById(R.id.onetext);
+            text.setText("You have no favorite foods yet!");
+        }
+        else {
+            Collections.sort(foodsToDisplay, new Comparator<Food>(){
+                // Reverse order sorting means 1 and -1 are switched
+                public int compare(Food o1, Food o2) {
+                    if (o1.getCount() <= o2.getCount()) {
+                        return 1;
+                    } else if (o1.getCount() >= o2.getCount()){
+                        return -1;
+                    } else {
+                        return 0;
+                    }
+                }
+            });
+
+            TextView text1 = (TextView) view.findViewById(R.id.onetext);
+            text1.setText(foodsToDisplay.get(0).getName());
+
+            if(foodsToDisplay.size() > 1) {
+                TextView text = (TextView) view.findViewById(R.id.twotext);
+                text.setText(foodsToDisplay.get(1).getName());
+            }
+
+            if(foodsToDisplay.size() > 2) {
+                TextView text = (TextView) view.findViewById(R.id.threetext);
+                text.setText(foodsToDisplay.get(2).getName());
+            }
+
+            if(foodsToDisplay.size() > 3) {
+                TextView text = (TextView) view.findViewById(R.id.fourtext);
+                text.setText(foodsToDisplay.get(3).getName());
+            }
+
+            if(foodsToDisplay.size() > 4) {
+                TextView text = (TextView) view.findViewById(R.id.fivetext);
+                text.setText(foodsToDisplay.get(4).getName());
+            }
+
+            if(foodsToDisplay.size() > 5) {
+                TextView text = (TextView) view.findViewById(R.id.sixtext);
+                text.setText(foodsToDisplay.get(5).getName());
+            }
+        }
+
 
         // UI components for navigation bar
         final FloatingActionButton fab_plus, fab_search, fab_camera, fab_fresh, fab_manual;
@@ -78,7 +153,6 @@ public class HomeFragment extends Fragment {
         fab_plus = (FloatingActionButton)view.findViewById(R.id.plus);
         fab_search = (FloatingActionButton)view.findViewById(R.id.search);
         fab_camera = (FloatingActionButton)view.findViewById(R.id.camera);
-        fab_fresh = (FloatingActionButton)view.findViewById(R.id.fresh);
         fab_manual = (FloatingActionButton)view.findViewById(R.id.manual);
 
         fabOpen = AnimationUtils.loadAnimation(getActivity(),R.anim.fab_open);
@@ -92,24 +166,20 @@ public class HomeFragment extends Fragment {
             public void onClick(View v) {
                 if(isOpen){
                     fab_camera.startAnimation(fabClose);
-                    fab_fresh.startAnimation(fabClose);
                     fab_manual.startAnimation(fabClose);
                     fab_search.startAnimation(fabClose);
                     fab_plus.startAnimation(fabBackward);
                     fab_camera.setClickable(false);
-                    fab_fresh.setClickable(false);
                     fab_manual.setClickable(false);
                     fab_search.setClickable(false);
                     isOpen = false;
                 }
                 else{
                     fab_camera.startAnimation(fabOpen);
-                    fab_fresh.startAnimation(fabOpen);
                     fab_manual.startAnimation(fabOpen);
                     fab_search.startAnimation(fabOpen);
                     fab_plus.startAnimation(fabForward);
                     fab_camera.setClickable(true);
-                    fab_fresh.setClickable(true);
                     fab_manual.setClickable(true);
                     fab_search.setClickable(true);
                     isOpen = true;
@@ -122,7 +192,7 @@ public class HomeFragment extends Fragment {
         fab_search.setOnClickListener(new View.OnClickListener(){
             @Override
                     public void onClick(View view){
-                Intent search_intent = new Intent(getContext(), SearchFoodActivity.class);
+                Intent search_intent = new Intent(getContext(), FoodListActivity.class);
                 startActivity(search_intent);
             }
 
@@ -131,7 +201,8 @@ public class HomeFragment extends Fragment {
         fab_manual.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View view){
-                Intent manual_intent = new Intent(getContext(), ManualEntryForm.class);
+                Intent manual_intent = new Intent(getContext(), NutritionLabelConfirmActivity.class);
+                manual_intent.putExtra("MAN", true);
                 startActivity(manual_intent);
             }
         });
@@ -144,13 +215,6 @@ public class HomeFragment extends Fragment {
                   }
         });
 
-        fab_fresh.setOnClickListener(new View.OnClickListener(){
-            @Override
-            public void onClick(View view){
-                Intent fresh_intent = new Intent(getContext(), FreshFoodActivity.class);
-                startActivity(fresh_intent);
-            }
-        });
 
         return view;
     }

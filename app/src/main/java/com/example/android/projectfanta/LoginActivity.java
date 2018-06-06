@@ -1,6 +1,8 @@
 package com.example.android.projectfanta;
 
+import android.app.Activity;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.icu.text.IDNA;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
@@ -29,12 +31,14 @@ import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.GenericTypeIndicator;
 import com.google.firebase.database.ValueEventListener;
 
 import java.io.FileInputStream;
 import java.io.ObjectInputStream;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.Map;
 
 
 /**
@@ -110,8 +114,12 @@ public class LoginActivity extends AppCompatActivity {
 
     public void handleUsers(FirebaseUser user) {
 
-        final DatabaseReference singleUserRef = FirebaseDatabase.getInstance().getReference().child("users").child(user.getUid());
         final String userid = user.getUid();
+
+        final String username = user.getEmail();
+        final DatabaseReference singleUserRef = FirebaseDatabase.getInstance().getReference().child("users").child(userid);
+        // cehck if a username is in user if not then do sth eelse
+        //
         final Callback readCallBack = new Callback() {
             @Override
             public void onComplete(Object o) {
@@ -119,7 +127,7 @@ public class LoginActivity extends AppCompatActivity {
                 // Write Information Object to memory
                 Information.information.writeInfoToMemory(getApplicationContext());
                 Intent calcIntent = new Intent(LoginActivity.this, HomeActivity.class);
-                startActivityForResult(calcIntent, RC_SIGN_IN);
+                startActivity(calcIntent);
             }
         };
 
@@ -129,19 +137,32 @@ public class LoginActivity extends AppCompatActivity {
                 // If user does not have an account
                 if (!snapshot.exists()) {
                     // TODO REQUEST USER INFO TO SET USER VALUES CORRECTLY
-                    String username = "Baby john doe";
-                    UserInfo ui = new UserInfo(userid, username, 10, 8, 0);
+                    UserInfo ui = new UserInfo(userid, username, "f",0, 0, 0);
+
                     User u = new User(userid, username);
-                    DatabaseReference mData = FirebaseDatabase.getInstance().getReference();
+                    final DatabaseReference mData = FirebaseDatabase.getInstance().getReference();
                     Information.information = new Information(ui, u);
-
                     mData.child("users").child(userid).setValue(u);
-                    mData.child(userid).setValue(Information.information);
+                    DatabaseReference freshRef = FirebaseDatabase.getInstance().getReference().child("FreshFoods");
+                    freshRef.addListenerForSingleValueEvent(new ValueEventListener() {
+                        @Override
+                        public void onDataChange(DataSnapshot dataSnapshot) {
+                            GenericTypeIndicator<HashMap<String, Food>> hash = new GenericTypeIndicator<HashMap<String, Food>>() {};
+                            HashMap<String, Food> fresh = (HashMap<String, Food>) dataSnapshot.getValue(hash);
+                            Information.information.setFoods(fresh);
+                            mData.child(userid).setValue(Information.information);
+                            Information.information.writeInfoToMemory(getApplicationContext());
 
-                    Information.information.writeInfoToMemory(getApplicationContext());
+                            Intent calcIntent = new Intent(LoginActivity.this, MyAccountActivity.class);
+                            startActivity(calcIntent);
+                        }
 
-                    Intent calcIntent = new Intent(LoginActivity.this, HomeActivity.class);
-                    startActivityForResult(calcIntent, RC_SIGN_IN);
+                        @Override
+                        public void onCancelled(DatabaseError databaseError) {
+
+                        }
+                    });
+
                 } else {
                     // If the user was not signed in
                     FirebaseUser user = mAuth.getCurrentUser();
@@ -189,9 +210,9 @@ public class LoginActivity extends AppCompatActivity {
                         if (task.isSuccessful()) {
                             // Sign in success, update UI with the signed-in user's information
                             FirebaseUser user = mAuth.getCurrentUser();
+                            //System.out.println("userid is" + user.getUid());
+                            //System.out.println("myName is " + user.getEmail());
                             handleUsers(user);
-                            Intent calcIntent = new Intent(LoginActivity.this, HomeActivity.class);
-                            startActivityForResult(calcIntent, RC_SIGN_IN);
                         } else {
                             // TODO If sign in fails, display a message to the user.
                         }

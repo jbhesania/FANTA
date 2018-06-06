@@ -6,14 +6,25 @@ import android.os.Bundle;
 import android.support.design.widget.TabLayout;
 import android.support.v4.app.Fragment;
 import android.support.v4.view.ViewPager;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+
 import android.widget.AdapterView;
 import android.widget.ListView;
 
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.GenericTypeIndicator;
+import com.google.firebase.database.ValueEventListener;
+
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+
 
 
 /**
@@ -45,9 +56,8 @@ public class FriendsFragment extends Fragment {
 
     private void setUpViewPager(ViewPager viewPager){
         SectionsPageAdapter adapter = new SectionsPageAdapter(getFragmentManager());
-        adapter.addFragment(new ContactsFragment(), "Search");
-        adapter.addFragment(new FollowingFragment(), "Following");
-        adapter.addFragment(new FollowersFragment(), "Followers");
+        adapter.addFragment(new SearchFragment(), "Search");
+        adapter.addFragment(new InstructionFragment(), "Instruction");
         viewPager.setAdapter(adapter);
     }
 
@@ -76,7 +86,11 @@ public class FriendsFragment extends Fragment {
             mParam1 = getArguments().getString(ARG_PARAM1);
             mParam2 = getArguments().getString(ARG_PARAM2);
         }
+    }
 
+    @Override
+    public void onStart() {
+        super.onStart();
     }
 
     @Override
@@ -89,14 +103,6 @@ public class FriendsFragment extends Fragment {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_friends, container, false);
-
-//        list.setOnItemClickListener(new AdapterView.OnItemClickListener(){
-//            @Override
-//            public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
-//                //TODO: make screen for friends profile
-//            }
-//        });
-
 
         myAdapter = new SectionsPageAdapter(getFragmentManager());
 

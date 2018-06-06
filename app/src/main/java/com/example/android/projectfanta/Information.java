@@ -16,28 +16,25 @@ import java.io.ObjectOutputStream;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.Set;
 
 public class Information implements Serializable {
 
     public static Information information;
-    private static double ONE_DAY = 8.64*java.lang.Math.pow(10,7);
-    private static double ONE_WEEK = 7*ONE_DAY;
-    private static double ONE_MONTH = 4*ONE_WEEK;
-    private static double ONE_YEAR = 12*ONE_MONTH;
+    private static long ONE_DAY = 864 * (long)java.lang.Math.pow(10,5);
+    private static long ONE_WEEK = 7*ONE_DAY;
+    private static long ONE_MONTH = 31*ONE_DAY;
+    private static long ONE_YEAR = 365*ONE_DAY;
 
 
     private HashMap<String, Food> myFoods;
     private ArrayList<Intake> myIntakes;
     private UserInfo myInfo;
     // String here is the username
-    private HashMap<String, User> myFollowers;
-    private HashMap<String, User> imFollowing;
     DatabaseReference mData;
 
     public static final String FOOD_FILE = "myFoods";
     public static final String INTAKE_FILE = "myIntakes";
-    public static final String MYFOLLOWERS_FILE = "myFollowers";
-    public static final String IMFOLLOWING_FILE = "imFollowing";
     public static final String USERINFO_FILE = "userInfo";
 
     /**
@@ -52,10 +49,6 @@ public class Information implements Serializable {
         this.myFoods.put(" ", food);
         this.myIntakes = new ArrayList<Intake>();
         this.myIntakes.add(new Intake("", 0, 0));
-        this.myFollowers = new HashMap<String, User>();
-        this.myFollowers.put(user.getUserName(),user);
-        this.imFollowing = new HashMap<String, User>();
-        this.imFollowing.put(user.getUserName(),user);
     }
 
     public Information() {};
@@ -64,12 +57,8 @@ public class Information implements Serializable {
     public Food getFood(String name) { return myFoods.get(name); }
     public ArrayList<Intake> getMyIntakes() { return myIntakes; }
     public HashMap<String, Food> getMyFoods() { return myFoods; }
-    public HashMap<String, User> getImFollowing() { return imFollowing; }
-    public HashMap<String, User> getMyFollowers() { return myFollowers; }
-    public void setFollowers(HashMap<String, User> myFollowers) { this.myFollowers = myFollowers; }
-    public void setFollowing(HashMap<String, User> imFollowing) {
-        this.imFollowing = imFollowing;
-    }
+
+
     public void setInfo(UserInfo myInfo) {
         this.myInfo = myInfo;
     }
@@ -80,17 +69,14 @@ public class Information implements Serializable {
         this.myIntakes = myIntakes;
     }
 
-    /**
-     * Whether or not I follows the given user
-     * @param user the user in question
-     * @return true if i follow user, false if not
-     */
-    public boolean follows(User user) {
-        return this.imFollowing.containsKey(user.getUserName());
-    }
-
-    public boolean hasFood(String name) {
-        return myFoods.containsKey(name);
+    public boolean hasFood(String name)    {
+        Set<String> keys = myFoods.keySet();
+        for(String key: keys) {
+            if(key.toLowerCase().equals(name.toLowerCase())) {
+                return true;
+            }
+        }
+        return false;
     }
 
     static void read(String uid, final Callback call){
@@ -125,26 +111,13 @@ public class Information implements Serializable {
             intakeFileIn.close();
             foodIn.close();
 
-            FileInputStream imfollowingFileIn = context.getApplicationContext().openFileInput(Information.IMFOLLOWING_FILE);
-            ObjectInputStream imfollowingIn = new ObjectInputStream(imfollowingFileIn);
-            Information.information.setFollowing((HashMap<String, User>) imfollowingIn.readObject());
-            imfollowingFileIn.close();
-            imfollowingIn.close();
-
-            FileInputStream myfollowersFileIn = context.getApplicationContext().openFileInput(Information.MYFOLLOWERS_FILE);
-            ObjectInputStream myfollowersIn = new ObjectInputStream(myfollowersFileIn);
-            Information.information.setFollowers((HashMap<String, User>) myfollowersIn.readObject());
-            myfollowersFileIn.close();
-            myfollowersIn.close();
-
             FileInputStream userFileIn = context.getApplicationContext().openFileInput(Information.USERINFO_FILE);
             ObjectInputStream userIn = new ObjectInputStream(userFileIn);
             Information.information.setInfo((UserInfo) userIn.readObject());
             userFileIn.close();
             userIn.close();
 
-            if(Information.information.getMyFoods() == null || Information.information.getMyIntakes() == null ||
-                    Information.information.getImFollowing() == null || Information.information.getMyFollowers() == null
+            if(Information.information.getMyFoods() == null || Information.information.getMyIntakes() == null
                     || Information.information.getInfo() == null) {
                 throw new NullPointerException("Did not instantaie properly from files/files didnt exist");
             }
@@ -158,6 +131,8 @@ public class Information implements Serializable {
 
     public boolean writeInfoToMemory(Context context) {
         try {
+            this.deleteFiles(context);
+
             FileOutputStream foodFileOut =
                     context.getApplicationContext().openFileOutput(Information.FOOD_FILE, Context.MODE_PRIVATE);
             ObjectOutputStream foodOut = new ObjectOutputStream(foodFileOut);
@@ -171,20 +146,6 @@ public class Information implements Serializable {
             intakeOut.writeObject(Information.information.getMyIntakes());
             intakeFileOut.close();
             intakeOut.close();
-
-            FileOutputStream followersFileOut =
-                    context.getApplicationContext().openFileOutput(Information.MYFOLLOWERS_FILE, Context.MODE_PRIVATE);
-            ObjectOutputStream followersOut = new ObjectOutputStream(followersFileOut);
-            followersOut.writeObject(Information.information.getMyFollowers());
-            followersOut.close();
-            followersFileOut.close();
-
-            FileOutputStream followingFileOut =
-                    context.getApplicationContext().openFileOutput(Information.IMFOLLOWING_FILE, Context.MODE_PRIVATE);
-            ObjectOutputStream followingOut = new ObjectOutputStream(followingFileOut);
-            followingOut.writeObject(Information.information.getImFollowing());
-            followingOut.close();
-            followingFileOut.close();
 
             FileOutputStream userFileOut =
                     context.getApplicationContext().openFileOutput(Information.USERINFO_FILE, Context.MODE_PRIVATE);
@@ -200,10 +161,16 @@ public class Information implements Serializable {
         }
     }
 
+    public void deleteFiles(Context context) {
+        context.getApplicationContext().deleteFile(Information.INTAKE_FILE);
+        context.getApplicationContext().deleteFile(Information.FOOD_FILE);
+        context.getApplicationContext().deleteFile(Information.USERINFO_FILE);
+    }
 
     public void addIntake(Context context, Intake intake){
         addIntakeToDB(intake);
         myIntakes.add(intake);
+        Information.information.getFood(intake.getFood()).incrementCount(context);
         addIntakeToMemory(context);
     }
     private void addIntakeToDB(Intake intake) {
@@ -214,9 +181,9 @@ public class Information implements Serializable {
         context.deleteFile(Information.FOOD_FILE);
         try {
             FileOutputStream followersFileOut =
-                    context.getApplicationContext().openFileOutput(Information.MYFOLLOWERS_FILE, Context.MODE_PRIVATE);
+                    context.getApplicationContext().openFileOutput(Information.INTAKE_FILE, Context.MODE_PRIVATE);
             ObjectOutputStream followersOut = new ObjectOutputStream(followersFileOut);
-            followersOut.writeObject(Information.information.getMyFollowers());
+            followersOut.writeObject(Information.information.getMyIntakes());
             followersOut.close();
             followersFileOut.close();
         }
@@ -248,6 +215,16 @@ public class Information implements Serializable {
         catch(Exception e) {
 
         }
+    }
+
+
+    public void updateFood(Context context, Food food) {
+        updateFoodToDB(food);
+        addFoodToMemory(context);
+    }
+    private void updateFoodToDB(Food food) {
+        if (mData == null) mData = FirebaseDatabase.getInstance().getReference();
+        mData.child(myInfo.getId()).child("myFoods").child(food.getName()).child("count").setValue(food.getCount());
     }
 
     /**
@@ -283,20 +260,16 @@ public class Information implements Serializable {
         // Check the time interval we are looking in and set the time to
         // a day or a month
         int days_months_year = 0;
-        double time = 0;
         if (end - start == ONE_WEEK) {
-            time = ONE_DAY;
             days_months_year = 7;
         }
 
         else if (end - start == ONE_MONTH) {
-            time = ONE_DAY;
             days_months_year = 31;
         }
 
         else if (end - start == ONE_YEAR) {
-            time = ONE_MONTH;
-            days_months_year = 12;
+            days_months_year = 365;
 
         }
 
@@ -313,6 +286,8 @@ public class Information implements Serializable {
         // handle no foods yet
         if( myIntakes.size() == 1 ) return nutrientIntake;
 
+        long curr_time;
+
         // loop through piece returned by search
         for (int i = startIndex; i <= endIndex; i++) {
 
@@ -322,25 +297,28 @@ public class Information implements Serializable {
                     * myIntakes.get(i).getServings();
 
             current_idx = 0;
-            long curr_time;
             for (int j = 0; j < days_months_year; j++) {
-                curr_time = start + (days_months_year*j);
-                if (curr_time < myIntakes.get(i).getCreationTime()) {
+                curr_time = start + (ONE_DAY*j);
+                if (curr_time <= myIntakes.get(i).getCreationTime()) {
                     current_idx = j;
                 }
             }
 
             nutrientIntake[current_idx] += myFoods.get(myIntakes.get(i).getFood()).getNutrient(nutrient)
-                    * myIntakes.get(i).getServings();;
+                    * myIntakes.get(i).getServings();
 
         }
 
+        for(int i = 0; i < nutrientIntake.length; i++) {
+            System.out.print("Day" + i + ": ");
+            System.out.println(nutrientIntake[i]);
+        }
 
         return nutrientIntake;
 
     }
 
-}
+
 
 /*
     Memory Writing code
@@ -390,3 +368,28 @@ public class Information implements Serializable {
         }
 
  */
+
+
+    public void addUserInfo(Context context) {
+        addUserInfoToDB();
+        addUserInfoToMemory(context);
+    }
+    public void addUserInfoToDB() {
+        if (mData == null) mData = FirebaseDatabase.getInstance().getReference();
+        mData.child(myInfo.getId()).child("info").setValue(myInfo);
+    }
+    private void addUserInfoToMemory(Context context) {
+        context.deleteFile(Information.USERINFO_FILE);
+        try {
+            FileOutputStream userFileOut =
+                    context.getApplicationContext().openFileOutput(Information.USERINFO_FILE, Context.MODE_PRIVATE);
+            ObjectOutputStream userOut = new ObjectOutputStream(userFileOut);
+            userOut.writeObject(Information.information.getInfo());
+            userFileOut.close();
+            userOut.close();
+        }
+        catch(Exception e) {
+
+        }
+    }
+}

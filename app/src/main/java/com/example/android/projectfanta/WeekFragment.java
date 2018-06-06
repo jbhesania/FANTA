@@ -6,10 +6,6 @@ import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentActivity;
 import android.util.Log;
 import android.view.LayoutInflater;
-
-import android.view.Menu;
-import android.view.MenuInflater;
-import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Toast;
@@ -26,11 +22,19 @@ import com.jjoe64.graphview.series.Series;
 import java.util.Calendar;
 
 
-public class WeekFragment extends Fragment {
+public class WeekFragment extends Fragment{
     //Instance variable so that view can be accessed by createGraphWeek method as well
     public static GraphView graph;
-    public static String nutrient;
-    public static double recNutrient = 250.0;
+    public static String nutrient = "calories";
+    public static double recNutrient;
+    public static View global_view;
+
+
+    public static LineGraphSeries<DataPoint> series;
+    public static LineGraphSeries<DataPoint> standard;
+
+    private static long start, end;
+    private static Calendar day1;
 
     /**
      * numDays The number of days including starting day to end day. E.g from 12/10 - 12/12, numDays
@@ -73,14 +77,14 @@ public class WeekFragment extends Fragment {
         }
 
         //Drawing the graph on View
-        graph = (GraphView) view.findViewById(R.id.graph);
-        LineGraphSeries<DataPoint> series = new LineGraphSeries<>(dp);
+        series = new LineGraphSeries<>(dp);
         series.setTitle("User");
 
         // set date label formatter
         // use static labels for horizontal and vertical labels
         // set date label formatter
         final FragmentActivity activity = (FragmentActivity)view.getContext();
+        graph = (GraphView) global_view.findViewById(R.id.graph);
         graph.getGridLabelRenderer().setLabelFormatter(new DateAsXAxisLabelFormatter(activity));
         graph.getGridLabelRenderer().setHorizontalLabelsAngle(35);
         graph.getGridLabelRenderer().setNumHorizontalLabels(numDays+1);
@@ -93,12 +97,32 @@ public class WeekFragment extends Fragment {
         graph.getViewport().setXAxisBoundsManual(true);
         graph.getGridLabelRenderer().setHumanRounding(false);
 
+
+        /*double max = nutrientIntake[0];
+        for (int ktr = 0; ktr < nutrientIntake.length; ktr++) {
+            if (nutrientIntake[ktr] > max) {
+                max = nutrientIntake[ktr];
+            }
+        }
+        System.out.println("MAX = " + max);
+        double min = nutrientIntake[0];
+        for (int ktr = 0; ktr < nutrientIntake.length; ktr++) {
+            if (nutrientIntake[ktr] < min) {
+                min = nutrientIntake[ktr];
+            }
+        }
+        System.out.println("MIN = " + min);
+
+        graph.getViewport().setYAxisBoundsManual(true);
+        graph.getViewport().setMinY(min);
+        graph.getViewport().setMaxY(max);*/
+
         //Legend
         graph.getGridLabelRenderer().setHorizontalAxisTitle("date");
         graph.getGridLabelRenderer().setVerticalAxisTitle("mg");
 
         //Graphing standard intake
-        LineGraphSeries<DataPoint> standard = new LineGraphSeries<>(dpStd);
+        standard = new LineGraphSeries<>(dpStd);
         standard.setTitle("Standard");
         standard.setColor(Color.GREEN);
 
@@ -118,10 +142,10 @@ public class WeekFragment extends Fragment {
             }
         });
 
-        graph.getViewport().setScrollable(true);
+        /*graph.getViewport().setScrollable(true);
         graph.getViewport().setScrollableY(true);
         graph.getViewport().setScalable(true);
-        graph.getViewport().setScalableY(true);
+        graph.getViewport().setScalableY(true);*/
 
 
         //Adding them to the view
@@ -134,41 +158,72 @@ public class WeekFragment extends Fragment {
 
     public static void setNutrient(String input)
     {
+        UserInfo user = Information.information.getInfo();
         nutrient = input;
         switch(input){
             case "calories":
-                recNutrient = 200.0;
+                recNutrient = user.getRecCalories();
                 break;
             case "carbs":
-                recNutrient = 200.0;
+                recNutrient = user.getRecCarbs();
                 break;
             case "fat":
-                recNutrient = 200.0;
+                recNutrient = user.getRecFat();
                 break;
             case "protein":
-                recNutrient = 200.0;
+                recNutrient = user.getRecProtein();
                 break;
             case "sodium":
-                recNutrient = 200.0;
+                recNutrient = user.getRecSodium();
                 break;
             case "sugar":
-                recNutrient = 200.0;
+                recNutrient = user.getRecSugars();
                 break;
             case "cholesterol":
-                recNutrient = 200.0;
+                recNutrient = user.getRecCholesterol();
                 break;
             case "potassium":
-                recNutrient = 200.0;
+                recNutrient = user.getRecPotassium();
                 break;
             case "fiber":
-                recNutrient = 200.0;
+                recNutrient = user.getRecFiber();
                 break;
             default:
-                recNutrient = 200.0;
+                recNutrient = user.getRecCalories();
         }
     }
 
+    // Creates array and graphs it
+    public static void graphUpdate(String s, boolean rewrite) {
 
+        setNutrient(s);
+
+        if(rewrite) graph.removeAllSeries();
+
+        double[] intakes = Information.information.intakeInterval(start, end,nutrient);
+
+        /*Fragment frg = null;
+        FragmentManager frg = getSupportFragmentManager().findFragmentByTag("Your_Fragment_TAG");
+        final FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
+        ft.detach(frg);
+        ft.attach(frg);
+        ft.commit();*/
+
+        day1.setTimeInMillis(start);
+        createGraphWeek(7,day1,nutrient,intakes,recNutrient,global_view);
+        graph.onDataChanged(false,false);
+
+    }
+
+    public  static void generateGraph(String s) {
+
+        setNutrient(s);
+
+        double[] intakes = Information.information.intakeInterval(start, end,nutrient);
+        createGraphWeek(7,day1,nutrient,intakes,recNutrient,global_view);
+        graph.onDataChanged(false,false);
+
+    }
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -177,30 +232,30 @@ public class WeekFragment extends Fragment {
     }
 
     @Override
+    public void onResume(){
+        super.onResume();
+        Log.e("check", "OnResume invoked");
+    }
+
+    @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        View view = inflater.inflate(R.layout.fragment_week, container, false);
-        //System.out.println(Information.information.getMyFoods().get(
-        //Information.information.getMyIntakes().get(2).getFood()).getNutrient("calories")
-        //);
+        global_view = inflater.inflate(R.layout.fragment_week, container, false);
+
         Calendar today = Calendar.getInstance();
         today.add(Calendar.DAY_OF_MONTH, 1);
         today.set(Calendar.HOUR_OF_DAY, 0);
         today.set(Calendar.MINUTE, 0);
         today.set(Calendar.SECOND, 0);
         today.set(Calendar.MILLISECOND, 0);
-        long end = today.getTimeInMillis()+864*(long)java.lang.Math.pow(10,5);
-        //long end = System.currentTimeMillis();
-        long start = end - 7*864*(long)java.lang.Math.pow(10,5);
-        //createGraphWeek(7, , "Protein",
-        Calendar test = Calendar.getInstance();
-        test.setTimeInMillis(start-864*(long)java.lang.Math.pow(10,5));
+        end = today.getTimeInMillis();
+        start = end - 7*864*(long)java.lang.Math.pow(10,5);
+        day1 = Calendar.getInstance();
+        day1.setTimeInMillis(start);
 
-        double[] intakes = Information.information.intakeInterval(start, end,"calories");
-
-        createGraphWeek(7,test,"calories",intakes,recNutrient,view);
-        return view;
+        graphUpdate( nutrient, false);
+        return global_view;
     }
 
 }

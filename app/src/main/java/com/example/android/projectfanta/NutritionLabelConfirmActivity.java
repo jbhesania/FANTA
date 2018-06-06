@@ -1,5 +1,6 @@
 package com.example.android.projectfanta;
 
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
@@ -9,6 +10,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import java.util.HashMap;
 
@@ -35,7 +37,8 @@ public class NutritionLabelConfirmActivity extends AppCompatActivity {
         setContentView(R.layout.activity_nutrition_label_confirm);
         Intent intent = getIntent();
         String[] detections = intent.getStringArrayExtra("Detections");
-        HashMap<Integer, String> parsedData = parseData(detections);
+        HashMap<Integer, String> parsedData;
+
         dataCals = (TextView)findViewById(R.id.calories_field);
         dataFat = (TextView)findViewById(R.id.totalFat_field);
         dataChol = (TextView)findViewById(R.id.chol_input);
@@ -48,16 +51,20 @@ public class NutritionLabelConfirmActivity extends AppCompatActivity {
         name = (TextView)findViewById(R.id.name);
         serve = (TextView)findViewById(R.id.servings);
 
-        dataChol.setText(parsedData.get(8));
-        dataCals.setText(parsedData.get(3));
-        dataFat.setText(parsedData.get(1));
-        dataSod.setText(parsedData.get(6));
-        dataPot.setText(parsedData.get(7));
-        dataCarb.setText(parsedData.get(2));
-        dataSug.setText(parsedData.get(4));
-        dataProt.setText(parsedData.get(5));
-        dataFib.setText(parsedData.get(9));
+        if (!intent.getBooleanExtra("MAN", false)) {
+            parsedData = parseData(detections);
 
+            dataChol.setText(parsedData.get(8));
+            dataCals.setText(parsedData.get(3));
+            dataFat.setText(parsedData.get(1));
+            dataSod.setText(parsedData.get(6));
+            dataPot.setText(parsedData.get(7));
+            dataCarb.setText(parsedData.get(2));
+            dataSug.setText(parsedData.get(4));
+            dataProt.setText(parsedData.get(5));
+            dataFib.setText(parsedData.get(9));
+        }
+        
     }
 
     @Override
@@ -85,11 +92,12 @@ public class NutritionLabelConfirmActivity extends AppCompatActivity {
 
     public HashMap<Integer, String> parseData(String[] detects) {
 
+        // Different possibilities of spellings the OCR catches
         String[] keys = {
                 "total", // 0
                 "fat lat fal", // 1
-                "carbohydrate carb. carbs.", // 2
-                "calories calri ceries caries", // 3
+                "carbohydrates carb. carbs.", // 2
+                "calories calri ceries caries caories caores caleries", // 3
                 "sugars", // 4
                 "protein", // 5
                 "sodium", // 6
@@ -111,21 +119,25 @@ public class NutritionLabelConfirmActivity extends AppCompatActivity {
         HashMap<Integer, String> map = new HashMap<Integer, String>();
 
         String[] stringArray = string.split(" ");
-        System.out.println(stringArray.length);
         for(int i = 0; i < stringArray.length-1; ++i) {
 
             if(stringArray[i].length() <= 2) continue; // vitamin C -> calories issue
 
-            System.out.println(keys[0] + " == " + stringArray[i + 1].toLowerCase());
+            // Check for over 2000 calorie value
+            if(stringArray[i].equals("2,000") ||
+                    stringArray[i].equals("2000") ||
+                    stringArray[i].equals("3,000") ||
+                    stringArray[i].equals("3000")) continue;
+
+
             if (keys[0].contains(stringArray[i].toLowerCase())) {
                 for (int j = 1; j <= 2; ++j) {
-                    System.out.println(keys[j] + " == " + stringArray[i + 1].toLowerCase());
 
                     if (keys[j].contains(stringArray[i + 1].toLowerCase())) {
                         String data = stringArray[i + 2];
                         data = data.replaceAll("[' 'mgq]+", "");
                         data = data.replaceAll("[OoDQ]", "0");
-                        if (isInteger(data)) {
+                        if (isDouble(data)) {
                             System.out.println("Added " + data + " " + keys[j]);
                             map.put(j, data);
                             stringArray[i] = "";
@@ -137,14 +149,13 @@ public class NutritionLabelConfirmActivity extends AppCompatActivity {
                 }
             } else {
                 for (int j = 3; j < keys.length; ++j) {
-                    System.out.println(keys[j] + " == " + stringArray[i].toLowerCase());
 
                     if (keys[j].contains(stringArray[i].toLowerCase())) {
                         String data = stringArray[i + 1];
                         data = data.replaceAll("[' 'mgq]+", "");
                         data = data.replaceAll("[OoDQ]", "0");
 
-                        if (isInteger(data)) {
+                        if (isDouble(data)) {
                             System.out.println("Added " + data + " " + keys[j]);
 
                             map.put(j, data);
@@ -161,7 +172,24 @@ public class NutritionLabelConfirmActivity extends AppCompatActivity {
     }
 
     public void onConfirm(View view) {
+
+        if(name.getText().toString().contains(".") || name.getText().toString().contains("/") ||
+                name.getText().toString().contains("[") || name.getText().toString().contains("]") ||
+                name.getText().toString().contains("#") || name.getText().toString().contains("$")) {
+            Toast toast = Toast.makeText(getApplicationContext(),
+                    "Names cannot contain . / [ ] # or $", Toast.LENGTH_SHORT);
+            toast.show();
+            return;
+        }
+
+        if(Information.information.hasFood(name.getText().toString())) {
+            Toast toast = Toast.makeText(getApplicationContext(),
+                    "Enter a unique name!", Toast.LENGTH_SHORT);
+            toast.show();
+            return;
+        }
         if (!TextUtils.isEmpty(serve.getText().toString()) && !TextUtils.isEmpty(name.getText().toString())) {
+
 
             if (!TextUtils.isEmpty(dataCals.getText().toString())) food.add(Food.CALORIES, Double.parseDouble(dataCals.getText().toString()));
             else food.add(Food.CALORIES, 0.0);
@@ -187,8 +215,8 @@ public class NutritionLabelConfirmActivity extends AppCompatActivity {
             if (!TextUtils.isEmpty(dataSug.getText().toString())) food.add(Food.SUGAR, Double.parseDouble(dataSug.getText().toString()));
             else food.add(Food.SUGAR, 0.0);
 
-            if (!TextUtils.isEmpty(dataProt.getText().toString())) food.add(Food.PROTIEN, Double.parseDouble(dataProt.getText().toString()));
-            else food.add(Food.PROTIEN, 0.0);
+            if (!TextUtils.isEmpty(dataProt.getText().toString())) food.add(Food.PROTEIN, Double.parseDouble(dataProt.getText().toString()));
+            else food.add(Food.PROTEIN, 0.0);
 
 
             food.setName(Food.getValidName(name.getText().toString()));
@@ -201,23 +229,46 @@ public class NutritionLabelConfirmActivity extends AppCompatActivity {
             Intent homeIntent = new Intent(this, HomeActivity.class);
 
             startActivity(homeIntent);
+            finish();
+
+
         } else {
+
             // POP up saying to enter servings and name
+            if (TextUtils.isEmpty(serve.getText().toString())) {
+                Context context = getApplicationContext();
+                CharSequence text = "Please enter number of servings";
+                int duration = Toast.LENGTH_SHORT;
+
+                Toast toast = Toast.makeText(context, text, duration);
+                toast.show();
+            }
+
+            if (TextUtils.isEmpty(name.getText().toString()) || name.getText().toString().equals("Name")) {
+                Context context = getApplicationContext();
+                CharSequence text = "Please enter a name";
+                int duration = Toast.LENGTH_SHORT;
+
+                Toast toast = Toast.makeText(context, text, duration);
+                toast.show();
+            }
+
         }
     }
 
     public void exit(View view){
         Intent homeIntent = new Intent(this, HomeActivity.class);
         startActivity(homeIntent);
+        finish();
     }
 
-    public boolean isInteger(String data) {
+    public boolean isDouble(String data) {
 
         boolean valid = false;
         try {
 
             // check
-            Integer.parseInt(data);
+            Double.parseDouble(data);
             valid = true;
 
         }
@@ -229,4 +280,26 @@ public class NutritionLabelConfirmActivity extends AppCompatActivity {
         EditText editText = (EditText) findViewById(R.id.name);
         editText.setText("");
     }
+
+    // LIFECYCLE
+    @Override
+    protected void onResume() {
+        super.onResume();
+    }
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+    }
+
+    @Override
+    protected void onStop() {
+        super.onStop();
+    }
+
 }
