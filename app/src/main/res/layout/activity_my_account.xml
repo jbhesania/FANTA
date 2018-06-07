@@ -37,177 +37,202 @@
         <RelativeLayout
             android:layout_below="@+id/rell"
             android:layout_centerHorizontal="true"
-            android:layout_width="200dp"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:orientation="vertical"
-            android:layout_marginTop="25dp"
-            android:layout_gravity="center_horizontal">
-
-
-            <ImageView
-                android:id="@+id/gender"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:src="@drawable/gender"
-                android:layout_marginRight="5dp"/>
-
-            <RadioGroup
-                android:id="@+id/genderGroup"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_toEndOf="@+id/gender">
-                <RadioButton
-                    android:id="@+id/female"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:onClick="genderGroupClick"
-                    android:text="Female"/>
-                <RadioButton
-                    android:id="@+id/male"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:onClick="genderGroupClick"
-                    android:text="Male"/>
-            </RadioGroup>
+            android:layout_marginTop="10dp">
 
             <RelativeLayout
-                android:id="@+id/linAge"
-                android:layout_centerHorizontal="true"
-                android:layout_marginTop="5dp"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                android:layout_gravity="center_horizontal">
+                android:id="@+id/gen">
+
                 <ImageView
-                    android:id="@+id/birthdayP"
-                    android:layout_marginTop="80dp"
-                    android:layout_width="25dp"
-                    android:layout_height="25dp"
-                    android:src="@drawable/birthday"
-                    android:layout_marginRight="5dp"/>
-                <TextView
+                    android:id="@+id/gender"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="80dp"
-                    android:text="Age"
-                    android:textSize="20dp"
-                    android:layout_toEndOf="@+id/birthdayP"
-                    android:gravity="center"/>
-                <EditText
-                    android:id="@+id/ageText"
-                    android:layout_marginTop="75dp"
-                    android:layout_width="75dp"
+                    android:src="@drawable/gender"/>
+
+                <RadioGroup
+                    android:layout_marginLeft="5dp"
+                    android:id="@+id/genderGroup"
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:inputType="numberDecimal"
-                    android:textSize="15sp"
-                    android:layout_alignParentRight="true"/>
+                    android:layout_toEndOf="@+id/gender">
+
+                    <RadioButton
+                        android:id="@+id/female"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:onClick="genderGroupClick"
+                        android:text="Female"/>
+
+                    <RadioButton
+                        android:id="@+id/male"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:onClick="genderGroupClick"
+                        android:text="Male"/>
+                </RadioGroup>
             </RelativeLayout>
 
             <RelativeLayout
-                android:id="@+id/linWeight"
+                android:layout_marginTop="15dp"
+                android:id="@+id/linAge"
+                android:layout_below="@id/gen"
                 android:layout_centerHorizontal="true"
-                android:layout_marginTop="5dp"
-                android:layout_width="wrap_content"
+                android:layout_width="200dp"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+                <ImageView
+                    android:id="@+id/birthdayP"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:src="@drawable/birthday"
+                    android:layout_marginRight="5dp"/>
+                <TextView
+                    android:id="@+id/textAge"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Age"
+                    android:textSize="15dp"
+                    android:layout_marginTop="5dp"
+                    android:textColor="#000"
+                    android:layout_toEndOf="@+id/birthdayP"
+                    android:gravity="center"/>
+                <EditText
+                    android:layout_marginRight="20dp"
+                    android:layout_alignParentEnd="true"
+                    android:id="@+id/ageText"
+                    android:layout_width="40dp"
+                    android:layout_marginLeft="45dp"
+                    android:layout_height="wrap_content"
+                    android:inputType="numberDecimal"
+                    android:textSize="15sp"/>
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:layout_marginTop="10dp"
+                android:id="@+id/linWeight"
+                android:layout_below="@id/linAge"
+                android:layout_centerHorizontal="true"
+                android:layout_width="200dp"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal"
                 android:layout_gravity="center_horizontal">
                 <ImageView
                     android:id="@+id/weight"
-                    android:layout_marginTop="130dp"
-                    android:layout_width="25dp"
-                    android:layout_height="25dp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
                     android:src="@drawable/weight"
                     android:layout_marginRight="5dp"/>
                 <TextView
+                    android:id="@+id/textWeight"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="130dp"
                     android:text="Weight"
-                    android:textSize="20dp"
+                    android:textSize="15dp"
+                    android:layout_marginTop="5dp"
+                    android:textColor="#000"
                     android:layout_toEndOf="@+id/weight"
                     android:gravity="center"/>
                 <EditText
+                    android:layout_marginRight="20dp"
+                    android:layout_alignParentEnd="true"
                     android:id="@+id/weightText"
-                    android:layout_width="75dp"
+                    android:layout_width="40dp"
+                    android:layout_marginLeft="30dp"
                     android:layout_height="wrap_content"
-                    android:textSize="15sp"
                     android:inputType="numberDecimal"
-                    android:layout_marginTop="125dp"
-                    android:layout_alignParentRight="true"/>
+                    android:textSize="15sp"/>
             </RelativeLayout>
 
             <RelativeLayout
+                android:layout_marginTop="10dp"
                 android:id="@+id/linHeight"
+                android:layout_below="@id/linWeight"
                 android:layout_centerHorizontal="true"
-                android:layout_marginTop="5dp"
-                android:layout_width="wrap_content"
+                android:layout_width="200dp"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal"
                 android:layout_gravity="center_horizontal">
                 <ImageView
                     android:id="@+id/height"
-                    android:layout_marginTop="180dp"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:src="@drawable/height"
                     android:layout_marginRight="5dp"/>
                 <TextView
+                    android:id="@+id/textHeight"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="180dp"
                     android:text="Height"
-                    android:textSize="20dp"
+                    android:textSize="15dp"
+                    android:layout_marginTop="5dp"
+                    android:textColor="#000"
                     android:layout_toEndOf="@+id/height"
                     android:gravity="center"/>
                 <EditText
+                    android:layout_marginRight="20dp"
+                    android:layout_alignParentEnd="true"
                     android:id="@+id/heightText"
-                    android:layout_marginTop="175dp"
-                    android:layout_width="75dp"
+                    android:layout_width="40dp"
+                    android:layout_marginLeft="30dp"
                     android:layout_height="wrap_content"
                     android:inputType="numberDecimal"
-                    android:textSize="15sp"
-                    android:layout_alignParentRight="true"/>
+                    android:textSize="15sp"/>
             </RelativeLayout>
 
-            <ImageView
-                android:layout_width="wrap_content"
+            <RelativeLayout
+                android:layout_marginTop="10dp"
+                android:id="@+id/linRunning"
+                android:layout_below="@id/linHeight"
+                android:layout_centerHorizontal="true"
+                android:layout_width="200dp"
                 android:layout_height="wrap_content"
-                android:layout_marginRight="5dp"
-                android:src="@drawable/running"
-                android:layout_marginTop="230dp"/>
+                android:orientation="horizontal"
+                android:layout_gravity="center_horizontal">
 
-            <RadioGroup
-                android:id="@+id/paGroup"
-                android:layout_marginTop="230dp"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_toEndOf="@+id/gender">
-                <RadioButton
-                    android:id="@+id/sedentary"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:onClick="paGroupClick"
-                    android:text="Sedentary"/>
-                <RadioButton
-                    android:id="@+id/lowactive"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:onClick="paGroupClick"
-                    android:text="Low Active"/>
-                <RadioButton
-                    android:id="@+id/active"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:onClick="paGroupClick"
-                    android:text="Active"/>
-                <RadioButton
-                    android:id="@+id/veryactive"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:onClick="paGroupClick"
-                    android:text="Very Active"/>
-            </RadioGroup>
 
+                <ImageView
+                    android:id="@+id/imageRunning"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginRight="5dp"
+                    android:src="@drawable/running"/>
+
+                <RadioGroup
+                    android:layout_toEndOf="@id/imageRunning"
+                    android:id="@+id/paGroup"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+                    <RadioButton
+                        android:id="@+id/sedentary"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:onClick="paGroupClick"
+                        android:text="Sedentary"/>
+                    <RadioButton
+                        android:id="@+id/lowactive"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:onClick="paGroupClick"
+                        android:text="Low Active"/>
+                    <RadioButton
+                        android:id="@+id/active"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:onClick="paGroupClick"
+                        android:text="Active"/>
+                    <RadioButton
+                        android:id="@+id/veryactive"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:onClick="paGroupClick"
+                        android:text="Very Active"/>
+                </RadioGroup>
+
+            </RelativeLayout>
         </RelativeLayout>
 
     <RelativeLayout
@@ -227,5 +252,4 @@
             android:textAlignment="center" />
 
     </RelativeLayout>
-
-</RelativeLayout>
+        </RelativeLayout>

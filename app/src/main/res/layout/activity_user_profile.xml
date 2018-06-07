@@ -9,145 +9,95 @@
     <RelativeLayout
         android:id="@+id/relative"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="match_parent">
 
-        <LinearLayout
-            android:background="@drawable/gradientbackground"
+        <RelativeLayout
+            android:background="@drawable/gradientbackground2"
             android:layout_width="match_parent"
-            android:layout_height="300dp"
+            android:layout_height="130dp"
             android:orientation="vertical">
 
-            <Switch
-                android:id="@+id/visibility"
-                android:layout_gravity="end"
+            <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:checked="false"/>
+                android:textColor="#000"
+                android:textSize="20sp"
+                android:textStyle="bold"
+                android:text="Intake History of"
+                android:layout_marginTop="30dp"
+                android:layout_centerHorizontal="true"/>
 
             <TextView
                 android:id="@+id/myName"
-                android:layout_marginTop="100dp"
-                android:layout_gravity="center_horizontal"
+                android:layout_centerHorizontal="true"
+                android:layout_marginTop="60dp"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="liam1990"
-                android:textColor="#fff"
-                android:textStyle="bold"
+                android:text=""
+                android:textColor="#000"
                 android:textSize="20sp"/>
+        </RelativeLayout>
 
-            <TextView
-                android:id="@+id/memberSince"
-                android:layout_gravity="center_horizontal"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Member since 2018"
-                android:textColor="#d3d3d3"
-                android:textSize="13sp"/>
-
-        </LinearLayout>
-
-        <android.support.v7.widget.CardView
-            android:layout_width="220dp"
-            android:layout_height="70dp"
+        <RelativeLayout
+            android:layout_marginBottom="40dp"
+            android:layout_alignParentBottom="true"
             android:layout_centerHorizontal="true"
-            android:layout_marginTop="260dp"
-            android:elevation="20dp">
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:orientation="horizontal"
-            android:weightSum="2">
-
-            <LinearLayout
-                android:gravity="center"
-                android:orientation="vertical"
-                android:layout_width="0dp"
-                android:layout_weight="1"
-                android:layout_height="match_parent">
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Following"
-                    android:textSize="15sp" />
-                <TextView
-                    android:id="@+id/MyFollowing"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="125"
-                    android:textStyle="bold"
-                    android:textSize="15sp"
-                    android:paddingTop="10dp"
-                    android:textColor="#dfd708"/>
-
-            </LinearLayout>
-
-            <LinearLayout
-                android:gravity="center"
-                android:orientation="vertical"
-                android:layout_width="0dp"
-                android:layout_weight="1"
-                android:layout_height="match_parent">
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Followers"
-                    android:textSize="15sp" />
-
-                <TextView
-                    android:id="@+id/myFollowers"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="1250"
-                    android:textStyle="bold"
-                    android:textSize="15sp"
-                    android:paddingTop="10dp"
-                    android:textColor="#dfd708"/>
-
-            </LinearLayout>
-        </LinearLayout>
-
-        </android.support.v7.widget.CardView>
-
-        <LinearLayout
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:orientation="vertical"
-            android:layout_gravity="center"
-            android:layout_marginTop="420dp"
-            android:layout_marginLeft="125dp">
-
-            <LinearLayout
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal">
-
-                <ImageView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:src="@drawable/location"/>
-
-                <TextView
-                    android:layout_marginLeft="5dp"
-                    android:layout_marginTop="6dp"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="San Francisco, CA"
-                    android:textColor="#000"/>
-            </LinearLayout>
+            android:layout_height="wrap_content">
 
             <Button
-                android:layout_marginTop="20dp"
-                android:layout_marginLeft="33dp"
-                android:id="@+id/saveBtn"
-                android:layout_width="100dp"
+                android:id="@+id/select"
+                android:layout_width="wrap_content"
                 android:layout_height="30dp"
                 android:background="@drawable/capsule"
-                android:textAlignment="center"
-                android:text="Follow"/>
+                android:text="SELECT SPECIFIC NUTRIENT"
+                android:textAlignment="center" />
+        </RelativeLayout>
 
-        </LinearLayout>
+
+        <FrameLayout
+            android:layout_centerHorizontal="true"
+            android:id="@+id/main_content"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            tools:context=".FriendsFragment">
+
+            <android.support.design.widget.AppBarLayout
+                android:id="@+id/appbar"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="150dp"
+                android:theme="@style/AppTheme.AppBarOverlay"
+                android:background="@color/addButton"
+                android:layout_gravity="center_horizontal">
+
+                <android.support.design.widget.TabLayout
+                    android:id="@+id/historyTabs"
+                    android:layout_width="250dp"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center">
+
+                    <android.support.design.widget.TabItem
+                        android:id="@+id/tabItem"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Week" />
+
+                    <android.support.design.widget.TabItem
+                        android:id="@+id/tabItem2"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Month" />
+
+                    <android.support.design.widget.TabItem
+                        android:id="@+id/tabItem3"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Year" />
+
+                </android.support.design.widget.TabLayout>
+            </android.support.design.widget.AppBarLayout>
+
+        </FrameLayout>
     </RelativeLayout>
 </LinearLayout>

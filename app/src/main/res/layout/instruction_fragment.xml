@@ -2,46 +2,99 @@
 <RelativeLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:layout_margin="25dp">
 
     <RelativeLayout
         android:id="@+id/relLayout"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_centerHorizontal="true"
-        android:layout_marginTop="20dp">
+        android:layout_marginTop="70dp">
 
         <TextView
+            android:id="@+id/titleHow"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="How to see other user's profile"
+            android:text="Instruction to View Other Profiles"
             android:textColor="#000"
             android:textSize="20sp"
             android:textStyle="bold|italic" />
 
+        <TextView
+            android:id="@+id/step1"
+            android:layout_marginTop="10dp"
+            android:layout_below="@id/titleHow"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="#000"
+            android:text="1. Go to the Friends tab on your navigation bar"/>
+
+        <TextView
+            android:id="@+id/step2"
+            android:layout_marginTop="10dp"
+            android:layout_below="@id/step1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="#000"
+            android:text="2. Search the username of the user you want to
+     view"/>
+
+        <TextView
+            android:id="@+id/step3"
+            android:layout_marginTop="10dp"
+            android:layout_below="@id/step2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="#000"
+            android:text="3.You can find their username in their Instruction
+    tab within Friends"/>
     </RelativeLayout>
 
     <RelativeLayout
-        android:layout_marginTop="10dp"
+        android:layout_below="@id/relLayout"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:layout_below="@+id/relLayout"
-        android:layout_centerHorizontal="true">
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="60dp">
 
         <TextView
-            android:id="@+id/yourUser"
+            android:id="@+id/titleHow1.1"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Your Username: " />
+            android:text="Instruction to Share Your Profile"
+            android:textColor="#000"
+            android:textSize="20sp"
+            android:textStyle="bold|italic" />
 
         <TextView
-            android:id="@+id/username"
-            android:text="shartono"
-            android:layout_toEndOf="@id/yourUser"
+            android:id="@+id/step1.1"
+            android:layout_marginTop="10dp"
+            android:layout_below="@id/titleHow1.1"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content" />
-    </RelativeLayout>
+            android:layout_height="wrap_content"
+            android:textColor="#000"
+            android:text="1. Share your username with the person whom
+     you would like to allow to see your profile"/>
 
+        <TextView
+            android:id="@+id/step2.1"
+            android:layout_marginTop="10dp"
+            android:layout_below="@id/step1.1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="#000"
+            android:text="2. THIS IS YOUR USERNAME: "/>
+
+        <TextView
+            android:id="@+id/step31"
+            android:layout_marginTop="10dp"
+            android:layout_below="@id/step2.1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="#000"
+            android:text="    "/>
+
+    </RelativeLayout>
 
 </RelativeLayout>

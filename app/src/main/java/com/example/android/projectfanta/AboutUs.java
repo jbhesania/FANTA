@@ -14,11 +14,11 @@ import java.util.List;
 
 public class AboutUs extends AppCompatActivity {
 
-    RecyclerView recyclerView;
-    RecyclerView.LayoutManager layoutManager;
-
-    List<AboutUsItem> items;
-    AboutUsAdapter adapter;
+//    RecyclerView recyclerView;
+//    RecyclerView.LayoutManager layoutManager;
+//
+//    List<AboutUsItem> items;
+//    AboutUsAdapter adapter;
 
 
     @Override
@@ -26,29 +26,29 @@ public class AboutUs extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_about_us);
 
-        recyclerView = (RecyclerView)findViewById(R.id.aboutUsView);
-        recyclerView.setHasFixedSize(true);
-        layoutManager = new LinearLayoutManager(this);
-        recyclerView.setLayoutManager(layoutManager);
+//        recyclerView = (RecyclerView)findViewById(R.id.aboutUsView);
+//        recyclerView.setHasFixedSize(true);
+//        layoutManager = new LinearLayoutManager(this);
+//        recyclerView.setLayoutManager(layoutManager);
 
-        initItem();
+       // initItem();
 
     }
 
     private void initItem(){
-        items = new ArrayList<>();
-        items.add(new AboutUsItem("Joyaan Percy Bhesania", "Project Manager",R.drawable.fanta));
-        items.add(new AboutUsItem("Bingtian Huang", "Senior System Analyst",R.drawable.fanta));
-        items.add(new AboutUsItem("Linxuan Wang", "Software Architect",R.drawable.fanta));
-        items.add(new AboutUsItem("Tom Toma", "Software Development Lead",R.drawable.fanta));
-        items.add(new AboutUsItem("Oren G Lenchner", "Project Manager",R.drawable.fanta));
-        items.add(new AboutUsItem("Arun Nathaniel Sugumar", "Database Specialist",R.drawable.fanta));
-        items.add(new AboutUsItem("Jay S Chitale", "Business Analyst",R.drawable.fanta));
-        items.add(new AboutUsItem("Stephanie Hartono", "User Interface Specialist",R.drawable.fanta));
-        items.add(new AboutUsItem("Yixuan Wang", "Quality Assurance Lead",R.drawable.fanta));
-
-        adapter = new AboutUsAdapter(this, items);
-        recyclerView.setAdapter(adapter);
+//        items = new ArrayList<>();
+//        items.add(new AboutUsItem("Joyaan Percy Bhesania", "Project Manager",R.drawable.fanta));
+//        items.add(new AboutUsItem("Bingtian Huang", "Senior System Analyst",R.drawable.fanta));
+//        items.add(new AboutUsItem("Linxuan Wang", "Software Architect",R.drawable.fanta));
+//        items.add(new AboutUsItem("Tom Toma", "Software Development Lead",R.drawable.fanta));
+//        items.add(new AboutUsItem("Oren G Lenchner", "Project Manager",R.drawable.fanta));
+//        items.add(new AboutUsItem("Arun Nathaniel Sugumar", "Database Specialist",R.drawable.fanta));
+//        items.add(new AboutUsItem("Jay S Chitale", "Business Analyst",R.drawable.fanta));
+//        items.add(new AboutUsItem("Stephanie Hartono", "User Interface Specialist",R.drawable.fanta));
+//        items.add(new AboutUsItem("Yixuan Wang", "Quality Assurance Lead",R.drawable.fanta));
+//
+//        adapter = new AboutUsAdapter(this, items);
+//        recyclerView.setAdapter(adapter);
 
 
     }
