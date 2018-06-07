@@ -81,6 +81,10 @@ public class SearchFragment extends Fragment {
                     } else {
                         readUserInfo(userid);
                         Toast.makeText(getContext(), "Loading User", Toast.LENGTH_SHORT).show();
+                        dataFriends.add(new User(userid, username));
+                        Intent user_intent = new Intent(getContext(), UserProfile.class);
+                        user_intent.putExtra("username", username);
+                        startActivity(user_intent);
                     }
                 } else {
                     Toast.makeText(getContext(), "Loading User List", Toast.LENGTH_SHORT).show();

@@ -9,25 +9,95 @@
     <RelativeLayout
         android:id="@+id/relative"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="match_parent">
 
-        <LinearLayout
-            android:background="@drawable/gradientbackground"
+        <RelativeLayout
+            android:background="@drawable/gradientbackground2"
             android:layout_width="match_parent"
-            android:layout_height="150dp"
+            android:layout_height="130dp"
             android:orientation="vertical">
 
             <TextView
-                android:id="@+id/myName"
-                android:layout_marginTop="60dp"
-                android:layout_gravity="center_horizontal"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="liam1990"
-                android:textColor="#fff"
+                android:textColor="#000"
+                android:textSize="20sp"
                 android:textStyle="bold"
-                android:textSize="20sp"/>
+                android:text="Intake History of"
+                android:layout_marginTop="30dp"
+                android:layout_centerHorizontal="true"/>
 
-        </LinearLayout>
+            <TextView
+                android:id="@+id/myName"
+                android:layout_centerHorizontal="true"
+                android:layout_marginTop="60dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text=""
+                android:textColor="#000"
+                android:textSize="20sp"/>
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:layout_marginBottom="40dp"
+            android:layout_alignParentBottom="true"
+            android:layout_centerHorizontal="true"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content">
+
+            <Button
+                android:id="@+id/select"
+                android:layout_width="wrap_content"
+                android:layout_height="30dp"
+                android:background="@drawable/capsule"
+                android:text="SELECT SPECIFIC NUTRIENT"
+                android:textAlignment="center" />
+        </RelativeLayout>
+
+
+        <FrameLayout
+            android:layout_centerHorizontal="true"
+            android:id="@+id/main_content"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            tools:context=".FriendsFragment">
+
+            <android.support.design.widget.AppBarLayout
+                android:id="@+id/appbar"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="150dp"
+                android:theme="@style/AppTheme.AppBarOverlay"
+                android:background="@color/addButton"
+                android:layout_gravity="center_horizontal">
+
+                <android.support.design.widget.TabLayout
+                    android:id="@+id/historyTabs"
+                    android:layout_width="250dp"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center">
+
+                    <android.support.design.widget.TabItem
+                        android:id="@+id/tabItem"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Week" />
+
+                    <android.support.design.widget.TabItem
+                        android:id="@+id/tabItem2"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Month" />
+
+                    <android.support.design.widget.TabItem
+                        android:id="@+id/tabItem3"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Year" />
+
+                </android.support.design.widget.TabLayout>
+            </android.support.design.widget.AppBarLayout>
+
+        </FrameLayout>
     </RelativeLayout>
 </LinearLayout>
