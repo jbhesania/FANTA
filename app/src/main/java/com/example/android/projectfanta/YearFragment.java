@@ -20,7 +20,7 @@ public class YearFragment extends Fragment {
     public static View global_view;
     public static GraphView graph;
     public static String nutrient = "calories";
-    public static double recNutrient;
+    public static double recNutrient = -1;
 
     public static LineGraphSeries<DataPoint> series;
     public static LineGraphSeries<DataPoint> standard;
@@ -132,6 +132,12 @@ public class YearFragment extends Fragment {
     }
 
     public static void graphUpdateYear(String s, boolean rewrite) {
+
+        // handle currently unloaded year graph
+        if(recNutrient==-1) {
+            setNutrient(s);
+            return;
+        }
 
         setNutrient(s);
 
