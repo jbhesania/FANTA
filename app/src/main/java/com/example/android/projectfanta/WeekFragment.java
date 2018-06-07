@@ -57,7 +57,7 @@ public class WeekFragment extends Fragment{
         Calendar calendar2 = (Calendar)startDayCalendar.clone();
 
         DataPoint dp[] = new DataPoint[numDays];
-        long start = calendar1.getTimeInMillis();       //Use for the viewingWindow
+        long startTime = calendar1.getTimeInMillis();       //Use for the viewingWindow
 
         //Create Data set for user line
         for(int i = 0; i < dp.length; i++)
@@ -66,7 +66,7 @@ public class WeekFragment extends Fragment{
             dp[i] = point;
             calendar1.add(Calendar.DATE,1);
         }
-        long end = calendar1.getTimeInMillis();         //Use for the viewingWindow
+        long endTime = calendar1.getTimeInMillis();         //Use for the viewingWindow
 
         //Create Data set for standard
         DataPoint dpStd[] = new DataPoint[numDays];
@@ -86,14 +86,14 @@ public class WeekFragment extends Fragment{
         final FragmentActivity activity = (FragmentActivity)view.getContext();
         graph = (GraphView) global_view.findViewById(R.id.graph);
         graph.getGridLabelRenderer().setLabelFormatter(new DateAsXAxisLabelFormatter(activity));
-        graph.getGridLabelRenderer().setHorizontalLabelsAngle(35);
+        graph.getGridLabelRenderer().setHorizontalLabelsAngle(30);
         graph.getGridLabelRenderer().setNumHorizontalLabels(numDays+1);
         graph.getGridLabelRenderer().setTextSize(36);
 
         // set manual x bounds to have nice steps
         //Axis Label
-        graph.getViewport().setMinX(start);
-        graph.getViewport().setMaxX(end);
+        graph.getViewport().setMinX(startTime);
+        graph.getViewport().setMaxX(endTime);
         graph.getViewport().setXAxisBoundsManual(true);
         graph.getGridLabelRenderer().setHumanRounding(false);
 
@@ -194,7 +194,7 @@ public class WeekFragment extends Fragment{
     }
 
     // Creates array and graphs it
-    public static void graphUpdate(String s, boolean rewrite) {
+    public static void graphUpdateWeek(String s, boolean rewrite) {
 
         setNutrient(s);
 
@@ -215,26 +215,10 @@ public class WeekFragment extends Fragment{
 
     }
 
-    public  static void generateGraph(String s) {
-
-        setNutrient(s);
-
-        double[] intakes = Information.information.intakeInterval(start, end,nutrient);
-        createGraphWeek(7,day1,nutrient,intakes,recNutrient,global_view);
-        graph.onDataChanged(false,false);
-
-    }
-
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setHasOptionsMenu(true);
-    }
-
-    @Override
-    public void onResume(){
-        super.onResume();
-        Log.e("check", "OnResume invoked");
     }
 
     @Override
@@ -254,7 +238,7 @@ public class WeekFragment extends Fragment{
         day1 = Calendar.getInstance();
         day1.setTimeInMillis(start);
 
-        graphUpdate( nutrient, false);
+        graphUpdateWeek( nutrient, false);
         return global_view;
     }
 

@@ -45,6 +45,8 @@ public class HistoryFragment extends Fragment {
     Button select_nutrient;
     Dialog dialog;
     public WeekFragment wf;
+    public MonthFragment mf;
+    public YearFragment yf;
 
 
 
@@ -55,9 +57,11 @@ public class HistoryFragment extends Fragment {
     private void setUpViewPager(ViewPager viewPager){
         SectionsPageAdapter adapter = new SectionsPageAdapter(getFragmentManager());
         wf = new WeekFragment();
+        mf = new MonthFragment();
+        yf = new YearFragment();
         adapter.addFragment(wf, "Week");
-        adapter.addFragment(new MonthFragment(), "Month");
-        adapter.addFragment(new YearFragment(), "Year");
+        adapter.addFragment(mf, "Month");
+        adapter.addFragment(yf, "Year");
         viewPager.setAdapter(adapter);
     }
 
@@ -142,46 +146,86 @@ public class HistoryFragment extends Fragment {
     }
 
     public void nutrientChoose() {
+        long mill = 100;
+        //Reset weekFragment
+        if (mf != null && wf.isVisible()) {
+            getActivity().getSupportFragmentManager()
+                    .beginTransaction()
+                    .detach(wf)
+                    .attach(wf)
+                    .commit();
+        }
 
-        getActivity().getSupportFragmentManager()
-                .beginTransaction()
-                .detach(wf)
-                .attach(wf)
-                .commit();
+        //Reset monthFragment
+        if (mf != null && mf.isVisible()) {
+            getActivity().getSupportFragmentManager()
+                    .beginTransaction()
+                    .detach(mf)
+                    .attach(mf)
+                    .commit();
+        }
+
+        //Reset yearFragment
+        if (yf != null && yf.isVisible()) {
+            getActivity().getSupportFragmentManager()
+                    .beginTransaction()
+                    .detach(yf)
+                    .attach(yf)
+                    .commit();
+        }
+
 
         switch (nutrient.getText().toString()) {
             case "Calories":
-                WeekFragment.graphUpdate("calories", true);
+                WeekFragment.graphUpdateWeek("calories", true);
+                MonthFragment.graphUpdateMonth("calories",true);
+                YearFragment.graphUpdateYear("calories", true);
                 break;
             case "Total Fat":
-                WeekFragment.graphUpdate("fat", true);
+                WeekFragment.graphUpdateWeek("fat", true);
+                MonthFragment.graphUpdateMonth("fat",true);
+                YearFragment.graphUpdateYear("fat", true);
                 break;
             case "Cholesterol":
-                WeekFragment.graphUpdate("cholesterol", true);
+                WeekFragment.graphUpdateWeek("cholesterol", true);
+                MonthFragment.graphUpdateMonth("cholesterol",true);
+                YearFragment.graphUpdateYear("cholesterol", true);
                 break;
             case "Sodium":
-                WeekFragment.graphUpdate("sodium",true);
+                WeekFragment.graphUpdateWeek("sodium",true);
+                MonthFragment.graphUpdateMonth("sodium",true);
+                YearFragment.graphUpdateYear("sodium", true);
                 break;
             case "Potassium":
-                WeekFragment.graphUpdate("potassium",true);
+                WeekFragment.graphUpdateWeek("potassium",true);
+                MonthFragment.graphUpdateMonth("potassium",true);
+                YearFragment.graphUpdateYear("potassium", true);
                 break;
             case "Total Carbs":
-                WeekFragment.graphUpdate("carbs", true);
+                WeekFragment.graphUpdateWeek("carbs", true);
+                MonthFragment.graphUpdateMonth("carbs",true);
+                YearFragment.graphUpdateYear("carbs", true);
                 break;
             case "Dietary Fiber":
-                WeekFragment.graphUpdate("fiber",true);
+                WeekFragment.graphUpdateWeek("fiber",true);
+                MonthFragment.graphUpdateMonth("fiber",true);
+                YearFragment.graphUpdateYear("fiber", true);
                 break;
             case "Sugars":
-                WeekFragment.graphUpdate("sugar",true);
+                WeekFragment.graphUpdateWeek("sugar",true);
+                MonthFragment.graphUpdateMonth("sugar",true);
+                YearFragment.graphUpdateYear("sugar", true);
                 break;
             case "Protein":
-                WeekFragment.graphUpdate("protein",true);
+                WeekFragment.graphUpdateWeek("protein",true);
+                MonthFragment.graphUpdateMonth("protein",true);
+                YearFragment.graphUpdateYear("protein", true);
                 break;
             default:
-                WeekFragment.graphUpdate("calories",true);
+                WeekFragment.graphUpdateWeek("calories",true);
+                MonthFragment.graphUpdateMonth("calories",true);
+                YearFragment.graphUpdateYear("calories", true);
                 break;
-
-
         }
     }
 
