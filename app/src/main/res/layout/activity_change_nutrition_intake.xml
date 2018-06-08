@@ -8,7 +8,7 @@
     android:layout_marginTop="20dp"
     android:orientation="vertical">
 
-    <LinearLayout
+    <RelativeLayout
         android:layout_centerHorizontal="true"
         android:id="@+id/lin"
         android:layout_width="wrap_content"
@@ -18,16 +18,16 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Nutrition Goals"
-            android:textSize="24sp"
+            android:textSize="25sp"
             android:textColor="#000"
             android:textStyle="bold"/>
-    </LinearLayout>
+    </RelativeLayout>
 
         <RelativeLayout
             android:id="@+id/lin2"
             android:layout_centerHorizontal="true"
             android:layout_below="@+id/lin"
-            android:layout_marginTop="5dp"
+            android:layout_marginTop="25dp"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:orientation="horizontal"
@@ -40,8 +40,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginRight="100dp"
-                android:orientation="horizontal"
-                android:layout_gravity="center_horizontal">
+                android:orientation="horizontal">
 
                 <ImageView
                     android:layout_marginTop="5dp"
@@ -52,11 +51,12 @@
                     android:layout_marginRight="5dp"/>
 
                 <TextView
-                    android:layout_marginTop="5dp"
+                    android:textColor="#000"
+                    android:layout_marginTop="7dp"
+                    android:textSize="15dp"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="Calories"
-                    android:textSize="20dp"
                     android:layout_toEndOf="@+id/cal"
                     android:gravity="center"/>
 
@@ -69,8 +69,6 @@
                     android:layout_alignParentRight="true"/>
 
             </RelativeLayout>
-
-
 
             <RelativeLayout
                 android:id="@+id/linFat"
@@ -93,9 +91,10 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="45dp"
+                    android:layout_marginTop="48dp"
                     android:text="Total Fat"
-                    android:textSize="20dp"
+                    android:textColor="#000"
+                    android:textSize="15dp"
                     android:layout_toEndOf="@+id/fat"
                     android:gravity="center"/>
 
@@ -107,6 +106,7 @@
                     android:inputType="number|numberDecimal"
                     android:textSize="15sp"
                     android:layout_alignParentRight="true"/>
+
             </RelativeLayout>
             <RelativeLayout
                 android:id="@+id/linChol"
@@ -117,6 +117,7 @@
                 android:layout_marginRight="100dp"
                 android:orientation="horizontal"
                 android:layout_gravity="center_horizontal">
+
                 <ImageView
                     android:id="@+id/cholesterol"
                     android:layout_marginTop="85dp"
@@ -124,12 +125,14 @@
                     android:layout_height="25dp"
                     android:src="@drawable/cholesterol"
                     android:layout_marginRight="5dp"/>
+
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="85dp"
+                    android:layout_marginTop="88dp"
                     android:text="Cholesterol"
-                    android:textSize="20dp"
+                    android:textSize="15dp"
+                    android:textColor="#000"
                     android:layout_toEndOf="@+id/cholesterol"
                     android:gravity="center"/>
                 <EditText
@@ -151,6 +154,7 @@
                 android:layout_marginRight="100dp"
                 android:orientation="horizontal"
                 android:layout_gravity="center_horizontal">
+
                 <ImageView
                     android:id="@+id/sod"
                     android:layout_marginTop="125dp"
@@ -158,12 +162,14 @@
                     android:layout_height="25dp"
                     android:src="@drawable/sodium"
                     android:layout_marginRight="5dp"/>
+
                 <TextView
+                    android:textColor="#000"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="125dp"
+                    android:layout_marginTop="128dp"
                     android:text="Sodium"
-                    android:textSize="20dp"
+                    android:textSize="15dp"
                     android:layout_toEndOf="@+id/sod"
                     android:gravity="center"/>
                 <EditText
@@ -194,12 +200,14 @@
                     android:layout_height="25dp"
                     android:src="@drawable/potassium"
                     android:layout_marginRight="5dp"/>
+
                 <TextView
+                    android:textColor="#000"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="165dp"
+                    android:layout_marginTop="168dp"
                     android:text="Potassium"
-                    android:textSize="20dp"
+                    android:textSize="15dp"
                     android:layout_toEndOf="@+id/potassium"
                     android:gravity="center"/>
                 <EditText
@@ -233,9 +241,10 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="205dp"
+                    android:layout_marginTop="208dp"
                     android:text="Carbohydrates"
-                    android:textSize="20dp"
+                    android:textSize="15dp"
+                    android:textColor="#000"
                     android:layout_toEndOf="@+id/carbs"
                     android:gravity="center"/>
 
@@ -249,6 +258,7 @@
                     android:layout_alignParentRight="true"/>
 
             </RelativeLayout>
+
             <RelativeLayout
                 android:id="@+id/linFib"
                 android:layout_centerHorizontal="true"
@@ -258,6 +268,7 @@
                 android:layout_marginRight="100dp"
                 android:orientation="horizontal"
                 android:layout_gravity="center_horizontal">
+
                 <ImageView
                     android:id="@+id/fiber"
                     android:layout_marginTop="245dp"
@@ -265,14 +276,17 @@
                     android:layout_height="25dp"
                     android:src="@drawable/fiber"
                     android:layout_marginRight="5dp"/>
+
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="245dp"
+                    android:layout_marginTop="248dp"
                     android:text="Dietary Fiber"
-                    android:textSize="20dp"
+                    android:textSize="15dp"
+                    android:textColor="#000"
                     android:layout_toEndOf="@+id/fiber"
                     android:gravity="center"/>
+
                 <EditText
                     android:id="@+id/fiberText"
                     android:layout_marginTop="240dp"
@@ -282,6 +296,7 @@
                     android:textSize="15sp"
                     android:layout_alignParentRight="true"/>
             </RelativeLayout>
+
             <RelativeLayout
                 android:id="@+id/linSug"
                 android:layout_centerHorizontal="true"
@@ -291,6 +306,7 @@
                 android:layout_marginRight="100dp"
                 android:orientation="horizontal"
                 android:layout_gravity="center_horizontal">
+
                 <ImageView
                     android:id="@+id/sug"
                     android:layout_marginTop="285dp"
@@ -298,14 +314,17 @@
                     android:layout_height="25dp"
                     android:src="@drawable/sugar"
                     android:layout_marginRight="5dp"/>
+
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="285dp"
+                    android:layout_marginTop="288dp"
                     android:text="Sugars"
-                    android:textSize="20dp"
+                    android:textSize="15sp"
+                    android:textColor="#000"
                     android:layout_toEndOf="@+id/sug"
                     android:gravity="center"/>
+
                 <EditText
                     android:id="@+id/sugText"
                     android:layout_marginTop="280dp"
@@ -315,6 +334,7 @@
                     android:textSize="15sp"
                     android:layout_alignParentRight="true"/>
             </RelativeLayout>
+
             <RelativeLayout
                 android:id="@+id/linProt"
                 android:layout_centerHorizontal="true"
@@ -324,6 +344,7 @@
                 android:layout_marginRight="100dp"
                 android:orientation="horizontal"
                 android:layout_gravity="center_horizontal">
+
                 <ImageView
                     android:id="@+id/prot"
                     android:layout_marginTop="325dp"
@@ -331,12 +352,14 @@
                     android:layout_height="25dp"
                     android:src="@drawable/proteins"
                     android:layout_marginRight="5dp"/>
+
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="325dp"
+                    android:layout_marginTop="328dp"
                     android:text="Protein"
-                    android:textSize="20dp"
+                    android:textSize="15sp"
+                    android:textColor="#000"
                     android:layout_toEndOf="@+id/prot"
                     android:gravity="center"/>
                 <EditText
@@ -348,7 +371,9 @@
                     android:textSize="15sp"
                     android:layout_alignParentRight="true"/>
             </RelativeLayout>
+
         </RelativeLayout>
+
     <RelativeLayout
         android:layout_centerHorizontal="true"
         android:layout_below="@+id/lin2"
@@ -356,6 +381,7 @@
         android:layout_height="wrap_content"
         android:padding="30dp"
         android:orientation="horizontal">
+
         <Button
             android:id="@+id/saveBtn"
             android:layout_width="120dp"

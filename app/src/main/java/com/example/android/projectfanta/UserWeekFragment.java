@@ -1,10 +1,11 @@
 package com.example.android.projectfanta;
 
+import android.content.Context;
 import android.graphics.Color;
+import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentActivity;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -22,8 +23,16 @@ import com.jjoe64.graphview.series.Series;
 import java.util.Calendar;
 
 
-public class WeekFragment extends Fragment{
-    //Instance variable so that view can be accessed by createGraphWeek method as well
+/**
+ * A simple {@link Fragment} subclass.
+ * Activities that contain this fragment must implement the
+ * {@link UserWeekFragment.OnFragmentInteractionListener} interface
+ * to handle interaction events.
+ * Use the {@link UserWeekFragment#newInstance} factory method to
+ * create an instance of this fragment.
+ */
+public class UserWeekFragment extends Fragment {
+
     public static GraphView graph;
     public static String nutrient = "calories";
     public static double recNutrient;
@@ -36,20 +45,126 @@ public class WeekFragment extends Fragment{
     private static long start, end;
     private static Calendar day1;
 
+    // TODO: Rename parameter arguments, choose names that match
+    // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
+    private static final String ARG_PARAM1 = "param1";
+    private static final String ARG_PARAM2 = "param2";
+
+    // TODO: Rename and change types of parameters
+    private String mParam1;
+    private String mParam2;
+
+    private OnFragmentInteractionListener mListener;
+
+    public UserWeekFragment() {
+        // Required empty public constructor
+    }
+
     /**
-     * numDays The number of days including starting day to end day. E.g from 12/10 - 12/12, numDays
-     * would be 3.
-     * startDayCalendar The Calendar Object for starting day
-     * nutrient The name of the nutrient
-     * double[] An array of nutrient intake
-     * standardIntake I assume the intake is constant throughout... If not please tell me to fix it
-     * I didn't check for nutrientIntake.length = numDays, I assume they are equal
+     * Use this factory method to create a new instance of
+     * this fragment using the provided parameters.
      *
-     * How to create and set a Calendar instance
-     * Calendar calendar = Calendar.getInstance();
-     * Month Field 0-11 Represent January to December
-     * calendar.set(2017,11,1);
+     * @param param1 Parameter 1.
+     * @param param2 Parameter 2.
+     * @return A new instance of fragment UserWeekFragment.
      */
+    // TODO: Rename and change types and number of parameters
+    public static UserWeekFragment newInstance(String param1, String param2) {
+        UserWeekFragment fragment = new UserWeekFragment();
+        Bundle args = new Bundle();
+        args.putString(ARG_PARAM1, param1);
+        args.putString(ARG_PARAM2, param2);
+        fragment.setArguments(args);
+        return fragment;
+    }
+
+    @Override
+    public void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        if (getArguments() != null) {
+            mParam1 = getArguments().getString(ARG_PARAM1);
+            mParam2 = getArguments().getString(ARG_PARAM2);
+        }
+    }
+
+    @Override
+    public View onCreateView(LayoutInflater inflater, ViewGroup container,
+                             Bundle savedInstanceState) {
+        global_view = inflater.inflate(R.layout.fragment_user_week, container, false);
+        System.out.println("IN USER WEEK ON CREATE VIEW ******************");
+
+        Calendar today = Calendar.getInstance();
+        today.add(Calendar.DAY_OF_MONTH, 1);
+        today.set(Calendar.HOUR_OF_DAY, 0);
+        today.set(Calendar.MINUTE, 0);
+        today.set(Calendar.SECOND, 0);
+        today.set(Calendar.MILLISECOND, 0);
+        end = today.getTimeInMillis();
+        start = end - 7*864*(long)java.lang.Math.pow(10,5);
+        day1 = Calendar.getInstance();
+        day1.setTimeInMillis(start);
+
+        graphUpdateWeek( nutrient, false);
+        // Inflate the layout for this fragment
+        //return inflater.inflate(R.layout.fragment_user_week, container, false);
+        return global_view;
+    }
+
+    // TODO: Rename method, update argument and hook method into UI event
+    public void onButtonPressed(Uri uri) {
+        if (mListener != null) {
+            mListener.onFragmentInteraction(uri);
+        }
+    }
+
+    @Override
+    public void onAttach(Context context) {
+        super.onAttach(context);
+    }
+
+    @Override
+    public void onDetach() {
+        super.onDetach();
+        mListener = null;
+    }
+
+    /**
+     * This interface must be implemented by activities that contain this
+     * fragment to allow an interaction in this fragment to be communicated
+     * to the activity and potentially other fragments contained in that
+     * activity.
+     * <p>
+     * See the Android Training lesson <a href=
+     * "http://developer.android.com/training/basics/fragments/communicating.html"
+     * >Communicating with Other Fragments</a> for more information.
+     */
+    public interface OnFragmentInteractionListener {
+        // TODO: Update argument type and name
+        void onFragmentInteraction(Uri uri);
+    }
+
+    // Creates array and graphs it
+    public static void graphUpdateWeek(String s, boolean rewrite) {
+
+        setNutrient(s);
+
+        if(rewrite) graph.removeAllSeries();
+
+        double[] intakes = SearchFragment.intakeInterval(start, end,nutrient);
+
+        /*Fragment frg = null;
+        FragmentManager frg = getSupportFragmentManager().findFragmentByTag("Your_Fragment_TAG");
+        final FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
+        ft.detach(frg);
+        ft.attach(frg);
+        ft.commit();*/
+
+        day1.setTimeInMillis(start);
+        createGraphWeek(7,day1,nutrient,intakes,recNutrient,global_view);
+        graph.onDataChanged(false,false);
+
+    }
+
     public static void createGraphWeek(int numDays, Calendar startDayCalendar, String nutrient,
                                        double[] nutrientIntake, double standardIntake,View view)
     {
@@ -192,55 +307,4 @@ public class WeekFragment extends Fragment{
                 recNutrient = user.getRecCalories();
         }
     }
-
-    // Creates array and graphs it
-    public static void graphUpdateWeek(String s, boolean rewrite) {
-
-        setNutrient(s);
-
-        if(rewrite) graph.removeAllSeries();
-
-        double[] intakes = Information.information.intakeInterval(start, end,nutrient);
-
-        /*Fragment frg = null;
-        FragmentManager frg = getSupportFragmentManager().findFragmentByTag("Your_Fragment_TAG");
-        final FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
-        ft.detach(frg);
-        ft.attach(frg);
-        ft.commit();*/
-
-        day1.setTimeInMillis(start);
-        createGraphWeek(7,day1,nutrient,intakes,recNutrient,global_view);
-        graph.onDataChanged(false,false);
-
-    }
-
-    @Override
-    public void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setHasOptionsMenu(true);
-    }
-
-    @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                             Bundle savedInstanceState) {
-        // Inflate the layout for this fragment
-        global_view = inflater.inflate(R.layout.fragment_week, container, false);
-
-        Calendar today = Calendar.getInstance();
-        today.add(Calendar.DAY_OF_MONTH, 1);
-        today.set(Calendar.HOUR_OF_DAY, 0);
-        today.set(Calendar.MINUTE, 0);
-        today.set(Calendar.SECOND, 0);
-        today.set(Calendar.MILLISECOND, 0);
-        end = today.getTimeInMillis();
-        start = end - 7*864*(long)java.lang.Math.pow(10,5);
-        day1 = Calendar.getInstance();
-        day1.setTimeInMillis(start);
-
-        graphUpdateWeek( nutrient, false);
-        return global_view;
-    }
-
 }
-
