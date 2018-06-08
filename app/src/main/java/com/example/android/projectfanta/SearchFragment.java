@@ -1,15 +1,9 @@
 package com.example.android.projectfanta;
 
-import android.app.NotificationManager;
-import android.app.PendingIntent;
-import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
-import android.support.v4.app.NotificationCompat;
-import android.text.Editable;
-import android.text.TextWatcher;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -17,10 +11,7 @@ import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.ImageView;
 import android.widget.ListView;
-import android.widget.RemoteViews;
-import android.widget.SearchView;
 import android.widget.Toast;
 
 import com.google.firebase.database.DataSnapshot;
@@ -33,9 +24,6 @@ import com.google.firebase.database.ValueEventListener;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
-import java.util.Locale;
-
-import static android.content.Context.NOTIFICATION_SERVICE;
 
 /**
  * Created by User on 5/18/2018.
@@ -47,8 +35,12 @@ public class SearchFragment extends Fragment {
     EditText search;
     Button searchBtn;
     private HashMap<String, User> users;
-    private HashMap<String, Food> theirFoods;
-    private ArrayList<Intake> theirIntakes;
+    private static HashMap<String, Food> theirFoods;
+    private static ArrayList<Intake> theirIntakes;
+    private static long ONE_DAY = 864 * (long)java.lang.Math.pow(10,5);
+    private static long ONE_WEEK = 7*ONE_DAY;
+    private static long ONE_MONTH = 31*ONE_DAY;
+    private static long ONE_YEAR = 365*ONE_DAY;
 
     @Nullable
     @Override
@@ -152,5 +144,91 @@ public class SearchFragment extends Fragment {
 
             }
         });
+    }
+
+    /**
+     * Binary Search for time boundaries
+     * @param time time we are looking for (start/end)
+     * @return index of intake at time boundary
+     */
+    public static int searchForIntervalBoundary(long time) {
+
+        int intakeIndex = 1;
+
+        for (int i = theirIntakes.size() - 1; i > 0; i--) {
+            if (theirIntakes.get(i).getCreationTime() < time) {
+                intakeIndex = i;
+                break;
+            }
+        }
+
+        return intakeIndex;
+
+    }
+
+    /**
+     * Sum of intakes over interval of time
+     * @param start start of interval
+     * @param end end of interval
+     * @param nutrient the nutrient we are tracking over the specified interval of time
+     * @return array of doubles the size of numDays with the sum of intakes for each day.
+     *         The array that is returned can then be used for the graph.
+     */
+    public static double[] intakeInterval(long start, long end, String nutrient) {
+
+        // Check the time interval we are looking in and set the time to
+        // a day or a month
+        int days_months_year = 0;
+        if (end - start == ONE_WEEK) {
+            days_months_year = 7;
+        }
+
+        else if (end - start == ONE_MONTH) {
+            days_months_year = 31;
+        }
+
+        else if (end - start == ONE_YEAR) {
+            days_months_year = 365;
+
+        }
+
+        // Create an array the size of the number of days in a week or month, or the number of
+        // months in a year
+        double[] nutrientIntake = new double[days_months_year];
+        int startIndex = searchForIntervalBoundary(start);
+        int endIndex = searchForIntervalBoundary(end);
+        double intakeSum = 0;
+        //long beginningOfDay = myIntakes.get(startIndex).getCreationTime();
+        long beginningOfDay = start;
+        int current_idx = 0;
+
+        // handle no foods yet
+        if( theirIntakes.size() == 1 ) return nutrientIntake;
+
+        long curr_time;
+
+        // loop through piece returned by search
+        for (int i = startIndex; i <= endIndex; i++) {
+
+            // Get nutrient amount and multiply by amount of servings. Add this to running total
+            // of the amount of that nutrient.
+            intakeSum += theirFoods.get(theirIntakes.get(i).getFood()).getNutrient(nutrient)
+                    * theirIntakes.get(i).getServings();
+
+            current_idx = 0;
+            for (int j = 0; j < days_months_year; j++) {
+                curr_time = start + (ONE_DAY*j);
+                if (curr_time <= theirIntakes.get(i).getCreationTime()) {
+                    current_idx = j;
+                }
+            }
+
+            nutrientIntake[current_idx] += theirFoods.get(theirIntakes.get(i).getFood()).getNutrient(nutrient)
+                    * theirIntakes.get(i).getServings();
+
+        }
+
+        return nutrientIntake;
+
     }
 }
