@@ -4,6 +4,7 @@ import android.app.Dialog;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
+import android.support.design.widget.TabLayout;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
@@ -23,6 +24,8 @@ public class UserProfile extends AppCompatActivity {
     Button select_nutrient;
     RadioGroup rg;
     RadioButton nutrient;
+    private SectionsPageAdapter myAdapters;
+    private ViewPager myPagers;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -59,6 +62,14 @@ public class UserProfile extends AppCompatActivity {
 
             }
         });
+
+        myAdapters = new SectionsPageAdapter(getSupportFragmentManager());
+
+        myPagers = (ViewPager) findViewById(R.id.historyContainer);
+        setUpViewPager(myPagers);
+
+        TabLayout tab = (TabLayout) findViewById(R.id.historyTabs);
+        tab.setupWithViewPager(myPagers);
     }
 
     private void setUpViewPager(ViewPager viewPager){
