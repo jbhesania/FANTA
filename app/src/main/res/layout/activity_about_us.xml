@@ -28,7 +28,7 @@
         android:layout_marginTop="40dp">
 
         <RelativeLayout
-            android:id="@id/rels"
+            android:id="@+id/joyaan"
             android:padding="5dp"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content">
@@ -37,10 +37,11 @@
                 android:id="@+id/image"
                 android:layout_width="150dp"
                 android:layout_height="200dp"
-                android:src="@drawable/joyaan"/>
+                android:src="@drawable/joyaan"
+                android:scaleType="centerCrop"/>
 
             <TextView
-                android:layout_marginLeft="20dp"
+                android:layout_centerHorizontal="true"
                 android:layout_below="@id/image"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -49,20 +50,38 @@
         </RelativeLayout>
 
         <RelativeLayout
+            android:layout_alignParentEnd="true"
             android:padding="5dp"
-            android:id="@+id/asdf"
-            android:layout_below="@id/rels"
+            android:id="@+id/projman"
+            android:layout_toEndOf="@id/joyaan"
+            android:layout_width="150dp"
+            android:layout_height="200dp">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textAlignment="center"
+                android:layout_centerInParent="true"
+                android:text="Project/Deputy Manager"
+                android:textColor="#000"/>
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:padding="5dp"
+            android:id="@+id/peter"
+            android:layout_below="@id/joyaan"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content">
 
             <ImageView
                 android:id="@+id/image2"
-                android:layout_width="150dp"
+                android:layout_width="180dp"
                 android:layout_height="200dp"
-                android:src="@drawable/peter"/>
+                android:src="@drawable/peter"
+                android:scaleType="centerCrop"/>
 
             <TextView
-                android:layout_marginLeft="25dp"
+                android:layout_centerHorizontal="true"
                 android:layout_below="@id/image2"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -72,8 +91,27 @@
 
         <RelativeLayout
             android:padding="5dp"
-            android:id="@+id/relll"
-            android:layout_toEndOf="@id/rels"
+            android:id="@+id/sensys"
+            android:layout_toEndOf="@id/peter"
+            android:layout_below="@+id/projman"
+            android:layout_width="150dp"
+            android:layout_height="200dp"
+            android:layout_marginTop="33dp">
+
+            <TextView
+                android:layout_marginLeft="40dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textAlignment="center"
+                android:layout_centerInParent="true"
+                android:text="Senior System Analyst"
+                android:textColor="#000"/>
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:padding="5dp"
+            android:id="@+id/arun"
+            android:layout_below="@id/peter"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content">
 
@@ -81,34 +119,12 @@
                 android:id="@+id/image3"
                 android:layout_width="150dp"
                 android:layout_height="200dp"
-                android:src="@drawable/tom"/>
+                android:src="@drawable/arun"
+                android:scaleType="centerCrop"/>
 
             <TextView
-                android:layout_marginLeft="38dp"
+                android:layout_centerHorizontal="true"
                 android:layout_below="@id/image3"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Tom Toma"
-                android:textColor="#000"/>
-        </RelativeLayout>
-
-        <RelativeLayout
-            android:id="@+id/adddd"
-            android:padding="5dp"
-            android:layout_below="@id/relll"
-            android:layout_toEndOf="@id/asdf"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content">
-
-            <ImageView
-                android:id="@+id/image4"
-                android:layout_width="150dp"
-                android:layout_height="200dp"
-                android:src="@drawable/arun"/>
-
-            <TextView
-                android:layout_marginLeft="30dp"
-                android:layout_below="@id/image4"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Arun Sugumar"
@@ -116,10 +132,70 @@
         </RelativeLayout>
 
         <RelativeLayout
-            android:id="@+id/adfg"
+            android:layout_alignParentEnd="true"
             android:padding="5dp"
-            android:layout_below="@id/adddd"
-            android:layout_toEndOf="@id/asdf"
+            android:id="@+id/datan"
+            android:layout_toEndOf="@id/arun"
+            android:layout_below="@+id/sensys"
+            android:layout_width="150dp"
+            android:layout_height="200dp"
+            android:layout_marginTop="25dp">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textAlignment="center"
+                android:layout_centerInParent="true"
+                android:text="Database Specialist"
+                android:textColor="#000"/>
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:padding="5dp"
+            android:id="@+id/tom"
+            android:layout_below="@id/arun"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content">
+
+            <ImageView
+                android:id="@+id/image4"
+                android:layout_width="150dp"
+                android:layout_height="200dp"
+                android:src="@drawable/tom"
+                android:scaleType="centerCrop"/>
+
+            <TextView
+                android:layout_centerHorizontal="true"
+                android:layout_below="@id/image4"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Tom Toma"
+                android:textColor="#000"/>
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:layout_alignParentEnd="true"
+            android:padding="5dp"
+            android:id="@+id/softdev"
+            android:layout_toEndOf="@id/tom"
+            android:layout_below="@+id/datan"
+            android:layout_width="150dp"
+            android:layout_height="200dp"
+            android:layout_marginTop="25dp">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textAlignment="center"
+                android:layout_centerInParent="true"
+                android:text="Software Development Lead"
+                android:textColor="#000"/>
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:padding="5dp"
+            android:id="@+id/nima"
+            android:layout_below="@id/tom"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content">
 
@@ -127,33 +203,12 @@
                 android:id="@+id/image5"
                 android:layout_width="150dp"
                 android:layout_height="200dp"
-                android:src="@drawable/jay"/>
+                android:src="@drawable/nima"
+                android:scaleType="centerCrop"/>
 
             <TextView
-                android:layout_marginLeft="42dp"
+                android:layout_centerHorizontal="true"
                 android:layout_below="@id/image5"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Jay Chitale"
-                android:textColor="#000"/>
-        </RelativeLayout>
-
-        <RelativeLayout
-            android:id="@+id/adfgh"
-            android:padding="5dp"
-            android:layout_below="@id/asdf"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content">
-
-            <ImageView
-                android:id="@+id/image6"
-                android:layout_width="150dp"
-                android:layout_height="200dp"
-                android:src="@drawable/nima"/>
-
-            <TextView
-                android:layout_marginLeft="28dp"
-                android:layout_below="@id/image6"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Nima Azbijari"
@@ -161,9 +216,70 @@
         </RelativeLayout>
 
         <RelativeLayout
-            android:id="@+id/adfghg"
+            android:layout_alignParentEnd="true"
             android:padding="5dp"
-            android:layout_below="@id/adfgh"
+            android:id="@+id/softdev2"
+            android:layout_toEndOf="@id/nima"
+            android:layout_below="@+id/softdev"
+            android:layout_width="150dp"
+            android:layout_height="200dp"
+            android:layout_marginTop="25dp">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textAlignment="center"
+                android:layout_centerInParent="true"
+                android:text="Software Development Lead"
+                android:textColor="#000"/>
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:padding="5dp"
+            android:id="@+id/jay"
+            android:layout_below="@id/nima"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content">
+
+            <ImageView
+                android:id="@+id/image6"
+                android:layout_width="150dp"
+                android:layout_height="200dp"
+                android:src="@drawable/jay"
+                android:scaleType="centerCrop"/>
+
+            <TextView
+                android:layout_centerHorizontal="true"
+                android:layout_below="@id/image6"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Jay Chitale"
+                android:textColor="#000"/>
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:layout_alignParentEnd="true"
+            android:padding="5dp"
+            android:id="@+id/busan"
+            android:layout_toEndOf="@id/jay"
+            android:layout_below="@+id/softdev2"
+            android:layout_width="150dp"
+            android:layout_height="200dp"
+            android:layout_marginTop="35dp">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textAlignment="center"
+                android:layout_centerInParent="true"
+                android:text="Business Analyst"
+                android:textColor="#000"/>
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:padding="5dp"
+            android:id="@+id/oren"
+            android:layout_below="@id/jay"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content">
 
@@ -171,10 +287,11 @@
                 android:id="@+id/image7"
                 android:layout_width="150dp"
                 android:layout_height="200dp"
-                android:src="@drawable/oren"/>
+                android:src="@drawable/oren"
+                android:scaleType="centerCrop"/>
 
             <TextView
-                android:layout_marginLeft="28dp"
+                android:layout_centerHorizontal="true"
                 android:layout_below="@id/image7"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -183,10 +300,28 @@
         </RelativeLayout>
 
         <RelativeLayout
-            android:id="@+id/adfghgaa"
+            android:layout_alignParentEnd="true"
             android:padding="5dp"
-            android:layout_below="@id/adfg"
-            android:layout_toEndOf="@+id/adfghg"
+            android:id="@+id/algspe"
+            android:layout_toEndOf="@id/oren"
+            android:layout_below="@+id/busan"
+            android:layout_width="150dp"
+            android:layout_height="200dp"
+            android:layout_marginTop="35dp">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textAlignment="center"
+                android:layout_centerInParent="true"
+                android:text="Algorithm Specialist"
+                android:textColor="#000"/>
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:padding="5dp"
+            android:id="@+id/stephanie"
+            android:layout_below="@id/oren"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content">
 
@@ -194,33 +329,12 @@
                 android:id="@+id/image8"
                 android:layout_width="150dp"
                 android:layout_height="200dp"
-                android:src="@drawable/linxuan"/>
+                android:src="@drawable/stephanie"
+                android:scaleType="centerCrop"/>
 
             <TextView
-                android:layout_marginLeft="32dp"
+                android:layout_centerHorizontal="true"
                 android:layout_below="@id/image8"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Linxuan Wang"
-                android:textColor="#000"/>
-        </RelativeLayout>
-
-        <RelativeLayout
-            android:id="@+id/adfghga"
-            android:padding="5dp"
-            android:layout_below="@id/adfghg"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content">
-
-            <ImageView
-                android:id="@+id/image9"
-                android:layout_width="150dp"
-                android:layout_height="200dp"
-                android:src="@drawable/stephanie"/>
-
-            <TextView
-                android:layout_marginLeft="15dp"
-                android:layout_below="@id/image9"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Stephanie Hartono"
@@ -228,22 +342,41 @@
         </RelativeLayout>
 
         <RelativeLayout
-            android:id="@+id/adfghgaaa"
             android:padding="5dp"
-            android:layout_below="@id/adfghg"
-            android:layout_toEndOf="@+id/adfghga"
+            android:layout_alignParentEnd="true"
+            android:id="@+id/uispec"
+            android:layout_toEndOf="@id/stephanie"
+            android:layout_below="@+id/algspe"
+            android:layout_width="150dp"
+            android:layout_height="200dp"
+            android:layout_marginTop="35dp">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textAlignment="center"
+                android:layout_centerInParent="true"
+                android:text="User Interface Specialist"
+                android:textColor="#000"/>
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:padding="5dp"
+            android:id="@+id/yixuan"
+            android:layout_below="@id/stephanie"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content">
 
             <ImageView
-                android:id="@+id/image10"
+                android:id="@+id/image9"
                 android:layout_width="150dp"
                 android:layout_height="200dp"
-                android:src="@drawable/yixuan"/>
+                android:src="@drawable/yixuan"
+                android:scaleType="centerCrop"/>
 
             <TextView
-                android:layout_marginLeft="32dp"
-                android:layout_below="@id/image10"
+                android:layout_centerHorizontal="true"
+                android:layout_below="@id/image9"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Yixuan Wang"
@@ -251,13 +384,74 @@
         </RelativeLayout>
 
         <RelativeLayout
-            android:id="@+id/adfghgaaaa"
-            android:layout_marginTop="17dp"
-            android:layout_below="@id/adfghga"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content">
+            android:padding="5dp"
+            android:layout_alignParentEnd="true"
+            android:id="@+id/qalead"
+            android:layout_toEndOf="@id/yixuan"
+            android:layout_below="@+id/uispec"
+            android:layout_width="150dp"
+            android:layout_height="200dp"
+            android:layout_marginTop="35dp">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textAlignment="center"
+                android:layout_centerInParent="true"
+                android:text="Quality Assurance Lead"
+                android:textColor="#000"/>
         </RelativeLayout>
 
+        <RelativeLayout
+            android:padding="5dp"
+            android:id="@+id/linxuan"
+            android:layout_below="@id/yixuan"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content">
+
+            <ImageView
+                android:id="@+id/image10"
+                android:layout_width="150dp"
+                android:layout_height="200dp"
+                android:src="@drawable/linxuan"
+                android:scaleType="centerCrop"/>
+
+            <TextView
+                android:layout_centerHorizontal="true"
+                android:layout_below="@id/image10"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Linxuan Wang"
+                android:textColor="#000"/>
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:padding="5dp"
+            android:layout_alignParentEnd="true"
+            android:id="@+id/softarc"
+            android:layout_toEndOf="@id/linxuan"
+            android:layout_below="@+id/qalead"
+            android:layout_width="150dp"
+            android:layout_height="200dp"
+            android:layout_marginTop="30dp">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textAlignment="center"
+                android:layout_centerInParent="true"
+                android:text="Software Architext"
+                android:textColor="#000"/>
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:padding="5dp"
+            android:id="@+id/extra"
+            android:layout_below="@+id/softarc"
+            android:layout_width="30dp"
+            android:layout_height="100dp"
+            android:layout_marginTop="5dp">
+        </RelativeLayout>
     </RelativeLayout>
 
 

@@ -25,148 +25,154 @@
     </RelativeLayout>
 
     <RelativeLayout
-        android:id="@+id/lins"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentTop="true"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="91dp"
-        android:orientation="vertical">
+        android:layout_width="250dp"
+        android:layout_height="270dp"
+        android:layout_marginTop="110dp"
+        android:background="@drawable/rectangle"
+        android:layout_centerHorizontal="true">
 
-        <TextView
+
+        <RelativeLayout
+            android:id="@+id/lins"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_alignParentStart="true"
-            android:layout_alignParentTop="true"
-            android:text="My Favorite Foods"
-            android:textColor="#000"
-            android:textSize="30sp"
-            android:textStyle="bold" />
+            android:layout_centerHorizontal="true"
+            android:orientation="vertical">
 
-    </RelativeLayout>
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:text="My Top 8 Foods"
+                android:textColor="#000"
+                android:textSize="20sp"
+                android:textStyle="bold" />
 
-    <RelativeLayout
-        android:id="@+id/one"
-        android:orientation="vertical"
-        android:layout_below="@+id/lins"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_centerInParent="true">
+        </RelativeLayout>
 
-        <TextView
-            android:id="@+id/onetext"
-            android:onClick="homeAddIntake"
+        <RelativeLayout
+            android:id="@+id/one"
+            android:orientation="vertical"
+            android:layout_below="@+id/lins"
+            android:layout_marginTop="10dp"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text=""
-            android:padding="5dp"
-            android:textColor="#000"
-            android:textSize="18sp"/>
+            android:layout_centerInParent="true">
 
-    </RelativeLayout>
+            <TextView
+                android:id="@+id/onetext"
+                android:onClick="homeAddIntake"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text=""
+                android:padding="5dp"
+                android:textColor="#000"
+                android:textSize="15sp"/>
 
-    <RelativeLayout
-        android:id="@+id/two"
-        android:orientation="vertical"
-        android:layout_below="@+id/one"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_centerInParent="true">
+        </RelativeLayout>
 
-        <TextView
-            android:id="@+id/twotext"
-            android:onClick="homeAddIntake"
+        <RelativeLayout
+            android:id="@+id/two"
+            android:orientation="vertical"
+            android:layout_below="@+id/one"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text=""
-            android:padding="5dp"
-            android:textColor="#000"
-            android:textSize="18sp"/>
+            android:layout_centerInParent="true">
 
-    </RelativeLayout>
+            <TextView
+                android:id="@+id/twotext"
+                android:onClick="homeAddIntake"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text=""
+                android:padding="5dp"
+                android:textColor="#000"
+                android:textSize="15sp"/>
 
-    <RelativeLayout
-        android:orientation="vertical"
-        android:id="@+id/three"
-        android:layout_below="@+id/two"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_centerInParent="true">
+        </RelativeLayout>
 
-        <TextView
-            android:id="@+id/threetext"
-            android:onClick="homeAddIntake"
+        <RelativeLayout
+            android:orientation="vertical"
+            android:id="@+id/three"
+            android:layout_below="@+id/two"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text=""
-            android:padding="5dp"
-            android:textColor="#000"
-            android:textSize="18sp"/>
+            android:layout_centerInParent="true">
 
-    </RelativeLayout>
+            <TextView
+                android:id="@+id/threetext"
+                android:onClick="homeAddIntake"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text=""
+                android:padding="5dp"
+                android:textColor="#000"
+                android:textSize="15sp"/>
 
-    <RelativeLayout
-        android:orientation="vertical"
-        android:id="@+id/four"
-        android:layout_below="@+id/three"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_centerInParent="true">
+        </RelativeLayout>
 
-        <TextView
-            android:id="@+id/fourtext"
-            android:onClick="homeAddIntake"
+        <RelativeLayout
+            android:orientation="vertical"
+            android:id="@+id/four"
+            android:layout_below="@+id/three"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text=""
-            android:padding="5dp"
-            android:textColor="#000"
-            android:textSize="18sp"/>
+            android:layout_centerInParent="true">
 
-    </RelativeLayout>
+            <TextView
+                android:id="@+id/fourtext"
+                android:onClick="homeAddIntake"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text=""
+                android:padding="5dp"
+                android:textColor="#000"
+                android:textSize="15sp"/>
 
-    <RelativeLayout
-        android:orientation="vertical"
-        android:id="@+id/five"
-        android:layout_below="@+id/four"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_centerInParent="true">
+        </RelativeLayout>
 
-        <TextView
-            android:id="@+id/fivetext"
-            android:onClick="homeAddIntake"
+        <RelativeLayout
+            android:orientation="vertical"
+            android:id="@+id/five"
+            android:layout_below="@+id/four"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text=""
-            android:padding="5dp"
-            android:textColor="#000"
-            android:textSize="18sp"/>
+            android:layout_centerInParent="true">
 
-    </RelativeLayout>
+            <TextView
+                android:id="@+id/fivetext"
+                android:onClick="homeAddIntake"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text=""
+                android:padding="5dp"
+                android:textColor="#000"
+                android:textSize="15sp"/>
 
-    <RelativeLayout
-        android:id="@+id/six"
-        android:orientation="vertical"
-        android:layout_below="@+id/five"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_centerInParent="true">
+        </RelativeLayout>
 
-        <TextView
-            android:id="@+id/sixtext"
-            android:onClick="homeAddIntake"
+        <RelativeLayout
+            android:id="@+id/six"
+            android:orientation="vertical"
+            android:layout_below="@+id/five"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text=""
-            android:padding="5dp"
-            android:textColor="#000"
-            android:textSize="18sp"/>
+            android:layout_centerInParent="true">
+
+            <TextView
+                android:id="@+id/sixtext"
+                android:onClick="homeAddIntake"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text=""
+                android:padding="5dp"
+                android:textColor="#000"
+                android:textSize="15sp"/>
+
+        </RelativeLayout>
+
 
     </RelativeLayout>
-
-
-
     <android.support.design.widget.FloatingActionButton
         android:id="@+id/camera"
         android:layout_width="wrap_content"
