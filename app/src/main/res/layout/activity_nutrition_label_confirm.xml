@@ -4,13 +4,12 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:layout_margin="20dp"
+    android:layout_margin="5dp"
     tools:context=".NutritionLabelConfirmActivity"
     android:id="@+id/big">
 
     <RelativeLayout
         android:id="@+id/relLayout1"
-        android:layout_marginTop="15dp"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content">
 
@@ -25,40 +24,38 @@
             tools:layout_editor_absoluteX="65dp"
             tools:layout_editor_absoluteY="16dp"
             android:onClick="onClick" />
+
     </RelativeLayout>
 
     <RelativeLayout
+        android:layout_centerInParent="true"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_below="@id/relLayout1">
 
         <RelativeLayout
-            android:layout_centerHorizontal="true"
             android:id="@+id/relLayout2"
-            android:layout_width="match_parent"
+            android:layout_width="180dp"
             android:layout_height="wrap_content"
             android:orientation="horizontal">
 
             <TextView
-                android:layout_marginTop="15dp"
                 android:id="@+id/addServings"
-                android:textSize="20dp"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:ems="10"
-                android:gravity="center_horizontal"
+                android:textSize="15sp"
+                android:textColor="#000"
                 android:inputType="textPersonName"
                 android:text="@string/servings"
-                tools:layout_editor_absoluteX="65dp"
-                tools:layout_editor_absoluteY="16dp"/>
+                android:layout_marginTop="16dp"/>
 
             <EditText
-                android:layout_toEndOf="@id/addServings"
+                android:textColor="#000"
+                android:layout_alignParentEnd="true"
                 android:id="@+id/servings"
                 android:layout_width="40dp"
                 android:layout_height="wrap_content"
-                android:inputType="number|numberDecimal"
-                android:gravity="center"/>
+                android:inputType="number|numberDecimal" />
 
         </RelativeLayout>
 
@@ -66,30 +63,28 @@
             android:layout_centerHorizontal="true"
             android:id="@+id/relLayout3"
             android:layout_below="@id/relLayout2"
-            android:layout_width="match_parent"
+            android:layout_width="180dp"
             android:layout_height="wrap_content"
             android:orientation="horizontal">
 
             <TextView
-                android:layout_marginTop="15dp"
+                android:textColor="#000"
+                android:layout_marginTop="16dp"
                 android:id="@+id/calories"
-                android:textSize="20dp"
+                android:textSize="15dp"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:ems="10"
                 android:gravity="center_horizontal"
                 android:inputType="textPersonName"
-                android:text="@string/calories"
-                tools:layout_editor_absoluteX="65dp"
-                tools:layout_editor_absoluteY="16dp" />
+                android:text="@string/calories" />
 
             <EditText
-                android:layout_toEndOf="@id/calories"
+                android:textColor="#000"
+                android:layout_alignParentEnd="true"
                 android:id="@+id/calories_field"
                 android:layout_width="40dp"
                 android:layout_height="wrap_content"
-                android:inputType="number|numberDecimal"
-                android:gravity="center"/>
+                android:inputType="number|numberDecimal"/>
 
         </RelativeLayout>
 
@@ -97,218 +92,204 @@
             android:layout_centerHorizontal="true"
             android:layout_below="@+id/relLayout3"
             xmlns:tools="http://schemas.android.com/tools"
-            android:layout_width="match_parent"
+            android:layout_width="180dp"
             android:layout_height="wrap_content"
             android:gravity="left"
             android:id="@+id/relLayout4"
             android:orientation="horizontal">
 
             <TextView
-                android:layout_marginTop="15dp"
+                android:textColor="#000"
+                android:layout_marginTop="16dp"
                 android:id="@+id/totalFat"
-                android:textSize="20dp"
+                android:textSize="15dp"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:ems="10"
                 android:gravity="center_horizontal"
                 android:inputType="textPersonName"
-                android:text="@string/totalFat"
-                tools:layout_editor_absoluteX="65dp"
-                tools:layout_editor_absoluteY="16dp" />
+                android:text="@string/totalFat" />
 
             <EditText
-                android:layout_toEndOf="@id/totalFat"
+                android:textColor="#000"
+                android:layout_alignParentEnd="true"
                 android:id="@+id/totalFat_field"
                 android:layout_width="40dp"
                 android:layout_height="wrap_content"
-                android:inputType="number|numberDecimal"
-                android:gravity="center"/>
+                android:inputType="number|numberDecimal"/>
 
         </RelativeLayout>
 
         <RelativeLayout
             android:layout_centerHorizontal="true"
             android:id="@+id/relLayout5"
-            android:layout_width="match_parent"
+            android:layout_width="180dp"
             android:layout_height="wrap_content"
             android:gravity="left"
             android:layout_below="@+id/relLayout4"
             android:orientation="horizontal">
 
             <TextView
-                android:layout_marginTop="15dp"
+                android:textColor="#000"
+                android:layout_marginTop="16dp"
                 android:id="@+id/cholest"
-                android:textSize="20dp"
+                android:textSize="15dp"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:ems="10"
                 android:gravity="center_horizontal"
                 android:inputType="textPersonName"
-                android:text="@string/cholest"
-                tools:layout_editor_absoluteX="65dp"
-                tools:layout_editor_absoluteY="16dp" />
+                android:text="@string/cholest" />
 
             <EditText
-                android:layout_toEndOf="@+id/cholest"
+                android:textColor="#000"
+                android:layout_alignParentEnd="true"
                 android:id="@+id/chol_input"
-                android:layout_width="wrap_content"
+                android:layout_width="40dp"
                 android:layout_height="wrap_content"
-                android:inputType="number|numberDecimal"
-                android:gravity="center"/>
+                android:inputType="number|numberDecimal"/>
 
         </RelativeLayout>
 
         <RelativeLayout
+            android:textColor="#000"
             android:layout_below="@id/relLayout5"
-            android:layout_width="match_parent"
+            android:layout_width="180dp"
             android:layout_height="wrap_content"
             android:gravity="left"
             android:id="@+id/relLayout6"
             android:orientation="horizontal">
 
             <TextView
-                android:layout_marginTop="15dp"
+                android:textColor="#000"
+                android:layout_marginTop="16dp"
                 android:id="@+id/sodi"
-                android:textSize="20dp"
+                android:textSize="15dp"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:ems="10"
                 android:gravity="center_horizontal"
                 android:inputType="textPersonName"
-                android:text="@string/sodium"
-                tools:layout_editor_absoluteX="65dp"
-                tools:layout_editor_absoluteY="16dp" />
+                android:text="@string/sodium"/>
 
             <EditText
-                android:layout_toEndOf="@id/sodi"
+                android:textColor="#000"
+                android:layout_alignParentEnd="true"
                 android:id="@+id/sodium_input"
-                android:layout_width="wrap_content"
+                android:layout_width="40dp"
                 android:layout_height="wrap_content"
-                android:inputType="number|numberDecimal"
-                android:gravity="center"/>
+                android:inputType="number|numberDecimal"/>
 
         </RelativeLayout>
 
         <RelativeLayout
             android:layout_below="@id/relLayout6"
             android:id="@+id/relLayout7"
-            android:layout_width="match_parent"
+            android:layout_width="180dp"
             android:layout_height="wrap_content"
             android:gravity="left"
             android:orientation="horizontal">
 
             <TextView
-                android:layout_marginTop="15dp"
+                android:textColor="#000"
+                android:layout_marginTop="16dp"
                 android:id="@+id/potas"
-                android:textSize="20dp"
+                android:textSize="15dp"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:ems="10"
                 android:gravity="center_horizontal"
                 android:inputType="textPersonName"
-                android:text="@string/potassium"
-                tools:layout_editor_absoluteX="65dp"
-                tools:layout_editor_absoluteY="16dp"
-                />
+                android:text="@string/potassium" />
 
             <EditText
-                android:layout_toEndOf="@id/potas"
+                android:textColor="#000"
+                android:layout_alignParentEnd="true"
                 android:id="@+id/potass_input"
-                android:layout_width="wrap_content"
+                android:layout_width="40dp"
                 android:layout_height="wrap_content"
-                android:inputType="number|numberDecimal"
-                android:gravity="center"/>
+                android:inputType="number|numberDecimal"/>
 
         </RelativeLayout>
 
         <RelativeLayout
             android:id="@+id/relLayout8"
             android:layout_below="@+id/relLayout7"
-            android:layout_width="match_parent"
+            android:layout_width="180dp"
             android:layout_height="wrap_content"
             android:gravity="left"
             android:orientation="horizontal">
 
             <TextView
-                android:layout_marginTop="15dp"
+                android:textColor="#000"
+                android:layout_marginTop="16dp"
                 android:id="@+id/total_carb"
-                android:textSize="20dp"
+                android:textSize="15dp"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:ems="10"
                 android:gravity="center_horizontal"
                 android:inputType="textPersonName"
-                android:text="@string/total_carb"
-                tools:layout_editor_absoluteX="65dp"
-                tools:layout_editor_absoluteY="16dp"/>
+                android:text="@string/total_carb"/>
 
             <EditText
-                android:layout_toEndOf="@+id/total_carb"
+                android:textColor="#000"
+                android:layout_alignParentEnd="true"
                 android:id="@+id/totCarb_input"
-                android:layout_width="wrap_content"
+                android:layout_width="40dp"
                 android:layout_height="wrap_content"
-                android:inputType="number|numberDecimal"
-                android:gravity="center"/>
+                android:inputType="number|numberDecimal"/>
 
         </RelativeLayout>
 
         <RelativeLayout
             android:id="@+id/relLayout9"
             android:layout_below="@id/relLayout8"
-            android:layout_width="match_parent"
+            android:layout_width="180dp"
             android:layout_height="wrap_content"
             android:gravity="left"
             android:orientation="horizontal">
 
             <TextView
-                android:layout_marginTop="15dp"
+                android:textColor="#000"
+                android:layout_marginTop="16dp"
                 android:id="@+id/fiber"
-                android:textSize="20dp"
+                android:textSize="15dp"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:ems="10"
                 android:gravity="center_horizontal"
                 android:inputType="textPersonName"
-                android:text="@string/diet_fiber"
-                tools:layout_editor_absoluteX="65dp"
-                tools:layout_editor_absoluteY="16dp" />
+                android:text="@string/diet_fiber" />
 
             <EditText
-                android:layout_toEndOf="@id/fiber"
+                android:textColor="#000"
+                android:layout_alignParentEnd="true"
                 android:id="@+id/fiber_input"
-                android:layout_width="wrap_content"
+                android:layout_width="40dp"
                 android:layout_height="wrap_content"
-                android:inputType="number|numberDecimal"
-                android:gravity="center"/>
+                android:inputType="number|numberDecimal"/>
 
         </RelativeLayout>
 
         <RelativeLayout
             android:id="@+id/relLayout10"
             android:layout_below="@id/relLayout9"
-            android:layout_width="match_parent"
+            android:layout_width="180dp"
             android:layout_height="wrap_content"
             android:gravity="left"
             android:orientation="horizontal">
 
             <TextView
-                android:layout_marginTop="15dp"
+                android:textColor="#000"
+                android:layout_marginTop="16dp"
                 android:id="@+id/sugar"
-                android:textSize="20dp"
+                android:textSize="15sp"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:ems="10"
                 android:gravity="center_horizontal"
                 android:inputType="textPersonName"
-                android:text="@string/sugar"
-                tools:layout_editor_absoluteX="65dp"
-                tools:layout_editor_absoluteY="16dp" />
+                android:text="@string/sugar"/>
 
             <EditText
-                android:layout_toEndOf="@id/sugar"
+                android:textColor="#000"
+                android:layout_alignParentEnd="true"
                 android:id="@+id/sugar_input"
-                android:gravity="center"
-                android:layout_width="wrap_content"
+                android:layout_width="40dp"
                 android:layout_height="wrap_content"
                 android:inputType="number|numberDecimal" />
 
@@ -317,59 +298,54 @@
         <RelativeLayout
             android:id="@+id/relLayout11"
             android:layout_below="@id/relLayout10"
-            android:layout_width="match_parent"
+            android:layout_width="180dp"
             android:layout_height="wrap_content"
             android:gravity="left"
             android:orientation="horizontal">
 
             <TextView
-                android:layout_marginTop="15dp"
+                android:textColor="#000"
+                android:layout_marginTop="16dp"
                 android:id="@+id/prot"
-                android:textSize="20dp"
+                android:textSize="15sp"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:ems="10"
                 android:gravity="center_horizontal"
                 android:inputType="textPersonName"
-                android:text="@string/protein"
-                tools:layout_editor_absoluteX="65dp"
-                tools:layout_editor_absoluteY="16dp"
-                />
+                android:text="@string/protein" />
 
             <EditText
-                android:layout_toEndOf="@id/prot"
+                android:layout_alignParentEnd="true"
                 android:id="@+id/prote_input"
-                android:layout_width="wrap_content"
+                android:layout_width="40dp"
                 android:layout_height="wrap_content"
-                android:inputType="number|numberDecimal"
-                android:gravity="center"/>
+                android:inputType="number|numberDecimal"/>
         </RelativeLayout>
 
         <RelativeLayout
-            android:layout_below="@id/relLayout11"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:gravity="left"
+            android:layout_alignParentBottom="true"
             android:orientation="horizontal"
-            android:layout_marginTop="40dp"
             android:layout_centerHorizontal="true"
             tools:context=".NutritionLabelConfirmActivity">
 
             <Button
-                android:layout_marginLeft="40dp"
                 android:background="@drawable/capsule"
                 android:layout_toEndOf="@id/confirm"
                 android:id="@+id/quit"
-                android:layout_width="100dp"
-                android:layout_height="30dp"
+                android:layout_width="80dp"
+                android:layout_height="20dp"
                 android:text="@string/exit"
-                android:onClick="exit" />
+                android:onClick="exit"
+                android:layout_marginBottom="10dp"/>
 
             <Button
+                android:layout_marginRight="15dp"
                 android:background="@drawable/capsule"
                 android:id="@+id/confirm"
-                android:layout_width="100dp"
-                android:layout_height="30dp"
+                android:layout_width="80dp"
+                android:layout_height="20dp"
                 android:text="@string/confirm"
                 android:onClick="onConfirm" />
         </RelativeLayout>

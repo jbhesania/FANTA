@@ -52,8 +52,6 @@ public class MyAccountActivity extends AppCompatActivity {
             else if (user.getPa() == 3) paGroup.check(R.id.active);
             else if (user.getPa() == 4) paGroup.check(R.id.veryactive);
         }
-
-
     }
 
     @Override
