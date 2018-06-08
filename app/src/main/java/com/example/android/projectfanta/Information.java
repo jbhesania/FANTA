@@ -309,11 +309,6 @@ public class Information implements Serializable {
 
         }
 
-        for(int i = 0; i < nutrientIntake.length; i++) {
-            System.out.print("Day" + i + ": ");
-            System.out.println(nutrientIntake[i]);
-        }
-
         return nutrientIntake;
 
     }

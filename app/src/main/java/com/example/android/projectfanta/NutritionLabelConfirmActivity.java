@@ -219,7 +219,7 @@ public class NutritionLabelConfirmActivity extends AppCompatActivity {
             else food.add(Food.PROTEIN, 0.0);
 
 
-            food.setName(Food.getValidName(name.getText().toString()));
+            food.setName(Food.getValidName(name.getText().toString().trim()));
             intake.setFood(food.getName());
             intake.setCreationTime(System.currentTimeMillis());
             intake.setServings(Double.parseDouble(serve.getText().toString()));

@@ -2,7 +2,6 @@ package com.example.android.projectfanta;
 
 import android.graphics.Color;
 import android.os.Bundle;
-import android.os.Handler;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentActivity;
 import android.view.LayoutInflater;
@@ -20,7 +19,6 @@ import com.jjoe64.graphview.series.OnDataPointTapListener;
 import com.jjoe64.graphview.series.Series;
 
 import java.util.Calendar;
-import java.util.List;
 
 
 public class WeekFragment extends Fragment{
@@ -58,7 +56,7 @@ public class WeekFragment extends Fragment{
         Calendar calendar2 = (Calendar)startDayCalendar.clone();
 
         DataPoint dp[] = new DataPoint[numDays];
-        long start = calendar1.getTimeInMillis();       //Use for the viewingWindow
+        long startTime = calendar1.getTimeInMillis();       //Use for the viewingWindow
 
         //Create Data set for user line
         for(int i = 0; i < dp.length; i++)
@@ -67,7 +65,7 @@ public class WeekFragment extends Fragment{
             dp[i] = point;
             calendar1.add(Calendar.DATE,1);
         }
-        long end = calendar1.getTimeInMillis();         //Use for the viewingWindow
+        long endTime = calendar1.getTimeInMillis();         //Use for the viewingWindow
 
         //Create Data set for standard
         DataPoint dpStd[] = new DataPoint[numDays];
@@ -87,16 +85,36 @@ public class WeekFragment extends Fragment{
         final FragmentActivity activity = (FragmentActivity)view.getContext();
         graph = (GraphView) global_view.findViewById(R.id.graph);
         graph.getGridLabelRenderer().setLabelFormatter(new DateAsXAxisLabelFormatter(activity));
-        graph.getGridLabelRenderer().setHorizontalLabelsAngle(35);
+        graph.getGridLabelRenderer().setHorizontalLabelsAngle(30);
         graph.getGridLabelRenderer().setNumHorizontalLabels(numDays+1);
         graph.getGridLabelRenderer().setTextSize(36);
 
         // set manual x bounds to have nice steps
         //Axis Label
-        graph.getViewport().setMinX(start);
-        graph.getViewport().setMaxX(end);
+        graph.getViewport().setMinX(startTime);
+        graph.getViewport().setMaxX(endTime);
         graph.getViewport().setXAxisBoundsManual(true);
         graph.getGridLabelRenderer().setHumanRounding(false);
+
+
+        /*double max = nutrientIntake[0];
+        for (int ktr = 0; ktr < nutrientIntake.length; ktr++) {
+            if (nutrientIntake[ktr] > max) {
+                max = nutrientIntake[ktr];
+            }
+        }
+        System.out.println("MAX = " + max);
+        double min = nutrientIntake[0];
+        for (int ktr = 0; ktr < nutrientIntake.length; ktr++) {
+            if (nutrientIntake[ktr] < min) {
+                min = nutrientIntake[ktr];
+            }
+        }
+        System.out.println("MIN = " + min);
+
+        graph.getViewport().setYAxisBoundsManual(true);
+        graph.getViewport().setMinY(min);
+        graph.getViewport().setMaxY(max);*/
 
         //Legend
         graph.getGridLabelRenderer().setHorizontalAxisTitle("date");
@@ -123,10 +141,10 @@ public class WeekFragment extends Fragment{
             }
         });
 
-        graph.getViewport().setScrollable(true);
+        /*graph.getViewport().setScrollable(true);
         graph.getViewport().setScrollableY(true);
         graph.getViewport().setScalable(true);
-        graph.getViewport().setScalableY(true);
+        graph.getViewport().setScalableY(true);*/
 
 
         //Adding them to the view
@@ -175,18 +193,18 @@ public class WeekFragment extends Fragment{
     }
 
     // Creates array and graphs it
-    public static void graphUpdate() {
-        double[] intakes = Information.information.intakeInterval(start,end,nutrient);
-        DataPoint dp[] = new DataPoint[7];
+    public static void graphUpdateWeek(String s, boolean rewrite) {
 
-        //Create Data set for user line
-        for(int i = 0; i < dp.length; i++)
-        {
-            DataPoint point = new DataPoint(day1.getTime(), intakes[i]);
-            dp[i] = point;
-            day1.add(Calendar.DATE,1);
-        }
-        series.resetData(dp);
+        setNutrient(s);
+
+        if(rewrite) graph.removeAllSeries();
+
+        double[] intakes = Information.information.intakeInterval(start, end,nutrient);
+
+        day1.setTimeInMillis(start);
+        createGraphWeek(7,day1,nutrient,intakes,recNutrient,global_view);
+        graph.onDataChanged(false,false);
+
     }
 
     @Override
@@ -212,14 +230,7 @@ public class WeekFragment extends Fragment{
         day1 = Calendar.getInstance();
         day1.setTimeInMillis(start);
 
-        double[] intakes = Information.information.intakeInterval(start, end,nutrient);
-
-        System.out.println(recNutrient);
-        System.out.println(Information.information.getInfo().getRecCalories());
-
-        createGraphWeek(7,day1,nutrient,intakes,recNutrient,global_view);
-
-        //graphUpdate();
+        graphUpdateWeek( nutrient, false);
         return global_view;
     }
 
