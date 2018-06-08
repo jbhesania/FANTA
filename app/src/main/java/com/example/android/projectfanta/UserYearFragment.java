@@ -185,14 +185,7 @@ public class UserYearFragment extends Fragment {
 
         if(rewrite) graph.removeAllSeries();
 
-        double[] intakes = Information.information.intakeInterval(start, end,nutrient);
-
-        /*Fragment frg = null;
-        FragmentManager frg = getSupportFragmentManager().findFragmentByTag("Your_Fragment_TAG");
-        final FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
-        ft.detach(frg);
-        ft.attach(frg);
-        ft.commit();*/
+        double[] intakes = SearchFragment.intakeInterval(start, end,nutrient);
 
         day1.setTimeInMillis(start);
         createGraphYear(365, day1,nutrient,intakes,recNutrient,global_view);
