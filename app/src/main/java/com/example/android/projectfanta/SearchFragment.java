@@ -59,13 +59,11 @@ public class SearchFragment extends Fragment {
             public void onClick(View view){
                 //TODO: send the username to the database to search for a certain
                 String username = search.getText().toString();
-                Log.v("SUCKS", username);
                 String userid = "";
                 if (users != null) {
                     for (String id : users.keySet()) {
                         if (users.get(id).getUserName().equals(username)){
                             userid = id;
-                            Log.v("SUCKS", users.get(id).getUserName());
                             break;
                         }
                     }
