@@ -132,9 +132,6 @@ public class HistoryFragment extends Fragment {
             }
         });
 
-
-
-
         myAdapters = new SectionsPageAdapter(getFragmentManager());
 
         myPagers = (ViewPager) view.findViewById(R.id.historyContainer);

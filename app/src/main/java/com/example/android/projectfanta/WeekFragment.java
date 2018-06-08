@@ -4,7 +4,6 @@ import android.graphics.Color;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentActivity;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -201,13 +200,6 @@ public class WeekFragment extends Fragment{
         if(rewrite) graph.removeAllSeries();
 
         double[] intakes = Information.information.intakeInterval(start, end,nutrient);
-
-        /*Fragment frg = null;
-        FragmentManager frg = getSupportFragmentManager().findFragmentByTag("Your_Fragment_TAG");
-        final FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
-        ft.detach(frg);
-        ft.attach(frg);
-        ft.commit();*/
 
         day1.setTimeInMillis(start);
         createGraphWeek(7,day1,nutrient,intakes,recNutrient,global_view);

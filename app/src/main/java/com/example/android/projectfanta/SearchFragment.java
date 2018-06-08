@@ -119,6 +119,8 @@ public class SearchFragment extends Fragment {
         });
     }
 
+    public static UserInfo getTheirInfo() { return info; }
+
     /**
      * loads the foods and intakes of a given userid
      * asynchronous need null checks on the theirFoods and theirIntakes even after call

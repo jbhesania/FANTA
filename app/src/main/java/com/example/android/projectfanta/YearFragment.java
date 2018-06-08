@@ -28,6 +28,8 @@ public class YearFragment extends Fragment {
     private static long start, end;
     private static Calendar day1;
 
+    private static boolean unloaded = true;
+
     public static void setNutrient(String input)
     {
         UserInfo user = Information.information.getInfo();
@@ -133,13 +135,9 @@ public class YearFragment extends Fragment {
 
     public static void graphUpdateYear(String s, boolean rewrite) {
 
-        // handle currently unloaded year graph
-        if(recNutrient==-1) {
-            setNutrient(s);
-            return;
-        }
-
         setNutrient(s);
+
+        if(unloaded) return;
 
         if(rewrite) graph.removeAllSeries();
 
@@ -161,6 +159,8 @@ public class YearFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
+        unloaded = false;
+
         // Inflate the layout for this fragment
         global_view = inflater.inflate(R.layout.fragment_year, container, false);
         Calendar today = Calendar.getInstance();

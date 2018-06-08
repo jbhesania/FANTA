@@ -91,7 +91,6 @@ public class UserWeekFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         global_view = inflater.inflate(R.layout.fragment_user_week, container, false);
-        System.out.println("IN USER WEEK ON CREATE VIEW ******************");
 
         Calendar today = Calendar.getInstance();
         today.add(Calendar.DAY_OF_MONTH, 1);
@@ -105,8 +104,7 @@ public class UserWeekFragment extends Fragment {
         day1.setTimeInMillis(start);
 
         graphUpdateWeek( nutrient, false);
-        // Inflate the layout for this fragment
-        //return inflater.inflate(R.layout.fragment_user_week, container, false);
+
         return global_view;
     }
 
@@ -151,13 +149,6 @@ public class UserWeekFragment extends Fragment {
         if(rewrite) graph.removeAllSeries();
 
         double[] intakes = SearchFragment.intakeInterval(start, end,nutrient);
-
-        /*Fragment frg = null;
-        FragmentManager frg = getSupportFragmentManager().findFragmentByTag("Your_Fragment_TAG");
-        final FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
-        ft.detach(frg);
-        ft.attach(frg);
-        ft.commit();*/
 
         day1.setTimeInMillis(start);
         createGraphWeek(7,day1,nutrient,intakes,recNutrient,global_view);
@@ -273,7 +264,7 @@ public class UserWeekFragment extends Fragment {
 
     public static void setNutrient(String input)
     {
-        UserInfo user = Information.information.getInfo();
+        UserInfo user = SearchFragment.getTheirInfo();
         nutrient = input;
         switch(input){
             case "calories":
