@@ -37,6 +37,7 @@ public class SearchFragment extends Fragment {
     private HashMap<String, User> users;
     private static HashMap<String, Food> theirFoods;
     private static ArrayList<Intake> theirIntakes;
+    private static UserInfo info;
     private static long ONE_DAY = 864 * (long)java.lang.Math.pow(10,5);
     private static long ONE_WEEK = 7*ONE_DAY;
     private static long ONE_MONTH = 31*ONE_DAY;
@@ -71,12 +72,8 @@ public class SearchFragment extends Fragment {
                     if (userid.equals("")){
                         Toast.makeText(getContext(), "No Such User", Toast.LENGTH_LONG).show();
                     } else {
-                        readUserInfo(userid);
+                        readUserInfo(userid, username);
                         Toast.makeText(getContext(), "Loading User", Toast.LENGTH_SHORT).show();
-                        dataFriends.add(new User(userid, username));
-                        Intent user_intent = new Intent(getContext(), UserProfile.class);
-                        user_intent.putExtra("username", username);
-                        startActivity(user_intent);
                     }
                 } else {
                     Toast.makeText(getContext(), "Loading User List", Toast.LENGTH_SHORT).show();
@@ -127,7 +124,7 @@ public class SearchFragment extends Fragment {
      * asynchronous need null checks on the theirFoods and theirIntakes even after call
      * @param uid the uid of the user to load their intakes and foods
      */
-    public void readUserInfo(final String uid){
+    public void readUserInfo(final String uid, final String username){
         DatabaseReference usersRef = FirebaseDatabase.getInstance().getReference().child(uid);
         usersRef.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
@@ -137,6 +134,11 @@ public class SearchFragment extends Fragment {
 
                 theirFoods = dataSnapshot.child("myFoods").getValue(hash);
                 theirIntakes = dataSnapshot.child("myIntakes").getValue(list);
+                info = dataSnapshot.child("info").getValue(UserInfo.class);
+                dataFriends.add(new User(uid, username));
+                Intent user_intent = new Intent(getContext(), UserProfile.class);
+                user_intent.putExtra("username", username);
+                startActivity(user_intent);
             }
 
             @Override
