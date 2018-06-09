@@ -100,6 +100,20 @@ public class HomeFragment extends Fragment {
         if(foodsToDisplay.size() == 0) {
             TextView text = (TextView) view.findViewById(R.id.onetext);
             text.setText("You have no favorite foods yet!");
+            TextView text1 = (TextView) view.findViewById(R.id.onetext);
+            TextView text2 = (TextView) view.findViewById(R.id.twotext);
+            TextView text3 = (TextView) view.findViewById(R.id.threetext);
+            TextView text4 = (TextView) view.findViewById(R.id.fourtext);
+            TextView text5 = (TextView) view.findViewById(R.id.fivetext);
+            TextView text6 = (TextView) view.findViewById(R.id.sixtext);
+
+            text1.setClickable(false);
+            text2.setClickable(false);
+            text3.setClickable(false);
+            text4.setClickable(false);
+            text5.setClickable(false);
+            text6.setClickable(false);
+
         }
         else {
             Collections.sort(foodsToDisplay, new Comparator<Food>(){
@@ -117,30 +131,37 @@ public class HomeFragment extends Fragment {
 
             TextView text1 = (TextView) view.findViewById(R.id.onetext);
             text1.setText(foodsToDisplay.get(0).getName());
+            text1.setClickable(true);
 
             if(foodsToDisplay.size() > 1) {
                 TextView text = (TextView) view.findViewById(R.id.twotext);
                 text.setText(foodsToDisplay.get(1).getName());
+                text.setClickable(true);
             }
 
             if(foodsToDisplay.size() > 2) {
                 TextView text = (TextView) view.findViewById(R.id.threetext);
                 text.setText(foodsToDisplay.get(2).getName());
+                text.setClickable(true);
             }
 
             if(foodsToDisplay.size() > 3) {
                 TextView text = (TextView) view.findViewById(R.id.fourtext);
                 text.setText(foodsToDisplay.get(3).getName());
+                text.setClickable(true);
+
             }
 
             if(foodsToDisplay.size() > 4) {
                 TextView text = (TextView) view.findViewById(R.id.fivetext);
                 text.setText(foodsToDisplay.get(4).getName());
+                text.setClickable(true);
             }
 
             if(foodsToDisplay.size() > 5) {
                 TextView text = (TextView) view.findViewById(R.id.sixtext);
                 text.setText(foodsToDisplay.get(5).getName());
+                text.setClickable(true);
             }
         }
 
