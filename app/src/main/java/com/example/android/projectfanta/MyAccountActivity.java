@@ -192,5 +192,6 @@ public class MyAccountActivity extends AppCompatActivity {
         Information.information.addUserInfo(getApplicationContext());
         Intent homeIntent = new Intent(MyAccountActivity.this, HomeActivity.class);
         startActivity(homeIntent);
+        this.finish();
     }
 }

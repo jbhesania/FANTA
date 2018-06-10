@@ -95,6 +95,7 @@ public class LoginActivity extends AppCompatActivity {
 
             Intent calcIntent = new Intent(LoginActivity.this, HomeActivity.class);
             startActivityForResult(calcIntent, RC_SIGN_IN);
+            finish();
         }
     }
 
@@ -128,6 +129,7 @@ public class LoginActivity extends AppCompatActivity {
                 Information.information.writeInfoToMemory(getApplicationContext());
                 Intent calcIntent = new Intent(LoginActivity.this, HomeActivity.class);
                 startActivity(calcIntent);
+                finish();
             }
         };
 
@@ -155,6 +157,7 @@ public class LoginActivity extends AppCompatActivity {
 
                             Intent calcIntent = new Intent(LoginActivity.this, MyAccountActivity.class);
                             startActivity(calcIntent);
+                            finish();
                         }
 
                         @Override
