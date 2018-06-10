@@ -155,6 +155,7 @@ public class LoginActivity extends AppCompatActivity {
 
                             Intent calcIntent = new Intent(LoginActivity.this, MyAccountActivity.class);
                             startActivity(calcIntent);
+                            getParent().finish();
                         }
 
                         @Override
